@@ -717,7 +717,8 @@ function _AutoUnBan($user, $msg=FALSE){
 												'ua'	=> $_SERVER['HTTP_USER_AGENT'],
 												'b'		=> $this->_IsSpider
 												);
-require('modules/watches/_includeFm.php');
+				require('modules/watches/_includeFm.php');
+
 				foreach ($onlinedata as $id=>$info) {
 						if ($expire > $info['t']) {
 							// Решение проблемы актуальной даты последнего посещения
@@ -727,7 +728,11 @@ require('modules/watches/_includeFm.php');
 								$user = $this->_Read2Write($file, 'members/'.$info['id'].'.php');
 								$user['last_visit'] = $info['t'];
 								$this->_Write($file, $user);
-								_watchesIncludeFmDeadline($info['id']);
+								
+								if ($this->exbb['watches']) {
+									_watchesIncludeFmDeadline($info['id']);
+								}
+
 							}
 							
 							unset($onlinedata[$id]);

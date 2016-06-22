@@ -11,3 +11,10 @@
 !/uploads/index.html
 
 /forum*/*
+
+/modules/*/data/*
+!/modules/*/data/index.html
+
+/data/
+/data/*
+!/data/index.html

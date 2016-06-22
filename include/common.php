@@ -1,15 +1,18 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
-error_reporting  (E_ALL);
-#error_reporting  (E_ERROR | E_PARSE);
 
-if (!defined("PATH_SEPARATOR")) { define("PATH_SEPARATOR", getenv("COMSPEC")? ";" : ":"); }
-ini_set("include_path", ini_get("include_path").PATH_SEPARATOR.dirname(__FILE__));
+// Debug flag
+define('DEBUG', true);
 
+if (DEBUG) {
+	ini_set('display_errors', true);
+	ini_set('error_reporting', true);
+	error_reporting  (E_ALL);
+}
 
-if (get_magic_quotes_runtime() === 1) set_magic_quotes_runtime(0);
+ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . __DIR__);
 
-define('FM_PATH',			dirname(dirname(__FILE__)) . '/');
+define('FM_PATH',			dirname(__DIR__) . '/');
 define("FM_LOGDIR",			"data/access_log/");
 define("FM_ALLFORUMS",		"data/allforums.php");
 define("FM_ALLFORUMS_BAK",	"data/allforums_bak.php");
@@ -53,34 +56,16 @@ $fm->exbb['version'] = FM_VERSION;
  unset($req_url, $set_url);
 
 if ($fm->exbb['installed'] === FALSE) {
-header("Location: ./install/index.php");
-} elseif (file_exists("./install/index.php")) {
-// Удаление папки "install" со всем содержимым
-$dir = 'install';
-_deldir($dir);
-// ============= end ==============================
-} elseif (file_exists("./install/index.php")) {
-$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['DelleteInstallDir']);
+	header("Location: ./install/index.php");
+}
+elseif (file_exists("./install/index.php") && !DEBUG) {
+	$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['DelleteInstallDir']);
 }
 
 if ($fm->exbb['board_closed'] && !(defined('IS_LOGIN') || defined('IS_ADMIN'))) {
-$fm->_Message($fm->LANG['BoardClosed'],nl2br(strtr($fm->exbb['closed_mes'], array_flip(get_html_translation_table(HTML_SPECIALCHARS)))));
+	$fm->_Message($fm->LANG['BoardClosed'],nl2br(strtr($fm->exbb['closed_mes'], array_flip(get_html_translation_table(HTML_SPECIALCHARS)))));
 }
-// Функция удаления папки со всем содержимым
-function _deldir($dir) {
-if ($objs = glob($dir.'/*')) {
-foreach($objs as $obj) {
-is_dir($obj) ? _deldir($obj) : unlink($obj);
-}
-}
-rmdir($dir);
-} 
 
-if ($fm->exbb['installed'] === FALSE) {
-	header("Location: ./install/index.php");
-} elseif (file_exists("./install/index.php")) {
-		$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['DelleteInstallDir']);
-}
 require('modules/mailer/_send.php');
 if ($fm->exbb['board_closed'] && !(defined('IS_LOGIN') || defined('IS_ADMIN'))) {
 	$fm->_Message($fm->LANG['BoardClosed'],nl2br(strtr($fm->exbb['closed_mes'], array_flip(get_html_translation_table(HTML_SPECIALCHARS)))));
