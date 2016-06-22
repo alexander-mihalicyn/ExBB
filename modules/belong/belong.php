@@ -13,10 +13,10 @@ define('BELONG_DATA_DIR',       'modules/belong/data/');
 define('BELONG_CONFIG_FILE',    'modules/belong/data/config.php');
 
 class Belong {
-    var $config = array();
-    var $_handle = false;
+    private $config = array();
+    private $_handle = false;
     
-    function Belong() {
+    public function __construct() {
         global $fm;
         
         $this->config = $fm->_Read(BELONG_CONFIG_FILE);
@@ -38,7 +38,7 @@ class Belong {
     function _createTable() {
         $sql = 'CREATE TABLE posts (member INTEGER, creator INTEGER, post INTEGER, forum INTEGER, topic INTEGER, PRIMARY KEY(member, creator, post))';
         
-        sqlite_query($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function _openSqlite($userId, $createDb = true) {
@@ -52,15 +52,16 @@ class Belong {
             return false;
         }
         
-        if ($this->_handle !== false) {
-            sqlite_close($this->_handle);
-        }
+		if ($this->_handle) {
+			$this->_handle->close();
+		}
         
         if (!$existed) {
             @fclose(@fopen($dbname, 'a+'));
             @chmod($dbname, $fm->exbb['ch_files']);
         }
-        $this->_handle = sqlite_open($dbname);
+		
+        $this->_handle = new SQLite3($dbname);
         
         if (!$existed) {
             $this->_createTable();
@@ -93,7 +94,7 @@ class Belong {
         
         $sql = "INSERT INTO posts VALUES ({$user}, 1, {$post}, {$forum}, {$topic})";
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function addReply($user, $forum, $topic, $post) {
@@ -101,9 +102,13 @@ class Belong {
         
         $this->_openSqlite($user);
         
+		echo 11;
+		
+		die;
+		
         $sql = "INSERT INTO posts VALUES ({$user}, 0, {$post}, {$forum}, {$topic})";
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function deletePost($post) {
@@ -113,7 +118,7 @@ class Belong {
         
         $sql = "DELETE FROM posts WHERE member = {$fm->user['id']} AND post = {$post}";
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function deleteTopic($forum, $topic, $users) {
@@ -128,7 +133,7 @@ class Belong {
                 
                 $dbname = $this->_getDbFilename($id);
                 
-                sqlite_exec($this->_handle, $sql);
+                $this->_handle->exec($sql);
             }
         }
     }
@@ -145,7 +150,7 @@ class Belong {
                 
                 $dbname = $this->_getDbFilename($id);
                 
-                sqlite_exec($this->_handle, $sql);
+                $this->_handle->exec($sql);
             }
         }
     }
@@ -157,7 +162,7 @@ class Belong {
         foreach ($users as $id => $posts) {
             if ($dbname != $this->_getDbFilename($id)) {
                 if ($dbname) {
-                    sqlite_exec($this->_handle, $sql);
+                    $this->_handle->exec($sql);
                 }
                 
                 $this->_openSqlite($id, false);
@@ -170,7 +175,7 @@ class Belong {
             $sql .= "DELETE FROM posts WHERE member = {$id} AND post IN (" . implode(', ', $posts) . ');';
         }
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function inNew($toForum, $toTopic, $users) {
@@ -183,7 +188,7 @@ class Belong {
         foreach ($users as $id => $posts) {
             if ($dbname != $this->_getDbFilename($id)) {
                 if ($dbname) {
-                    sqlite_exec($this->_handle, $sql);
+                    $this->_handle->exec($sql);
                 }
                 
                 $this->_openSqlite($id, false);
@@ -200,7 +205,7 @@ class Belong {
             }
         }
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function inExists($toForum, $toTopic, $users, $newUsers) {
@@ -211,7 +216,7 @@ class Belong {
         foreach ($users as $id => $posts) {
             if ($dbname != $this->_getDbFilename($id)) {
                 if ($dbname) {
-                    sqlite_exec($this->_handle, $sql);
+                    $this->_handle->exec($sql);
                 }
                 
                 $this->_openSqlite($id, false);
@@ -226,7 +231,7 @@ class Belong {
             }
         }
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function deleteForums($forums) {
@@ -247,16 +252,23 @@ class Belong {
         
         $sql = "SELECT COUNT(*) AS found FROM posts WHERE member = {$userId} AND creator = 1 AND forum IN({$forums})";
         
-        $result = sqlite_query($this->_handle, $sql);
-        $found = sqlite_column($result, 'found');
-        
+        $result = $this->_handle->query($sql);
+        $found =  $result->fetchArray(SQLITE3_NUM);
+        $found = $found[0];
+		
         if (!$found) {
             return false;
         }
         
+		$topics = array();
+		
         $sql = "SELECT post, forum, topic FROM posts WHERE member = {$userId} AND creator = 1 AND forum IN({$forums}) ORDER BY post DESC LIMIT {$offset}, {$length}";
-        $topics = sqlite_array_query($this->_handle, $sql, SQLITE_NUM);
+        $result = $this->_handle->query($sql);
         
+		while ($row = $result->fetchArray(SQLITE3_NUM)) {
+			$topics[] = $row;
+		}
+		
         return $topics;
     }
     
@@ -270,16 +282,23 @@ class Belong {
         
         $sql = "SELECT COUNT(*) AS found FROM posts WHERE member = {$userId} AND forum IN({$forums})";
         
-        $result = sqlite_query($this->_handle, $sql);
-        $found = sqlite_column($result, 'found');
-        
+        $result = $this->_handle->query($sql);
+        $found =  $result->fetchArray(SQLITE3_NUM);
+        $found = $found[0];
+		
         if (!$found) {
             return false;
         }
         
+		$posts = array();
+		
         $sql = "SELECT post, forum, topic FROM posts WHERE member = {$userId} AND forum IN({$forums}) ORDER BY post DESC LIMIT {$offset}, {$length}";
-        $posts = sqlite_array_query($this->_handle, $sql, SQLITE_NUM);
+        $result = $this->_handle->query($sql);
         
+		while ($row = $result->fetchArray(SQLITE3_NUM)) {
+			$posts[] = $row;
+		}
+		
         return $posts;
     }
     
@@ -306,7 +325,7 @@ class Belong {
             
             if ($dbname != $this->_getDbFilename($id)) {
                 if ($dbname) {
-                    sqlite_exec($this->_handle, $sql);
+                    $this->_handle->exec($sql);
                 }
                 
                 $this->_openSqlite($id);
@@ -321,7 +340,7 @@ class Belong {
             }
         }
         
-        sqlite_exec($this->_handle, $sql);
+        $this->_handle->exec($sql);
     }
     
     function index() {

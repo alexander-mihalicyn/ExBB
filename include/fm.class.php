@@ -5,35 +5,35 @@ class FM extends VARS{
 		/*
 			Флаг русской локали boolean
 		*/
-		var $_RuLocale		= TRUE;
+		public $_RuLocale		= TRUE;
 		/*
 			Языковый массив array
 		*/
-		var $LANG		= array();
+		public $LANG		= array();
 		/*
 			Начало отсчета времени работы скрипта integer
 		*/
-		var $_StartTime		= 0;
+		public $_StartTime		= 0;
 		/*
 			Флаг Gzip сжатия страницы boolean
 		*/
-		var $_PageGziped	= FALSE;
+		public $_PageGziped	= FALSE;
 		/*
 			Текущее время  integer
 		*/
-		var $_Nowtime		= 0;
+		public $_Nowtime		= 0;
 		/*
 			Массив конфигурации форума array
 		*/
-		var $exbb 			= array();
+		public $exbb 			= array();
 		/*
 			Массив статистики форума array
 		*/
-		var $_Stats			= array();
+		public $_Stats			= array();
 		/*
 			Умолчательный (для гостя) массив пользователя array
 		*/
-		var $user			= array('id'			=> 0,
+		public $user			= array('id'			=> 0,
 									'unread'		=> 0,
 									'status'		=> 'gu',
 									'last_visit'	=> 0,
@@ -46,79 +46,81 @@ class FM extends VARS{
 		/*
 	Атрибуты тега <body>
 	*/
-	var $_Body = '';
+	public $_Body = '';
 
         /*
         	Вставка в заголовок страницы string
         */
-        var $_Link 			= '';
+        public $_Link 			= '';
         /*
         	Флаг нового сообщения в ЛС boolean
         */
-        var	$_NewEmail 		= '';
+        public	$_NewEmail 		= '';
         /*
         	Переменная для вывода банера string
         */
-        var $_Baner			= '';
+        public $_Baner			= '';
         /*
         	Переменная для вывода счетчиков string
         */
-        var	$_Counters		= '';
+        public	$_Counters		= '';
         /*
         	Название странице в заголовке <title> string
         */
-        var $_Title			= '';
-		var $_Keywords      = '';
+        public $_Title			= '';
+		public $_Keywords      = '';
         /*
         	Флаг модератора boolean
         */
-        var $_Moderator		= FALSE;
+        public $_Moderator		= FALSE;
 		/*
         	Массив ID модераторов разделов форума array
         */
-        var $_Moderators	= array();
+        public $_Moderators	= array();
         /*
         	Строка перечисления модераторов разделов форума string
         */
-        var $_Modoutput		= '';
+        public $_Modoutput		= '';
 		/*
         	Массив ID пользователей в онлайн array
         */
-        var $_OnlineIds		= array();
+        public $_OnlineIds		= array();
 		/*
         	Кол-во гостей в online integer
         */
-        var $_OnlineGuest	= 0;
+        public $_OnlineGuest	= 0;
 		/*
         	Кол-во скрытых в online integer
         */
-        var $_Invisible		= 0;
+        public $_Invisible		= 0;
 		/*
         	Кол-во зарегистрированых в online integer
         */
-        var $_Members		= 0;
+        public $_Members		= 0;
 		/*
         	Кол-во зарегистрированых в online integer
         */
-        var $_OnlineTotal	= 0;
+        public $_OnlineTotal	= 0;
         /*
         	Строка перечисления пользователей в online string
         */
-        var $_MembersOutput	= '';
+        public $_MembersOutput	= '';
 		/*
         	Массив дескрипторов открытых файлов array
         */
-        var $_FilePointers	= array();
+        public $_FilePointers	= array();
         /*
         	FM конструктор
         */
-		function FM() {
+		public function __construct() {
 				@setlocale(LC_CTYPE, 'ru_RU.CP1251', 'ru_RU.cp1251', 'ru_RU', 'RU');
 				if (!preg_match("#(russian\_russia.1251|ru\_ru.1251|russian\_russia|ru\_ru|russia|ru)#is", setlocale(LC_CTYPE, 0)))
 					$this->_RuLocale = FALSE;
 				
 				$this->_StartTime = $this->_Microtime();
-				$this->VARS();
+				
+				parent::__construct();
+				
 				require_once(FM_BOARDINFO);
 				$this->_Nowtime = time();
 		}
@@ -443,7 +445,7 @@ function _AutoUnBan($user, $msg=FALSE){
 				fseek($fp,8);
 				$str = fread($fp,$filesize);
 				//flock($fp, 2);
-				$this->_FilePointers[$fp] = $fp;
+				$this->_FilePointers[(int)$fp] = $fp;
 				return (!empty($str))?unserialize($str):array();
 		}
 
@@ -588,7 +590,7 @@ function _AutoUnBan($user, $msg=FALSE){
 		/*
 			_Message функция вывода сообщений
 		*/
-		var $_Refresh = 3;
+		public $_Refresh = 3;
 		function _Message($msg_title,$msg_text,$meta = '',$mode = 0) {
 				if (!$mode) echo '&nbsp;';
 				$this->_Link	= ($meta !== '') ? "<meta http-equiv='refresh' content='".$this->_Refresh."; url=".$meta."'>":'';
@@ -614,7 +616,7 @@ function _AutoUnBan($user, $msg=FALSE){
 *																				*
 ********************************************************************************/
 
-		var $_IsSpider = FALSE;
+		public $_IsSpider = FALSE;
 		/*
 			_IsSpider проверка поискового паука
 		*/
@@ -814,7 +816,7 @@ require('modules/watches/_includeFm.php');
 *																				*
 ********************************************************************************/
 
-		var $_Smiles	= FALSE;
+		public $_Smiles	= FALSE;
 
 		/*
 			setsmiles замена кодов смайлов на изображения
@@ -1156,8 +1158,8 @@ $string = preg_replace_callback("#\[(rus)\]([^\[]*(\[\/{0,1}(?!\\1\])[^\[]*)*?)\
 		/*                                <img src="" width="" height="" alt="" border="0">
 			Объект аплоада
 		*/
-		var $UP = FALSE;
-		var $MAX_SIZE = 0;
+		public $UP = FALSE;
+		public $MAX_SIZE = 0;
 		/*
 			Upload Основная функция определяющая загрузку файлов
 		*/

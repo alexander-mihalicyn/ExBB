@@ -1,12 +1,11 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 class VARS {
-
         /* Массив в который будут помещены все входящие данные */
-        var $input  		= array();
-		var $_POST  		= FALSE;
-		var $_GET	  		= FALSE;
-		var $_IP  			= '127.0.0.1';
+        public $input  		= array();
+		public $_POST  		= FALSE;
+		public $_GET	  		= FALSE;
+		public $_IP  			= '127.0.0.1';
 
         /****************************************************
         *													*
@@ -20,13 +19,13 @@ class VARS {
         	вычисляет IP пользователя и заносит эти данные
         	в массив входящих данных $input
 		*/
-        function VARS() {
+        public function __construct() {
         		$this->_IP		= $this->Return_IP();
                 $this->_POST	= ($_SERVER['REQUEST_METHOD'] == 'POST') ? TRUE:FALSE;
                 $this->_GET		= ($_SERVER['REQUEST_METHOD'] == 'POST') ? FALSE:TRUE;
         }
 
-        function _GetVars() {
+        public function _GetVars() {
                 if (is_array($_GET)){
                     $this->Read_Vars($this->input,$_GET);
                 }
@@ -43,7 +42,7 @@ class VARS {
         	По ссылке изменяет массив входящих данных $input
         	Применяется только в функции конструкторе GBOOK()
         */
-        function Read_Vars(&$return,$array) {
+        public function Read_Vars(&$return,$array) {
                 if (is_array($array)){
                     foreach ($array as $k => $v) {
                             if (is_array($array[$k])){
@@ -62,30 +61,23 @@ class VARS {
 			Применяется только в функции Read_Vars()
 			для очистки ключей
 		*/
-		function Clean_Key($key) {
+		public function Clean_Key($key) {
         		$key = trim($key);
-        		if ($key == '') {
-            		return '';
+				
+        		if (empty($key)) {
+            		return $key;
         		}
-        		$key = preg_replace( "/\.\./"           , ''  , $key );
+				
+        		$key = preg_replace( "/\.\./", '', $key );
         		$key = preg_replace( "/\_\_(.+?)\_\_/"  , ''  , $key );
         		$key = preg_replace( "/^([\w\.\-\_]+)$/", "$1", $key );
         		return $key;
 		}
 
 		function Clean_Value($var) {
-				$var = (get_magic_quotes_gpc()) ? trim(stripslashes($var)):trim($var);
-				$var = preg_replace("#\r#","",$var);
-				return preg_replace("#&amp;(\#[0-9]+;)#", "&$1", htmlspecialchars($var,ENT_QUOTES));
+			$var = preg_replace("/\r/","",trim($var));
+			return preg_replace("/&amp;(\#[0-9]+;)/", "&$1", htmlspecialchars($var,ENT_QUOTES, 'Windows-1251'));
 		}
-
-		/*
-		function htmlspecialchars($string) {
-				$find 		= array("'&'","'\"'","'\''","'<'","'>'","'\n'");
-				$replace	= array('&amp;','&quot;','&#039;','&lt;','&gt;','');
-				return preg_replace($find, $replace, $string);
-		}
-        */
 
 		function _String($key,$var = '') {
         		$this->input[$key] = (isset($this->input[$key]) && $this->input[$key] != '') ? $this->input[$key]:$var;
@@ -358,13 +350,13 @@ class VARS {
 		}
 
 		function Return_IP() {
-				if (($ip = $this->_tst_ip('HTTP_CLIENT_IP')) !== false) return $ip;
-				if (($ip = $this->_tst_ip('HTTP_X_FORWARDED_FOR')) !== false) return $ip;
-				if (($ip = $this->_tst_ip('HTTP_X_FORWARDED')) !== false) return $ip;
-				if (($ip = $this->_tst_ip('HTTP_FORWARDED_FOR')) !== false) return $ip;
-				if (($ip = $this->_tst_ip('HTTP_FORWARDED')) !== false) return $ip;
-				return $_SERVER['REMOTE_ADDR'];
+			if (!empty($_SERVER['REMOTE_ADDR'])) return $_SERVER['REMOTE_ADDR'];
+			
+			if (($ip = $this->_tst_ip('HTTP_CLIENT_IP')) !== false) return $ip;
+			if (($ip = $this->_tst_ip('HTTP_X_FORWARDED_FOR')) !== false) return $ip;
+			if (($ip = $this->_tst_ip('HTTP_X_FORWARDED')) !== false) return $ip;
+			if (($ip = $this->_tst_ip('HTTP_FORWARDED_FOR')) !== false) return $ip;
+			if (($ip = $this->_tst_ip('HTTP_FORWARDED')) !== false) return $ip;
 		}
-
 }
 ?>

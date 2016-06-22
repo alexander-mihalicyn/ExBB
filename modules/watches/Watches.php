@@ -17,13 +17,13 @@ define('FM_WATCHES_DATA_DIR',		FM_WATCHES_DIR . 'data/');
 define('FM_WATCHES_CONFIG_FILE',	FM_WATCHES_DATA_DIR . 'config.php');
 
 class Watches {
-	var $config = array();
-	var $_dbname = '';
-	var $_handle = false;
-	var $_result = false;
-	var $_filter;
+	private $config = array();
+	private $_dbname = '';
+	private $_handle = false;
+	private $_result = false;
+	private $_filter;
 	
-	function Watches() {
+	public function __construct() {
 		$this->getConfig();
 	}
 	
@@ -188,7 +188,7 @@ class Watches {
 		global $fm;
 		
 		$this->_openSqlite();
-		
+
 		if (!$forums) {
 			$sql = 'DELETE FROM watches;' .
 				"INSERT INTO watches VALUES (0, 0, {$fm->_Nowtime});";
@@ -208,7 +208,7 @@ class Watches {
 	
 	function upDeadlines($uid = 0) {
 		global $fm;
-		
+
 		if (!$uid) {
 			$uid = $fm->user['id'];
 		}
@@ -282,7 +282,7 @@ class Watches {
 		}
 		
 		if ($this->_handle) {
-			sqlite_close($this->_handle);
+			$this->_handle->close();
 		}
 		
 		$this->_dbname = $dbname;
@@ -292,7 +292,7 @@ class Watches {
 			@chmod($this->_dbname, $fm->exbb['ch_files']);
 		}
 		
-		$this->_handle = sqlite_open($this->_dbname, $fm->exbb['ch_files']) or $this->_error();
+		$this->_handle = new SQLite3($this->_dbname);
 		
 		if (!$exists) {
 			$sql = 'CREATE TABLE watches (forum INTEGER, topic INTEGER, time INTEGER, PRIMARY KEY (forum, topic));' .
@@ -305,28 +305,34 @@ class Watches {
 	}
 	
 	function _execSqlite($sql) {
-		$this->_result = sqlite_exec($this->_handle, $sql) or $this->_error($sql);
+		$this->_result = $this->_handle->exec($sql) or $this->_error($sql);
 		
 		return $this->_result;
 	}
 	
 	function _querySqlite($sql) {
-		$this->_result = sqlite_query($this->_handle, $sql) or $this->_error($sql);
+		$this->_result = $this->_handle->query($sql) or $this->_error($sql);
 		
 		return $this->_result;
 	}
 	
 	function _singleSqlite($result = false) {
-		return sqlite_fetch_single(($result) ? $result : $this->_result);
+		$result = ($result) ? $result : $this->_result;
+		
+		$row = $result->fetchArray(SQLITE3_NUM);
+		
+		return (isset($row[0])) ? $row[0] : null;
 	}
 	
 	function _fetchSqlite($result = false) {
-		return sqlite_fetch_array(($result) ? $result : $this->_result, SQLITE_ASSOC);
+		$result = ($result) ? $result : $this->_result;
+		
+		return $result->fetchArray(SQLITE3_ASSOC);
 	}
 	
 	function _error($sql = '') {
-		$errno	= sqlite_last_error($this->_handle);
-		$error	= sqlite_error_string($errno);
+		$errno	= $this->_handle->lastErrorCode();
+		$error	= $this->_handle->lastErrorMsg();
 		echo "<b>SQLite error #{$errno}:</b> {$error}<!--";
 		
 		print_r(debug_backtrace());

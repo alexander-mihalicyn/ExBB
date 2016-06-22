@@ -1,0 +1,13 @@
+/messages/*
+!/messages/index.html
+
+/search/db/*
+/search/temp/*
+
+/members/*
+!/members/index.html
+
+/uploads/*
+!/uploads/index.html
+
+/forum*/*
