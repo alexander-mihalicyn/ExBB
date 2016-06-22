@@ -1,0 +1,10 @@
+#newmail td.topL                                        {background-image:url('im/newmail/form-shadow-tl.png');}
+#newmail td.top                                        {background-image:url('im/newmail/form-shadow-t.png');}
+#newmail td.topR                                        {background-image:url('im/newmail/form-shadow-tr.png');}
+
+#newmail td.mdlL                                        {background-image:url('im/newmail/form-shadow-l.png');}
+#newmail td.mdlR                                        {background-image:url('im/newmail/form-shadow-r.png');}
+
+#newmail td.btmL                                        {background-image:url('im/newmail/form-shadow-bl.png');}
+#newmail td.btm                                        {background-image:url('im/newmail/form-shadow-b.png');}
+#newmail td.btmR                                        {background-image:url('im/newmail/form-shadow-br.png');}

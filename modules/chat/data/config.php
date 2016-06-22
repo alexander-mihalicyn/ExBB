@@ -1,0 +1,1 @@
+<?die;?>a:4:{s:6:"height";i:300;s:6:"update";i:5;s:6:"scroll";i:5;s:7:"history";i:100;}
