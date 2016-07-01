@@ -1,141 +1,109 @@
 <?php
-error_reporting  (E_ALL);
-if (get_magic_quotes_runtime() === 1) set_magic_quotes_runtime(0);
+error_reporting(E_ALL);
+if (get_magic_quotes_runtime() === 1) {
+	set_magic_quotes_runtime(0);
+}
 
-$_ForumRoot = str_replace('install/', '', str_replace('\\', '/', dirname(__FILE__)).'/');
+$_ForumRoot = str_replace('install/', '', str_replace('\\', '/', dirname(__FILE__)) . '/');
 
-define("FM_DATADIR",		$_ForumRoot."data/");
-define("FM_LOGDIR",			$_ForumRoot."data/access_log/");
-define("FM_ALLFORUMS",		$_ForumRoot."data/allforums.php");
-define("FM_ALLFORUMS_BAK",	$_ForumRoot."data/allforums_bak.php");
-define("FM_BADWORDS",		$_ForumRoot."data/badwords.php");
-define("FM_BANLIST",		$_ForumRoot."data/banlist.php");
-define("FM_BANNEDIP",		$_ForumRoot."data/bannedip.php");
-define("FM_BANNERS",		$_ForumRoot."data/banners.php");
-define("FM_BOARDINFO",		$_ForumRoot."data/boardinfo.php");
-define("FM_BOARDINFO_BAK",	$_ForumRoot."data/boardinfo_bak.php");
-define("FM_BOARDSTATS",		$_ForumRoot."data/boardstats.php");
-define("FM_COUNTERS",		$_ForumRoot."data/counters.php");
-define("FM_TITLES",			$_ForumRoot."data/membertitles.php");
-define("FM_NEWS",			$_ForumRoot."data/news.php");
-define("FM_ONLINE",			$_ForumRoot."data/onlinedata.php");
-define("FM_SKIP_MAILS",		$_ForumRoot."data/skip_mails.php");
-define("FM_SMILES",			$_ForumRoot."data/smiles.php");
-define("FM_USERS",			$_ForumRoot."data/users.php");
-define("FM_TEMPUSERS",		$_ForumRoot."data/users_temp.php");
-define("FM_SEARCH_EXC",		$_ForumRoot."data/search_exc.php");
+define("FM_DATADIR", $_ForumRoot . "data/");
+define("FM_LOGDIR", $_ForumRoot . "data/access_log/");
+define("FM_ALLFORUMS", $_ForumRoot . "data/allforums.php");
+define("FM_ALLFORUMS_BAK", $_ForumRoot . "data/allforums_bak.php");
+define("FM_BADWORDS", $_ForumRoot . "data/badwords.php");
+define("FM_BANLIST", $_ForumRoot . "data/banlist.php");
+define("FM_BANNEDIP", $_ForumRoot . "data/bannedip.php");
+define("FM_BANNERS", $_ForumRoot . "data/banners.php");
+define("FM_BOARDINFO", $_ForumRoot . "data/boardinfo.php");
+define("FM_BOARDINFO_BAK", $_ForumRoot . "data/boardinfo_bak.php");
+define("FM_BOARDSTATS", $_ForumRoot . "data/boardstats.php");
+define("FM_COUNTERS", $_ForumRoot . "data/counters.php");
+define("FM_TITLES", $_ForumRoot . "data/membertitles.php");
+define("FM_NEWS", $_ForumRoot . "data/news.php");
+define("FM_ONLINE", $_ForumRoot . "data/onlinedata.php");
+define("FM_SKIP_MAILS", $_ForumRoot . "data/skip_mails.php");
+define("FM_SMILES", $_ForumRoot . "data/smiles.php");
+define("FM_USERS", $_ForumRoot . "data/users.php");
+define("FM_TEMPUSERS", $_ForumRoot . "data/users_temp.php");
+define("FM_SEARCH_EXC", $_ForumRoot . "data/search_exc.php");
 
-define("FM_VERSION",		"1.0 Final");
-define('IN_EXBB', TRUE);
-define('FM_SAFE_MODE', (ini_get('safe_mode') ? TRUE:FALSE));
-require_once('../include/lib.php');
-require_once('page_header.php');
-require_once('language/russian/lang.php');
+define("FM_VERSION", "1.0 Final");
+define('IN_EXBB', true);
+define('FM_SAFE_MODE', ( ini_get('safe_mode') ? true : false ));
+require_once( '../include/lib.php' );
+require_once( 'page_header.php' );
+require_once( 'language/russian/lang.php' );
 
 $fm->_GetVars();
 $fm->_String('action');
 
 if ($fm->input['action'] === 'checkperms') {
-	$_CheckFiles = array(	"data/",
-							"data/access_log/",
-							"data/allforums.php",
-							"data/badwords.php",
-							"data/banlist.php",
-							"data/bannedip.php",
-							"data/boardinfo.php",
-							"data/boardstats.php",
-							"data/membertitles.php",
-							"data/news.php",
-							"data/onlinedata.php",
-							"data/skip_mails.php",
-							"data/smiles.php",
-							"data/users.php",
-							"data/users_temp.php",
-							"im/avatars/personal/",
-							"im/emoticons/temp/",
-							"members/",
-							"messages/",
-							"search/db/",
-							"search/temp/",
-							"uploads/",
-							"modules/birstday/data/",
-							"modules/birstday/data/birstday_data.php",
-							"modules/birstday/data/config.php",
-							"modules/karma/data/",
-							"modules/karma/data/karmalog.php",
-							"modules/punish/data/",
-							"modules/punish/data/config.php",
-							"modules/threadstop/data/",
-							"modules/threadstop/data/config.php",
-							"modules/userstop/data/",
-							"modules/userstop/data/config.php",
-							"modules/userstop/data/userstop_data.php",
-							"modules/statvisit/data/",
-							"modules/statvisit/data/config.php",
-							"modules/statvisit/data/today.php",
-							"modules/reputation/data/",
-							"modules/reputation/data/config.php"
-							);
+	$_CheckFiles = array( "data/", "data/access_log/", "data/allforums.php", "data/badwords.php", "data/banlist.php", "data/bannedip.php", "data/boardinfo.php", "data/boardstats.php", "data/membertitles.php", "data/news.php", "data/onlinedata.php", "data/skip_mails.php", "data/smiles.php", "data/users.php", "data/users_temp.php", "im/avatars/personal/", "im/emoticons/temp/", "members/", "messages/", "search/db/", "search/temp/", "uploads/", "modules/birstday/data/", "modules/birstday/data/birstday_data.php", "modules/birstday/data/config.php", "modules/karma/data/", "modules/karma/data/karmalog.php", "modules/punish/data/", "modules/punish/data/config.php", "modules/threadstop/data/", "modules/threadstop/data/config.php", "modules/userstop/data/", "modules/userstop/data/config.php", "modules/userstop/data/userstop_data.php", "modules/statvisit/data/", "modules/statvisit/data/config.php", "modules/statvisit/data/today.php", "modules/reputation/data/", "modules/reputation/data/config.php" );
 	$table = '<br><table border="0" cellpadding="2" cellspacing="2" align="center" class="check">
-			<caption><b>'.$lang['CheckResults'].'</b></caption>
+			<caption><b>' . $lang['CheckResults'] . '</b></caption>
 			<tr>
-				<th>'.$lang['FileName'].'</th>
-				<th>'.$lang['FileExists'].'</th>
-				<th>'.$lang['FilePerms'].'</th>
+				<th>' . $lang['FileName'] . '</th>
+				<th>' . $lang['FileExists'] . '</th>
+				<th>' . $lang['FilePerms'] . '</th>
 			</tr>';
 	$not_exists = 0;
 	$not_writable = 0;
 	foreach ($_CheckFiles as $filename) {
-			if (file_exists($_ForumRoot.$filename)) {
-				$exists = '<span class="ok">да</span>';
-				if (is_writable($_ForumRoot.$filename)) {
-					$writable = '<span class="ok">да</span>';
-				} else {
-						$not_writable++;
-						$writable = '<span class="warning">нет</span>';
-				}
-			} else {
-					$not_exists++;
-					$exists = '<span class="warning">нет</span>';
-					$writable = '<span class="warning">нет</span>';
+		if (file_exists($_ForumRoot . $filename)) {
+			$exists = '<span class="ok">да</span>';
+			if (is_writable($_ForumRoot . $filename)) {
+				$writable = '<span class="ok">да</span>';
 			}
-			$table .=  '			<tr align="center">
-				<td align="left">'.$filename.'</td>
-				<td>'.$exists.'</td>
-				<td>'.$writable.'</td>
+			else {
+				$not_writable++;
+				$writable = '<span class="warning">нет</span>';
+			}
+		}
+		else {
+			$not_exists++;
+			$exists = '<span class="warning">нет</span>';
+			$writable = '<span class="warning">нет</span>';
+		}
+		$table .= '			<tr align="center">
+				<td align="left">' . $filename . '</td>
+				<td>' . $exists . '</td>
+				<td>' . $writable . '</td>
 			</tr>';
 	}
-    $table .=  '</table><br>';
-    if ($not_exists !== 0 ) {
-    	$warning	= '<div class="warning">'.(($not_writable !==0) ? $lang['Error'].$lang['NotExists'].$lang['NoPerms']:$lang['Error'].$lang['NotExists']).$lang['ForContinuePerms'].'</div>';
-    	$action		= 'checkperms';
-    	$ButtonName	= $lang['RePermsCheck'];
-    	$_SESSION['checkperms'] = FALSE;
-    } elseif ($not_writable !==0) {
-    		$warning	= '<div class="warning">'.$lang['Error'].$lang['NoPerms'].$lang['ForContinuePerms'].'</div>';
-    		$action		= 'checkperms';
-    		$ButtonName	= $lang['RePermsCheck'];
-    		$_SESSION['checkperms'] = FALSE;
-    } else {
-    		$warning	= '<div class="ok">'.$lang['NoError'].$lang['PermsOk'].'</div>';
-    		$action		= 'configenter';
-    		$ButtonName	= $lang['ContinueInstall'];
-    		$_SESSION['checkperms'] = TRUE;
-    }
+	$table .= '</table><br>';
+	if ($not_exists !== 0) {
+		$warning = '<div class="warning">' . ( ( $not_writable !== 0 ) ? $lang['Error'] . $lang['NotExists'] . $lang['NoPerms'] : $lang['Error'] . $lang['NotExists'] ) . $lang['ForContinuePerms'] . '</div>';
+		$action = 'checkperms';
+		$ButtonName = $lang['RePermsCheck'];
+		$_SESSION['checkperms'] = false;
+	}
+	elseif ($not_writable !== 0) {
+		$warning = '<div class="warning">' . $lang['Error'] . $lang['NoPerms'] . $lang['ForContinuePerms'] . '</div>';
+		$action = 'checkperms';
+		$ButtonName = $lang['RePermsCheck'];
+		$_SESSION['checkperms'] = false;
+	}
+	else {
+		$warning = '<div class="ok">' . $lang['NoError'] . $lang['PermsOk'] . '</div>';
+		$action = 'configenter';
+		$ButtonName = $lang['ContinueInstall'];
+		$_SESSION['checkperms'] = true;
+	}
 
-    _header(FM_VERSION,$lang['InstallTitle'],$lang['PermsCheck']);
-	echo $warning.$table;
-    _footer(FM_VERSION, $action, $ButtonName);
-} elseif ($fm->input['action'] === 'configenter') {
-		if (!isset($_SESSION['checkperms']) || $_SESSION['checkperms'] === FALSE) {
-			header("Location: index.php?action=checkperms");
-			exit();
-		}
+	_header(FM_VERSION, $lang['InstallTitle'], $lang['PermsCheck']);
+	echo $warning . $table;
+	_footer(FM_VERSION, $action, $ButtonName);
+}
+elseif ($fm->input['action'] === 'configenter') {
+	if (!isset( $_SESSION['checkperms'] ) || $_SESSION['checkperms'] === false) {
+		header("Location: index.php?action=checkperms");
+		exit();
+	}
 
-		if ($fm->_Boolean($fm->input, 'dosave') === FALSE) {
-			_header(FM_VERSION,$lang['InstallTitle'],$lang['ConfigOptions']);
-			$this_url = ((isset($_SERVER['HTTPS'])) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].str_replace('/install', '', dirname($_SERVER['PHP_SELF']));
-            $table = '<br>
+	if ($fm->_Boolean($fm->input, 'dosave') === false) {
+		_header(FM_VERSION, $lang['InstallTitle'], $lang['ConfigOptions']);
+		$this_url = ( ( isset( $_SERVER['HTTPS'] ) ) ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . str_replace('/install', '', dirname($_SERVER['PHP_SELF']));
+		$table = '<br>
             <input type="hidden" name="dosave" value="yes">
             <table border="0" cellpadding="0" cellspacing="0" align="center">
             	<tr>
@@ -146,7 +114,7 @@ if ($fm->input['action'] === 'checkperms') {
 						<br>
 						<i>(например http://www.your_site.ru/forums)</i>
 					</td>
-					<td><input type="text" name="boardurl" value="'.$this_url.'" class="text"></td>
+					<td><input type="text" name="boardurl" value="' . $this_url . '" class="text"></td>
 				</tr>
 				<tr>
 					<td><b>Права (CHMOD) на создаваемые папки</b></td>
@@ -173,80 +141,91 @@ if ($fm->input['action'] === 'checkperms') {
 					<td><input type="text" name="adminemail" value="" class="text"></td>
 				</tr>
 			</table><br><br>';
-			_footer(FM_VERSION, 'configenter', $lang['ContinueInstall'],$table);
-		} else {
-				if ($fm->_String('boardurl') === '') {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "URL до скриптов" или неправильный формат URL!');
-				}
+		_footer(FM_VERSION, 'configenter', $lang['ContinueInstall'], $table);
+	}
+	else {
+		if ($fm->_String('boardurl') === '') {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "URL до скриптов" или неправильный формат URL!');
+		}
 
-                if ($fm->_String('ch_dirs') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_dirs'])) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Права (CHMOD) на создаваемые папки" или неправильный формат!');
-				}
+		if ($fm->_String('ch_dirs') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_dirs'])) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Права (CHMOD) на создаваемые папки" или неправильный формат!');
+		}
 
-                if ($fm->_String('ch_files') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_files'])) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Права (CHMOD) на создаваемые файлы" или неправильный формат!');
-				}
+		if ($fm->_String('ch_files') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_files'])) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Права (CHMOD) на создаваемые файлы" или неправильный формат!');
+		}
 
-                if ($fm->_String('ch_upfiles') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_upfiles'])) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Права (CHMOD) на загружаемые файлы" или неправильный формат!');
-				}
+		if ($fm->_String('ch_upfiles') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_upfiles'])) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Права (CHMOD) на загружаемые файлы" или неправильный формат!');
+		}
 
-				if ($fm->_String('boardname') === '') {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Название форума"!');
-				}
+		if ($fm->_String('boardname') === '') {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Название форума"!');
+		}
 
-				if ($fm->_String('boarddesc') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_upfiles'])) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Описание форума"!');
-				}
+		if ($fm->_String('boarddesc') === '' || !preg_match("#^0\d{3}$#", $fm->input['ch_upfiles'])) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Описание форума"!');
+		}
 
-$board_config = "<?php
+		$board_config = "<?php
 if (!defined('IN_EXBB')) die('Hack attempt!');";
-				foreach ($fm->exbb as $key=>$var) {
-						switch($key) {
-							case 'boardurl':
-							case 'ch_dirs':
-							case 'ch_files':
-							case 'ch_upfiles':
-							case 'boardname':
-							case 'boarddesc':
-							case 'adminemail':	$var = $fm->input[$key];
-												break;
-							case 'installed':	$var = TRUE;
-												break;
-							case 'boardstart':	$var = $fm->_Nowtime;
-												break;
-							default: 			break;
-						}
+		foreach ($fm->exbb as $key => $var) {
+			switch ($key) {
+				case 'boardurl':
+				case 'ch_dirs':
+				case 'ch_files':
+				case 'ch_upfiles':
+				case 'boardname':
+				case 'boarddesc':
+				case 'adminemail':
+					$var = $fm->input[$key];
+				break;
+				case 'installed':
+					$var = true;
+				break;
+				case 'boardstart':
+					$var = $fm->_Nowtime;
+				break;
+				default:
+				break;
+			}
 
-						switch(gettype($var)) {
-							case 'string': 	switch($key) {
-												case 'ch_upfiles':
-												case 'ch_files':
-												case 'ch_dirs':		break;
-												default:			$var = "'$var'";break;
-											};
-											break;
-							case 'boolean':	$var = ($var === TRUE) ? 'TRUE':'FALSE';
-											break;
-						}
-$board_config .="
+			switch (gettype($var)) {
+				case 'string':
+					switch ($key) {
+						case 'ch_upfiles':
+						case 'ch_files':
+						case 'ch_dirs':
+						break;
+						default:
+							$var = "'$var'";
+						break;
+					};
+				break;
+				case 'boolean':
+					$var = ( $var === true ) ? 'TRUE' : 'FALSE';
+				break;
+			}
+			$board_config .= "
 \$this->exbb['$key'] = $var;";
-				}
-$board_config .="\n?>";
-
-				$fm->_WriteText(FM_BOARDINFO, $board_config);
-				$_SESSION['createadmin'] = TRUE;
-                header("Location: index.php?action=createadmin");
 		}
-} elseif ($fm->input['action'] === 'createadmin') {
-		if (!isset($_SESSION['createadmin']) || $_SESSION['createadmin'] === FALSE) {
-			header("Location: index.php?action=configenter");
-			exit();
-		}
+		$board_config .= "\n?>";
 
-		if ($fm->_Boolean($fm->input, 'dosave') === FALSE) {
-			_header(FM_VERSION,$lang['InstallTitle'],$lang['CreateAdmin']);
-            $table = '<br>
+		$fm->_WriteText(FM_BOARDINFO, $board_config);
+		$_SESSION['createadmin'] = true;
+		header("Location: index.php?action=createadmin");
+	}
+}
+elseif ($fm->input['action'] === 'createadmin') {
+	if (!isset( $_SESSION['createadmin'] ) || $_SESSION['createadmin'] === false) {
+		header("Location: index.php?action=configenter");
+		exit();
+	}
+
+	if ($fm->_Boolean($fm->input, 'dosave') === false) {
+		_header(FM_VERSION, $lang['InstallTitle'], $lang['CreateAdmin']);
+		$table = '<br>
             <input type="hidden" name="dosave" value="yes">
             <table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 60%;">
 				<tr>
@@ -266,131 +245,130 @@ $board_config .="\n?>";
 					<td><input type="text" name="adminemail" class="text"></td>
 				</tr>
 			</table><br><br>';
-			_footer(FM_VERSION, 'createadmin', $lang['ContinueInstall'],$table);
-		} else {
-				if ($fm->_String('adminname') === '' || preg_match("#[^A-Za-zА-Яа-я0-9-_\.\s]#", $fm->input['adminname'])) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Логин" или запрещенные символы в логине!');
-				}
-
-                if ($fm->_String('adminpass') === '') {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Пароль администратора"!');
-				}
-
-				if ($fm->_String('readminpass') === '') {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "Подтверждение пароля"!');
-				}
-
-				if ($fm->input['adminpass'] !== $fm->input['readminpass']) {
-					_error($lang['InstallTitle'],'Ошибка!','Введенный пароль и подтверждение не совпадают!');
-				}
-
-				if ($fm->_String('adminemail') === '' || $fm->_Chek_Mail('adminemail') === FALSE) {
-					_error($lang['InstallTitle'],'Ошибка!','Не заполнено поле "E-mail администратора" или неправильный формат e-mail!');
-				}
-
-				$users		= array();
-				$users[1]['n'] = $fm->_LowerCase($fm->input['adminname']);
-				$users[1]['m']	= $fm->input['adminemail'];
-				$users[1]['p']	= 0;
-                $fm->_Read2Write($fp_users,FM_USERS);
-                $fm->_Write($fp_users,$users);
-
-				$user 					= array();
-				$user['id']				= 1;
-				$user['name']			= $fm->input['adminname'];
-				$user['pass']			= md5($fm->input['adminpass']);
-				$user['mail']			= $fm->input['adminemail'];
-				$user['status']			= 'ad';
-				$user['title']			= '';
-				$user['posts']			= 0;
-				$user['showemail']		= FALSE;
-				$user['www']			= '';
-				$user['aim']			= '';
-				$user['icq']			= '';
-				$user['location']		= '';
-				$user['joined']			= $fm->_Nowtime;
-				$user['sig']			= '';
-				$user['sig_on']			= TRUE;
-				$user['timedif']		= 0;
-				$user['upload']			= TRUE;
-				$user['avatar']			= 'noavatar.gif';
-				$user['last_visit']		= 0;
-				$user['posted']			= array();
-				$user['lastpost']		= array ('date' => 0,'link' => '','name' => '');
-				$user['lang']			= $fm->exbb['default_lang'];
-				$user['skin']			= $fm->exbb['default_style'];
-				$user['interests']		= '';
-				$user['private']		= array();
-				$user['new_pm']			= FALSE;
-				$user['sendnewpm']		= FALSE;
-				$user['visible']		= FALSE;
-				$user['posts2page']		= $fm->exbb['posts_per_page'];
-				$user['topics2page']	= $fm->exbb['topics_per_page'];
-				$fm->_Read2Write($fp_user,$_ForumRoot.'members/1.php');
-                $fm->_Write($fp_user,$user);
-
-				$fm->_SAVE_STATS(array (
-										'max_online' => array(1, 0),
-										'max_time' => array($fm->_Nowtime, 0),
-										'lastreg' => array($user['name'], 0),
-										'last_id' => array(1, 0),
-										'totalmembers'=> array(1, 0),
-										'totalposts'=> array(0, 0),
-										'totalthreads'=> array(0, 0),
-										)
-								);
-
-                $_SESSION['selectnext'] = TRUE;
-				header("Location: index.php?action=selectnext");
+		_footer(FM_VERSION, 'createadmin', $lang['ContinueInstall'], $table);
+	}
+	else {
+		if ($fm->_String('adminname') === '' || preg_match("#[^A-Za-zА-Яа-я0-9-_\.\s]#", $fm->input['adminname'])) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Логин" или запрещенные символы в логине!');
 		}
-} elseif ($fm->input['action'] === 'selectnext') {
-		if (!isset($_SESSION['selectnext']) || $_SESSION['selectnext'] === FALSE) {
-			header("Location: index.php?action=createadmin");
-			exit();
+
+		if ($fm->_String('adminpass') === '') {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Пароль администратора"!');
 		}
-		$_SESSION['updatedesc'] = TRUE;
-		_header(FM_VERSION,$lang['InstallTitle'],$lang['BoardInstalledOk']);
-		echo '<div class="warning">'.$lang['OkInstalleddesc'].'</div>';
-		$secondbutton = ' &nbsp; <input type="button" value="'.$lang['StartUpdate'].'" class="text" style="width: auto;" onClick="location.href=\'update.php?action=updatedesc\'">';
-		_footer(FM_VERSION, 'installend', $lang['EndInstall'], '', $secondbutton);
-} elseif ($fm->input['action'] === 'installend') {
-		header("Location: ".$fm->exbb['boardurl']);
-		exit();
-} else {
-		_header(FM_VERSION,$lang['InstallTitle'],$lang['Welcome']);
-		echo $lang['InstallDesc'];
-		_footer(FM_VERSION, 'checkperms', $lang['StartInstall']);
+
+		if ($fm->_String('readminpass') === '') {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "Подтверждение пароля"!');
+		}
+
+		if ($fm->input['adminpass'] !== $fm->input['readminpass']) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Введенный пароль и подтверждение не совпадают!');
+		}
+
+		if ($fm->_String('adminemail') === '' || $fm->_Chek_Mail('adminemail') === false) {
+			_error($lang['InstallTitle'], 'Ошибка!', 'Не заполнено поле "E-mail администратора" или неправильный формат e-mail!');
+		}
+
+		$users = array();
+		$users[1]['n'] = $fm->_LowerCase($fm->input['adminname']);
+		$users[1]['m'] = $fm->input['adminemail'];
+		$users[1]['p'] = 0;
+		$fm->_Read2Write($fp_users, FM_USERS);
+		$fm->_Write($fp_users, $users);
+
+		$user = array();
+		$user['id'] = 1;
+		$user['name'] = $fm->input['adminname'];
+		$user['pass'] = md5($fm->input['adminpass']);
+		$user['mail'] = $fm->input['adminemail'];
+		$user['status'] = 'ad';
+		$user['title'] = '';
+		$user['posts'] = 0;
+		$user['showemail'] = false;
+		$user['www'] = '';
+		$user['aim'] = '';
+		$user['icq'] = '';
+		$user['location'] = '';
+		$user['joined'] = $fm->_Nowtime;
+		$user['sig'] = '';
+		$user['sig_on'] = true;
+		$user['timedif'] = 0;
+		$user['upload'] = true;
+		$user['avatar'] = 'noavatar.gif';
+		$user['last_visit'] = 0;
+		$user['posted'] = array();
+		$user['lastpost'] = array( 'date' => 0, 'link' => '', 'name' => '' );
+		$user['lang'] = $fm->exbb['default_lang'];
+		$user['skin'] = $fm->exbb['default_style'];
+		$user['interests'] = '';
+		$user['private'] = array();
+		$user['new_pm'] = false;
+		$user['sendnewpm'] = false;
+		$user['visible'] = false;
+		$user['posts2page'] = $fm->exbb['posts_per_page'];
+		$user['topics2page'] = $fm->exbb['topics_per_page'];
+		$fm->_Read2Write($fp_user, $_ForumRoot . 'members/1.php');
+		$fm->_Write($fp_user, $user);
+
+		$fm->_SAVE_STATS(array( 'max_online' => array( 1, 0 ), 'max_time' => array( $fm->_Nowtime, 0 ), 'lastreg' => array( $user['name'], 0 ), 'last_id' => array( 1, 0 ), 'totalmembers' => array( 1, 0 ), 'totalposts' => array( 0, 0 ), 'totalthreads' => array( 0, 0 ), ));
+
+		$_SESSION['selectnext'] = true;
+		header("Location: index.php?action=selectnext");
+	}
 }
-include('page_tail.php');
+elseif ($fm->input['action'] === 'selectnext') {
+	if (!isset( $_SESSION['selectnext'] ) || $_SESSION['selectnext'] === false) {
+		header("Location: index.php?action=createadmin");
+		exit();
+	}
+	$_SESSION['updatedesc'] = true;
+	_header(FM_VERSION, $lang['InstallTitle'], $lang['BoardInstalledOk']);
+	echo '<div class="warning">' . $lang['OkInstalleddesc'] . '</div>';
+	$secondbutton = ' &nbsp; <input type="button" value="' . $lang['StartUpdate'] . '" class="text" style="width: auto;" onClick="location.href=\'update.php?action=updatedesc\'">';
+	_footer(FM_VERSION, 'installend', $lang['EndInstall'], '', $secondbutton);
+}
+elseif ($fm->input['action'] === 'installend') {
+	header("Location: " . $fm->exbb['boardurl']);
+	exit();
+}
+else {
+	_header(FM_VERSION, $lang['InstallTitle'], $lang['Welcome']);
+	echo $lang['InstallDesc'];
+	_footer(FM_VERSION, 'checkperms', $lang['StartInstall']);
+}
+include( 'page_tail.php' );
 
 /*
 	functions
 */
 function boolean($var) {
 	settype($var, "boolean");
+
 	return $var;
 }
 
 function pre_replace($val) {
-		if ($val == '') return '';
+	if ($val == '') {
+		return '';
+	}
 
-		$val = preg_replace("/&#(0|)39;/"      	, '\''		, $val);
-		$val = preg_replace("/&#(0|)36;/"      	, '$'		, $val);
-		$val = preg_replace("/&#(0|)92;/"       , '\\'		, $val);
-		$val = preg_replace("/<p>/"      		, '\n\n'	, $val);
-		$val = preg_replace("/<br>/"       		, "\n"		, $val);
-		$val = preg_replace("/&#60;script/i"	, '<script'	, $val);
-		$val = str_replace("&amp;"        		, '&'		, $val);
-		$val = str_replace("&#60;&#33;--" 		, '<!--'	, $val);
-		$val = str_replace("--&#62;"      		, '-->'		, $val);
-		$val = str_replace("&gt;"            	, '>'		, $val);
-		$val = str_replace("&lt;"            	, '<'		, $val);
-		$val = str_replace("&quot;"				, '"'		, $val);
-		return $val;
+	$val = preg_replace("/&#(0|)39;/", '\'', $val);
+	$val = preg_replace("/&#(0|)36;/", '$', $val);
+	$val = preg_replace("/&#(0|)92;/", '\\', $val);
+	$val = preg_replace("/<p>/", '\n\n', $val);
+	$val = preg_replace("/<br>/", "\n", $val);
+	$val = preg_replace("/&#60;script/i", '<script', $val);
+	$val = str_replace("&amp;", '&', $val);
+	$val = str_replace("&#60;&#33;--", '<!--', $val);
+	$val = str_replace("--&#62;", '-->', $val);
+	$val = str_replace("&gt;", '>', $val);
+	$val = str_replace("&lt;", '<', $val);
+	$val = str_replace("&quot;", '"', $val);
+
+	return $val;
 }
 
-function _header($version,$action,$title) {
-		echo <<<PAGEHEADER
+function _header($version, $action, $title) {
+	echo <<<PAGEHEADER
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -440,9 +418,9 @@ input.text {font-family: "Courier New", Courier, monospace;cursor: auto;margin: 
 PAGEHEADER;
 }
 
-function _error($action,$title,$errormessage) {
-		_header(FM_VERSION,$action,$title);
-		echo <<<ERROR
+function _error($action, $title, $errormessage) {
+	_header(FM_VERSION, $action, $title);
+	echo <<<ERROR
 		<div><span class="warning">{$errormessage}</span></div><br><br>
 		<div class="return"><a href="javascript:history.go(-1)"> << Вернуться назад</a></div><br>
 		</div>
@@ -450,11 +428,11 @@ function _error($action,$title,$errormessage) {
 </div>
 <br />
 ERROR;
-include('page_tail.php');
+	include( 'page_tail.php' );
 }
 
-function _footer($version,$action, $ButtonName, $hidden = '', $SecondButton = '') {
-		echo <<<FOOTER
+function _footer($version, $action, $ButtonName, $hidden = '', $SecondButton = '') {
+	echo <<<FOOTER
 			<form action="index.php?action={$action}" method="POST">
 				{$hidden}
 				<input name="enter" type="submit" value="{$ButtonName}" class="text" style="width: auto;">{$SecondButton}
@@ -471,4 +449,5 @@ function _footer($version,$action, $ButtonName, $hidden = '', $SecondButton = ''
 <br />
 FOOTER;
 }
+
 ?>
