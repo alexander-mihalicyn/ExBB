@@ -431,14 +431,6 @@ function add_attach($attach, $forumid, $toipcid, $attach_oldid = 0, $mode = 'new
 
 }
 
-function prints($arr = array()) {
-	echo '<pre>';
-	print_r($arr);
-	echo '</pre>';
-
-	return;
-}
-
 function replace_img_link($imlink) {
 	global $fm;
 

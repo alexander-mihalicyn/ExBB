@@ -16,6 +16,7 @@
 *                                                                         	*
 ****************************************************************************/
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $GLOBALS['fm']->_FcloseAll();
 $totaltime = $GLOBALS['fm']->_TotalTime();
 $_GZIP_STATUS = ($GLOBALS['fm']->_PageGziped === TRUE) ? 'Gzipped':'Gzip Disabled';

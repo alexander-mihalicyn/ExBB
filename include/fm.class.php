@@ -644,7 +644,9 @@ class FM extends VARS {
 	 */
 	function _FcloseAll() {
 		foreach ($this->_FilePointers as $fp) {
-			fclose($fp);
+			if (is_resource($fp)) {
+				fclose($fp);
+			}
 		}
 		$this->_FilePointers = array();
 	}

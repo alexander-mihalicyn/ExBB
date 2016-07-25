@@ -20,7 +20,7 @@ class Ads {
 	var $config = array();
 	var $status = false;
 
-	function Ads() {
+	function __construct() {
 		$this->getConfig();
 	}
 

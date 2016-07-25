@@ -20,6 +20,7 @@ include( './include/common.php' );
 $fm->_GetVars();
 $fm->_Intval('c');
 
+
 if ($fm->_String('action') == 'resetall' && $fm->user['id'] !== 0) {
 
 	if ($fm->exbb['watches']) {
@@ -218,7 +219,7 @@ foreach ($allforums_keys as $key => $id) {
 	$lastcat = $forum['catid'];
 	$last = ( !isset( $allforums_keys[$key + 1] ) || $allforums[$allforums_keys[$key + 1]]['catid'] != $forum['catid'] ) ? true : false;
 
-	ob_get_contents();
+	ob_start();
 	include( './templates/' . DEF_SKIN . '/board_data.tpl' );
 	$board_data = ob_get_clean();
 }
@@ -274,6 +275,7 @@ SpoilerHide: 	'{$fm->LANG['SpoilerHide']}'
 //-->
 </script>";
 }
+
 include( './templates/' . DEF_SKIN . '/all_header.tpl' );
 include( './templates/' . DEF_SKIN . '/logos.tpl' );
 include( './templates/' . DEF_SKIN . '/board_body.tpl' );
