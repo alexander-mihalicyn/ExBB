@@ -19,9 +19,7 @@ Chat informer
 */
 $chat_informer = '';
 if ($fm->exbb['chat'])
-$chat_informer = <<
-<DATA
-
+$chat_informer = <<<DATA
 <div align="center" id="chat_informer"><br/><br/></div>
 <script language="JavaScript" src="modules/chat/javascript/informer.js"></script>
 DATA;
@@ -29,8 +27,7 @@ DATA;
 /*
 Board body
 */
-echo <<
-<DATA
+echo <<<DATA
 <br/>{$chat_informer}
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
 	<tr>
@@ -68,17 +65,15 @@ echo <<
 			<a href="tools.php?action=online" title="{$fm->LANG['ViewFullList']}">{$fm->LANG['WhoOnline']}</a>
 		</td>
 	</tr>
-	DATA;
+DATA;
 	if ($todayvisit) {
-	echo <<
-	<DATA
+	echo <<<DATA
 	<tr>
 		<td class="row4">{$todayvisit}</td>
 	</tr>
-	DATA;
+DATA;
 	}
-	echo <<
-	<DATA
+	echo <<<DATA
 	<!-- ÒÎÏ-ËÈÑÒ ÏÎËÜÇÎÂÀÒÅËÅÉ -->
 	{$userstop}
 	<!-- ÒÎÏ-ËÈÑÒ ÏÎËÜÇÎÂÀÒÅËÅÉ -->
@@ -103,16 +98,14 @@ echo <<
 </table>
 <br/>
 <div align="center">
-	DATA;
+DATA;
 	if ($fm->exbb['rss'] === TRUE) {
-	echo <<
-	<DATA
+	echo <<<DATA
 	<a href="tools.php?action=rss" target="_blank" title="RSS êàíàë ôîðóìà {$GLOBALS['fm']->exbb['boardname']}"><img
 				src="./im/images/rss20.gif" width="80" height="15" alt="RSS" border="0"></a>
-	DATA;
+DATA;
 	}
-	echo <<
-	<DATA
+	echo <<<DATA
 </div>
 DATA;
 ?>

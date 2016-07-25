@@ -1,8 +1,7 @@
 <?php
 $form_code = '&nbsp;';
 if ($fm->exbb['exbbcodes'] === TRUE) {
-$form_code = <<
-<COD
+$form_code = <<<COD
 <script type="text/javascript" language="JavaScript">
 	<!--
 	var bblang = {

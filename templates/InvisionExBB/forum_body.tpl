@@ -1,8 +1,7 @@
 <?php
 $navi = ($subf) ? '<a href="index.php?c='.$pcatid.'">'.$pcatname.'</a>&nbsp;&raquo;&nbsp;<a
 		href="forums.php?forum='.$subf.'">'.$pforumname.'</a>' : '<a href="index.php?c='.$catid.'">'.$category.'</a>';
-$sub = <<
-<DATA
+$sub = <<<DATA
 <br>
 <table class="tableborder" width="100%" border="0" cellspacing="1" cellpadding="4">
 	<tr>
@@ -21,8 +20,7 @@ $sub = <<
 </table><br><br>
 DATA;
 $sub = ($subforums) ? $sub : '';
-echo <<
-<DATA
+echo <<<DATA
 <br/>
 <div id="navstrip" align="left">
 	<img src="./templates/InvisionExBB/im/nav.gif" border="0" alt="&gt;"/>&nbsp;<a
@@ -60,17 +58,15 @@ echo <<
 		<td class="row2" style="padding:6px" colspan="3">{$topicpages}</td>
 		<td class="row2" style="padding:6px" colspan="3" align="right">{$options}&nbsp;&nbsp;{$markforum}</td>
 	</tr>
-	DATA;
+DATA;
 	if ($statforum) {
-	echo <<
-	<DATA
+	echo <<<DATA
 	<tr>
 		<td class="row2" style="padding:6px" colspan="6">{$statforum}</td>
 	</tr>
-	DATA;
+DATA;
 	}
-	echo <<
-	<DATA
+	echo <<<DATA
 	<tr>
 		<td class="darkrow2" style="padding:4px" colspan="6">
 			<form name="postform" action="forums.php" method="get" class="gentext" onSubmit="SubmitControl(this)">

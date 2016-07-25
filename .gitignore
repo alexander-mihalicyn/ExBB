@@ -4,6 +4,9 @@
 /search/db/*
 /search/temp/*
 
+!/search/db/index.html
+!/search/temp/index.html
+
 /members/*
 !/members/index.html
 
@@ -15,6 +18,5 @@
 /modules/*/data/*
 !/modules/*/data/index.html
 
-/data/
 /data/*
 !/data/index.html
