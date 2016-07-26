@@ -23,6 +23,14 @@ class Belong {
 		$this->config = $fm->_Read(BELONG_CONFIG_FILE);
 	}
 
+	public function getConfig() {
+		return $this->config;
+	}
+
+	public function setConfig($config) {
+		$this->config = $config;
+	}
+
 	function saveConfig() {
 		global $fm;
 
@@ -100,10 +108,6 @@ class Belong {
 		global $fm;
 
 		$this->_openSqlite($user);
-
-		echo 11;
-
-		die;
 
 		$sql = "INSERT INTO posts VALUES ({$user}, 0, {$post}, {$forum}, {$topic})";
 

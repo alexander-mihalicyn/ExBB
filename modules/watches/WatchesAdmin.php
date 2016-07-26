@@ -25,7 +25,7 @@ class WatchesAdmin extends Watches {
 		$fm->_Read2Write($fpConfig, FM_WATCHES_CONFIG_FILE);
 		$fm->_Write($fpConfig, $config);
 		
-		$this->getConfig();
+		$this->loadConfig();
 		
 		return true;
 	}

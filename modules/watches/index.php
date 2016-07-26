@@ -27,7 +27,8 @@ function changeConfig() {
 	
 	if (!$fm->_Boolean1('doSend')) {
 		$watches = new Watches;
-		$days = $watches->config['days'];
+		$config = $watches->getConfig();
+		$days = $config['days'];
 		unset($watches);
 		
 		include('admin/all_header.tpl');

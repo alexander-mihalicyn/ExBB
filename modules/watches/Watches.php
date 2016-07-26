@@ -17,22 +17,26 @@ define('FM_WATCHES_DATA_DIR', FM_WATCHES_DIR . 'data/');
 define('FM_WATCHES_CONFIG_FILE', FM_WATCHES_DATA_DIR . 'config.php');
 
 class Watches {
-	private $config = array();
+	private $config = null;
 	private $_dbname = '';
 	private $_handle = false;
 	private $_result = false;
 	private $_filter;
 
 	public function __construct() {
-		$this->getConfig();
+		$this->loadConfig();
 	}
 
-	function getConfig() {
+	protected function loadConfig() {
 		global $fm;
 
-		$this->config = $fm->_Read(FM_WATCHES_CONFIG_FILE);
+		if (empty($this->config)) {
+			$this->config = $fm->_Read(FM_WATCHES_CONFIG_FILE);
+		}
+	}
 
-		return true;
+	public function getConfig() {
+		return $this->config;
 	}
 
 	function watchingForums($forums, $lasts) {

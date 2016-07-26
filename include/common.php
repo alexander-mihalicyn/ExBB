@@ -1,16 +1,5 @@
 <?php
-if (!defined('IN_EXBB')) {
-	die( 'Hack attempt!' );
-}
-
-// Debug flag
-define('DEBUG', true);
-
-if (DEBUG) {
-	ini_set('display_errors', true);
-	ini_set('error_reporting', true);
-	error_reporting(E_ALL);
-}
+defined('IN_EXBB') or die;
 
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . __DIR__);
 
@@ -41,9 +30,6 @@ require_once( 'page_header.php' );
 
 $fm->_Advertising();
 $fm->_Authorization();
-
-// ≈сли сервер в заголовках принудительно ставит левую кодировку, пошлЄм его подальше и поставим свою ;)
-header('Content-Type: text/html; charset=' . $fm->LANG['ENCODING']);
 
 $fm->exbb['version'] = FM_VERSION;
 

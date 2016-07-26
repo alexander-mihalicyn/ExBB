@@ -591,7 +591,8 @@ function addreply() {
 		// Сохраним информацию о кол-ве просмотров на случай обнуления views.php
 		$views = $fm->_Read('forum' . $forum_id . '/views.php');
 		if (isset( $views[$topic_id] )) {
-			$topic[reset(array_keys($topic))]['views'] = $views[$topic_id];
+			$viewsArrayKeys = array_keys($topic);
+			$topic[reset($viewsArrayKeys)]['views'] = $views[$topic_id];
 		}
 	}
 

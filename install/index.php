@@ -318,8 +318,7 @@ elseif ($fm->input['action'] === 'selectnext') {
 	$_SESSION['updatedesc'] = true;
 	_header(FM_VERSION, $lang['InstallTitle'], $lang['BoardInstalledOk']);
 	echo '<div class="warning">' . $lang['OkInstalleddesc'] . '</div>';
-	$secondbutton = ' &nbsp; <input type="button" value="' . $lang['StartUpdate'] . '" class="text" style="width: auto;" onClick="location.href=\'update.php?action=updatedesc\'">';
-	_footer(FM_VERSION, 'installend', $lang['EndInstall'], '', $secondbutton);
+	_footer(FM_VERSION, 'installend', $lang['EndInstall'], '');
 }
 elseif ($fm->input['action'] === 'installend') {
 	header("Location: " . $fm->exbb['boardurl']);
@@ -426,11 +425,11 @@ ERROR;
 	include( 'page_tail.php' );
 }
 
-function _footer($version, $action, $ButtonName, $hidden = '', $SecondButton = '') {
+function _footer($version, $action, $ButtonName, $hidden = '') {
 	echo <<<FOOTER
 			<form action="index.php?action={$action}" method="POST">
 				{$hidden}
-				<input name="enter" type="submit" value="{$ButtonName}" class="text" style="width: auto;">{$SecondButton}
+				<input name="enter" type="submit" value="{$ButtonName}" class="text" style="width: auto;">
 			</form>
 		</div>
 	</div>

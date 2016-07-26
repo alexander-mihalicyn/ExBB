@@ -26,7 +26,7 @@ if ($fm->_POST !== true) {
     
     $belong = new Belong;
     
-    $config = $belong->config;
+    $config = $belong->getConfig();
     
     $viewTopicsYes  = ($config['viewTopics']) ? 'checked="checked" ' : '';
     $viewTopicsNo   = (!$config['viewTopics']) ? 'checked="checked" ' : '';
@@ -46,11 +46,11 @@ else {
     
     $belong = new Belong;
     
-    $belong->config = array(
+    $belong->setConfig(array(
         'membersPerDb'  => abs($fm->input['membersPerDb']),
         'viewTopics'    => $fm->_Boolean1('viewTopics'),
         'viewPosts'     => $fm->_Boolean1('viewPosts')
-    );
+	));
     
     $belong->saveConfig();
     

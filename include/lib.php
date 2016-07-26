@@ -43,6 +43,10 @@ function get_rd($sess_id = 0) {
 		$rd[3] = $rd[2] . '&' . _SESSION_ID;
 	}
 
+	if (empty($rd[5])) {
+		$rd[5] = '';
+	}
+
 	if ($rd[5] !== '') {
 		$rd[5] = $rd[4];
 	}

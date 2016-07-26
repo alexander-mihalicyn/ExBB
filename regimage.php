@@ -21,7 +21,7 @@ $_SESSION['captcha'] = $captcha->getKeyString();
 class KCAPTCHA {
 
 	// generates keystring and image
-	function KCAPTCHA() {
+	public function __construct() {
 
 		$alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"; # do not change without changing font files!
 		$allowed_symbols = "23456789abcdeghkmnpqsuvxyz"; #alphabet without similar symbols (o=0, 1=l, i=j, t=f)

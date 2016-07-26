@@ -410,7 +410,6 @@ function memberslist() {
 
 function loadModule() {
 	global $fm;
-	//$fm->_LoadLang('forums');
 
 	if ($fm->input['action'] === '' || !preg_match('#^[a-zA-Z0-9\-_]+$#is', $fm->input['action'])) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
