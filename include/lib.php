@@ -19,10 +19,9 @@ if (!defined('IN_EXBB')) {
 	die( 'Hack attempt!' );
 }
 
-if (!defined("PATH_SEPARATOR")) {
-	define("PATH_SEPARATOR", getenv("COMSPEC") ? ";" : ":");
-}
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . dirname(__FILE__));
+
+include dirname(__DIR__).'/core/bootstrap.php';
 
 require_once( 'vars.class.php' );
 require_once( 'fm.class.php' );

@@ -17,9 +17,9 @@
  ****************************************************************************/
 define('IN_EXBB', true);
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_Intval('c');
-
 
 if ($fm->_String('action') == 'resetall' && $fm->user['id'] !== 0) {
 
@@ -72,7 +72,7 @@ $allforums_keys = array_keys($allforums);
 $subforums = array();
 require( 'modules/watches/_index.php' );
 
-$viewData = [ ];
+$viewData = array();
 
 foreach ($allforums_keys as $key => $id) {
 	$forum = $allforums[$id];
@@ -221,7 +221,7 @@ foreach ($allforums_keys as $key => $id) {
 
 	ob_start();
 	include( './templates/' . DEF_SKIN . '/board_data.tpl' );
-	$board_data = ob_get_clean();
+	$board_data .= ob_get_clean();
 }
 
 // — –€“€… –≈∆»Ã œ–≈¡€¬¿Õ»ﬂ Õ¿ ‘Œ–”Ã≈ //

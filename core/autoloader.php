@@ -1,4 +1,6 @@
 <?php
+defined('IN_EXBB') or die;
+
 spl_autoload_register(function ($class) {
 
     // project-specific namespace prefix

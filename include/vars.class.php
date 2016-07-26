@@ -160,7 +160,7 @@ class VARS {
 
 		$cookie = ( isset( $_COOKIE[$name] ) && trim($_COOKIE[$name]) != '' && intval($_COOKIE[$name]) != 0 ) ? $_COOKIE[$name] : $return;
 
-		return ( get_magic_quotes_gpc() ) ? stripslashes($cookie) : $cookie;
+		return $cookie;
 	}
 
 	/*
@@ -168,7 +168,6 @@ class VARS {
 	*/
 	function _GetCookieArray($name) {
 		$cookie = ( isset( $_COOKIE[$name] ) && trim($_COOKIE[$name]) != '' ) ? $_COOKIE[$name] : "a:0:{}";
-		$cookie = ( get_magic_quotes_gpc() ) ? stripslashes($cookie) : $cookie;
 
 		return ( ( $cookie = @unserialize($cookie) ) !== false ) ? $cookie : array();
 	}

@@ -1,9 +1,4 @@
 <?php
-error_reporting(E_ALL);
-if (get_magic_quotes_runtime() === 1) {
-	set_magic_quotes_runtime(0);
-}
-
 $_ForumRoot = str_replace('install/', '', str_replace('\\', '/', dirname(__FILE__)) . '/');
 
 define("FM_DATADIR", $_ForumRoot . "data/");
@@ -32,7 +27,7 @@ define('IN_EXBB', true);
 define('FM_SAFE_MODE', ( ini_get('safe_mode') ? true : false ));
 require_once( '../include/lib.php' );
 require_once( 'page_header.php' );
-require_once( 'language/russian/lang.php' );
+require_once( __DIR__.'/language/russian/lang.php' );
 
 $fm->_GetVars();
 $fm->_String('action');
