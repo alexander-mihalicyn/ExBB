@@ -20,16 +20,14 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 $GLOBALS['fm']->_FcloseAll();
 $totaltime = $GLOBALS['fm']->_TotalTime();
 $_GZIP_STATUS = ($GLOBALS['fm']->_PageGziped === TRUE) ? 'Gzipped':'Gzip Disabled';
-echo <<<FOOTER
+?>
+
 <center>
 	<font color="#990000" size="1">
-    	  <!-- [Script Execution time: $totaltime] [ {$_GZIP_STATUS} ] -->
+    	  <!-- [Script Execution time: <?php echo $totaltime; ?>] [ <?php echo $_GZIP_STATUS; ?> ] -->
     </font>
 </center>
 </body>
 </html>
-FOOTER;
-ob_end_flush();
-unset($GLOBALS['fm'],$lang);
-exit;
-?>
+
+<?php ob_end_flush(); ?>

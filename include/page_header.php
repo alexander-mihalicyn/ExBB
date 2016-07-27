@@ -21,7 +21,7 @@ if (!defined('IN_EXBB')) {
 
 /* Start gzip headers */
 if ($fm->exbb['gzip_compress'] && !defined('ATTACH') && !defined('NO_GZIP') && extension_loaded("zlib")) {
-	ob_start("ob_gzhandler", 9);
+	ob_start("ob_gzhandler");
 	$fm->_PageGziped = true;
 }
 else {
@@ -30,5 +30,3 @@ else {
 ob_implicit_flush(0);
 session_start();
 define('_SESSION_ID', session_name() . '=' . session_id());
-/* End gzip headers */
-?>
