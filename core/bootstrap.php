@@ -2,7 +2,7 @@
 defined('IN_EXBB') or die;
 
 // Debug flag
-define('DEBUG', true);
+define('DEBUG', false);
 
 header('Content-Type: text/html; charset=Windows-1251');
 

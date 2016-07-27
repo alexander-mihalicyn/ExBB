@@ -1,6 +1,8 @@
 <?php
 defined('IN_EXBB') or die;
 
+use ExBB\Helpers\FileSystemHelper;
+
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . __DIR__);
 
 define('FM_PATH', dirname(__DIR__) . '/');
@@ -48,7 +50,7 @@ if ($fm->exbb['installed'] === false) {
 	header("Location: ./install/index.php");
 }
 elseif (file_exists("./install/index.php") && !DEBUG) {
-	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['DelleteInstallDir']);
+	FileSystemHelper::deleteDirectoryRecursive(dirname(__DIR__).'/install');
 }
 
 if ($fm->exbb['board_closed'] && !( defined('IS_LOGIN') || defined('IS_ADMIN') )) {
@@ -62,4 +64,3 @@ if ($fm->exbb['board_closed'] && !( defined('IS_LOGIN') || defined('IS_ADMIN') )
 if (!defined('IS_LOGIN') && !defined('IS_REGISTER')) {
 	$_SESSION['rd'] = '';
 }
-?>
