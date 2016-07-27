@@ -16,7 +16,7 @@ class UPLOAD {
 	var $_REQUEST_TYPE = '.*';
 	var $_TARFILE = false;
 
-	function UPLOAD($maxsize) {
+	public function __construct($maxsize) {
 
 		$this->_TEMPNAME = $_FILES['FILE_UPLOAD']['tmp_name'];
 		$this->_NAME = $_FILES['FILE_UPLOAD']['name'];

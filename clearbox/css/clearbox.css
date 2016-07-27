@@ -266,8 +266,8 @@ background:transparent;
 
 #CB_CloseWindow {
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right: -14px;
+	top: -10px;
 	z-index: 1104;
 	cursor: pointer;
 }

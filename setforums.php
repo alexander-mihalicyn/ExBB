@@ -173,8 +173,8 @@ elseif ($fm->input['action'] == "edit") {
 	$forummoderator = implode(',', $allforums[$forum_id]['moderator']);
 	$forumgraphic = $allforums[$forum_id]['icon'];
 
-	$forumname = htmlspecialchars($allforums[$forum_id]['name']);
-	$forumdescription = htmlspecialchars($allforums[$forum_id]['desc']);
+	$forumname = htmlspecialchars($allforums[$forum_id]['name'], ENT_COMPAT, 'windows-1251');
+	$forumdescription = htmlspecialchars($allforums[$forum_id]['desc'], ENT_COMPAT, 'windows-1251');
 	$do = $fm->LANG['EditForum'];
 
 	$codes_on = ( $allforums[$forum_id]['codes'] ) ? 'selected' : '';
@@ -193,7 +193,7 @@ elseif ($fm->input['action'] == "edit") {
 	$access2reply_reged = ( $allforums[$forum_id]['strep'] == 'reged' ) ? 'selected' : '';
 	$access2reply_no = ( $allforums[$forum_id]['strep'] == 'admo' ) ? 'selected' : '';
 	$upsize = $allforums[$forum_id]['upload'] / 1024;
-	$sponsor = ( $fm->exbb['sponsor'] && isset( $allforums[$forum_id]['sponsor'] ) ) ? htmlspecialchars($allforums[$forum_id]['sponsor']) : '';
+	$sponsor = ( $fm->exbb['sponsor'] && isset( $allforums[$forum_id]['sponsor'] ) ) ? htmlspecialchars($allforums[$forum_id]['sponsor'], ENT_COMPAT, 'windows-1251') : '';
 	$button = $fm->LANG['Save'];
 	$safe_mode = '';
 	$hidden = '<input type="hidden" name="action" value="doedit">
@@ -279,7 +279,7 @@ elseif ($fm->input['action'] == "editcatname") {
 	}
 	else {
 		$fm->_Fclose($fp_allforums);
-		$categoryname = htmlspecialchars($categories[$catid]);
+		$categoryname = htmlspecialchars($categories[$catid], ENT_COMPAT, 'windows-1251');
 		include( './admin/all_header.tpl' );
 		include( './admin/nav_bar.tpl' );
 		include( './admin/edit_catname.tpl' );
