@@ -7,15 +7,10 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) {
-	die;
-}
+defined('IN_EXBB') or die;
 
 if ($fm->exbb['mailer'] && preg_match('#index.php$#iu', $_SERVER['SCRIPT_FILENAME'])) {
 	include_once('Mailer.class.php');
 	$mailer = new Mailer;
 	$mailer->send();
-	unset($mailer);
 }
-
-?>

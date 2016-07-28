@@ -7,9 +7,7 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) {
-	die;
-}
+defined('IN_EXBB') or die;
 
 require('MailerAdmin.class.php');
 
@@ -57,8 +55,5 @@ $config['reserved']		= abs($fm->input['reserved']);
 $config['cron']			= $fm->input['cron'];
 
 $mailerAdmin->saveConfig($config);
-unset($mailer);
 
 $fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=mailer', true);
-
-?>

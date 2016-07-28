@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Mailer Mod for ExBB FM 1.0 RC1.01
 	Copyright (c) 2005 - 2012 by Yuri Antonov aka yura3d
@@ -7,15 +6,13 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) {
-	die;
-}
+defined('IN_EXBB') or die;
 
-define('FM_MAILER_DATA_DIR', 				FM_PATH . 'modules/mailer/data/');		// Путь к папке данных модуля
-define('FM_MAILER_LOCK_FILE',				FM_MAILER_DATA_DIR . 'lock.php');		// Блокиратор доступа
-define('FM_MAILER_CONFIG_FILE',				FM_MAILER_DATA_DIR . 'config.php');		// Конфигурация
-define('FM_MAILER_LIST_FILE',				FM_MAILER_DATA_DIR . 'list.php');		// Список писем в очереди
-define('FM_MAILER_MAIL_FORMAT',				FM_MAILER_DATA_DIR . '%d.php');			// Письмо
+define('EXBB_MODULE_MAILER_DATA_DIR', EXBB_DATA_DIR_MODULES . '/mailer');		// Путь к папке данных модуля
+define('EXBB_MODULE_MAILER_DATA_LOCK', EXBB_MODULE_MAILER_DATA_DIR . '/lock.php');		// Блокиратор доступа
+define('EXBB_MODULE_MAILER_DATA_CONFIG', EXBB_MODULE_MAILER_DATA_DIR . '/config.php');		// Конфигурация
+define('EXBB_MODULE_MAILER_DATA_QUEUE', EXBB_MODULE_MAILER_DATA_DIR . '/list.php');		// Список писем в очереди
+define('EXBB_MODULE_MAILER_DATA_MAIL', EXBB_MODULE_MAILER_DATA_DIR . '/%d.php');			// Письмо
 define('FM_MAILER_ACCOUNT_PRIORITY',		1);										// Приоритет учётных писем
 define('FM_MAILER_PERSON_PRIORITY',			2);										// Приоритет персональных писем
 define('FM_MAILER_SUBSCRIBERS_PRIORITY',	3);										// Приоритет подписок
@@ -29,9 +26,9 @@ class Mailer {
 	function getConfig() {
 		global $fm;
 		
-		$fm->_Read2Write($this->_fpLock, FM_MAILER_LOCK_FILE);
+		$fm->_Read2Write($this->_fpLock, EXBB_MODULE_MAILER_DATA_LOCK);
 		
-		$this->config = $fm->_Read2Write($this->_fpConfig, FM_MAILER_CONFIG_FILE);
+		$this->config = $fm->_Read2Write($this->_fpConfig, EXBB_MODULE_MAILER_DATA_CONFIG);
 		
 		return $this->config;
 	}
@@ -42,7 +39,7 @@ class Mailer {
 		$fm->_Write($this->_fpConfig, $config !== null ? $config : $this->config);
 		
 		$fm->_Fclose($this->_fpLock);
-		unlink(FM_MAILER_LOCK_FILE);
+		unlink(EXBB_MODULE_MAILER_DATA_LOCK);
 		
 		return true;
 	}
@@ -53,7 +50,7 @@ class Mailer {
 		$fm->_Fclose($this->_fpConfig);
 		
 		$fm->_Fclose($this->_fpLock);
-		unlink(FM_MAILER_LOCK_FILE);
+		unlink(EXBB_MODULE_MAILER_DATA_LOCK);
 		
 		return true;
 	}
@@ -82,14 +79,14 @@ class Mailer {
 		$id = $config['id'] = isset($config['id']) ? $config['id'] : 1;
 		
 		// List start
-		$list = $fm->_Read2Write($fpList, FM_MAILER_LIST_FILE);
+		$list = $fm->_Read2Write($fpList, EXBB_MODULE_MAILER_DATA_QUEUE);
 		$list[$id] = array($priority, true);
 		if (is_array($args[2])) {
 			$list[$id][2] = count($args[2]);
 		}
 		
 		// Mail
-		$fm->_Read2Write($fpMail, sprintf(FM_MAILER_MAIL_FORMAT, $id));
+		$fm->_Read2Write($fpMail, sprintf(EXBB_MODULE_MAILER_DATA_MAIL, $id));
 		$fm->_Write($fpMail, array($args[0], $args[1], $args[2], $args[3], $args[4]));
 		
 		// List end
@@ -128,7 +125,7 @@ class Mailer {
 		global $fm;
 		
 		// Lock checking
-		if (file_exists(FM_MAILER_LOCK_FILE) && !$this->isCron()) {
+		if (file_exists(EXBB_MODULE_MAILER_DATA_LOCK) && !$this->isCron()) {
 			return false;
 		}
 		
@@ -144,7 +141,7 @@ class Mailer {
 				$process = 0;
 				
 				// List start
-				$list = $fm->_Read2Write($fpList, FM_MAILER_LIST_FILE);
+				$list = $fm->_Read2Write($fpList, EXBB_MODULE_MAILER_DATA_QUEUE);
 				
 				$stop = false;
 				foreach ($list as $id => $info) {
@@ -153,7 +150,7 @@ class Mailer {
 					}
 					
 					// Mail
-					$mail = $fm->_Read2Write($fpMail, sprintf(FM_MAILER_MAIL_FORMAT, $id));
+					$mail = $fm->_Read2Write($fpMail, sprintf(EXBB_MODULE_MAILER_DATA_MAIL, $id));
 					$headers = $this->_makeHeaders($mail[0], $mail[1]);
 					$mail[2] = is_array($mail[2]) ? $mail[2] : array($mail[2]);
 					if (reset($mail[2]) === 1) {
@@ -206,7 +203,7 @@ class Mailer {
 					}
 					else {
 						$fm->_Fclose($fpMail);
-						unlink(sprintf(FM_MAILER_MAIL_FORMAT, $id));
+						unlink(sprintf(EXBB_MODULE_MAILER_DATA_MAIL, $id));
 						
 						unset($list[$id]);
 					}
@@ -222,7 +219,7 @@ class Mailer {
 				}
 				else {
 					$fm->_Fclose($fpList);
-					unlink(FM_MAILER_LIST_FILE);
+					unlink(EXBB_MODULE_MAILER_DATA_QUEUE);
 				}
 				
 				if ($process) {

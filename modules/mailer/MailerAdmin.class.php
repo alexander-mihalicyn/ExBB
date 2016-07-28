@@ -19,7 +19,7 @@ class MailerAdmin extends Mailer {
 		
 		$wSentThrough = array(0, 0);
 		
-		$list = $fm->_Read2Write($fpList, FM_MAILER_LIST_FILE);
+		$list = $fm->_Read2Write($fpList, EXBB_MODULE_MAILER_DATA_QUEUE);
 		foreach ($list as $id => $info) {
 			$count = isset($info[2]) ? $info[2] - (isset($info[3]) ? $info[3] : 0) : 1;
 			switch ($info[0]) {
@@ -37,11 +37,9 @@ class MailerAdmin extends Mailer {
 		}
 		$fm->_Fclose($fpList);
 		if (!$list) {
-			unlink(FM_MAILER_LIST_FILE);
+			unlink(EXBB_MODULE_MAILER_DATA_QUEUE);
 		}
 		
 		return $wSentThrough;
 	}
 }
-
-?>

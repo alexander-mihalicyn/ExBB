@@ -87,5 +87,3 @@ if ($fm->exbb['mailer']) {
 	$mailer->send();
 	unset($mailer);
 }
-
-?>

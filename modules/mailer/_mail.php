@@ -7,9 +7,7 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) {
-	die;
-}
+defined('IN_EXBB') or die;
 
 $backtrace = debug_backtrace();
 $file = $backtrace[1]['file'];
@@ -30,6 +28,3 @@ else {
 require_once('Mailer.class.php');
 $mailer = new Mailer;
 call_user_func(array($mailer, $method), $args[0], $args[1], $args[2], $args[3], $args[4]);
-unset($mailer);
-
-?>
