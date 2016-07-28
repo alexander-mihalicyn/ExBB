@@ -23,5 +23,3 @@ if ($fm->exbb['watches']) {
 	
 	_watchesLoginout();
 }
-
-?>

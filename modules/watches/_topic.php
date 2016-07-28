@@ -27,5 +27,3 @@ if ($fm->exbb['watches'] && $fm->user['id']) {
 	
 	$TopicVisitTime = _watchesTopic($forum_id, $topic_id, $topic['postdate'], $topic['postkey'], end($threads_keys));
 }
-
-?>

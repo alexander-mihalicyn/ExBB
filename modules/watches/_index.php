@@ -32,5 +32,3 @@ if ($fm->exbb['watches'] && $fm->user['id']) {
 	
 	$_watchesIndex = _watchesIndex($allforums_keys);
 }
-
-?>

@@ -23,5 +23,3 @@ if ($fm->exbb['watches'] && $fm->user['id']) {
 	
 	_watchesIndexMark();
 }
-
-?>

@@ -47,5 +47,3 @@ function changeConfig() {
 	
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=watches', 1);
 }
-
-?>

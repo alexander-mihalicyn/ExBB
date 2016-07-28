@@ -28,5 +28,3 @@ function _watchesIncludeFmDeadline($uid) {
 if ($this->exbb['watches']) {
 	include_once('Watches.php');
 }
-
-?>

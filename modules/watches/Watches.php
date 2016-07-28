@@ -12,9 +12,9 @@ if (!defined('IN_EXBB')) {
 	die;
 }
 
-define('FM_WATCHES_DIR', 'modules/watches/');
-define('FM_WATCHES_DATA_DIR', FM_WATCHES_DIR . 'data/');
-define('FM_WATCHES_CONFIG_FILE', FM_WATCHES_DATA_DIR . 'config.php');
+define('EXBB_', 'modules/watches/');
+define('EXBB_MODULE_WATCHES_DATA_DIR', EXBB_DATA_DIR_MODULES . '/watches');
+define('EXBB_MODULE_WATCHES_DATA_CONFIG', EXBB_MODULE_WATCHES_DATA_DIR . '/config.php');
 
 class Watches {
 	private $config = null;
@@ -31,7 +31,7 @@ class Watches {
 		global $fm;
 
 		if (empty($this->config)) {
-			$this->config = $fm->_Read(FM_WATCHES_CONFIG_FILE);
+			$this->config = $fm->_Read(EXBB_MODULE_WATCHES_DATA_CONFIG);
 		}
 	}
 
@@ -273,7 +273,7 @@ class Watches {
 			$uid = $fm->user['id'];
 		}
 
-		$dbname = FM_WATCHES_DATA_DIR . "member{$uid}.db";
+		$dbname = EXBB_MODULE_WATCHES_DATA_DIR . "/member{$uid}.db";
 
 		if ($dbname == $this->_dbname) {
 			return true;
@@ -336,5 +336,3 @@ class Watches {
 		die( '//-->' );
 	}
 }
-
-?>

@@ -22,7 +22,7 @@ class WatchesAdmin extends Watches {
 			'days'	=> $days
 		);
 		
-		$fm->_Read2Write($fpConfig, FM_WATCHES_CONFIG_FILE);
+		$fm->_Read2Write($fpConfig, EXBB_MODULE_WATCHES_DATA_CONFIG);
 		$fm->_Write($fpConfig, $config);
 		
 		$this->loadConfig();
@@ -30,5 +30,3 @@ class WatchesAdmin extends Watches {
 		return true;
 	}
 }
-
-?>

@@ -25,5 +25,3 @@ if ($fm->exbb['watches'] && $fm->user['id']) {
 	
 	$alltopics = _watchesSearch($allforums_keys);
 }
-
-?>

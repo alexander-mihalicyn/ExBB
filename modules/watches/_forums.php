@@ -52,5 +52,3 @@ if ($fm->exbb['watches'] && $fm->user['id']) {
 	
 	$_watchesForums = _watchesForums($allforums_keys, $forum_id, array_filter($keys, '_watchesForumsFilter'));
 }
-
-?>
