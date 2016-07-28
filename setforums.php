@@ -696,7 +696,7 @@ elseif ($fm->input['action'] == "searchindex") {
 		$fm->_Message($fm->LANG['ForumIndexing'], $fm->LANG['ForumNotExists'], '', 1);
 	}
 
-	$forum_dir = 'forum' . $forum_id;
+	$forum_dir = EXBB_DATA_DIR_FORUMS . '/' . $forum_id;
 
 	include( 'search/search.php' );
 
@@ -705,21 +705,16 @@ elseif ($fm->input['action'] == "searchindex") {
 	$cwn = 0;
 	$kbcount = 0;
 
-	if (!ini_get('safe_mode') && !is_dir('search/db')) {
-		mkdir('search/db', $fm->exbb['ch_dirs']);
-		@chmod('search/db', $fm->exbb['ch_dirs']);
-	}
-	else {
-		if (!is_dir('search/db')) {
-			$fm->_Message($fm->LANG['ForumIndexing'], sprintf($fm->LANG['SafeModeCat'], 'search/db'), '', 1);
-		}
+	if (!is_dir(EXBB_DATA_DIR_SEARCH . '/db/')) {
+		mkdir(EXBB_DATA_DIR_SEARCH . '/db/', $fm->exbb['ch_dirs']);
+		@chmod(EXBB_DATA_DIR_SEARCH . '/db/', $fm->exbb['ch_dirs']);
 	}
 
-	$HASH = 'search/db/' . $fm->input['forum'] . '_hash';
-	$HASHWORDS = 'search/db/' . $fm->input['forum'] . '_hashwords';
-	$FINFO = 'search/db/' . $fm->input['forum'] . '_finfo';
-	$SITEWORDS = 'search/db/' . $fm->input['forum'] . '_sitewords';
-	$WORD_IND = 'search/db/' . $fm->input['forum'] . '_word_ind';
+	$HASH = EXBB_DATA_DIR_SEARCH . '/db/' . $fm->input['forum'] . '_hash';
+	$HASHWORDS = EXBB_DATA_DIR_SEARCH . '/db/' . $fm->input['forum'] . '_hashwords';
+	$FINFO = EXBB_DATA_DIR_SEARCH . '/db/' . $fm->input['forum'] . '_finfo';
+	$SITEWORDS = EXBB_DATA_DIR_SEARCH . '/db/' . $fm->input['forum'] . '_sitewords';
+	$WORD_IND = EXBB_DATA_DIR_SEARCH . '/db/' . $fm->input['forum'] . '_word_ind';
 
 	$fp_FINFO = fopen($FINFO, 'w');
 	fwrite($fp_FINFO, "\n");

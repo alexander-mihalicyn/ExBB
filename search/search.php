@@ -76,12 +76,13 @@ function get_query(&$wholeword,&$querymode,&$query_arr) {
 function get_results($inforum,$wholeword,$querymode,$query_arr,&$allres) {
 		global $_SEARCH;
 
-		$HASH      = 'search/db/'.$inforum.'_hash';
-		$HASHWORDS = 'search/db/'.$inforum.'_hashwords';
-		$SITEWORDS = 'search/db/'.$inforum.'_sitewords';
-		$WORD_IND  = 'search/db/'.$inforum.'_word_ind';
+		$HASH      = EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_hash';
+		$HASHWORDS = EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_hashwords';
+		$SITEWORDS = EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_sitewords';
+		$WORD_IND  = EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_word_ind';
 
 		if (!file_exists($HASH) || !file_exists($HASHWORDS) || !file_exists($SITEWORDS) || !file_exists($WORD_IND)) return;
+
 		$fp_HASH		= fopen($HASH, "rb");
 		$fp_HASHWORDS	= fopen($HASHWORDS, "rb");
 		$fp_SITEWORDS	= fopen($SITEWORDS, "rb");
@@ -119,6 +120,7 @@ function get_results($inforum,$wholeword,$querymode,$query_arr,&$allres) {
 				}
 
 				$pos = strpos($word, $query);
+
 				if ($pos !== false) {
 					fseek($fp_WORD_IND,$arr_dum['filepos'],0);
 					$dum = fread($fp_WORD_IND,4);
@@ -254,9 +256,9 @@ function _check($inforum, $k) {
 	global $finfo;
 	
 	if (!isset($finfo[$inforum])) {
-		$fp = fopen('search/db/'.$inforum.'_finfo', 'r');
+		$fp = fopen(EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_finfo', 'r');
 		flock($fp, 1);
-		$finfo[$inforum] = fread($fp, filesize('search/db/'.$inforum.'_finfo'));
+		$finfo[$inforum] = fread($fp, filesize(EXBB_DATA_DIR_SEARCH . '/db/'.$inforum.'_finfo'));
 		flock($fp, 3);
 		fclose($fp);
 	}

@@ -195,6 +195,7 @@ function search() {
 		$_SEARCH['entered_word'] = $fm->input['search_keywords'];
 		$_SEARCH['search_keywords'] = $fm->input['search_keywords'];
 		$_SEARCH['stype'] = $fm->input['stype'];
+
 		get_query($wholeword, $querymode, $query_arr);
 
 		$_SEARCH['entered_word_arr'] = $query_arr;
@@ -217,7 +218,7 @@ function search() {
 
 			if ($total_found) {
 				$search_id = $newpassword = substr(uniqid(str_shuffle(session_id()), false), mt_rand(0, 32), 16);
-				if ($fp = @fopen('search/temp/' . $search_id, 'wb')) {
+				if ($fp = @fopen(EXBB_DATA_DIR_SEARCH . '/temp/' . $search_id, 'wb')) {
 					$fm->_FilePointers[$fp] = $fp;
 					$fm->_Write($fp, $_SEARCH);
 				}
@@ -236,10 +237,10 @@ function search() {
 		clear_dir_from_expired_files();
 		$search_id = $fm->_String('search_id');
 
-		if (!$search_id || !file_exists('search/temp/' . $search_id)) {
+		if (!$search_id || !file_exists(EXBB_DATA_DIR_SEARCH . '/temp/' . $search_id)) {
 			$fm->_Message($fm->LANG['Search'], $fm->LANG['SEARCHNOPARAM']);
 		}
-		$_SEARCH = $fm->_Read('search/temp/' . $search_id);
+		$_SEARCH = $fm->_Read(EXBB_DATA_DIR_SEARCH . '/temp/' . $search_id);
 		//unset($vars['res']);
 		//prints($vars);exit();
 		$data = '';
@@ -251,8 +252,8 @@ function search() {
 		$entered_word = urlencode($entered_word);
 		$fm->input['p'] = abs($fm->_Intval('p', 1));
 		foreach ($_SEARCH['res'] as $forum_id => $res) {
-			$FINFO = 'search/db/' . $forum_id . '_finfo';
-			if (!file_exists('search/db/' . $forum_id . '_finfo')) {
+			$FINFO = EXBB_DATA_DIR_SEARCH . '/db/' . $forum_id . '_finfo';
+			if (!file_exists(EXBB_DATA_DIR_SEARCH . '/db/' . $forum_id . '_finfo')) {
 				continue;
 			}
 			$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
@@ -295,7 +296,6 @@ function search() {
 				$poster = ( $topic[$t]['poster'] !== false ) ? $topic[$t]['poster'] : $fm->LANG['Guest'];
 				$poster = ( $topic[$t]['p_id'] !== 0 ) ? '<a href="profile.php?action=show&member=' . $topic[$t]['p_id'] . '">' . $poster . '</a>' : $poster;
 
-				//printpage.php?action=1&forum='.$f.'&topic='.$t.'&post='.urlencode($_SEARCH['entered_word']).'&stype='.$_SEARCH['stype'].'&color=yes
 				$topicname = '<a href="printpage.php?action=1&forum=' . $f . '&topic=' . $t . '&post=' . $entered_word . '&stype=OR&color=yes">' . $fm->chunk_split($topic[$t]['name']) . '</a>';
 				//$topicname	= '<a href="topic.php?forum='.$f.'&topic='.$t.'&v=l#'.$topic[$t]['postkey'].'">'.$fm->chunk_split($topic[$t]['name']).'</a>';
 				$topicdesc = $fm->chunk_split($topic[$t]['desc']);
@@ -332,7 +332,7 @@ function filterForums($forum) {
 }
 
 function clear_dir_from_expired_files() {
-	$cleardir = 'search/temp';
+	$cleardir = EXBB_DATA_DIR_SEARCH . '/temp/';
 	$d = dir($cleardir);
 	while (false !== ( $file = $d->read() )) {
 		if (is_dir($cleardir . '/' . $file)) {

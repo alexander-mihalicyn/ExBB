@@ -95,14 +95,14 @@ $ReplyButton = ( $topic['state'] == 'open' ) ? '<a href="post.php?action=reply&f
 /* ондяберйю онхяйю */
 $findstring = $search_link = '';
 if ($fm->_String('search_id') !== '') {
-	$search_array = $fm->_Read('search/temp/' . $fm->input['search_id']);
+	$search_array = $fm->_Read(EXBB_DATA_DIR_SEARCH . '/temp/' . $fm->input['search_id']);
 	if (sizeof($search_array)) {
 		$findstring = implode("|", $search_array['entered_word_arr']);
 		$search_link = "&amp;search_id=" . $fm->input['search_id'];
 		unset( $search_array );
 	}
 	else {
-		unlink('search/temp/' . $fm->input['search_id']);
+		unlink(EXBB_DATA_DIR_SEARCH . '/temp/' . $fm->input['search_id']);
 	}
 }
 /* ондяберйю онхяйю */
