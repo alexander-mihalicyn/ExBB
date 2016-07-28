@@ -16,10 +16,10 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 define(\"FM_BIRSTPM\", {$birst_pm});
 define(\"FM_BIRSTEMAIL\", {$birst_em});
 ?>";
-	$fm->_WriteText('modules/birstday/data/config.php', $moduleconfig);
+	$fm->_WriteText(EXBB_DATA_DIR_MODULES.'/birthday/config.php', $moduleconfig);
     $fm->_Message($fm->LANG['ModuleTitle'],$fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=birstday', 1);
 } else {
-		include('modules/birstday/data/config.php');
+		include(EXBB_DATA_DIR_MODULES.'/birthday/config.php');
 
 		$birst_pm_yes	= (FM_BIRSTPM === TRUE) ? 'checked="checked"' : '';
 		$birst_pm_no	= (FM_BIRSTPM === FALSE) ? 'checked="checked"' : '';

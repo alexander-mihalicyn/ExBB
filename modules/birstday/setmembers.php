@@ -10,7 +10,7 @@ if ($fm->exbb['birstday'] === TRUE){
 		}
 		include ('modules/birstday/admintemplates/edit_users.tpl');
 	} else {
-			$birsdaydata = $fm->_Read2Write($fp_birsday,'modules/birstday/data/birstday_data.php',FALSE);
+			$birsdaydata = $fm->_Read2Write($fp_birsday,EXBB_DATA_DIR_MODULES.'/birthday/data.php',FALSE);
 			$new_data = array();
 			foreach ($birsdaydata as $day => $ids) {
 					foreach ($ids as $id => $info) {
@@ -24,4 +24,3 @@ if ($fm->exbb['birstday'] === TRUE){
 			unset($new_data);
 	}
 }
-?>

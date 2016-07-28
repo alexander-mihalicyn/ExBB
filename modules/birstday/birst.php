@@ -2,8 +2,8 @@
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $birstdaylist = '';
-if ($fm->exbb['birstday'] === TRUE){
-	include ('modules/birstday/data/config.php');
+if ($fm->exbb['birstday']){
+	include (EXBB_DATA_DIR_MODULES . '/birthday/config.php');
 	$fm->_LoadModuleLang('birstday');
 
 	$birsdayprint = array();
@@ -14,7 +14,7 @@ if ($fm->exbb['birstday'] === TRUE){
 	$todaykey			= date("j:n", time());
 	$todayyear			= date("Y", time());
 
-	$birsdaydata		= $fm->_Read2Write($fp_birsday,'modules/birstday/data/birstday_data.php');
+	$birsdaydata		= $fm->_Read2Write($fp_birsday,EXBB_DATA_DIR_MODULES.'/birthday/data.php');
 	//[0]  - год; [1] - флаг для мыла и ЛС; [2] - логин; [3] - емаил; [4] - флаг для показа возраста
 
 	if (count($birsdaydata) && isset($birsdaydata[$todaykey])) {

@@ -13,7 +13,7 @@ if ($fm->exbb['birstday'] === TRUE){
 		$new_day_key 		= $fm->input['d'].':'.$fm->input['m'];
 		$today 				= mktime(0,0,0,date("m"),date("d")-1,date("Y"));
 
-		$birstday_data = $fm->_Read2Write($fp_birst,'modules/birstday/data/birstday_data.php');
+		$birstday_data = $fm->_Read2Write($fp_birst,EXBB_DATA_DIR_MODULES.'/birthday/data.php');
 
 		if (isset($fm->user['birstday']) && preg_match("#(\d{1,2}:\d{1,2}):\d{4}#is",$fm->user['birstday'],$info)) {
 			$day_key 	= $info[1];
@@ -31,4 +31,3 @@ if ($fm->exbb['birstday'] === TRUE){
 	}
 }
 //[0]  - год; [1] - флаг для мыла и ЛС; [2] - логин; [3] - емаил; [4] - флаг для показа возраста
-?>

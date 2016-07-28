@@ -10,4 +10,3 @@ if ($fm->exbb['birstday'] === TRUE){
 	}
 	include ('templates/'.DEF_SKIN.'/modules/birstday/profile_show.tpl');
 }
-?>
