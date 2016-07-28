@@ -279,7 +279,7 @@ function banmemberslist() {
 		unset( $user_info );
 	}
 
-	$dirtoread = 'data/banned_users/';
+	$dirtoread = EXBB_DATA_DIR_BANNED_MEMBERS . '/';
 	$d = dir($dirtoread);
 
 	while (false !== ( $file = $d->read() )) {

@@ -52,7 +52,7 @@ if ($fm->input['action'] === 'show') {
 		$moders_ban = '';
 
 		if ($user['status'] == 'banned' AND $fm->_CheckBanMember($user_id)) {
-			$usrban = $fm->_Read('data/banned_users/' . $user_id . '.php');
+			$usrban = $fm->_Read(EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $user_id . '.php');
 			$moders_ban .= '<br />' . $fm->LANG['BanReason'] . ': <b>' . $usrban['reason'] . '</b> ' . $fm->LANG['BanDays'] . ' <b>' . $usrban['days'] . '</b> ' . $fm->LANG['BanDateEnd'] . ': <b>' . $fm->_DateFormat($usrban['end']) . '</b>';
 		}
 
@@ -76,7 +76,7 @@ if ($fm->input['action'] === 'show') {
 			if ($reason != '' OR $unban == 1) {
 				if ($days > 0 OR $unban == 1) {
 					$days = $unban == 1 ? 0 : $days;
-					$user_ban = $fm->_Read2Write($fp_ban, 'data/banned_users/' . $user_id . '.php');
+					$user_ban = $fm->_Read2Write($fp_ban, EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $user_id . '.php');
 					$user_ban['user_id'] = $user_id;
 					$user_ban['user_name'] = $user['name'];
 					$user_ban['days'] = $days;
@@ -109,7 +109,7 @@ if ($fm->input['action'] === 'show') {
 					$fm->_Write($fp_ban, $user_ban);
 				}
 				elseif ($days === -1) {
-					$user_ban = $fm->_Read2Write($fp_ban, 'data/banned_users/' . $user_id . '.php');
+					$user_ban = $fm->_Read2Write($fp_ban, EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $user_id . '.php');
 					$user_ban['permanently'] = true; //вечный бан
 					$user_ban['user_id'] = $user_id;
 					$user_ban['user_name'] = $user['name'];

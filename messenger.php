@@ -46,7 +46,7 @@ if ($fm->input['action'] == 'inbox') {
 		$fm->_Write($fp_user, $UserInfo);
 		unset( $UserInfo );
 	}
-	$inboxfile = 'messages/' . $fm->user['id'] . '-msg.php';
+	$inboxfile = EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php';
 	$inboxdata = $fm->_Read($inboxfile);
 	$TotalInbox = count($inboxdata);
 	krsort($inboxdata);
@@ -71,7 +71,7 @@ if ($fm->input['action'] == 'inbox') {
 	include( './templates/' . DEF_SKIN . '/footer.tpl' );
 }
 elseif ($fm->input['action'] == 'outbox') {
-	$outboxfile = 'messages/' . $fm->user['id'] . '-out.php';
+	$outboxfile = EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-out.php';
 	$outboxdata = $fm->_Read($outboxfile);
 	$totaloutbox = count($outboxdata);
 	krsort($outboxdata);
@@ -97,7 +97,7 @@ elseif ($fm->input['action'] == 'outbox') {
 	include( './templates/' . DEF_SKIN . '/footer.tpl' );
 }
 elseif ($fm->input['action'] == 'read') {
-	$inboxdata = $fm->_Read2Write($fp_inbox, 'messages/' . $fm->user['id'] . '-msg.php');
+	$inboxdata = $fm->_Read2Write($fp_inbox, EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php');
 
 	if (( $message_id = $fm->_Intval('msg') ) === 0 || !isset( $inboxdata[$message_id] )) {
 		$fm->_Fclose($fp_inbox);
@@ -110,7 +110,7 @@ elseif ($fm->input['action'] == 'read') {
 		$fm->_Write($fp_inbox, $inboxdata);
 
 		//check as readed into the sender outbox
-		$senderoutbox = $fm->_Read2Write($fp_sender, 'messages/' . $sender_id . '-out.php');
+		$senderoutbox = $fm->_Read2Write($fp_sender, EXBB_DATA_DIR_MESSAGES . '/' . $sender_id . '-out.php');
 
 		if (isset( $senderoutbox[$message_id] )) {
 			$senderoutbox[$message_id]['status'] = true;
@@ -120,7 +120,7 @@ elseif ($fm->input['action'] == 'read') {
 			$fm->_Fclose($fp_sender);
 		}
 		if (count($senderoutbox) == 0) {
-			unlink('messages/' . $sender_id . '-out.php');
+			unlink(EXBB_DATA_DIR_MESSAGES . '/' . $sender_id . '-out.php');
 		}
 		unset( $senderoutbox );
 	}
@@ -141,11 +141,11 @@ elseif ($fm->input['action'] == 'read') {
 	include( './templates/' . DEF_SKIN . '/footer.tpl' );
 }
 elseif ($fm->input['action'] == 'outread') {
-	$outboxdata = $fm->_Read('messages/' . $fm->user['id'] . '-out.php');
+	$outboxdata = $fm->_Read(EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-out.php');
 
 	if (( $message_id = $fm->_Intval('msg') ) === 0 || !isset( $outboxdata[$message_id] )) {
 		if (count($outboxdata) <= 0) {
-			unlink('messages/' . $fm->user['id'] . '-out.php');
+			unlink(EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-out.php');
 		}
 		$fm->_Message($fm->LANG['OutboxTitle'], $fm->LANG['MessNotExists']);
 	}
@@ -169,12 +169,12 @@ elseif (( $fm->input['action'] == 'send' && $fm->_String('dosend') == '' ) || ( 
 	$preview = $fm->_String('preview');
 
 	if ($fm->input['action'] == 'reply' || $fm->input['action'] == 'replyquote') {
-		$inboxdata = $fm->_Read2Write($fp_inbox, 'messages/' . $fm->user['id'] . '-msg.php');
+		$inboxdata = $fm->_Read2Write($fp_inbox, EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php');
 
 		if (( $message_id = $fm->_Intval('msg') ) === 0 || !isset( $inboxdata[$message_id] )) {
 			$fm->_Fclose($fp_inbox);
 			if (count($inboxdata) <= 0) {
-				unlink('messages/' . $fm->user['id'] . '-msg.php');
+				unlink(EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php');
 			}
 			$fm->_Message($fm->LANG['NewPMCreating'], $fm->LANG['MessNotExists']);
 		}
@@ -185,7 +185,7 @@ elseif (( $fm->input['action'] == 'send' && $fm->_String('dosend') == '' ) || ( 
 			$inboxdata[$message_id]['status'] = true;
 			$fm->_Write($fp_inbox, $inboxdata);
 			//Отмечаем как прочитанное у отправителя
-			$senderoutbox = $fm->_Read2Write($fp_senderoutbox, 'messages/' . $sender_id . '-out.php');
+			$senderoutbox = $fm->_Read2Write($fp_senderoutbox, EXBB_DATA_DIR_MESSAGES . '/' . $sender_id . '-out.php');
 
 			if (isset( $senderoutbox[$message_id] )) {
 				$senderoutbox[$message_id]['status'] = true;
@@ -195,7 +195,7 @@ elseif (( $fm->input['action'] == 'send' && $fm->_String('dosend') == '' ) || ( 
 				$fm->_Fclose($fp_senderoutbox);
 			}
 			if (count($senderoutbox) <= 0) {
-				unlink('messages/' . $sender_id . '-out.php');
+				unlink(EXBB_DATA_DIR_MESSAGES . '/' . $sender_id . '-out.php');
 			}
 		}
 		else {
@@ -283,7 +283,7 @@ elseif ($fm->input['action'] == 'send') {
 	$MessageTitle = ( $fm->exbb['wordcensor'] ) ? $fm->bads_filter($fm->input['msgtitle']) : $fm->input['msgtitle'];
 	$MessageText = ( $fm->exbb['wordcensor'] ) ? $fm->bads_filter($fm->input['message']) : $fm->input['message'];
 
-	$toinbox = $fm->_Read2Write($fp_toinbox, 'messages/' . $touser_id . '-msg.php');
+	$toinbox = $fm->_Read2Write($fp_toinbox, EXBB_DATA_DIR_MESSAGES . '/' . $touser_id . '-msg.php');
 
 	$toinbox[$fm->_Nowtime]['from'] = $fm->user['name'];
 	$toinbox[$fm->_Nowtime]['title'] = $MessageTitle;
@@ -294,7 +294,7 @@ elseif ($fm->input['action'] == 'send') {
 	$fm->_Write($fp_toinbox, $toinbox);
 	unset( $toinbox );
 
-	$fromoutbox = $fm->_Read2Write($fp_fromoutbox, 'messages/' . $fm->user['id'] . '-out.php');
+	$fromoutbox = $fm->_Read2Write($fp_fromoutbox, EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-out.php');
 	$fromoutbox[$fm->_Nowtime]['to'] = $touserdata['name'];
 	$fromoutbox[$fm->_Nowtime]['title'] = $MessageTitle;
 	$fromoutbox[$fm->_Nowtime]['msg'] = $MessageText;
@@ -325,10 +325,10 @@ elseif ($fm->input['action'] == 'deletemsg') {
 	}
 	switch ($fm->input['where']) {
 		case  'inbox':
-			$fromfile = 'messages/' . $fm->user['id'] . '-msg.php';
+			$fromfile = EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php';
 		break;
 		case 'outbox':
-			$fromfile = 'messages/' . $fm->user['id'] . '-out.php';
+			$fromfile = EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-out.php';
 		break;
 	}
 	$deletedata = $fm->_Read2Write($fp_del, $fromfile);
@@ -347,10 +347,10 @@ elseif ($fm->input['action'] == 'deletemsg') {
 	$fm->_Message($fm->LANG['DeleteTitle'], $fm->LANG['SelDeleteOk'], 'messenger.php?action=' . $fm->input['where']);
 }
 else {
-	$allmessages = $fm->_Read('messages/' . $fm->user['id'] . '-msg.php');
+	$allmessages = $fm->_Read(EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php');
 	$totalmessages = count($allmessages);
 	if ($totalmessages === 0) {
-		@unlink('messages/' . $fm->user['id'] . '-msg.php');
+		@unlink(EXBB_DATA_DIR_MESSAGES . '/' . $fm->user['id'] . '-msg.php');
 	}
 	unset( $allmessages );
 	$fm->LANG['NewPMMessage'] = sprintf($fm->LANG['NewPMMessage'], $totalmessages, $fm->user['unread']);

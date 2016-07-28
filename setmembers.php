@@ -365,11 +365,11 @@ function deletemember() {
 	}
 
 	if (unlink(EXBB_DATA_DIR_MEMBERS . '/' . $userid . '.php')) {
-		if (file_exists('messages/' . $userid . '-msg.php')) {
-			unlink('messages/' . $userid . '-msg.php');
+		if (file_exists(EXBB_DATA_DIR_MESSAGES . '/' . $userid . '-msg.php')) {
+			unlink(EXBB_DATA_DIR_MESSAGES . '/' . $userid . '-msg.php');
 		}
-		if (file_exists('messages/' . $userid . '-out.php')) {
-			unlink('messages/' . $userid . '-out.php');
+		if (file_exists(EXBB_DATA_DIR_MESSAGES . '/' . $userid . '-out.php')) {
+			unlink(EXBB_DATA_DIR_MESSAGES . '/'. $userid . '-out.php');
 		}
 		/*start clear birstday data file */
 		if (file_exists('modules/birstday/data/birstday_data.php')) {

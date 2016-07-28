@@ -143,7 +143,7 @@ function send_pm($message) {
 		global $fm, $user;
 
         $user['new_pm'] = true;
-		$inbox = $fm->_Read2Write($fp_inbox,'messages/'.$user['id'].'-msg.php');
+		$inbox = $fm->_Read2Write($fp_inbox,EXBB_DATA_DIR_MESSAGES . '/'.$user['id'].'-msg.php');
 		$inbox[$fm->_Nowtime]['from']	= $fm->user['name'];
 		$inbox[$fm->_Nowtime]['title']	= $fm->LANG['YouPunned'];
 		$inbox[$fm->_Nowtime]['msg']	= $message;

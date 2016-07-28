@@ -82,7 +82,7 @@ function birstday_pm($id) {
         							$user['name'],
         							$fm->exbb['boardname']);
 
-        $inbox = $fm->_Read2Write($fp_inbox,'messages/'.$id.'-msg.php');
+        $inbox = $fm->_Read2Write($fp_inbox,EXBB_DATA_DIR_MESSAGES . '/'.$id.'-msg.php');
 		$inbox[$fm->_Nowtime]['from']	= $fm->LANG['PMFrom'];
 		$inbox[$fm->_Nowtime]['title']	= $user['name'].$fm->LANG['PmTitle'];
 		$inbox[$fm->_Nowtime]['msg']	= $fm->LANG['PmText'];

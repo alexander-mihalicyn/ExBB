@@ -70,6 +70,9 @@ define('EXBB_DATA_DIR_MODULES', EXBB_DATA.'/modules');
 // Путь к директории для хранения данных о пользователях
 define('EXBB_DATA_DIR_MEMBERS', EXBB_DATA.'/members');
 
+// Путь к директории для хранения данных о заблокированных пользователях
+define('EXBB_DATA_DIR_BANNED_MEMBERS', EXBB_DATA.'/banned');
+
 // Путь к директории для хранения личных сообщений
 define('EXBB_DATA_DIR_MESSAGES', EXBB_DATA.'/messages');
 

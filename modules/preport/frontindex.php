@@ -71,7 +71,7 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
     }
 
 	foreach ($fm->_Moderators as $moder_id) {
-			$inbox = $fm->_Read2Write($fp_inbox,'messages/'.$moder_id.'-msg.php');
+			$inbox = $fm->_Read2Write($fp_inbox,EXBB_DATA_DIR_MESSAGES . '/'.$moder_id.'-msg.php');
 			$inbox[$fm->_Nowtime]['from']	= $fm->user['name'];
 			$inbox[$fm->_Nowtime]['title']	= $fm->LANG['PMSubject'];
 			$inbox[$fm->_Nowtime]['msg']	= $message;

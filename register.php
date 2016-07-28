@@ -194,7 +194,7 @@ if ($fm->input['action'] == 'addmember') {
 			$user['new_pm'] = true;
 			$fm->LANG['NewUserPMMsg'] = sprintf($fm->LANG['NewUserPMMsg'], $fm->input['inmembername'], $fm->exbb['boardurl'], $fm->exbb['boardurl']);
 
-			$inbox = $fm->_Read2Write($fp_inbox, 'messages/' . $id . '-msg.php');
+			$inbox = $fm->_Read2Write($fp_inbox,EXBB_DATA_DIR_MESSAGES . '/' . $id . '-msg.php');
 
 			$inbox[$fm->_Nowtime]['from'] = $fm->LANG['NewUserPMFrom'];
 			$inbox[$fm->_Nowtime]['title'] = $fm->LANG['NewUserPMTitle'];
@@ -299,7 +299,7 @@ elseif ($fm->input['action'] == 'activate') {
 			$user['new_pm'] = true;
 			$fm->LANG['NewUserPMMsg'] = sprintf($fm->LANG['NewUserPMMsg'], $user['name'], $fm->exbb['boardurl'], $fm->exbb['boardurl']);
 
-			$inbox = $fm->_Read2Write($fp_inbox, 'messages/' . $id . '-msg.php');
+			$inbox = $fm->_Read2Write($fp_inbox, EXBB_DATA_DIR_MESSAGES . '/' . $id . '-msg.php');
 
 			$inbox[$fm->_Nowtime]['from'] = $fm->LANG['NewUserPMFrom'];
 			$inbox[$fm->_Nowtime]['title'] = $fm->LANG['NewUserPMTitle'];

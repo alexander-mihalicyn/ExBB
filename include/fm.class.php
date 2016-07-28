@@ -381,7 +381,7 @@ class FM extends VARS {
 	function _AutoUnBan($user, $msg = false) {
 		if ($usrban = $this->_GetBanMember($user['id'])) {
 			if (!isset( $usrban['permanently'] ) && $usrban['end'] < time()) {
-				$user_ban = $this->_Read2Write($fp_ban, 'data/banned_users/' . $user['id'] . '.php');
+				$user_ban = $this->_Read2Write($fp_ban, EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $user['id'] . '.php');
 				$user_ban['whounban_id'] = 0;
 				$user_ban['whounban_name'] = 'auto';
 				$user_ban['days'] = 0;
@@ -519,13 +519,12 @@ class FM extends VARS {
 	 */
 	function CheckUnread() {
 		$unread = 0;
-		$allmessages = $this->_Read('messages/' . $this->user['id'] . '-msg.php');
+		$allmessages = $this->_Read(EXBB_DATA_DIR_MESSAGES . '/' . $this->user['id'] . '-msg.php');
 		foreach ($allmessages as $date => $ms) {
 			if (!$ms['status']) {
 				$unread++;
 			}
 		}
-		unset( $allmessages );
 
 		return $unread;
 
@@ -721,7 +720,7 @@ class FM extends VARS {
 	 * @return bool
 	 */
 	function _CheckBanMember($uid) {
-		if (file_exists('data/banned_users/' . $uid . '.php')) {
+		if (file_exists(EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $uid . '.php')) {
 			return true;
 		}
 
@@ -735,7 +734,7 @@ class FM extends VARS {
 	 */
 	function _GetBanMember($uid) {
 		if ($this->_Checkuser($uid) && $this->_CheckBanMember($uid)) {
-			$userfile = 'data/banned_users/' . $uid . '.php';
+			$userfile = EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $uid . '.php';
 
 			return $this->_Read($userfile, false);
 		}
