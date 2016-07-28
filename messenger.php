@@ -41,7 +41,7 @@ $NewPMIcon = './templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/newpm.gif';
 
 if ($fm->input['action'] == 'inbox') {
 	if ($fm->user['new_pm'] === true) {
-		$UserInfo = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php', false);
+		$UserInfo = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php', false);
 		$UserInfo['new_pm'] = $fm->user['new_pm'] = false;
 		$fm->_Write($fp_user, $UserInfo);
 		unset( $UserInfo );
@@ -276,7 +276,7 @@ elseif ($fm->input['action'] == 'send') {
 		$fm->_Message($fm->LANG['NewPMCreating'], $fm->LANG['DoNotSendSelf']);
 	}
 
-	$touserdata = $fm->_Read2Write($fp_touser, 'members/' . $touser_id . '.php');
+	$touserdata = $fm->_Read2Write($fp_touser, EXBB_DATA_DIR_MEMBERS . '/' . $touser_id . '.php');
 	$touserdata['new_pm'] = true;
 	$fm->_Write($fp_touser, $touserdata);
 

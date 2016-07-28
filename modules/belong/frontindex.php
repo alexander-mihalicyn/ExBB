@@ -47,7 +47,7 @@ function viewTopics() {
     
     applyModuleSkin();
     
-    $user = $fm->_Read('members/' . $fm->_Intval('to') . '.php');
+    $user = $fm->_Read(EXBB_DATA_DIR_MEMBERS . '/' . $fm->_Intval('to') . '.php');
     
     if (!$user) {
         $fm->_Message($fm->LANG['BelongModuleTitle'], $fm->LANG['BelongUserNotFound']);
@@ -109,7 +109,7 @@ function viewTopics() {
         $views = (isset($viewsData[$forum][$topic])) ? $viewsData[$forum][$topic] : 0;
         
         if ($poster && !isset($usernames[$poster])) {
-            $usernames[$poster] = ($user = $fm->_Read("members/{$poster}.php")) ? $user['name'] : false;
+            $usernames[$poster] = ($user = $fm->_Read(EXBB_DATA_DIR_MEMBERS ."/{$poster}.php")) ? $user['name'] : false;
             unset($user);
         }
         
@@ -137,7 +137,7 @@ function viewPosts() {
     
     applyModuleSkin();
     
-    $user = $fm->_Read('members/' . $fm->_Intval('to') . '.php');
+    $user = $fm->_Read(EXBB_DATA_DIR_MEMBERS . '/' . $fm->_Intval('to') . '.php');
     
     if (!$user) {
         $fm->_Message($fm->LANG['BelongModuleTitle'], $fm->LANG['BelongUserNotFound']);

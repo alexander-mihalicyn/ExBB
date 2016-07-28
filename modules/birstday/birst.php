@@ -73,7 +73,7 @@ function birstday_email($name,$emailaddres){
 function birstday_pm($id) {
 		global $fm;
 
-        $user = $fm->_Read2Write($fp_user,'members/'.$id.'.php',FALSE);
+        $user = $fm->_Read2Write($fp_user,EXBB_DATA_DIR_MEMBERS . '/'.$id.'.php',FALSE);
         $user['new_pm'] = TRUE;
         $fm->_Write($fp_user,$user);
 

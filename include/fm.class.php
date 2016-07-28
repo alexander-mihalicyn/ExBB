@@ -331,7 +331,7 @@ class FM extends VARS {
 					$this->user['id'] = 0;
 				}
 				else {
-					$user = $this->_Read2Write($fp_user, 'members/' . $id_cookie . '.php');
+					$user = $this->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id_cookie . '.php');
 					if ($user === false || !is_array($user) || $pass_cookie != md5($user['pass'])) {
 						$this->_Fclose($fp_user);
 						unset( $user );
@@ -387,7 +387,7 @@ class FM extends VARS {
 				$user_ban['days'] = 0;
 				$this->_Write($fp_ban, $user_ban);
 
-				$user_unban = $this->_Read2Write($fp_user_unban, 'members/' . $user['id'] . '.php');
+				$user_unban = $this->_Read2Write($fp_user_unban, EXBB_DATA_DIR_MEMBERS . '/'. $user['id'] . '.php');
 				$user_unban['status'] = 'me';
 				$this->_Write($fp_user_unban, $user_unban);
 
@@ -685,20 +685,16 @@ class FM extends VARS {
 	 *                    Функции пользователя                                        *
 	 *                                                                                *
 	 ********************************************************************************/
-	/*
-		_Checkuser проверка есть файл с ID un
-	*/
+
 	/**
-	 * @param $uid
+	 * Поверяет существование пользователя
+	 *
+	 * @param int $uid ID пользователя
 	 *
 	 * @return bool
 	 */
 	function _Checkuser($uid) {
-		if (file_exists('members/' . $uid . '.php')) {
-			return true;
-		}
-
-		return false;
+		return file_exists(EXBB_DATA_DIR_MEMBERS . '/' . $uid . '.php');
 	}
 
 	/*
@@ -711,7 +707,7 @@ class FM extends VARS {
 	 */
 	function _Getmember($uid) {
 		if ($this->_Checkuser($uid)) {
-			$userfile = 'members/' . $uid . '.php';
+			$userfile = EXBB_DATA_DIR_MEMBERS . '/' . $uid . '.php';
 
 			return $this->_Read($userfile, false);
 		}
@@ -901,8 +897,8 @@ class FM extends VARS {
 				// Решение проблемы актуальной даты последнего посещения
 				// Если пользователь уходит без нажатия кнопки "Выход" то после сдыхания его сессии
 				// мы обновим инфу в профиле о дате последнего посещения :)
-				if (!empty( $info['id'] ) && file_exists('members/' . $info['id'] . '.php')) {
-					$user = $this->_Read2Write($file, 'members/' . $info['id'] . '.php');
+				if (!empty( $info['id'] ) && file_exists(EXBB_DATA_DIR_MEMBERS . '/' . $info['id'] . '.php')) {
+					$user = $this->_Read2Write($file, EXBB_DATA_DIR_MEMBERS . '/' . $info['id'] . '.php');
 					$user['last_visit'] = $info['t'];
 					$this->_Write($file, $user);
 

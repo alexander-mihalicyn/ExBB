@@ -27,7 +27,7 @@ if ($fm->_String('action') == 'resetall' && $fm->user['id'] !== 0) {
 		require( 'modules/watches/_indexMark.php' );
 	}
 	else {
-		$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/'. $fm->user['id'] . '.php');
 		$user['last_visit'] = $fm->_Nowtime;
 		$fm->_Write($fp_user, $user);
 		$fm->_setcookie('lastvisit', $fm->_Nowtime);

@@ -81,7 +81,7 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 			$fm->_Write($fp_inbox,$inbox);
 			unset($inbox);
 
-			$moder = $fm->_Read2Write($fp_moder,'members/'.$moder_id.'.php',FALSE);
+			$moder = $fm->_Read2Write($fp_moder,EXBB_DATA_DIR_MEMBERS . '/'.$moder_id.'.php',FALSE);
 			$moder['new_pm'] = TRUE;
 			$fm->_Write($fp_moder,$moder);
 

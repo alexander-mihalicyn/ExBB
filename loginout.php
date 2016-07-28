@@ -26,7 +26,7 @@ if ($fm->input['action'] == 'login' && $fm->_POST === true) {
 	$user = false;
 	$id = precheck_user();
 	if ($id !== 0) {
-		$user = $fm->_Read2Write($fp_user, 'members/' . $id . '.php', false);
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id . '.php', false);
 	}
 
 	if (is_array($user) and $user['pass'] == md5($fm->input['ipassword'])) {
@@ -72,7 +72,7 @@ if ($fm->input['action'] == 'login' && $fm->_POST === true) {
 	$fm->_Message($fm->LANG['ErrorLogin'], $fm->LANG['LoginError'], 'loginout.php');
 }
 elseif ($fm->input['action'] == 'logout' && $fm->user['id'] !== 0) {
-	$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php', false);
+	$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php', false);
 	$user['last_visit'] = $fm->_Nowtime;
 	$fm->_Write($fp_user, $user);
 	$rd = get_rd();

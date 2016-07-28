@@ -54,7 +54,7 @@ else {
 		}
 
 		if ($fm->user['new_pm'] === true) {
-			$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php', false);
+			$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php', false);
 			$user['new_pm'] = $fm->user['new_pm'] = false;
 			$fm->_Write($fp_user, $user);
 			unset( $user );

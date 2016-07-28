@@ -137,7 +137,7 @@ if ($fm->input['action'] === 'show') {
 			}
 		}
 		if ($fm->_Boolean1('ban')) {
-			$user = $fm->_Read2Write($fp_user, 'members/' . $user_id . '.php');
+			$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php');
 			$user['status'] = ( $user['status'] == 'me' ) ? 'banned' : 'me';
 			$fm->_Write($fp_user, $user);
 
@@ -255,7 +255,7 @@ elseif ($fm->input['action'] === 'lostpassword') {
 			$fm->_Message($fm->LANG['SendPassTitle'], $fm->LANG['SorryUserNotExists']);
 		}
 
-		$user = $fm->_Read2Write($fp_user, 'members/' . $m_id . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $m_id . '.php');
 
 		if ($fm->_Boolean($fm->input, 'resend') === true) {
 			if (!isset( $user['sendpass'] )) {
@@ -313,7 +313,7 @@ elseif ($fm->input['action'] === 'activate') {
 			$fm->_Message($fm->LANG['ActivatePass'], $fm->LANG['SorryUserNotExists']);
 		}
 
-		$user = $fm->_Read2Write($fp_user, 'members/' . $fm->input['user'] . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->input['user'] . '.php');
 
 		if (!isset( $user['sendpass'] )) {
 			$fm->_Fclose($fp_user);
@@ -420,7 +420,7 @@ elseif ($fm->input['action'] === 'savemodify') {
 		$fm->_Write($fp_allusers, $allusers);
 	}
 
-	$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php');
+	$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php');
 
 	$user['pass'] = $fm->user['pass'];
 	$user['mail'] = $fm->input['emailaddress'];

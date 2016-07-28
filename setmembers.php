@@ -34,11 +34,11 @@ elseif ($fm->input['action'] == 'edit_user') {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost'], '', 1);
 	}
 
-	if (( $user_id = $fm->_Intval('userid') ) === 0 || !file_exists('members/' . $user_id . '.php')) {
+	if (( $user_id = $fm->_Intval('userid') ) === 0 || !file_exists(EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php')) {
 		$fm->_Message($fm->LANG['UserAdmin'], $fm->LANG['UserNotFound'], '', 1);
 	}
 
-	$user = $fm->_Read2Write($fp_user, 'members/' . $user_id . '.php', false);
+	$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php', false);
 	$forums = $fm->_Read(EXBB_DATA_FORUMS_LIST, false);
 
 	if ($fm->_String('checkaction') === 'yes' && $fm->_POST === true) {
@@ -316,7 +316,7 @@ function UpdateAllusersInfo() {
 	@set_time_limit(360);
 
 	$users = array();
-	$dirtoread = 'members/';
+	$dirtoread = EXBB_DATA_DIR_MEMBERS . '/';
 	$d = dir($dirtoread);
 	$fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST);
 	while (false !== ( $file = $d->read() )) {
@@ -360,11 +360,11 @@ function UpdateAllusersInfo() {
 function deletemember() {
 	global $fm;
 
-	if (( $userid = $fm->_Intval('userid') ) === 0 || !file_exists('members/' . $userid . '.php')) {
+	if (( $userid = $fm->_Intval('userid') ) === 0 || !file_exists(EXBB_DATA_DIR_MEMBERS . '/'. $userid . '.php')) {
 		$fm->_Message($fm->LANG['UserAdmin'], $fm->LANG['UserNotFound'], '', 1);
 	}
 
-	if (unlink('members/' . $userid . '.php')) {
+	if (unlink(EXBB_DATA_DIR_MEMBERS . '/' . $userid . '.php')) {
 		if (file_exists('messages/' . $userid . '-msg.php')) {
 			unlink('messages/' . $userid . '-msg.php');
 		}

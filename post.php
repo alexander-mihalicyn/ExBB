@@ -276,7 +276,7 @@ function addnewthread() {
 		/* Топ-лист пользователей */
 		include( 'modules/userstop/post.php' );
 
-		$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php');
 		$user['posts']++;
 		if ($allforums[$forum_id]['private'] === false) {
 			$user['lastpost']['date'] = $fm->_Nowtime;
@@ -655,7 +655,7 @@ function addreply() {
 	if ($fm->user['id'] !== 0 && $PostAdded === true) {
 		/* Топ-лист пользователей */
 		include( 'modules/userstop/post.php' );
-		$user = $fm->_Read2Write($fp_user, 'members/' . $fm->user['id'] . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php');
 		$user['posts'] += 1 + $continueTopic;
 		if ($allforums[$forum_id]['private'] === false) {
 			$user['lastpost']['date'] = $fm->_Nowtime;

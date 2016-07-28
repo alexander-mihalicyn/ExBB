@@ -158,7 +158,7 @@ if ($fm->input['action'] == 'addmember') {
 		$tempusers[$filehash]['t'] = $fm->_Nowtime;
 
 		$fm->_Write($fp_temp, $tempusers);
-		$fm->_Read2Write($fp_tempuser, 'members/__' . $filehash . '.php');
+		$fm->_Read2Write($fp_tempuser, EXBB_DATA_DIR_MEMBERS . '/__' . $filehash . '.php');
 		$fm->_Write($fp_tempuser, $user);
 		unset( $_SESSION['captcha'] );
 
@@ -207,7 +207,7 @@ if ($fm->input['action'] == 'addmember') {
 		}
 		/* Приветсвие нового пользователя */
 
-		$fm->_Read2Write($fp_user, 'members/' . $id . '.php');
+		$fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id . '.php');
 		$fm->_Write($fp_user, $user);
 
 		$_SESSION['mid'] = $id;
@@ -245,8 +245,8 @@ elseif ($fm->input['action'] == 'activate') {
 		$tempusers = $fm->_Read2Write($fp_temp, EXBB_DATA_TEMP_USERS_LIST);
 		foreach ($tempusers as $hash => $tempinfo) {
 			if (( $tempinfo['t'] + 86400 ) < $fm->_Nowtime) {
-				if (file_exists('members/__' . $hash . '.php')) {
-					unlink('members/__' . $hash . '.php');
+				if (file_exists(EXBB_DATA_DIR_MEMBERS . '/__' . $hash . '.php')) {
+					unlink(EXBB_DATA_DIR_MEMBERS . '/__' . $hash . '.php');
 				}
 				unset( $tempusers[$hash] );
 			}
@@ -262,7 +262,7 @@ elseif ($fm->input['action'] == 'activate') {
 			$fm->_Message($fm->LANG['ActivateAccount'], $fm->LANG['WrongActivation'], 'register.php?action=activate');
 		}
 
-		$tempfile = 'members/__' . $fm->input['code'] . '.php';
+		$tempfile = EXBB_DATA_DIR_MEMBERS . '/__' . $fm->input['code'] . '.php';
 		if (!file_exists($tempfile)) {
 			$fm->_Write($fp_temp, $tempusers);
 			$fm->_Message($fm->LANG['ActivateAccount'], $fm->LANG['WrongActivation'], 'register.php?action=activate');
@@ -312,7 +312,7 @@ elseif ($fm->input['action'] == 'activate') {
 		}
 		/* Приветсвие нового пользователя */
 
-		$fm->_Read2Write($fp_user, 'members/' . $id . '.php');
+		$fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id . '.php');
 		$fm->_Write($fp_user, $user);
 
 		$fm->_SAVE_STATS(array( 'totalmembers' => array( 1, 1 ), 'lastreg' => array( $user['name'], 0 ), 'last_id' => array( $id, 0 ) ));

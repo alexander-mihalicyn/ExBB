@@ -976,7 +976,7 @@ function updateUsersPrivate($private) {
 	}
 
 	$users = array();
-	$dirtoread = 'members/';
+	$dirtoread = EXBB_DATA_DIR_MEMBERS . '/';
 	$d = dir($dirtoread);
 	while (false !== ( $file = $d->read() )) {
 		$writeFILE = false;

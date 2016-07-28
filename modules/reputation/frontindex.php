@@ -104,7 +104,7 @@ function change_rep() {
 	}
 	else {
 		// Изменим численное значение репутации в файле пользователя
-		$member = $fm->_Read2Write($fp_member, 'members/'.$member['id'].'.php');
+		$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$member['id'].'.php');
 		if (!isset($member['reputation'])) $member['reputation'] = 0;
 		if ($fm->input['do'] == 'down') $member['reputation']--;
 		else $member['reputation']++;
@@ -127,7 +127,7 @@ function change_rep() {
 		
 		// Обновим время изменения репутации для изменяющего пользователя
 		$name = $member['name'];
-		$member = $fm->_Read2Write($fp_member, 'members/'.$fm->user['id'].'.php');
+		$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$fm->user['id'].'.php');
 		$member['rep_time'] = $time;
 		$fm->_Write($fp_member, $member);
 		
@@ -154,7 +154,7 @@ function show_rep() {
 	
 	// Проверим существование пользователя, заодно прочитаем его профиль
 	$fm->_Intval('member');
-	if (!file_exists('members/'.$fm->input['member'].'.php')) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMember']);
+	if (!file_exists(EXBB_DATA_DIR_MEMBERS . '/'.$fm->input['member'].'.php')) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMember']);
 	
 	// Читаем историю изменения репутации, при её отсутствии выводим сообщение об ошибке
 	$rep = $fm->_Read('modules/reputation/data/'.$fm->input['member'].'.php');
@@ -169,7 +169,7 @@ function show_rep() {
 	$total = $down + $up;
 	
 	// Прочитаем профиль пользователя и выполним синхронизацию его репутации при необходимости
-	$member = $fm->_Read2Write($fp_member, 'members/'.$fm->input['member'].'.php');
+	$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$fm->input['member'].'.php');
 	if ($member['reputation'] != $up - $down) {
 		$member['reputation'] = $up - $down;
 		$fm->_Write($fp_member, $member);

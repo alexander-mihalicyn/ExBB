@@ -24,7 +24,7 @@ if(!empty($_SERVER['HTTP_REFERER']) && !preg_match("#^http://".$_SERVER['HTTP_HO
 } elseif (isset($fm->user['lastkarma']) && (($fm->_Nowtime - $fm->user['lastkarma'])< KARMA_TIME_OUT)){
 		echo $fm->LANG['KarmaWait'];
 } else {
-        $touser = $fm->_Read2Write($fp_touser,'members/'.$touser_id.'.php',FALSE);
+        $touser = $fm->_Read2Write($fp_touser,EXBB_DATA_DIR_MEMBERS . '/'.$touser_id.'.php',FALSE);
 
         $touser['karma'] = (isset($touser['karma'])) ? $touser['karma']:0;
         switch($fm->input['action']) {
@@ -35,7 +35,7 @@ if(!empty($_SERVER['HTTP_REFERER']) && !preg_match("#^http://".$_SERVER['HTTP_HO
         }
         $fm->_Write($fp_touser,$touser);
 
-        $user = $fm->_Read2Write($fp_user,'members/'.$fm->user['id'].'.php',FALSE);
+        $user = $fm->_Read2Write($fp_user,EXBB_DATA_DIR_MEMBERS . '/'.$fm->user['id'].'.php',FALSE);
         $user['lastkarma'] = $fm->_Nowtime;
         $fm->_Write($fp_user,$user);
 

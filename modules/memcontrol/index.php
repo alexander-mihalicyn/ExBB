@@ -91,7 +91,7 @@ function deletemember() {
 		$deletedTotal = 0;
 		$users = $fm->_Read2Write($fp_users,EXBB_DATA_USERS_LIST);
 		foreach ($del_ids as $user_id) {
-				if (file_exists('members/'.$user_id.'.php')) unlink('members/'.$user_id.'.php');
+				if (file_exists(EXBB_DATA_DIR_MEMBERS . '/'.$user_id.'.php')) unlink(EXBB_DATA_DIR_MEMBERS . '/'.$user_id.'.php');
 				if (isset($users[$user_id])) unset($users[$user_id]);
 				$deletedTotal++;
 		}

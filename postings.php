@@ -426,7 +426,7 @@ function deletepost() {
 
 	/* Обновим количество постов у юзера, пост которого удалили */
 	if ($poster_id !== 0 && $fm->_Checkuser($poster_id)) {
-		$user = $fm->_Read2Write($fp_user, 'members/' . $poster_id . '.php');
+		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $poster_id . '.php');
 		if ($user['posts'] > 0) {
 			$user['posts']--;
 		}
@@ -1990,8 +1990,8 @@ function UpdateAutorsInfo(&$autors) {
 	global $fm, $forum_id, $toforum_id;
 
 	foreach ($autors as $user_id => $countposts) {
-		if (file_exists('members/' . $user_id . '.php')) {
-			$user = $fm->_Read2Write($fp_user, 'members/' . $user_id . '.php');
+		if (file_exists(EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php')) {
+			$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php');
 			$user['posted'][$toforum_id] = ( isset( $user['posted'][$toforum_id] ) && $user['posted'][$toforum_id] >= 0 ) ? $user['posted'][$toforum_id] + $countposts : $countposts;
 			$user['posted'][$forum_id] = ( isset( $user['posted'][$forum_id] ) && $user['posted'][$forum_id] >= $countposts ) ? $user['posted'][$forum_id] - $countposts : 0;
 			if ($user['posted'][$forum_id] <= 0) {
@@ -2011,8 +2011,8 @@ function UpdateAutorsInfoDelete($users, $forum_id) {
 	$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 
 	foreach ($users as $user_id => $total) {
-		if (file_exists('members/' . $user_id . '.php')) {
-			$user = $fm->_Read2Write($fp_user, 'members/' . $user_id . '.php');
+		if (file_exists(EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php')) {
+			$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $user_id . '.php');
 			$user['posts'] -= $total;
 			if (isset( $user['posted'][$forum_id] )) {
 				$user['posted'][$forum_id] -= $total;

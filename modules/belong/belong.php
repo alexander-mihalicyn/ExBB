@@ -383,7 +383,7 @@ class Belong {
 				$thread = $fm->_Read("forum{$forum}/{$topic}-thd.php");
 
 				foreach ($thread as $post => $info) {
-					if (!$info['p_id'] && !file_exists("members/{$info['p_id']}.php")) {
+					if (!$info['p_id'] && !file_exists(EXBB_DATA_DIR_MEMBERS . "/{$info['p_id']}.php")) {
 						continue;
 					}
 

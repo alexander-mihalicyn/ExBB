@@ -42,7 +42,7 @@ if ($fm->_Moderator === TRUE) {
 			$fm->_Message($fm->LANG['MainMessage'],$fm->LANG['UserNotFound']);
 		}
 		$pun_id = $forum_id.':'.$topic_id.':'.$post_id;
-		$user = $fm->_Read2Write($fp_user,'members/'.$user_id.'.php');
+		$user = $fm->_Read2Write($fp_user,EXBB_DATA_DIR_MEMBERS . '/'.$user_id.'.php');
 		if (isset($user['punned']) && isset($user['punned'][$pun_id])){
 			$fm->_Fclose($fp_user);
 			$fm->_Message($fm->LANG['MainMessage'],$fm->LANG['UserPunAlredy']);
@@ -91,7 +91,7 @@ if ($fm->_Moderator === TRUE) {
 			if ($user_id === 0 || $fm->_Checkuser($user_id) === FALSE) {
 				$fm->_Message($fm->LANG['MainMessage'],$fm->LANG['UserNotFound']);
 			}
-			$user = $fm->_Read2Write($fp_user,'members/'.$user_id.'.php');
+			$user = $fm->_Read2Write($fp_user,EXBB_DATA_DIR_MEMBERS . '/'.$user_id.'.php');
             if (($pun_id = $fm->_String('id')) == '' ||!isset($user['punned']) || !is_array($user['punned']) || !isset($user['punned'][$pun_id])){
                 $fm->_Fclose($fp_user);
                 $fm->_Message($fm->LANG['MainMessage'],$fm->LANG['PunNotFound']);
