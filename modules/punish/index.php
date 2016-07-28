@@ -21,10 +21,10 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 define(\"FM_PUNISH3\", {$fm->input['pt3']});
 define(\"FM_PUNISH4\", {$fm->input['pt4']});
 ?>";
-	$fm->_WriteText('modules/punish/data/config.php', $moduleconfig);
+	$fm->_WriteText(EXBB_DATA_DIR_MODULES.'/punish/config.php', $moduleconfig);
     $fm->_Message($fm->LANG['ModuleTitle'],$fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=punish', 1);
 } else {
-		include('modules/punish/data/config.php');
+		include(EXBB_DATA_DIR_MODULES.'/punish/config.php');
         $pt3 = FM_PUNISH3;
 		$pt4 = FM_PUNISH4;
 		include('admin/all_header.tpl');
@@ -32,4 +32,3 @@ define(\"FM_PUNISH4\", {$fm->input['pt4']});
         include('modules/punish/admintemplates/index.tpl');
         include('admin/footer.tpl');
 }
-?>

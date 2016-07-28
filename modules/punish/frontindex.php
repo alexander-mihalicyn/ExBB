@@ -13,7 +13,7 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 $fm->_String('doact','show');
 $fm->_LoadModuleLang('punish');
 
-include('modules/punish/data/config.php');
+include(EXBB_DATA_DIR_MODULES.'/punish/config.php');
 
 $topic_id	= $fm->_Intval('topic');
 $post_id	= $fm->_Intval('postid');
@@ -174,4 +174,3 @@ function PrintUserPunish($user) {
         }
         return $punish_data;
 }
-?>
