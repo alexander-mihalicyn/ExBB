@@ -14,7 +14,7 @@ $fm->_LoadModuleLang('chat', 1);
 
 if ($fm->_POST !== TRUE) {
 	
-	$config = $fm->_Read(CHAT_CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_CHAT_DATA_CONFIG);
 	
 	$height		= $config['height'];
 	$update		= $config['update'];
@@ -37,7 +37,7 @@ else {
 		'history'	=> $fm->input['history']
 	);
 	
-	$fm->_Read2Write($fp_config, CHAT_CONFIG);
+	$fm->_Read2Write($fp_config, EXBB_MODULE_CHAT_DATA_CONFIG);
 	$fm->_Write($fp_config, $config);
 	
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=chat', 1);

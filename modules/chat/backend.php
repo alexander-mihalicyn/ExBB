@@ -8,7 +8,7 @@
 */
 
 if (!defined('IN_EXBB')) die('Emo sucks;)');
-require_once('modules/chat/common.php');
+require_once(EXBB_ROOT.'/modules/chat/common.php');
 
 switch ($fm->_String('action')) {
 	case 'update':		update();
@@ -34,8 +34,8 @@ function update() {
 	
 	$time = $fm->_Nowtime;
 	
-	$online		= $fm->_Read2Write($fp_online, CHAT_ONLINE);
-	$messages	= $fm->_Read2Write($fp_messages, CHAT_MESSAGES);
+	$online		= $fm->_Read2Write($fp_online, EXBB_MODULE_CHAT_DATA_ONLINE);
+	$messages	= $fm->_Read2Write($fp_messages, EXBB_MODULE_CHAT_DATA_MESSAGES);
 	
 	$login = !isset($online[$fm->user['id']]);
 	
@@ -136,9 +136,9 @@ $maxlength = 150;
 	
 	$time = $fm->_Nowtime;
 	
-	$config = $fm->_Read(CHAT_CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_CHAT_DATA_CONFIG);
 	
-	$messages = $fm->_Read2Write($fp_messages, CHAT_MESSAGES);
+	$messages = $fm->_Read2Write($fp_messages, EXBB_MODULE_CHAT_DATA_MESSAGES);
 	$total = count($messages);
 	$empty = (!$total) ? 1 : 0;
 	
@@ -189,7 +189,7 @@ $maxlength = 150;
 function informer() {
 global $fm;
 
-$online = $fm->_Read(CHAT_ONLINE);
+$online = $fm->_Read(EXBB_MODULE_CHAT_DATA_ONLINE);
 
 $now = 0;
 $show_online = '';
@@ -206,4 +206,3 @@ $GLOBALS['_RESULT'] = array(
 'online' => implode(', ', $show_online)
 );
 }
-?>

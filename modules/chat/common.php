@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Chat for ExBB FM 1.0 RC2
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d
@@ -7,10 +6,8 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) die('Emo sucks;)');
+defined('IN_EXBB') or die;
 
-define('CHAT_CONFIG',		'modules/chat/data/config.php');
-define('CHAT_MESSAGES',		'modules/chat/data/messages.php');
-define('CHAT_ONLINE',		'modules/chat/data/online.php');
-
-?>
+define('EXBB_MODULE_CHAT_DATA_CONFIG', EXBB_DATA_DIR_MODULES . '/chat/config.php');
+define('EXBB_MODULE_CHAT_DATA_MESSAGES', EXBB_DATA_DIR_MODULES . '/chat/messages.php');
+define('EXBB_MODULE_CHAT_DATA_ONLINE', EXBB_DATA_DIR_MODULES . '/chat/online.php');

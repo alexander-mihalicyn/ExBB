@@ -7,8 +7,9 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) die('Emo sucks;)');
-require_once('modules/chat/common.php');
+defined('IN_EXBB') or die;
+
+require_once(EXBB_ROOT.'/modules/chat/common.php');
 
 $fm->_LoadModuleLang('chat');
 
@@ -32,7 +33,7 @@ switch ($fm->_String('do')) {
 function show_chat() {
 	global $fm;
 	
-	$config = $fm->_Read(CHAT_CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_CHAT_DATA_CONFIG);
 	
 	$smiles = array(
 		':-)'	=> 'smile24.gif',
