@@ -17,7 +17,7 @@ class FM {
 	var $exbb	= array();
 	var $_fps	= array();
 	
-	function FM() {
+	function __construct() {
 		require_once(FM_PATH . FM_BOARDINFO);
 		
 		$this->_Nowtime = time();

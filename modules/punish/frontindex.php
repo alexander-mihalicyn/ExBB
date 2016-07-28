@@ -19,7 +19,7 @@ $topic_id	= $fm->_Intval('topic');
 $post_id	= $fm->_Intval('postid');
 $user_id 	= $fm->_Intval('user');
 global $user, $allforums;
-$allforums 	= $fm->_Read(FM_ALLFORUMS);
+$allforums 	= $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 if (($forum_id = $fm->_Intval('forum')) === 0 || !isset($allforums[$forum_id])) {
 	$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
@@ -28,11 +28,11 @@ $fm->_GetModerators($forum_id,$allforums);
 
 if ($fm->_Moderator === TRUE) {
 	if ($fm->input['doact'] == 'addpun') {
-		$list = $fm->_Read('forum'.$forum_id.'/list.php');
-		if ($topic_id === 0 || !isset($list[$topic_id]) || !file_exists('forum'.$forum_id.'/'.$topic_id.'-thd.php')) {
+		$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
+		if ($topic_id === 0 || !isset($list[$topic_id]) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php')) {
 			$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
 		}
-		$topic = $fm->_Read('forum'.$forum_id.'/'.$topic_id.'-thd.php');
+		$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php');
 		if ($post_id === 0 || !isset($topic[$post_id])) {
 			$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
 		}
@@ -105,11 +105,11 @@ if ($fm->_Moderator === TRUE) {
             $punish_data = PrintUserPunish($user);
 
 	} else {
-			$list = $fm->_Read('forum'.$forum_id.'/list.php');
-			if ($topic_id === 0 || !isset($list[$topic_id]) || !file_exists('forum'.$forum_id.'/'.$topic_id.'-thd.php')) {
+			$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
+			if ($topic_id === 0 || !isset($list[$topic_id]) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php')) {
 				$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
 			}
-			$topic = $fm->_Read('forum'.$forum_id.'/'.$topic_id.'-thd.php');
+			$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php');
 			if ($post_id === 0 || !isset($topic[$post_id])) {
 				$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
 			}
@@ -166,7 +166,7 @@ function PrintUserPunish($user) {
         foreach ($user['punned'] as $id => $value){
         		list($forum_id,$topic_id,$post_id) = explode(':',$id);
                 $forumname = (isset($allforums[$forum_id])) ? $allforums[$forum_id]['name']:$fm->LANG['Unknow'];
-                $list = $fm->_Read('forum'.$forum_id.'/list.php');
+                $list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
                 $topicname = (isset($list[$topic_id])) ? $list[$topic_id]['name']:$fm->LANG['Unknow'];
                 list($moder,$status) = explode('::',$value);
                 $whoadd = $fm->LANG['Pun'.$status].' - '.$moder;

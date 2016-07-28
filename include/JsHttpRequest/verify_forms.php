@@ -44,7 +44,7 @@ function verify_register_inmembername() {
 	if ($fm->exbb['wordcensor'] === TRUE && $fm->bads_filter($fm->input['value'], 0) === TRUE)
 		verify_result(0, $fm->LANG['VerifyProfanity']);
 	
-	$users = $fm->_Read(FM_USERS);
+	$users = $fm->_Read(EXBB_DATA_USERS_LIST);
 	
 	foreach ($users as $id => $info)
 		if ($fm->input['value'] === $info['n'])
@@ -82,7 +82,7 @@ function verify_register_emailaddress() {
 	if ($fm->_Chek_Mail('value') === FALSE)
 		verify_result(0, $fm->LANG['VerifyEmailCorrect']);
 	
-	$users = $fm->_Read(FM_USERS);
+	$users = $fm->_Read(EXBB_DATA_USERS_LIST);
 	
 	foreach ($users as $id => $info)
 		if ($fm->input['value'] === $info['m'])

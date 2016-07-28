@@ -39,7 +39,7 @@ elseif ($fm->input['action'] == 'edit_user') {
 	}
 
 	$user = $fm->_Read2Write($fp_user, 'members/' . $user_id . '.php', false);
-	$forums = $fm->_Read(FM_ALLFORUMS, false);
+	$forums = $fm->_Read(EXBB_DATA_FORUMS_LIST, false);
 
 	if ($fm->_String('checkaction') === 'yes' && $fm->_POST === true) {
 
@@ -87,7 +87,7 @@ elseif ($fm->input['action'] == 'edit_user') {
 		$fm->_Write($fp_user, $user);
 
 		if ($newname === true || $newemail === true) {
-			$allusers = $fm->_Read2Write($fp_allusers, FM_USERS, false);
+			$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 			$allusers[$user_id]['n'] = $fm->_LowerCase($user['name']);
 			$allusers[$user_id]['m'] = $user['mail'];
 			$fm->_Write($fp_allusers, $allusers);
@@ -151,18 +151,18 @@ elseif ($fm->input['action'] == 'edit_user') {
 	}
 }
 elseif ($fm->input['action'] == 'log') {
-	if ($fm->_String('DelLog') != '' && $fm->_POST === true && ( $log_name = $fm->_Intval('log_name') ) !== 0 && preg_match("#^[0-9]{10}$#is", $log_name) && file_exists(FM_LOGDIR . $log_name . '.php')) {
+	if ($fm->_String('DelLog') != '' && $fm->_POST === true && ( $log_name = $fm->_Intval('log_name') ) !== 0 && preg_match("#^[0-9]{10}$#is", $log_name) && file_exists(EXBB_DATA_DIR_LOGS . '/' . $log_name . '.php')) {
 
-		unlink(FM_LOGDIR . $log_name . '.php');
+		unlink(EXBB_DATA_DIR_LOGS . '/' . $log_name . '.php');
 		$fm->_WriteLog(sprintf($fm->LANG['ClearLogInFile'], date("d.m.y", $log_name)), 1);
 	}
 	clearstatcache();
 
 	if ($fm->_String('DelAllLog') != '') {
-		$d = dir(FM_LOGDIR);
+		$d = dir(EXBB_DATA_DIR_LOGS);
 		while (false !== ( $file = $d->read() )) {
 			if (preg_match("#^([0-9]{10})\.php$#is", $file)) {
-				unlink(FM_LOGDIR . $file);
+				unlink(EXBB_DATA_DIR_LOGS . '/' . $file);
 			}
 		}
 		$d->close();
@@ -175,7 +175,7 @@ elseif ($fm->input['action'] == 'log') {
 	}
 
 	$logARRAY = array();
-	$d = dir(FM_LOGDIR);
+	$d = dir(EXBB_DATA_DIR_LOGS);
 	while (false !== ( $file = $d->read() )) {
 		if (preg_match("#^([0-9]{10})\.php$#is", $file, $match)) {
 			$logARRAY[intval($match[1])] = 1;
@@ -191,8 +191,8 @@ elseif ($fm->input['action'] == 'log') {
 
 	}
 
-	if (file_exists(FM_LOGDIR . $log_name . '.php')) {
-		$logdata = file(FM_LOGDIR . $log_name . ".php");
+	if (file_exists(EXBB_DATA_DIR_LOGS . '/' . $log_name . '.php')) {
+		$logdata = file(EXBB_DATA_DIR_LOGS . '/' . $log_name . ".php");
 		unset( $logdata[0] );
 		$logdata = implode("<br>", array_reverse($logdata));
 	}
@@ -213,7 +213,7 @@ elseif ($fm->input['action'] == 'massmail') {
 		if ($fm->input['subject'] == '' || $fm->input['message'] == '') {
 			$fm->_Message($fm->LANG['AdminMassMail'], $fm->LANG['EmailNotEmpty'], '', 1);
 		}
-		$allusers = $fm->_Read(FM_USERS, false);
+		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 		SkipMails();
 		array_filter($allusers, 'MAP_MAIL');
 		unset( $allusers );
@@ -238,15 +238,14 @@ elseif ($fm->input['action'] == 'massmail') {
 }
 elseif ($fm->input['action'] == 'censor') {
 	if ($fm->_String('process') != '' && $fm->_POST === true) {
-		$fp = fopen(FM_BADWORDS, 'a+');
-		//$fm->_Flock($fp,FM_BADWORDS,LOCK_EX);
+		$fp = fopen(EXBB_DATA_BADWORDS, 'a+');
 		flock($fp, 2);
 		ftruncate($fp, 0);
 		fwrite($fp, "<? die; ?>\n" . $fm->input['wordarray']);
 		fflush($fp);
 		flock($fp, 3);
 		fclose($fp);
-		if (file_exists(FM_BADWORDS)) {
+		if (file_exists(EXBB_DATA_BADWORDS)) {
 			$fm->_WriteLog($fm->LANG['LogCensor'], 1);
 			$fm->_Message($fm->LANG['Censor'], $fm->LANG['BadfilterOk'], 'setmembers.php?action=censor', 1);
 		}
@@ -256,8 +255,8 @@ elseif ($fm->input['action'] == 'censor') {
 	}
 	else {
 		$bads = '';
-		if (file_exists(FM_BADWORDS)) {
-			$bads = file(FM_BADWORDS);
+		if (file_exists(EXBB_DATA_BADWORDS)) {
+			$bads = file(EXBB_DATA_BADWORDS);
 			unset( $bads[0] );
 			$bads = implode("", $bads);
 		}
@@ -280,7 +279,7 @@ else {
 				$fm->_Message($fm->LANG['UserAdmin'], $fm->LANG['WrongEmail'], '', 1);
 			}
 		}
-		$allusers = $fm->_Read(FM_USERS, false);
+		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 
 		$username = preg_quote($fm->_LowerCase($fm->input['username']));
 		$usermail = preg_quote($fm->input['usermail']);
@@ -319,7 +318,7 @@ function UpdateAllusersInfo() {
 	$users = array();
 	$dirtoread = 'members/';
 	$d = dir($dirtoread);
-	$fm->_Read2Write($fp_allusers, FM_USERS);
+	$fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST);
 	while (false !== ( $file = $d->read() )) {
 		if (preg_match("#^([0-9]+)\.php$#is", $file, $match)) {
 			if (filesize($dirtoread . $file) <= 100) {
@@ -403,7 +402,7 @@ function BunUnban($newstatus) {
 	global $fm, $user;
 
 	$SaveFlag = false;
-	$banlist = $fm->_Read2Write($fp_ban, FM_BANLIST, false);
+	$banlist = $fm->_Read2Write($fp_ban, EXBB_DATA_BANNED_USERS_LIST, false);
 	if ($user['status'] == 'banned' && $newstatus != 'banned') {
 		if (isset( $banlist[$user['id']] )) {
 			unset( $banlist[$user['id']] );

@@ -26,7 +26,7 @@ if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('f
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 }
 
-$allforums = $fm->_Read(FM_ALLFORUMS);
+$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 if (!isset( $allforums[$forum_id] )) {
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['ForumNotExists']);
@@ -53,7 +53,7 @@ switch ($allforums[$forum_id]['strep']) {
 	break;
 }
 
-if (!file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 	$fm->_Message($fm->LANG['TopicOpen'], $fm->LANG['TopicMiss']);
 }
 
@@ -74,11 +74,11 @@ $forumcodes = ( $fm->exbb['exbbcodes'] === true && $allforums[$forum_id]['codes'
 
 
 /*Set topic views */
-$viewsdata = $fm->_Read2Write($fp_views, 'forum' . $forum_id . '/views.php');
+$viewsdata = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 $viewsdata[$topic_id] = ( isset( $viewsdata[$topic_id] ) ) ? $viewsdata[$topic_id] + 1 : 1;
 $fm->_Write($fp_views, $viewsdata);
 
-$list = $fm->_Read('forum' . $forum_id . '/list.php');
+$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 $topic = $list[$topic_id];
 unset( $list, $viewsdata );
 
@@ -107,7 +107,7 @@ if ($fm->_String('search_id') !== '') {
 }
 /* ÏÎÄÑÂÅÒÊÀ ÏÎÈÑÊÀ */
 
-$threads = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+$threads = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 $threads_keys = array_keys($threads);
 $end_key = end($threads_keys);
 sort($threads_keys, SORT_NUMERIC);
@@ -170,10 +170,10 @@ $pages = Print_Paginator($TotalPosts, $get_param, $fm->user['posts2page'] - coun
 $threads_keys = array_slice($threads_keys, $first, $fm->user['posts2page'] - count($_pinmsg));
 $threads_keys = array_merge($_pinmsg, $threads_keys);
 
-$allranks = ( $fm->exbb['ratings'] === true && $fm->_IsSpider === false ) ? $fm->_Read(FM_TITLES) : array();
+$allranks = ( $fm->exbb['ratings'] === true && $fm->_IsSpider === false ) ? $fm->_Read(EXBB_DATA_MEMBERS_TITLES) : array();
 $defranks = reset($allranks);
 
-$t_attaches = ( file_exists('forum' . $forum_id . '/attaches-' . $topic_id . '.php') ) ? $fm->_Read('forum' . $forum_id . '/attaches-' . $topic_id . '.php', false) : array();
+$t_attaches = ( file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php') ) ? $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php', false) : array();
 
 $users = array();
 $topic_data = '';
@@ -198,7 +198,7 @@ if ($fm->input['action'] == 'thanks' && $fm->user['id'] != 0) {
 	$key = $fm->input['post'];
 	$member_id = ( isset( $threads[$key]['p_id'] ) ) ? $threads[$key]['p_id'] : 0;
 	if ($fm->user['id'] != $member_id) {
-		$threads = $fm->_Read2Write($fp_threads, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+		$threads = $fm->_Read2Write($fp_threads, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 		if (!isset( $threads[$key]['thanks'] )) {
 			$threads[$key]['thanks'] = $fm->user['id'];
 		}
@@ -409,7 +409,7 @@ if ($topic['poll']) {
 unset( $users );
 
 $options = array();
-if (!file_exists('forum' . $forum_id . '/' . $topic_id . '-poll.php') && $fm->user['id'] && $threads[$firstkey]['state'] != 'closed' && ( $threads[$firstkey]['p_id'] == $fm->user['id'] || $fm->_Moderator === true )) {
+if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php') && $fm->user['id'] && $threads[$firstkey]['state'] != 'closed' && ( $threads[$firstkey]['p_id'] == $fm->user['id'] || $fm->_Moderator === true )) {
 	$options[] = '<a href="postings.php?action=addpoll&forum=' . $forum_id . '&topic=' . $topic_id . '">' . $fm->LANG['AddPoll'] . '</a>';
 }
 $options['srch_intop'] = '<a href="search.php?action=intopic&forum=' . $forum_id . '&topic=' . $topic_id . '">' . $fm->LANG['SearchInTopic'] . '</a>';
@@ -429,7 +429,7 @@ if ($access === true && $topic['state'] != 'closed') {
 
 	if ($fm->user['id'] !== 0 && $fm->exbb['emailfunctions'] === true && $fm->user['mail']) {
 		//  Îïöèÿ ïîäïèñêè íà òåìó //
-		$trackdata = $fm->_Read2Write($fp_track, 'forum' . $forum_id . '/_t_track.php');
+		$trackdata = $fm->_Read2Write($fp_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 		switch ($fm->input['action']) {
 			case 'untrack':
 				if (isset( $trackdata[$topic_id][$fm->user['id']] )) {
@@ -622,7 +622,8 @@ function setup_member($user_id) {
 function poll($forum_id, $topic_id) {
 	global $fm, $topic, $firstkey, $_icon;
 
-	$pollfile = 'forum' . $forum_id . '/' . $topic_id . '-poll.php';
+	$pollfile = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php';
+
 	if (!file_exists($pollfile)) {
 		return '';
 	}

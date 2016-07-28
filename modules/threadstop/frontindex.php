@@ -13,14 +13,14 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 $fm->_LoadModuleLang('threadstop');
 include('modules/threadstop/data/config.php');
 
-$allforums = $fm->_Read(FM_ALLFORUMS);
+$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 $arr_by_viewspost = array();
 $arr_by_lastpost  = array();
 $arr_by_posts     = array();
 foreach ($allforums as $forum_id => $forum){
 		if ($forum['private'] === TRUE && !defined('IS_ADMIN') && ($fm->user['id'] === 0 || !isset($fm->user['private'][$forum_id]) || $fm->user['private'][$forum_id] === FALSE)) continue;
-		$topic = $fm->_Read('forum'.$forum_id.'/list.php');
-		$_views = $fm->_Read('forum'.$forum_id.'/views.php');
+		$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
+		$_views = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/views.php');
 		foreach ($_views as $topic_id => $views)
 			$topic[$topic_id]['views'] = $views;
 		sort_array($topic,'views',$arr_by_viewspost);

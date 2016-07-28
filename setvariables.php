@@ -311,19 +311,18 @@ if (!defined('IN_EXBB')) die('Hack attempt!');";
 	$board_config .= "\n?>";
 
 	$title_key = ucfirst($fm->input['action']) . 'Config';
-	@chmod(FM_BOARDINFO, octdec($fm->exbb['ch_files']));
-	if (!empty( $board_config ) && is_writable(FM_BOARDINFO)) {
-		copy(FM_BOARDINFO, FM_BOARDINFO_BAK);
-		@chmod(FM_BOARDINFO_BAK, octdec($fm->exbb['ch_files']));
-		$fp = fopen(FM_BOARDINFO, 'a+');
-		//$fm->_Flock($fp,FM_BOARDINFO,LOCK_EX);
+	@chmod(EXBB_DATA_CONFIG, octdec($fm->exbb['ch_files']));
+	if (!empty( $board_config ) && is_writable(EXBB_DATA_CONFIG)) {
+		copy(EXBB_DATA_CONFIG, EXBB_DATA_CONFIG_BACKUP);
+		@chmod(EXBB_DATA_CONFIG_BACKUP, octdec($fm->exbb['ch_files']));
+		$fp = fopen(EXBB_DATA_CONFIG, 'a+');
 		flock($fp, 2);
 		ftruncate($fp, 0);
 		fwrite($fp, $board_config);
 		fflush($fp);
 		flock($fp, 3);
 		fclose($fp);
-		@chmod(FM_BOARDINFO, octdec($fm->exbb['ch_files']));
+		@chmod(EXBB_DATA_CONFIG, octdec($fm->exbb['ch_files']));
 		$fm->_WriteLog($fm->LANG['LogOk'] . $fm->LANG['Log' . $title_key], 1);
 		$fm->_Message($fm->LANG[$title_key], $fm->LANG['BoardinfoOk'], "setvariables.php?action=" . $fm->input['action'], 1);
 	}

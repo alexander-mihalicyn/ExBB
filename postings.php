@@ -108,7 +108,7 @@ include( 'page_tail.php' );
 function editform() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $post_id = $fm->_Intval('postid') ) === 0 || ( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -116,8 +116,8 @@ function editform() {
 	$privateID = ChekPrivate($allforums[$forum_id]['private'], $forum_id);
 	$fm->_GetModerators($forum_id, $allforums);
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php', false);
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', false);
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -125,7 +125,7 @@ function editform() {
 		$fm->_Message($fm->LANG['MessageEdit'], $fm->LANG['EditClosed']);
 	}
 
-	$topic = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+	$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 	if (!isset( $topic[$post_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -209,7 +209,7 @@ function processedit() {
 	global $fm;
 
 	CheckPostSize('inpost');
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $post_id = $fm->_Intval('postid') ) === 0 || ( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -217,8 +217,8 @@ function processedit() {
 	$privateID = ChekPrivate($allforums[$forum_id]['private'], $forum_id);
 	$fm->_GetModerators($forum_id, $allforums);
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php', false);
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', false);
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -226,7 +226,7 @@ function processedit() {
 		$fm->_Message($fm->LANG['MessageEdit'], $fm->LANG['EditClosed']);
 	}
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 	if (!isset( $topic[$post_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -316,7 +316,7 @@ function processedit() {
 function deletepost() {
 	global $fm, $allforums;
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS, false);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, false);
 	if (( $post_id = $fm->_Intval('postid') ) === 0 || ( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Fclose($fp_allforums);
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
@@ -329,13 +329,13 @@ function deletepost() {
 		$fm->_Message($fm->LANG['PostDeleting'], $fm->LANG['EditNo']);
 	}
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php', false);
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', false);
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 	if (!isset( $topic[$post_id] )) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
@@ -351,14 +351,14 @@ function deletepost() {
 	}
 
 	if (isset( $topic[$post_id]['attach_id'] )) {
-		$attach = $fm->_Read2Write($fp_attach, 'forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		$attach = $fm->_Read2Write($fp_attach, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		$attach_id = $topic[$post_id]['attach_id'];
 		$attach_name = $attach[$attach_id]['id'];
 		unset( $attach[$attach_id] );
 		$fm->_Write($fp_attach, $attach);
 
 		if (count($attach) === 0) {
-			unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+			unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		}
 
 		if (file_exists('uploads/' . $attach_name)) {
@@ -437,7 +437,7 @@ function deletepost() {
 			unset( $user['posted'][$forum_id] );
 		}
 		$fm->_Write($fp_user, $user);
-		$allusers = $fm->_Read2Write($fp_allusers, FM_USERS, false);
+		$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 		$allusers[$poster_id]['p'] = $user['posts'];
 		$fm->_Write($fp_allusers, $allusers);
 		unset( $user, $allusers );
@@ -455,14 +455,14 @@ function edit_topic_title() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -497,7 +497,7 @@ function edit_topic_title() {
 		$list[$topic_id]['name'] = $fm->input['topictitle'];
 		$list[$topic_id]['desc'] = $fm->input['description'];
 		$fm->_Write($fp_list, $list);
-		$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+		$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 		$topic[$list[$topic_id]['date']]['name'] = $fm->input['topictitle'];
 		$topic[$list[$topic_id]['date']]['desc'] = $fm->input['description'];
 		$topic[$list[$topic_id]['date']]['keywords'] = $fm->input['keywords'];
@@ -515,7 +515,7 @@ function edit_topic_title() {
 		$topicname = $list[$topic_id]['name'];
 		$description = $list[$topic_id]['desc'];
 		unset( $list );
-		$first = reset($fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php'));
+		$first = reset($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php'));
 		$keywords = ( isset( $first['keywords'] ) ) ? $first['keywords'] : '';
 		$fm->_Title = ' :: ' . $fm->LANG['EditTopic'];
 		include( './templates/' . DEF_SKIN . '/all_header.tpl' );
@@ -531,14 +531,14 @@ function deletethread() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -559,13 +559,13 @@ function deletethread() {
 		$fm->_Write($fp_list, $list);
 
 		/* Удалим инфу о кол-ве просмотров темы из views.php */
-		$views = $fm->_Read2Write($fp_views, 'forum' . $forum_id . '/views.php');
+		$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 		unset( $views[$topic_id] );
 		$fm->_Write($fp_views, $views);
 
 		/* Обновим инфо о постах пользователей */
-		$topic = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php');
-		unlink('forum' . $forum_id . '/' . $topic_id . '-thd.php');
+		$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
 		$users = array();
 		foreach ($topic as $t_id => $post) {
@@ -611,22 +611,22 @@ function deletethread() {
 
 		$fm->_Write($fp_allforums, $allforums);
 
-		$attaches = $fm->_Read('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		$attaches = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		foreach ($attaches as $id => $attach) {
 			if (file_exists('uploads/' . $attach['id'])) {
 				unlink('uploads/' . $attach['id']);
 			}
 		}
-		@unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		@unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 
-		$_t_track = $fm->_Read2Write($fp_t_track, 'forum' . $forum_id . '/_t_track.php');
+		$_t_track = $fm->_Read2Write($fp_t_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 		if (isset( $_t_track[$topic_id] )) {
 			unset( $_t_track[$topic_id] );
 		}
 		$fm->_Write($fp_t_track, $_t_track);
 
-		if (file_exists('forum' . $forum_id . '/' . $topic_id . '-poll.php')) {
-			unlink('forum' . $forum_id . '/' . $topic_id . '-poll.php');
+		if (file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php')) {
+			unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php');
 		}
 		include( 'modules/belong/_deleteTopic.php' );
 		// Черканём в логе запись об удалении темы =)
@@ -657,14 +657,14 @@ function movetopic() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS, 0);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, 0);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -682,41 +682,41 @@ function movetopic() {
 		}
 
 		/* Get a new thread number. */
-		$tolist = $fm->_Read2Write($fp_tolist, 'forum' . $toforum_id . '/list.php');
+		$tolist = $fm->_Read2Write($fp_tolist, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/list.php');
 		$newtopic_id = ( count($tolist) !== 0 ) ? max(array_keys($tolist)) + 1 : 1;
-		while (file_exists('forum' . $forum_id . '/' . $newtopic_id . '-thd.php')) {
+		while (file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $newtopic_id . '-thd.php')) {
 			$newtopic_id++;
 		}
 
-		$oldtopicfile = 'forum' . $forum_id . '/' . $topic_id . '-thd.php';
-		$newtopicfile = 'forum' . $toforum_id . '/' . $newtopic_id . '-thd.php';
+		$oldtopicfile = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php';
+		$newtopicfile = EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-thd.php';
 		copy($oldtopicfile, $newtopicfile);
 		@chmod($newtopicfile, $fm->exbb['ch_files']);
 		unlink($oldtopicfile);
 
 		/* attaches */
-		$oldattachesfile = 'forum' . $forum_id . '/attaches-' . $topic_id . '.php';
+		$oldattachesfile = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php';
 		if (file_exists($oldattachesfile)) {
-			$newattachesfile = 'forum' . $toforum_id . '/attaches-' . $newtopic_id . '.php';
+			$newattachesfile = EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/attaches-' . $newtopic_id . '.php';
 			copy($oldattachesfile, $newattachesfile);
 			@chmod($newattachesfile, $fm->exbb['ch_files']);
 			unlink($oldattachesfile);
 		}
 
 		//poll file
-		$oldpollfile = 'forum' . $forum_id . '/' . $topic_id . '-poll.php';
+		$oldpollfile = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php';
 		if (file_exists($oldpollfile)) {
-			$newpollfile = 'forum' . $toforum_id . '/' . $newtopic_id . '-poll.php';
+			$newpollfile = EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-poll.php';
 			copy($oldpollfile, $newpollfile);
 			@chmod($newpollfile, $fm->exbb['ch_files']);
 			unlink($oldpollfile);
 		}
 
 		/* topic email trackfile */
-		$_t_track = $fm->_Read2Write($fp_t_track, 'forum' . $forum_id . '/_t_track.php');
+		$_t_track = $fm->_Read2Write($fp_t_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 		if (isset( $_t_track[$topic_id] )) {
 
-			$new_t_track = $fm->_Read2Write($fp_new_t_track, 'forum' . $toforum_id . '/_t_track.php');
+			$new_t_track = $fm->_Read2Write($fp_new_t_track, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/_t_track.php');
 			$new_t_track[$newtopic_id] = $_t_track[$topic_id];
 			$fm->_Write($fp_new_t_track, $new_t_track);
 
@@ -725,8 +725,8 @@ function movetopic() {
 		}
 
 		/* Перенос кол-ва просмотров темы из старого views.php в новый */
-		$old_views = $fm->_Read2Write($fp_old_views, 'forum' . $forum_id . '/views.php');
-		$views = $fm->_Read2Write($fp_views, 'forum' . $toforum_id . '/views.php');
+		$old_views = $fm->_Read2Write($fp_old_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
+		$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/views.php');
 		$views[$newtopic_id] = $old_views[$topic_id];
 		unset( $old_views[$topic_id] );
 		$fm->_Write($fp_old_views, $old_views);
@@ -851,7 +851,7 @@ function movetopic() {
 function unlink_topic() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS, 0);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST, 0);
 
 	$forum_id = $fm->_Intval('forum');
 	$topic_id = $fm->_Intval('topic');
@@ -859,7 +859,7 @@ function unlink_topic() {
 
 	$fm->_GetModerators($forum_id, $allforums);
 
-	$list = $fm->_Read2Write($fp, 'forum' . $forum_id . '/list.php', 0);
+	$list = $fm->_Read2Write($fp, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', 0);
 
 	if ($fm->_Moderator === false || !isset( $list[$topic_id] ) || $list[$topic_id]['state'] != 'moved') {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
@@ -881,7 +881,7 @@ function restore() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -893,11 +893,11 @@ function restore() {
 
 	$forumname = $allforums[$forum_id]['name'];
 
-	if (!file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	ksort($topic, SORT_NUMERIC);
 	reset($topic);
 
@@ -930,7 +930,7 @@ function restore() {
 
 		$poster = GetName($poster_id);
 
-		$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
+		$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 
 		$list[$topic_id]['name'] = $fm->input['topictitle'];
 		$list[$topic_id]['id'] = $topic_id;
@@ -976,7 +976,7 @@ function top_recount() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -987,13 +987,13 @@ function top_recount() {
 		$fm->_Message($fm->LANG['TopicRecount'], $fm->LANG['EditNo']);
 	}
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$old_count = $list[$topic_id]['posts'];
-	$topic = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
+	$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 	$new_count = count($topic) - 1;
 	$list[$topic_id]['posts'] = $new_count;
 	$fm->_Write($fp_list, $list);
@@ -1018,8 +1018,8 @@ function addpoll() {
 	$forum_id = $fm->_Intval('forum');
 	$topic_id = $fm->_Intval('topic');
 
-	$topic_file = 'forum' . $forum_id . '/' . $topic_id . '-thd.php';
-	$poll_file = 'forum' . $forum_id . '/' . $topic_id . '-poll.php';
+	$topic_file = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php';
+	$poll_file = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php';
 
 	if (!file_exists($topic_file)) {
 		$fm->_Message($fm->LANG['AdditionPoll'], $fm->LANG['TopicMiss']);
@@ -1029,7 +1029,7 @@ function addpoll() {
 		$fm->_Message($fm->LANG['AdditionPoll'], $fm->LANG['PollAlreadyExists']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS, 0);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST, 0);
 	$fm->_GetModerators($forum_id, $allforums);
 
 	$threads = $fm->_Read($topic_file, 0);
@@ -1092,7 +1092,7 @@ function addpoll() {
 function poll_edit() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1104,19 +1104,19 @@ function poll_edit() {
 
 	$forumname = $allforums[$forum_id]['name'];
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-poll.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$topicname = ( isset( $list[$topic_id]['tnun'] ) ) ? $list[$topic_id]['name'] . ' - ' . $list[$topic_id]['tnun'] : $list[$topic_id]['name'];
-	$poll_data = $fm->_Read2Write($fp_poll, 'forum' . $forum_id . '/' . $topic_id . '-poll.php', false);
+	$poll_data = $fm->_Read2Write($fp_poll, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php', false);
 
 	if ($fm->_Boolean($fm->input, 'savepoll') === true) {
 		if ($fm->_Boolean($fm->input, 'delpoll') === true) {
 			if ($fm->_Boolean($fm->input, 'request') === true && $fm->_POST === true) {
 				$fm->_Fclose($fp_poll);
-				unlink('forum' . $forum_id . '/' . $topic_id . '-poll.php');
+				unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php');
 				$list[$topic_id]['poll'] = false;
 				$fm->_Write($fp_list, $list);
 
@@ -1214,7 +1214,7 @@ function un_lockthread($mode) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1224,15 +1224,15 @@ function un_lockthread($mode) {
 		$fm->_Message($fm->LANG['TopicClosing'], $fm->LANG['EditNo']);
 	}
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	$list[$topic_id]['state'] = ( $mode == 'lock' ) ? 'closed' : 'open';
 	$fm->_Write($fp_list, $list);
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	ksort($topic, SORT_NUMERIC);
 	reset($topic);
 	$firstkey = key($topic);
@@ -1255,7 +1255,7 @@ function un_pinthread($mode) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1265,11 +1265,11 @@ function un_pinthread($mode) {
 		$fm->_Message($fm->LANG['TopicPinning'], $fm->LANG['EditNo']);
 	}
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	$topic[$list[$topic_id]['date']]['pinned'] = ( $mode == 'pin' ) ? true : false;
 	$fm->_Write($fp_topic, $topic);
 
@@ -1293,17 +1293,17 @@ function pinmsg() {
 	$fm->_Intvals(array( 'forum', 'topic', 'post' ));
 
 	// Проверка прав доступа к этой функции
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	$fm->_GetModerators($fm->input['forum'], $allforums);
 	if ($fm->_Moderator === false) {
 		$fm->_Message($fm->LANG['MsgPin'], $fm->LANG['EditNo']);
 	}
 
 	// Проверка на существование сообщения
-	if (!file_exists('forum' . $fm->input['forum'] . '/' . $fm->input['topic'] . '-thd.php')) {
+	if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $fm->input['forum'] . '/' . $fm->input['topic'] . '-thd.php')) {
 		$fm->_Message($fm->LANG['TopicOpen'], $fm->LANG['TopicMiss']);
 	}
-	$threads = $fm->_Read2Write($fp_threads, 'forum' . $fm->input['forum'] . '/' . $fm->input['topic'] . '-thd.php');
+	$threads = $fm->_Read2Write($fp_threads, EXBB_DATA_DIR_FORUMS . '/' . $fm->input['forum'] . '/' . $fm->input['topic'] . '-thd.php');
 	if (!isset( $threads[$fm->input['post']] )) {
 		$fm->_Message($fm->LANG['TopicOpen'], $fm->LANG['MissMsg']);
 	}
@@ -1358,7 +1358,7 @@ function del_subscribed() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1368,12 +1368,12 @@ function del_subscribed() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['EditNo']);
 	}
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php');
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 	if (!isset( $list[$topic_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$_t_track = $fm->_Read2Write($fp_t_track, 'forum' . $forum_id . '/_t_track.php');
+	$_t_track = $fm->_Read2Write($fp_t_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 	if (isset( $_t_track[$topic_id] )) {
 		unset( $_t_track[$topic_id] );
 	}
@@ -1394,7 +1394,7 @@ function delselected() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1404,8 +1404,8 @@ function delselected() {
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id. '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
@@ -1415,7 +1415,7 @@ function delselected() {
 
 	$countremoved = 0;
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	ksort($topic, SORT_NUMERIC);
 	reset($topic);
 	$firstkey = key($topic);
@@ -1489,7 +1489,7 @@ function delselected() {
 
 	//Check posts attaches
 	if (count($attaches) > 0) {
-		$allattaches = $fm->_Read2Write($fp_attach, 'forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		$allattaches = $fm->_Read2Write($fp_attach, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		foreach ($attaches as $attach_id) {
 			if (isset( $allattaches[$attach_id] )) {
 				if (file_exists('uploads/' . $allattaches[$attach_id]['id'])) {
@@ -1500,7 +1500,7 @@ function delselected() {
 		}
 		$fm->_Write($fp_attach, $allattaches);
 		if (count($allattaches) === 0) {
-			unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+			unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		}
 	}
 
@@ -1520,7 +1520,7 @@ function innew() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1530,8 +1530,8 @@ function innew() {
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 	if (in_array($list[$topic_id]['date'], $postkey)) {
@@ -1555,10 +1555,10 @@ function innew() {
 
 		$newlist = array();
 		if ($movingFlag === true) {
-			$newlist = $fm->_Read2Write($fp_newlist, 'forum' . $toforum_id . '/list.php');
+			$newlist = $fm->_Read2Write($fp_newlist, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/list.php');
 		}
 		$newtopic_id = ( $movingFlag === true ) ? @max(array_keys($newlist)) + 1 : @max(array_keys($list)) + 1;
-		while (file_exists('forum' . $toforum_id . '/' . $newtopic_id . '-thd.php')) {
+		while (file_exists(EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-thd.php')) {
 			$newtopic_id++;
 		}
 
@@ -1592,7 +1592,7 @@ function innew() {
 		$newtopic[$newfirstkey]['pinned'] = false;
 		$newtopic[$newfirstkey]['desc'] = $fm->input['description'];
 
-		$fm->_Read2Write($fp_newtopic, 'forum' . $toforum_id . '/' . $newtopic_id . '-thd.php');
+		$fm->_Read2Write($fp_newtopic, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-thd.php');
 		$fm->_Write($fp_newtopic, $newtopic); //Закрыли и сохранили файл новой темы
 
 		$tpm_list['name'] = $fm->input['topictitle'];
@@ -1715,7 +1715,7 @@ function inexists() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1725,8 +1725,8 @@ function inexists() {
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 	if (in_array($list[$topic_id]['date'], $postkey)) {
@@ -1753,7 +1753,7 @@ function inexists() {
 		$newlist = array();
 		$movingFlag = ( $toforum_id !== $forum_id ) ? true : false;
 		if ($movingFlag === true) {
-			$newlist = $fm->_Read2Write($fp_newlist, 'forum' . $toforum_id . '/list.php');
+			$newlist = $fm->_Read2Write($fp_newlist, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/list.php');
 			$newtopicname = $newlist[$newtopic_id]['name'];
 		}
 
@@ -1777,7 +1777,7 @@ function inexists() {
 			UpdateAttaches($tmp_newtopic, $attaches);
 		}
 
-		$newtopic = $fm->_Read2Write($fp_newtopic, 'forum' . $toforum_id . '/' . $newtopic_id . '-thd.php');
+		$newtopic = $fm->_Read2Write($fp_newtopic, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-thd.php');
 		$oldfirstkey = key($newtopic);
 
 		$newUsers = array();
@@ -1936,7 +1936,7 @@ function delattach() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -1946,16 +1946,16 @@ function delattach() {
 	}
 
 	$fm->_GetModerators($forum_id, $allforums);
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
 	if ($fm->_Moderator === false) {
 		$fm->_Message($fm->LANG['DeletSelectedAtt'], $fm->LANG['EditNo']);
 	}
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php', false);
-	$allattaches = $fm->_Read2Write($fp_attaches, 'forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
+	$allattaches = $fm->_Read2Write($fp_attaches, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 
 	$unlinked = 0;
 	foreach ($postkey as $post_id) {
@@ -1975,7 +1975,7 @@ function delattach() {
 	$fm->_Write($fp_topic, $topic);
 	$fm->_Write($fp_attaches, $allattaches);
 	if (count($allattaches) === 0) {
-		unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 	}
 
 	// Запись в лог информации об удалении прикреплённых файлов в теме
@@ -2008,7 +2008,7 @@ function UpdateAutorsInfo(&$autors) {
 
 function UpdateAutorsInfoDelete($users, $forum_id) {
 	global $fm;
-	$allusers = $fm->_Read2Write($fp_allusers, FM_USERS, false);
+	$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 
 	foreach ($users as $user_id => $total) {
 		if (file_exists('members/' . $user_id . '.php')) {
@@ -2052,7 +2052,7 @@ function UpdateOldTopicFile(&$topic, &$postkey, $mode) {
 	$users = array();
 	$autors = array();
 	$countmoving = 0;
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
 	foreach ($postkey as $post_id) {
 		if (isset( $topic[$post_id] )) {
@@ -2083,8 +2083,8 @@ function UpdateAttaches(&$newtopic, &$attaches) {
 	global $fm, $forum_id, $topic_id, $toforum_id, $newtopic_id;
 
 	//echo '<b>['.$topic_id.'-'.$newtopic_id.']</b>';
-	$old_attach = $fm->_Read2Write($fp_old, 'forum' . $forum_id . '/attaches-' . $topic_id . '.php');
-	$new_attach = $fm->_Read2Write($fp_new, 'forum' . $toforum_id . '/attaches-' . $newtopic_id . '.php');
+	$old_attach = $fm->_Read2Write($fp_old, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
+	$new_attach = $fm->_Read2Write($fp_new, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/attaches-' . $newtopic_id . '.php');
 	$newattach_id = ( count($new_attach) == 0 ) ? 0 : max(array_keys($new_attach));
 	foreach ($attaches as $post_id => $attach_id) {
 		if (!isset( $old_attach[$attach_id] ) || !file_exists('uploads/' . $old_attach[$attach_id]['id'])) {
@@ -2105,10 +2105,10 @@ function UpdateAttaches(&$newtopic, &$attaches) {
 	$fm->_Write($fp_new, $new_attach);
 
 	if (count($old_attach) === 0) {
-		unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 	}
 	if (count($new_attach) === 0) {
-		unlink('forum' . $toforum_id . '/attaches-' . $newtopic_id . '.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/attaches-' . $newtopic_id . '.php');
 	}
 
 	return true;
@@ -2165,7 +2165,7 @@ function JumpTopicHTML($toforum_id, $forum_id, $topic_id) {
 	global $fm, $list;
 
 	if ($toforum_id !== $forum_id) {
-		$list = $fm->_Read('forum' . $toforum_id . '/list.php');
+		$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 	}
 
 	if (count($list) === 0) {
@@ -2189,7 +2189,7 @@ function relast_post($forum_id) {
 
 	$maxtime = 0;
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php', 0);
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', 0);
 
 	reset($list);
 	$last_id = key($list);

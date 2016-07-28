@@ -60,7 +60,7 @@ function attachment() {
 		}
 	}
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!isset( $allforums[$forum_id] )) {
 		if ($img === true) {
 			ImgError();
@@ -91,7 +91,7 @@ function attachment() {
 	}
 	unset( $allforums );
 
-	if (!file_exists('forum' . $forum_id . '/attaches-' . $topic_id . '.php')) {
+	if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php')) {
 		if ($img === true) {
 			ImgError();
 		}
@@ -100,10 +100,10 @@ function attachment() {
 		}
 	}
 
-	$attaches = $fm->_Read2Write($fp_attach, 'forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+	$attaches = $fm->_Read2Write($fp_attach, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 	if (count($attaches) === 0) {
 		$fm->_Fclose($fp_attach);
-		unlink('forum' . $forum_id . '/attaches-' . $topic_id . '.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 		if ($img === true) {
 			ImgError();
 		}

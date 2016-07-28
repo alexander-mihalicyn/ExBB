@@ -41,7 +41,7 @@ if ($fm->input['action'] == 'doadd' || $fm->input['action'] == 'doedit') {
 		$fm->_Message($fm->LANG['AdminRanks'], $fm->LANG['RankImgNotExists'], '', 1);
 	}
 	else {
-		$ranks = $fm->_Read2Write($fp_ranks, FM_TITLES, false);
+		$ranks = $fm->_Read2Write($fp_ranks, EXBB_DATA_MEMBERS_TITLES, false);
 		if ($fm->input['action'] == 'doedit') {
 			if (( $rank_id = $fm->_Intval('id') ) === 0) {
 				$fm->_Fclose($fp_ranks);
@@ -82,7 +82,7 @@ elseif ($fm->input['action'] == 'add' || $fm->input['action'] == 'edit') {
 			$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost'], '', 1);
 		}
 
-		$ranks = $fm->_Read(FM_TITLES, false);
+		$ranks = $fm->_Read(EXBB_DATA_MEMBERS_TITLES, false);
 		if (!isset( $ranks[$rank_id] )) {
 			$fm->_Message($fm->LANG['AdminRanks'], $fm->LANG['RankNotFound'], '', 1);
 		}
@@ -101,7 +101,7 @@ elseif ($fm->input['action'] == 'delete') {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost'], '', 1);
 	}
 
-	$ranks = $fm->_Read2Write($fp_ranks, FM_TITLES, false);
+	$ranks = $fm->_Read2Write($fp_ranks, EXBB_DATA_MEMBERS_TITLES, false);
 	if (!isset( $ranks[$rank_id] )) {
 		$fm->_Fclose($fp_ranks);
 		$fm->_Message($fm->LANG['AdminRanks'], $fm->LANG['RankNotFound'], '', 1);
@@ -114,7 +114,7 @@ elseif ($fm->input['action'] == 'delete') {
 	$fm->_Message($fm->LANG['AdminRanks'], $fm->LANG['RankDeletedOk'], 'setranks.php', 1);
 }
 else {
-	$allranks = $fm->_Read(FM_TITLES, false);
+	$allranks = $fm->_Read(EXBB_DATA_MEMBERS_TITLES, false);
 	$back_clr = 'row1';
 	$ranksdata = '';
 	foreach ($allranks as $id => $rank) {

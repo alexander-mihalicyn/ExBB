@@ -30,4 +30,4 @@ $_GZIP_STATUS = ($GLOBALS['fm']->_PageGziped === TRUE) ? 'Gzipped':'Gzip Disable
 </body>
 </html>
 
-<?php ob_end_flush(); ?>
+<?php if (ob_get_level()) ob_end_flush(); ?>

@@ -192,7 +192,7 @@ class FM extends VARS {
 
 		parent::__construct();
 
-		require_once( FM_BOARDINFO );
+		require EXBB_DATA_CONFIG;
 		$this->_Nowtime = time();
 	}
 
@@ -203,8 +203,8 @@ class FM extends VARS {
 	 *
 	 */
 	function _Advertising() {
-		require_once( FM_BANNERS );
-		require_once( FM_COUNTERS );
+		require_once( EXBB_DATA_BANNERS );
+		require_once( EXBB_DATA_COUNTERS );
 	}
 
 	/*
@@ -214,7 +214,7 @@ class FM extends VARS {
 	 *
 	 */
 	function _BOARDSTATS() {
-		$this->_Stats = $this->_Read(FM_BOARDSTATS);
+		$this->_Stats = $this->_Read(EXBB_DATA_BOARD_STATS);
 	}
 
 	/*
@@ -224,7 +224,7 @@ class FM extends VARS {
 	 * @param $array
 	 */
 	function _SAVE_STATS($array) {
-		$stats = $this->_Read2Write($fp_stats, FM_BOARDSTATS);
+		$stats = $this->_Read2Write($fp_stats, EXBB_DATA_BOARD_STATS);
 		foreach ($array as $key => $value) {
 			switch ($value[1]) {
 				case -1:
@@ -391,7 +391,7 @@ class FM extends VARS {
 				$user_unban['status'] = 'me';
 				$this->_Write($fp_user_unban, $user_unban);
 
-				$banlist = $this->_Read2Write($fp_banlist, FM_BANLIST, false);
+				$banlist = $this->_Read2Write($fp_banlist, EXBB_DATA_BANNED_USERS_LIST, false);
 				if (isset( $banlist[$user['id']] )) {
 					unset( $banlist[$user['id']] );
 				}
@@ -502,7 +502,7 @@ class FM extends VARS {
 	 * @return bool
 	 */
 	function _CheckBannedIP() {
-		$banneddata = array_filter($this->_Read(FM_BANNEDIP), "Banned");
+		$banneddata = array_filter($this->_Read(EXBB_DATA_BANNED_BY_IP_LIST), "Banned");
 		if (count($banneddata)) {
 			$id = key($banneddata);
 			$this->_Message(sprintf($this->LANG['YourIPBlocked'], $this->_IP), sprintf($this->LANG['YouBannedMess'], $banneddata[$id]['ipbd'], $this->exbb['adminemail']));
@@ -765,7 +765,7 @@ class FM extends VARS {
 		}
 		$action = ( $admin === 1 ) ? $action . ' (ad)' : $action;
 		$action = ( $admin === 2 ) ? $action . ' (mo)' : $action; // Если 2, то это модерация
-		$logfilename = FM_LOGDIR . mktime(0, 0, 0, date("m"), date("d"), date("Y")) . ".php";
+		$logfilename = EXBB_DATA_DIR_LOGS . '/' . mktime(0, 0, 0, date("m"), date("d"), date("Y")) . ".php";
 		$start = ( $exs = file_exists($logfilename) ) ? '' : "<?die();?>\n";
 		if (!$exs) {
 			@fclose(@fopen($logfilename, "a+"));
@@ -867,7 +867,7 @@ class FM extends VARS {
 			$visible = ( $this->user['visible'] === true ) ? true : false;
 		}
 
-		$onlinedata = $this->_Read2Write($fp_online, FM_ONLINE);
+		$onlinedata = $this->_Read2Write($fp_online, EXBB_DATA_MEMBERS_ONLINE);
 
 		// Advanced Visit Stats for ExBB FM 1.0 RC1 by yura3d
 		$statvisit = $today = false;
@@ -958,7 +958,7 @@ class FM extends VARS {
 		unset( $this->_OnlineIds[0] );
 		$this->_Write($fp_online, $onlinedata);
 
-		$this->_Stats = $this->_Read2Write($fp_maxonline, FM_BOARDSTATS);
+		$this->_Stats = $this->_Read2Write($fp_maxonline, EXBB_DATA_BOARD_STATS);
 		if ($this->_OnlineTotal > $this->_Stats['max_online']) {
 			$this->_Stats['max_online'] = $this->_OnlineTotal;
 			$this->_Stats['max_time'] = $this->_Nowtime;
@@ -1035,7 +1035,7 @@ class FM extends VARS {
 				return '<img src="./im/emoticons/' . $arr['img'] . '" border="0" alt="' . $arr['emt'] . '" title="' . $arr['emt'] . '">';
 			}
 
-			$allsmiles = $this->_Read(FM_SMILES);
+			$allsmiles = $this->_Read(EXBB_DATA_SMILES_LIST);
 			$this->_Smiles = array_map("SmileMap", $allsmiles['smiles']);
 			unset( $allsmiles );
 		}
@@ -1284,7 +1284,7 @@ class FM extends VARS {
 	 * @return bool|mixed
 	 */
 	function bads_filter($string, $replace = 1) {
-		$badwords = file(FM_BADWORDS);
+		$badwords = file(EXBB_DATA_BADWORDS);
 		unset( $badwords[0] );
 		if (count($badwords)) {
 			$bad = array();
@@ -1345,7 +1345,7 @@ class FM extends VARS {
 		$headers .= 'Return-Path: ' . $list[1] . "\n";
 		$headers .= "MIME-Version: 1.0\nContent-type: text/plain; charset=windows-1251\nContent-Transfer-Encoding: 8bit\nDate: " . gmdate('D, d M Y H:i:s', time()) . " UT\nX-Priority: 3\nX-Mailer: PHP\n";
 		$list[3] = '=?windows-1251?B?' . base64_encode($list[3]) . '?=';
-		$skip_mails = ( file_exists(FM_SKIP_MAILS) ) ? file(FM_SKIP_MAILS) : array();
+		$skip_mails = ( file_exists(EXBB_DATA_SKIP_MAILS) ) ? file(EXBB_DATA_SKIP_MAILS) : array();
 		if (count($skip_mails) !== 0) {
 			unset( $skip_mails[0] );
 			$skip_mails = preg_replace("#(\r\n|\|$)#", "", trim(implode("|", $skip_mails)));
@@ -1354,7 +1354,7 @@ class FM extends VARS {
 			$skip_mails = "@";
 		}
 
-		$users = $this->_Read(FM_USERS);
+		$users = $this->_Read(EXBB_DATA_USERS_LIST);
 		if (is_array($list[2])) {
 			@set_time_limit(360);
 			foreach ($list[2] as $user_id => $flag) {

@@ -54,7 +54,7 @@ function change_rep() {
 	// ≈сли да, то проверим есть ли у нас доступ в этот форум
 	// “акже проверим, не доступен ли этот форум только администраторам и модераторам
 	$fm->_Intvals(array('forum', 'topic', 'post'));
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!isset($allforums[$fm->input['forum']])) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMsg']);
 	if (!empty($allforums[$fm->input['forum']]['private']) && empty($fm->user['private'][$fm->input['forum']]) && !defined('IS_ADMIN'))
 		$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepMsgPrivate']);
@@ -62,7 +62,7 @@ function change_rep() {
 		$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoAllows']);
 	
 	// »щем сообщение, за которое собираемс€ измен€ть репутацию пользователю
-	$thread = $fm->_Read('forum'.$fm->input['forum'].'/'.$fm->input['topic'].'-thd.php');
+	$thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $fm->input['forum'].'/'.$fm->input['topic'].'-thd.php');
 	if (!isset($thread[$fm->input['post']])) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMsg']);
 	
 	// ѕолучаем id пользовател€, которому собираемс€ измен€ть репутацию
@@ -143,7 +143,7 @@ function show_rep() {
 	
 	// „итаем конфиг и список форумов, а также узнаем, €вл€емс€ ли мы модератором в одном из них :)
 	$config = $fm->_Read(CONFIG);
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!defined('IS_ADMIN') && $fm->user['status'] != 'sm')
 		foreach ($allforums as $forum)
 			$fm->_GetModerators($forum['id'], $allforums);
@@ -196,7 +196,7 @@ function show_rep() {
 			);
 		
 		// ѕолучаем информацию о сообщени€х, за которые пользователю изменили репутацию
-		if (!isset($topics[$id_topic]) && ($_thread = $fm->_Read('forum'.$rep_row['forum'].'/'.$rep_row['topic'].'-thd.php'))) {
+		if (!isset($topics[$id_topic]) && ($_thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $rep_row['forum'].'/'.$rep_row['topic'].'-thd.php'))) {
 			$_keys = array_keys($_thread);
 			$firstkey = reset($_keys);
 			$topics[$id_topic] = array(

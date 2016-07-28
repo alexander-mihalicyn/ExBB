@@ -5,26 +5,12 @@ use ExBB\Helpers\FileSystemHelper;
 
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . __DIR__);
 
+define('EXBB_ROOT', dirname(__DIR__));
+define('EXBB_BASE', ROOT);
+
+require __DIR__.'/paths.php';
+
 define('FM_PATH', dirname(__DIR__) . '/');
-define("FM_LOGDIR", "data/access_log/");
-define("FM_ALLFORUMS", "data/allforums.php");
-define("FM_ALLFORUMS_BAK", "data/allforums_bak.php");
-define("FM_BADWORDS", "data/badwords.php");
-define("FM_BANLIST", "data/banlist.php");
-define("FM_BANNEDIP", "data/bannedip.php");
-define("FM_BANNERS", "data/banners.php");
-define("FM_BOARDINFO", "data/boardinfo.php");
-define("FM_BOARDINFO_BAK", "data/boardinfo_bak.php");
-define("FM_BOARDSTATS", "data/boardstats.php");
-define("FM_COUNTERS", "data/counters.php");
-define("FM_TITLES", "data/membertitles.php");
-define("FM_NEWS", "data/news.php");
-define("FM_ONLINE", "data/onlinedata.php");
-define("FM_SKIP_MAILS", "data/skip_mails.php");
-define("FM_SMILES", "data/smiles.php");
-define("FM_USERS", "data/users.php");
-define("FM_TEMPUSERS", "data/users_temp.php");
-define("FM_SEARCH_EXC", "data/search_exc.php");
 define("FM_VERSION", "1.0 RC1");
 
 require_once( 'lib.php' );

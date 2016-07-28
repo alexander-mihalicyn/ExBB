@@ -21,7 +21,7 @@ include( './include/common.php' );
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('forums');
-$allforums = $fm->_Read(FM_ALLFORUMS);
+$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 if (( $forum_id = $fm->_Intval('forum') ) == 0 || !isset( $allforums[$forum_id] )) {
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['ForumNotExists']);
 }
@@ -48,8 +48,8 @@ $forumname = $allforums[$forum_id]['name'];
 $catid = $allforums[$forum_id]['catid'];
 
 
-$topics = $fm->_Read('forum' . $forum_id . '/list.php');
-$_views = $fm->_Read('forum' . $forum_id . '/views.php');
+$topics = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+$_views = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 
 $to_page = $resetfiltr = $word = '';
 if ($fm->_String('filterby') != "" && $fm->_String('word') != '') {
@@ -143,7 +143,7 @@ foreach ($allforums_keys as $id) {
 			$f_readed = $fm->_GetCookie('f' . $id, 0);
 			$f_readed = ( $f_readed > $fm->user['last_visit'] ) ? $f_readed : $fm->user['last_visit'];
 			if ($forum['last_time'] > $fm->user['last_visit']) {
-				$alltopic = $fm->_Read('forum' . $id . '/list.php');
+				$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 				if (sizeof($alltopic) > 0) {
 					$alltopic = array_filter($alltopic, "NEW_POSTS");
 					$totalnew = sizeof($alltopic);
@@ -238,7 +238,7 @@ foreach ($keys as $id => $topic_id) {
 	$topictitle = ( ( $fm->exbb['watches'] && ( !empty( $_watchesForums[1][$forum_id][$topic_id] ) ) || !$fm->exbb['watches'] && $fm->user['last_visit'] < $topics[$topic_id]['postdate'] && $fm->user['id'] != $topics[$topic_id]['p_id'] && $TopicVisitTime < $topics[$topic_id]['postdate'] ) ? '<a href="topic.php?forum=' . $forum_id . '&topic=' . $topic_id . '&v=u#unread" title="' . $fm->LANG['GoToFirstUnread'] . '"><img src="./templates/' . DEF_SKIN . '/im/unread.gif" border="0" /></a> ' : '' ) . $topictitle;
 
 
-	$uploadicon = ( file_exists('forum' . $forum_id . '/attaches-' . $topic_id . '.php') ) ? '<img src="./templates/' . DEF_SKIN . '/im/upload.gif" border=0 alt="@" title="' . $fm->LANG['FileAttached'] . '"> ' : '';
+	$uploadicon = ( file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php') ) ? '<img src="./templates/' . DEF_SKIN . '/im/upload.gif" border=0 alt="@" title="' . $fm->LANG['FileAttached'] . '"> ' : '';
 	$pollicon = ( $topics[$topic_id]['poll'] === true ) ? ' <img src="./templates/' . DEF_SKIN . '/im/poll.gif" width=20 height=20 border="0" alt="' . $fm->LANG['Poll'] . '">' : '';
 
 	$totalposts = $topics[$topic_id]['posts'] + 1;
@@ -264,7 +264,7 @@ foreach ($keys as $id => $topic_id) {
 
 $options = $markforum = '';
 if ($fm->user['id'] !== 0) {
-	$emailers = $fm->_Read2Write($fp_f_track, 'forum' . $forum_id . '/_f_track.php');
+	$emailers = $fm->_Read2Write($fp_f_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_f_track.php');
 
 	$markforum = '<a href="forums.php?action=markall&forum=' . $forum_id . '">' . $fm->LANG['ForumMark'] . '</a>';
 	if ($fm->exbb['emailfunctions'] === true && $fm->user['mail']) {

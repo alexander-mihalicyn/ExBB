@@ -74,7 +74,7 @@ include( 'page_tail.php' );
 function newthread() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 	if (( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
@@ -137,7 +137,7 @@ function newthread() {
 function addnewthread() {
 	global $fm;
 	check_captcha();
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS, false);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, false);
 	if (( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Fclose($fp_allforums);
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
@@ -185,15 +185,15 @@ function addnewthread() {
 	$fm->input['topictitle'] = $fm->bads_filter(substr($fm->input['topictitle'], 0, 255));
 	$fm->input['description'] = $fm->bads_filter(substr($fm->input['description'], 0, 160));
 	$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(substr($fm->_String('keywords'), 0, 128)));
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php');
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 	$topic_id = ( count($list) !== 0 ) ? max(array_keys($list)) + 1 : 1;
 
-	while (file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	while (file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$topic_id++;
 	}
 
 	if ($_Poll !== false) {
-		$fm->_Read2Write($fp_poll, 'forum' . $forum_id . '/' . $topic_id . '-poll.php');
+		$fm->_Read2Write($fp_poll, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php');
 		$fm->_Write($fp_poll, $_Poll);
 	}
 
@@ -247,12 +247,12 @@ function addnewthread() {
 	$fm->_Write($fp_list, $list);
 
 	// Создадим элемент в массиве просмотров
-	$views = $fm->_Read2Write($fp_views, 'forum' . $forum_id . '/views.php');
+	$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 	$views[$topic_id] = 0;
 	$fm->_Write($fp_views, $views);
 
 	/* Сохраняем новую тему */
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
 	$topic[$fm->_Nowtime]['p_id'] = $fm->user['id'];
 	$topic[$fm->_Nowtime]['post'] = $fm->bads_filter(preg_replace("#(\?|&amp;|;|&)PHPSESSID=([0-9a-zA-Z]){32}#i", "", $fm->input['inpost']));
@@ -286,7 +286,7 @@ function addnewthread() {
 		$user['posted'][$forum_id] = ( isset( $user['posted'][$forum_id] ) ) ? $user['posted'][$forum_id] + 1 : 1;
 		$fm->_Write($fp_user, $user);
 
-		$allusers = $fm->_Read2Write($fp_allusers, FM_USERS, false);
+		$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 		$allusers[$fm->user['id']]['p'] = $user['posts'];
 		$fm->_Write($fp_allusers, $allusers);
 		unset( $user, $allusers );
@@ -296,7 +296,7 @@ function addnewthread() {
 	if ($fm->exbb['emailfunctions'] === true && $fm->exbb['mail_posts'] === true) {
 		$time = date("d-m-Y H:i:s", $fm->_Nowtime);
 		if ($fm->_Boolean($fm->input, 'notify') === true && $fm->user['id'] !== 0) {
-			$_t_track = $fm->_Read2Write($fp_t_track, 'forum' . $forum_id . '/_t_track.php');
+			$_t_track = $fm->_Read2Write($fp_t_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 			$_t_track[$topic_id][$fm->user['id']] = 1;
 			$fm->_Write($fp_t_track, $_t_track);
 		}
@@ -304,7 +304,7 @@ function addnewthread() {
 		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $fm->user['mail'], $fm->LANG['NewTopicInForum'] . '"' . strip_tags($forumname) . '"', $email);
 
 		/* Отправка всем подписавшимся за слежением новых тем */
-		$emailers = $fm->_Read('forum' . $forum_id . '/_f_track.php');
+		$emailers = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_f_track.php');
 		if (isset( $emailers[$fm->user['id']] )) {
 			unset( $emailers[$fm->user['id']] );
 		}
@@ -325,14 +325,14 @@ function addnewthread() {
 function reply() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['ReplyCreate'], $fm->LANG['TopicMiss']);
 	}
 
@@ -354,7 +354,7 @@ function reply() {
 	$forumname = $allforums[$forum_id]['name'];
 	$topicname = ( isset( $topic['tnun'] ) ) ? $topic['name'] . ' - ' . $topic['tnun'] : $topic['name'];
 
-	$topic = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	krsort($topic, SORT_NUMERIC);
 
 	/* Вложенные цитаты */
@@ -452,14 +452,14 @@ SpoilerHide: '{$fm->LANG['SpoilerHide']}'
 function addreply() {
 	global $fm;
 	check_captcha();
-	$allforums = $fm->_Read2Write($fp_allforums, FM_ALLFORUMS, false);
+	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, false);
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Fclose($fp_allforums);
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$list = $fm->_Read2Write($fp_list, 'forum' . $forum_id . '/list.php', false);
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', false);
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['TopicMiss']);
 	}
@@ -497,7 +497,7 @@ function addreply() {
 	$forumname = $allforums[$forum_id]['name'];
 	$topicname = $list[$topic_id]['name'];
 
-	$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	ksort($topic, SORT_NUMERIC);
 	end($topic);
 	@$last_key = key($topic);
@@ -518,7 +518,7 @@ function addreply() {
 		$fm->_SAVE_STATS(array( 'totalposts' => array( 1, 1 ) ));
 
 		clearstatcache();
-		if ($continueTopic = filesize('forum' . $forum_id . '/' . $topic_id . '-thd.php') >= FM_MAX_THREAD_SIZE) {
+		if ($continueTopic = filesize(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php') >= FM_MAX_THREAD_SIZE) {
 			reset($topic);
 			$first_key = key($topic);
 			end($topic);
@@ -530,7 +530,7 @@ function addreply() {
 			$NewTopicPost = sprintf($fm->LANG['TopicContinue'], $fm->exbb['boardurl'], $forum_id, $topic_id, $topicname . ( ( isset( $list[$topic_id]['tnun'] ) ) ? ' - ' . $list[$topic_id]['tnun'] : '' ));
 
 			$newtopic_id = ( count($list) !== 0 ) ? max(array_keys($list)) + 1 : 1;
-			$check_file = 'forum' . $forum_id . '/';
+			$check_file = EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/';
 			while (file_exists($check_file . $newtopic_id . '-thd.php')) {
 				$newtopic_id++;
 			}
@@ -539,7 +539,7 @@ function addreply() {
 			$fm->_Write($fp_topic, $topic);
 
 			$topic_id = $newtopic_id;
-			$topic = $fm->_Read2Write($fp_topic, 'forum' . $forum_id . '/' . $topic_id . '-thd.php');
+			$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id. '/' . $topic_id . '-thd.php');
 
 			$list[$topic_id]['name'] = $topicname;
 			$list[$topic_id]['id'] = $topic_id;
@@ -589,7 +589,7 @@ function addreply() {
 		$last_key = $fm->_Nowtime;
 
 		// Сохраним информацию о кол-ве просмотров на случай обнуления views.php
-		$views = $fm->_Read('forum' . $forum_id . '/views.php');
+		$views = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 		if (isset( $views[$topic_id] )) {
 			$viewsArrayKeys = array_keys($topic);
 			$topic[reset($viewsArrayKeys)]['views'] = $views[$topic_id];
@@ -664,14 +664,14 @@ function addreply() {
 		}
 		$user['posted'][$forum_id] = ( isset( $user['posted'][$forum_id] ) ) ? $user['posted'][$forum_id] + 1 + $continueTopic : 1;
 		$fm->_Write($fp_user, $user);
-		$allusers = $fm->_Read2Write($fp_allusers, FM_USERS, false);
+		$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
 		$allusers[$fm->user['id']]['p'] = $user['posts'];
 		$fm->_Write($fp_allusers, $allusers);
 		unset( $user );
 	}
 
 	if ($fm->exbb['emailfunctions'] === true && $fm->exbb['mail_posts'] === true) {
-		$_t_track = $fm->_Read2Write($fp_t_track, 'forum' . $forum_id . '/_t_track.php');
+		$_t_track = $fm->_Read2Write($fp_t_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 
 		if ($fm->_Boolean($fm->input, 'notify') === true && $fm->user['id'] !== 0) {
 			$_t_track[$topic_id][$fm->user['id']] = 1;
@@ -756,18 +756,18 @@ function poll_vote() {
 		$fm->_Message($fm->LANG['Poll'], $fm->LANG['CorrectPost']);
 	}
 
-	$threads = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php');
+	$threads = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	if ($threads[reset(array_keys($threads))]['state'] == 'closed') {
 		$fm->_Message($fm->LANG['Poll'], $fm->LANG['TopicClosed']);
 	}
 
-	if (!file_exists('forum' . $forum_id . '/' . $topic_id . '-poll.php')) {
+	if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php')) {
 		$fm->_Message($fm->LANG['Poll'], $fm->LANG['PollNotFound']);
 	}
 	if (!isset( $fm->input['pid'] )) {
 		$fm->_Message($fm->LANG['Poll'], $fm->LANG['PollNoPid']);
 	}
-	$poll_data = $fm->_Read2Write($fp_poll, 'forum' . $forum_id . '/' . $topic_id . '-poll.php', false);
+	$poll_data = $fm->_Read2Write($fp_poll, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php', false);
 
 	if (!isset( $poll_data['choices'][$fm->_Intval('pid')] )) {
 		$fm->_Fclose($fp_poll);

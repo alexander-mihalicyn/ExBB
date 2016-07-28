@@ -65,7 +65,7 @@ function get_smilescat($var) {
 function showOnline() {
 	global $fm;
 
-	$onlinedata = $fm->_Read(FM_ONLINE);
+	$onlinedata = $fm->_Read(EXBB_DATA_MEMBERS_ONLINE);
 	$output = '';
 	foreach ($onlinedata as $id => $online) {
 		if ($fm->exbb['visiblemode'] === true && !defined('IS_ADMIN') && $online['v'] === true) {
@@ -129,7 +129,7 @@ function showHelpBBCode() {
 function showsmiles() {
 	global $fm, $curcatid;
 
-	$sm_list = $fm->_Read(FM_SMILES);
+	$sm_list = $fm->_Read(EXBB_DATA_SMILES_LIST);
 
 	$smoption = '';
 	if (count($sm_list['cats']) === 0) {
@@ -207,7 +207,7 @@ function mailtouser() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['GuestMail']);
 	}
 
-	$users = $fm->_Read(FM_USERS);
+	$users = $fm->_Read(EXBB_DATA_USERS_LIST);
 	if (( $user_id = $fm->_Intval('member') ) === 0 || !isset( $users[$user_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
@@ -245,8 +245,7 @@ function mailtouser() {
 
 function banmemberslist() {
 	global $fm;
-	//$users = $fm->_Read(FM_USERS);
-	$banlist = $fm->_Read(FM_BANLIST);
+	$banlist = $fm->_Read(EXBB_DATA_BANNED_USERS_LIST);
 
 	//$userskeys = array_keys($users);
 	$banlist_keys = array_keys($banlist);
@@ -338,7 +337,7 @@ function memberslist() {
 	$sort = $fm->_String('s');
 	$order = $fm->_String('order', 'ASC');
 
-	$users = $fm->_Read(FM_USERS);
+	$users = $fm->_Read(EXBB_DATA_USERS_LIST);
 	switch ($sort) {
 		case 'p':
 			uasort($users, 'sort_by_post');

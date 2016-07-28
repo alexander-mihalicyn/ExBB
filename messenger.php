@@ -256,7 +256,7 @@ elseif ($fm->input['action'] == 'send') {
 	}
 
 
-	$allusers = $fm->_Read(FM_USERS, false);
+	$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 	$tousername = $fm->_LowerCase($fm->input['tousername']);
 
 	ksort($allusers);

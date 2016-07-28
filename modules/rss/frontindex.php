@@ -13,7 +13,7 @@ global $lastmodifiedtime;
 
 $lastmodifiedtime = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) ? strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']):0;
 
-$allforums = array_filter($fm->_Read(FM_ALLFORUMS),"FilterForum");
+$allforums = array_filter($fm->_Read(EXBB_DATA_FORUMS_LIST),"FilterForum");
 
 if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && count($allforums) === 0){
 	header("HTTP/1.1 304 Not Modified");
@@ -30,7 +30,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && count($allforums) === 0){
 
 			$alllist = array();
 			foreach ($allforums as $forum_id => $forum) {
-					$list		= array_filter($fm->_Read('forum'.$forum_id.'/list.php'),"newposts");
+					$list		= array_filter($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php'),"newposts");
 					$alllist	= array_merge ($alllist, $list);
 					uasort($alllist, 'sort_by_lastpost');
 					$alllist = array_slice($alllist,0,$num);
@@ -55,7 +55,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && count($allforums) === 0){
 
 
 			foreach ($alllist as $topic) {
-					$topicdata		= $fm->_Read('forum'.$topic['fid'].'/'.$topic['id'].'-thd.php');
+					$topicdata		= $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $topic['fid'].'/'.$topic['id'].'-thd.php');
 					if (!isset($topic['postkey'])) continue;
 					$post_id		= $topic['postkey'];
 					$lastpost		= $topicdata[$post_id];

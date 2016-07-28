@@ -32,7 +32,7 @@ if ($fm->input['action'] === 'show') {
 	}
 
 	$user['joined'] = $fm->_DateFormat($user['joined'] + $fm->user['timedif'] * 3600);
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 	/* Moderator's Ban Panel for ExBB FM 1.0 RC2 by yura3d
 	http://www.exbb.org/ */
@@ -86,7 +86,7 @@ if ($fm->input['action'] === 'show') {
 					$user_ban['who_id'] = $fm->user['id'];
 					$user_ban['who_name'] = ( isset( $fm->LANG['Pun' . $fm->user['status']] ) ? $fm->LANG['Pun' . $fm->user['status']] . ' ' : '' ) . $fm->user['name'];
 
-					$banlist = $fm->_Read2Write($fp_banlist, FM_BANLIST, false);
+					$banlist = $fm->_Read2Write($fp_banlist, EXBB_DATA_BANNED_USERS_LIST, false);
 
 					if ($unban == 1) {
 						$user_ban['whounban_id'] = $fm->user['id'];
@@ -120,7 +120,7 @@ if ($fm->input['action'] === 'show') {
 					$user_ban['who_id'] = $fm->user['id'];
 					$user_ban['who_name'] = ( isset( $fm->LANG['Pun' . $fm->user['status']] ) ? $fm->LANG['Pun' . $fm->user['status']] . ' ' : '' ) . $fm->user['name'];
 
-					$banlist = $fm->_Read2Write($fp_banlist, FM_BANLIST, false);
+					$banlist = $fm->_Read2Write($fp_banlist, EXBB_DATA_BANNED_USERS_LIST, false);
 
 					$banlist[$user['id']]['m'] = $user['mail'];
 					$banlist[$user['id']]['ip'] = $user['ip'];
@@ -241,7 +241,7 @@ elseif ($fm->input['action'] === 'lostpassword') {
 		}
 
 		$membername = $fm->_LowerCase($fm->input['membername']);
-		$allusers = $fm->_Read(FM_USERS);
+		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST);
 
 		$m_id = 0;
 		foreach ($allusers as $id => $info) {
@@ -409,7 +409,7 @@ elseif ($fm->input['action'] === 'savemodify') {
 	}
 
 	if ($fm->exbb['emailfunctions'] === true && $fm->user['mail'] !== $fm->input['emailaddress']) {
-		$allusers = $fm->_Read2Write($fp_allusers, FM_USERS);
+		$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST);
 		foreach ($allusers as $u_id => $info) {
 			if ($info['m'] == $fm->input['emailaddress']) {
 				$fm->_Fclose($fp_allusers);

@@ -413,7 +413,7 @@ function build_hash() {
 
 function getsetsmiles() {
 		global $fm;
-		$allsmiles = $fm->_Read(FM_SMILES);
+		$allsmiles = $fm->_Read(EXBB_DATA_SMILES_LIST);
 		return preg_quote(implode("|",array_keys($allsmiles['smiles'])));
 }
 
@@ -422,7 +422,7 @@ function setsmiles1($array) {
 		function SmileMap($arr) {
 				return ' ';
 		}
-		$allsmiles = $fm->_Read(FM_SMILES);
+		$allsmiles = $fm->_Read(EXBB_DATA_SMILES_LIST);
 		return $array + array_map("SmileMap",$allsmiles['smiles']);
 }
 ?>

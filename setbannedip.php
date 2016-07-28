@@ -28,7 +28,7 @@ if ($fm->input['action'] == "addip" && $fm->_POST === true) {
 	if ($fm->_String('ipdesc') == '') {
 		$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['DescNotEntered'], '', 1);
 	}
-	$banneddata = $fm->_Read2Write($fp_ipban, FM_BANNEDIP);
+	$banneddata = $fm->_Read2Write($fp_ipban, EXBB_DATA_BANNED_BY_IP_LIST);
 	if (Check_Existing_IP($fm->input['ipbanned']) === true) {
 		$fm->_Fclose($fp_ipban);
 		$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['IpExists'], '', 1);
@@ -46,7 +46,7 @@ if ($fm->input['action'] == "addip" && $fm->_POST === true) {
 	$fm->_Message($fm->LANG['AdminBannedIp'], sprintf($fm->LANG['IpAddedOk'], $fm->input['ipbanned']), 'setbannedip.php', 1);
 }
 elseif ($fm->input['action'] == "modify") {
-	$banneddata = $fm->_Read(FM_BANNEDIP);
+	$banneddata = $fm->_Read(EXBB_DATA_BANNED_BY_IP_LIST);
 	if (( $id = $fm->_Intval('id') ) === 0 || !isset( $banneddata[$id] )) {
 		$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['IpNotExists'], '', 1);
 	}
@@ -63,7 +63,7 @@ elseif ($fm->input['action'] == "modify") {
 	include( 'admin/footer.tpl' );
 }
 elseif ($fm->input['action'] == "savemodify" && $fm->_POST === true) {
-	$banneddata = $fm->_Read2Write($fp_ipban, FM_BANNEDIP);
+	$banneddata = $fm->_Read2Write($fp_ipban, EXBB_DATA_BANNED_BY_IP_LIST);
 	if (( $id = $fm->_Intval('id') ) === 0 || !isset( $banneddata[$id] )) {
 		$fm->_Fclose($fp_ipban);
 		$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['IpNotExists'], '', 1);
@@ -98,7 +98,7 @@ elseif ($fm->input['action'] == "savemodify" && $fm->_POST === true) {
 	$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['EditingSavedOk'], 'setbannedip.php', 1);
 }
 elseif ($fm->input['action'] == "delet") {
-	$banneddata = $fm->_Read2Write($fp_ipban, FM_BANNEDIP);
+	$banneddata = $fm->_Read2Write($fp_ipban, EXBB_DATA_BANNED_BY_IP_LIST);
 	if (( $id = $fm->_Intval('id') ) === 0 || !isset( $banneddata[$id] )) {
 		$fm->_Fclose($fp_ipban);
 		$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['IpNotExists'], '', 1);
@@ -109,7 +109,7 @@ elseif ($fm->input['action'] == "delet") {
 	$fm->_Message($fm->LANG['AdminBannedIp'], $fm->LANG['IpUnbannedOk'], 'setbannedip.php', 1);
 }
 else {
-	$bannedipdata = $fm->_Read(FM_BANNEDIP);
+	$bannedipdata = $fm->_Read(EXBB_DATA_BANNED_BY_IP_LIST);
 	ksort($bannedipdata);
 	if (count($bannedipdata)) {
 		$ipdata = '';

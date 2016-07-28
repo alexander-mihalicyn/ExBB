@@ -22,7 +22,7 @@ $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('forums');
 
-$allforums = $fm->_Read(FM_ALLFORUMS);
+$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 }
@@ -31,8 +31,8 @@ CheckForumPerms($allforums[$forum_id]['stview'], 'Views');
 
 $privateID = ChekPrivate($allforums[$forum_id]['private'], $forum_id);
 
-$list = $fm->_Read('forum' . $forum_id . '/list.php');
-if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['TopicMiss']);
 }
 
@@ -46,7 +46,7 @@ unset( $allforums, $list );
 
 $topicname = $cur_topic['name'];
 
-$topic = $fm->_Read('forum' . $forum_id . '/' . $topic_id . '-thd.php');
+$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
 $fm->_Boolean($fm->input, 'color');
 $query_arr = false;
@@ -155,7 +155,7 @@ function get_query() {
 	else {
 		$query['data'] = $fm->input['user'];
 		$query['mode'] = 'poster';
-		$allusers = $fm->_Read(FM_USERS);
+		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST);
 		$user = $fm->_LowerCase($query['data']);
 		$allusers = array_filter($allusers, "search_user_id");
 		$user_id = ( sizeof($allusers) != 0 ) ? key($allusers) : 0;

@@ -32,7 +32,7 @@ if ($users_per_day > intval($fm->_Stats['totalmembers'])) {
 }
 $boardstart = date("d.m.Y - H:i", $fm->exbb['boardstart']);
 
-$onlinedata = $fm->_Read(FM_ONLINE);
+$onlinedata = $fm->_Read(EXBB_DATA_MEMBERS_ONLINE);
 $onlinedata = count($onlinedata);
 $php_ver = phpversion();
 $gzip = ( $fm->exbb['gzip_compress'] ) ? $fm->LANG['On'] : $fm->LANG['Off'];

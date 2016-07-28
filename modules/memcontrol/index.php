@@ -25,7 +25,7 @@ function memlist() {
 		$sort 	= $fm->_String('s');
 		$order 	= $fm->_String('order', 'ASC');
 
-        $users = $fm->_Read(FM_USERS);
+        $users = $fm->_Read(EXBB_DATA_USERS_LIST);
 		switch ($sort) {
 			case 'p': 	uasort($users, 'sort_by_post');
 						break;
@@ -89,7 +89,7 @@ function deletemember() {
 		if ($fm->_String('mode') !== '') delet_mail();
 
 		$deletedTotal = 0;
-		$users = $fm->_Read2Write($fp_users,FM_USERS);
+		$users = $fm->_Read2Write($fp_users,EXBB_DATA_USERS_LIST);
 		foreach ($del_ids as $user_id) {
 				if (file_exists('members/'.$user_id.'.php')) unlink('members/'.$user_id.'.php');
 				if (isset($users[$user_id])) unset($users[$user_id]);

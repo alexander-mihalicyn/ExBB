@@ -84,7 +84,7 @@ if ($fm->input['action'] == 'addmember') {
 	check_banned();
 	validate_items();
 
-	$allusers = $fm->_Read2Write($fp_allusers, FM_USERS);
+	$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST);
 	if (count($allusers) <= 0) {
 		$fm->_Fclose($fp_allusers);
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['RegistrDenied']);
@@ -135,7 +135,7 @@ if ($fm->input['action'] == 'addmember') {
 	$user['last_visit'] = 0;
 
 	if ($requirepass === true) {
-		$tempusers = $fm->_Read2Write($fp_temp, FM_TEMPUSERS);
+		$tempusers = $fm->_Read2Write($fp_temp, EXBB_DATA_TEMP_USERS_LIST);
 		if (count($tempusers) > 0) {
 			foreach ($tempusers as $hash => $tinfo) {
 				if ($tinfo['n'] == $username) {
@@ -242,7 +242,7 @@ elseif ($fm->input['action'] == 'activate') {
 	}
 
 	if ($fm->_String('code') !== '' && $fm->_Intval('regid') !== 0) {
-		$tempusers = $fm->_Read2Write($fp_temp, FM_TEMPUSERS);
+		$tempusers = $fm->_Read2Write($fp_temp, EXBB_DATA_TEMP_USERS_LIST);
 		foreach ($tempusers as $hash => $tempinfo) {
 			if (( $tempinfo['t'] + 86400 ) < $fm->_Nowtime) {
 				if (file_exists('members/__' . $hash . '.php')) {
@@ -277,7 +277,7 @@ elseif ($fm->input['action'] == 'activate') {
 		unlink($tempfile);
 		$fm->_Write($fp_temp, $tempusers);
 
-		$allusers = $fm->_Read2Write($fp_allusers, FM_USERS);
+		$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST);
 		ksort($allusers, SORT_NUMERIC);
 		end($allusers);
 		$id = key($allusers) + 1;
@@ -417,7 +417,7 @@ include( 'page_tail.php' );
 function check_banned() {
 	global $fm;
 
-	$bannedmembers = $fm->_Read(FM_BANLIST);
+	$bannedmembers = $fm->_Read(EXBB_DATA_BANNED_USERS_LIST);
 	$bannedmember = false;
 	foreach ($bannedmembers as $name => $infa) {
 		if ($fm->exbb['emailfunctions'] && @$fm->input['emailaddress'] == @$infa['em'] || $fm->input['inmembername'] == $name /*|| $fm->_IP == $infa['ip']*/) {

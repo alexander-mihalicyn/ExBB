@@ -27,6 +27,7 @@ if ($fm->exbb['gzip_compress'] && !defined('ATTACH') && !defined('NO_GZIP') && e
 else {
 	ob_start();
 }
+
 ob_implicit_flush(0);
 session_start();
 define('_SESSION_ID', session_name() . '=' . session_id());

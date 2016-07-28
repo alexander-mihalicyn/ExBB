@@ -76,15 +76,15 @@ function SkipMails() {
 		return 0;
 	}
 
-	$skipeds = ( file_exists(FM_SKIP_MAILS) ) ? file(FM_SKIP_MAILS) : array();
+	$skipeds = ( file_exists(EXBB_DATA_SKIP_MAILS) ) ? file(EXBB_DATA_SKIP_MAILS) : array();
 	unset( $skipeds[0] );
 	array_filter($skipeds, 'clear_skip');
 	unset( $skipeds );
 }
 
-function isset_poll($f_id, $pol_id) {
+function isset_poll($f_id, $poll_id) {
 	global $fm;
-	$pollfile = 'forum' . $f_id . '/' . $pol_id . '-poll.php';
+	$pollfile = EXBB_DATA_DIR_FORUMS . '/' . $f_id . '/' . $poll_id . '-poll.php';
 	if (!file_exists($pollfile)) {
 		return false;
 	}
@@ -385,7 +385,7 @@ function CheckForumPerms($permission, $mode) {
 function add_attach($attach, $forumid, $toipcid, $attach_oldid = 0, $mode = 'new') {
 	global $fm;
 
-	$attachdata = $fm->_Read2Write($fp_attach, 'forum' . $forumid . '/attaches-' . $toipcid . '.php');
+	$attachdata = $fm->_Read2Write($fp_attach, EXBB_DATA_DIR_FORUMS . '/' . $forumid . '/attaches-' . $toipcid . '.php');
 	$return = true;
 	if ($mode == 'new') {
 		$attach_id = ( count($attachdata) !== 0 ) ? max(array_keys($attachdata)) + 1 : 1;
@@ -427,7 +427,7 @@ function add_attach($attach, $forumid, $toipcid, $attach_oldid = 0, $mode = 'new
 	}
 	$fm->_Write($fp_attach, $attachdata);
 	if (count($attachdata) == 0) {
-		unlink('forum' . $forumid . '/attaches-' . $toipcid . '.php');
+		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forumid . '/attaches-' . $toipcid . '.php');
 	}
 
 	return $return;

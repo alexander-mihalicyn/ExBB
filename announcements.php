@@ -68,7 +68,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 			if (isset( $_SESSION['double'][$TextHash] )) {
 				$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['DoubleAddedOk'], $_SESSION['double'][$TextHash]);
 			}
-			$newsdata = $fm->_Read2Write($fp_news, FM_NEWS);
+			$newsdata = $fm->_Read2Write($fp_news, EXBB_DATA_NEWS);
 			$newsdata[$fm->_Nowtime]['t'] = $NewsTitle;
 			$newsdata[$fm->_Nowtime]['p'] = $NewsText;
 			$newsdata[$fm->_Nowtime]['h'] = $fm->_Boolean($fm->input, 'html');
@@ -81,7 +81,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 	elseif ($fm->input['action'] == 'edit') {
 		if ($fm->_Intval('dosave') === 0 || $fm->_String('dosend') == '') {
 			$fm->_LoadLang('formcode');
-			$newsdata = $fm->_Read(FM_NEWS);
+			$newsdata = $fm->_Read(EXBB_DATA_NEWS);
 			if (( $news_id = $fm->_Intval('number') ) == 0 || !isset( $newsdata[$news_id] )) {
 				$fm->_Message($fm->LANG['EditNewsTitle'], $fm->LANG['NewsNotExists']);
 			}
@@ -126,7 +126,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 				$fm->_Message($fm->LANG['EditNewsTitle'], $fm->LANG['NewsTextNeeded'], '', 0);
 			}
 
-			$newsdata = $fm->_Read2Write($fp_news, FM_NEWS);
+			$newsdata = $fm->_Read2Write($fp_news, EXBB_DATA_NEWS);
 			if (( $news_id = $fm->_Intval('number') ) == 0 || !isset( $newsdata[$news_id] )) {
 				$fm->_Fclose($fp_news);
 				$fm->_Message($fm->LANG['EditNewsTitle'], $fm->LANG['NewsNotExists']);
@@ -142,7 +142,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 	}
 	elseif ($fm->input['action'] == 'delall') {
 		if ($fm->_POST === true) {
-			$fm->_Read2Write($fp_news, FM_NEWS);
+			$fm->_Read2Write($fp_news, EXBB_DATA_NEWS);
 			$fm->_Write($fp_news, array());
 			$fm->_Message($fm->LANG['DelNews'], $fm->LANG['AllNewsDeletedOk'], 'announcements.php');
 		}
@@ -156,7 +156,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 		}
 	}
 	elseif ($fm->input['action'] == 'delete') {
-		$newsdata = $fm->_Read2Write($fp_news, FM_NEWS);
+		$newsdata = $fm->_Read2Write($fp_news, EXBB_DATA_NEWS);
 		if (( $news_id = $fm->_Intval('number') ) == 0 || !isset( $newsdata[$news_id] )) {
 			$fm->_Fclose($fp_news);
 			$fm->_Message($fm->LANG['DelNews'], $fm->LANG['NewsNotExists']);
@@ -180,7 +180,7 @@ if ($fm->input['action'] != 'default' && defined('IS_ADMIN')) {
 	}
 }
 else {
-	$announcements = $fm->_Read(FM_NEWS);
+	$announcements = $fm->_Read(EXBB_DATA_NEWS);
 	$totals = count($announcements);
 	if ($totals == 0) {
 		$dateposted = time();

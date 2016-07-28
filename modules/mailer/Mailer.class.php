@@ -157,7 +157,7 @@ class Mailer {
 					$headers = $this->_makeHeaders($mail[0], $mail[1]);
 					$mail[2] = is_array($mail[2]) ? $mail[2] : array($mail[2]);
 					if (reset($mail[2]) === 1) {
-						$users = $fm->_Read(FM_USERS);
+						$users = $fm->_Read(EXBB_DATA_USERS_LIST);
 						$uids = array_keys($mail[2]);
 						$mail[2] = array();
 						foreach ($uids as $offset => $uid) {

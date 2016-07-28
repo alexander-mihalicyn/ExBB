@@ -82,7 +82,7 @@ class Belong {
 	function _getAllforums() {
 		global $fm;
 
-		$allforums = $fm->_Read(FM_ALLFORUMS);
+		$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 		foreach ($allforums as $id => $forum) {
 			if ($forum['stview'] == 'reged' && !$fm->user['id'] || $forum['stview'] == 'admo' && !defined('IS_ADMIN') && $fm->user['status'] != 'sm' && !isset( $forum['moderator'][$fm->user['id']] ) || $forum['private'] && !defined('IS_ADMIN') && !isset( $fm->user['private'][$id] )) {
@@ -349,7 +349,7 @@ class Belong {
 	function index() {
 		global $fm;
 
-		$allforumsKeys = array_keys($fm->_Read(FM_ALLFORUMS));
+		$allforumsKeys = array_keys($fm->_Read(EXBB_DATA_FORUMS_LIST));
 		$percent = count($allforumsKeys);
 
 		if (isset( $this->config['last'] )) {

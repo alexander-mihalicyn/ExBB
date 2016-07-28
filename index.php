@@ -39,7 +39,7 @@ if ($fm->_String('action') == 'resetall' && $fm->user['id'] !== 0) {
 
 $news_data = GetNews(5);
 
-$allforums = array_filter($fm->_Read(FM_ALLFORUMS), function ($var) use ($fm) {
+$allforums = array_filter($fm->_Read(EXBB_DATA_FORUMS_LIST), function ($var) use ($fm) {
 	if (defined('IS_ADMIN') || !$var['private']) {
 		return true;
 	}
@@ -107,7 +107,7 @@ foreach ($allforums_keys as $key => $id) {
 					$f_readed = ( $f_readed > $fm->user['last_visit'] ) ? $f_readed : $fm->user['last_visit'];
 
 					if ($allforums[$subid]['last_time'] > $fm->user['last_visit']) {
-						$alltopic = $fm->_Read('forum' . $subid . '/list.php');
+						$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 
 						if (count($alltopic) > 0) {
 							$did = $id;
@@ -181,7 +181,7 @@ foreach ($allforums_keys as $key => $id) {
 			$f_readed = $fm->_GetCookie('f' . $id, 0);
 			$f_readed = ( $f_readed > $fm->user['last_visit'] ) ? $f_readed : $fm->user['last_visit'];
 			if ($forum['last_time'] > $fm->user['last_visit']) {
-				$alltopic = $fm->_Read('forum' . $id . '/list.php');
+				$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 				if (sizeof($alltopic) > 0) {
 					$alltopic = array_filter($alltopic, "NEW_POSTS");
 					$totalnew = sizeof($alltopic);
@@ -303,7 +303,7 @@ function GetNews($count) {
 
 	$news_data = "";
 
-	$news = $fm->_Read(FM_NEWS);
+	$news = $fm->_Read(EXBB_DATA_NEWS);
 
 	if (empty( $news )) {
 		return '';

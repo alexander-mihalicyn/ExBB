@@ -25,7 +25,7 @@ $fm->_LoadLang('setsmiles', true);
 
 $curcatid = $fm->_Intval('cat');
 $smilesdir = './im/emoticons/';
-$sm_list = $fm->_Read2Write($fp_sm, FM_SMILES);
+$sm_list = $fm->_Read2Write($fp_sm, EXBB_DATA_SMILES_LIST);
 $sm_list = ( count($sm_list) !== 0 ) ? $sm_list : array( 'cats' => array() );
 
 if ($fm->input['action'] == "newcat") {

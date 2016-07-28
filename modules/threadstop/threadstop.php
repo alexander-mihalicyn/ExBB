@@ -3,13 +3,13 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $fm->_LoadModuleLang('threadstop');
 
-$allforums = $fm->_Read(FM_ALLFORUMS);
+$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 if (!defined('IS_ADMIN') && $fm->user['status'] != 'sm')
 	foreach ($allforums as $forum)
 		$fm->_GetModerators($forum['id'], $allforums);
 if (($forum_id = $fm->_intval('inforum')) === 0 || !isset($allforums[$forum_id])) {
 	$divtext = $fm->LANG['CorrectPost'];
-} elseif (($topic_id = $fm->_intval('intopic')) === 0 || !file_exists('forum'.$forum_id.'/'.$topic_id.'-thd.php')) {
+} elseif (($topic_id = $fm->_intval('intopic')) === 0 || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php')) {
 		$divtext = $fm->LANG['CorrectPost'];
 } elseif ($allforums[$forum_id]['private'] == TRUE && !defined('IS_ADMIN') && (!isset($fm->user['private'][$forum_id]) || $fm->user['private'][$forum_id] !== TRUE)) {
 		$divtext = $fm->LANG['TsNoPerms'];
@@ -17,7 +17,7 @@ if (($forum_id = $fm->_intval('inforum')) === 0 || !isset($allforums[$forum_id])
 elseif (!$fm->user['id'] && $allforums[$forum_id]['stview'] == 'reged' || !defined('IS_ADMIN') && $fm->user['status'] != 'sm' && empty($fm->_Moderator) && $allforums[$forum_id]['stview'] == 'admo') {
 		$divtext = $fm->LANG['TsNoPerms'];
 } else {
-		$topic = $fm->_Read('forum'.$forum_id.'/'.$topic_id.'-thd.php');
+		$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php');
         ksort($topic,SORT_NUMERIC);
 		if ($fm->_Intval('mode') == 1){
 			reset($topic);

@@ -37,14 +37,14 @@ include( 'page_tail.php' );
 function intopic() {
 	global $fm;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 	if (( $topic_id = $fm->_Intval('topic') ) === 0 || ( $forum_id = $fm->_Intval('forum') ) === 0 || !isset( $allforums[$forum_id] )) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	$list = $fm->_Read('forum' . $forum_id . '/list.php');
-	if (!isset( $list[$topic_id] ) || !file_exists('forum' . $forum_id . '/' . $topic_id . '-thd.php')) {
+	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+	if (!isset( $list[$topic_id] ) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php')) {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['TopicMiss']);
 	}
 	$fm->_Title = ' :: ' . $fm->LANG['SearchInTopic'];
@@ -57,7 +57,7 @@ function intopic() {
 function newpostst() {
 	global $fm, $pages;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	$t_visits = $fm->_GetCookieArray('t_visits');
 
 	$allforums_keys = array_keys(array_filter($allforums, 'filterForums'));
@@ -72,7 +72,7 @@ function newpostst() {
 				}
 			}
 			if ($forum['last_time'] > $fm->user['last_visit']) {
-				$alltopics = array_merge($alltopics, array_filter($fm->_Read('forum' . $forum_id . '/list.php'), "SearchNewPost"));
+				$alltopics = array_merge($alltopics, array_filter($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php'), "SearchNewPost"));
 			}
 		}
 	}
@@ -123,7 +123,7 @@ function newpostst() {
 function search() {
 	global $fm, $_SEARCH;
 
-	$allforums = $fm->_Read(FM_ALLFORUMS);
+	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 
 	if ($fm->input['action'] === '') {
 		$forums = '<option value="-1"> ' . $fm->LANG['INALL'] . "\n";
@@ -255,7 +255,7 @@ function search() {
 			if (!file_exists('search/db/' . $forum_id . '_finfo')) {
 				continue;
 			}
-			$topic = $fm->_Read('forum' . $forum_id . '/list.php');
+			$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 			$FP_FINFO = fopen($FINFO, "rb");
 			$found += $_SEARCH['rescount'][$forum_id];
 

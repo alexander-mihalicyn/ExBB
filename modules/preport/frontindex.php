@@ -14,13 +14,13 @@ $fm->_LoadModuleLang('preport');
 if ($fm->user['id'] === 0) {
 	$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['UserUnreg'], 'loginout.php');
 }
-$allforums	= $fm->_Read(FM_ALLFORUMS);
+$allforums	= $fm->_Read(EXBB_DATA_FORUMS_LIST);
 if (($post_id = $fm->_Intval('postid')) === 0 || ($topic_id = $fm->_Intval('topic')) === 0 || ($forum_id = $fm->_Intval('forum')) === 0 || !isset($allforums[$forum_id])) {
 	$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['CorrectPost']);
 }
 
-$list = $fm->_Read('forum'.$forum_id.'/list.php');
-if (!isset($list[$topic_id]) || !file_exists('forum'.$forum_id.'/'.$topic_id.'-thd.php')) {
+$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
+if (!isset($list[$topic_id]) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php')) {
 	$fm->_Message($fm->LANG['MainMsg'],"AAA".$fm->LANG['TopicMiss']);
 }
 
@@ -29,7 +29,7 @@ $forumname = $allforums[$forum_id]['name'];
 $topicname = $list[$topic_id]['name'];
 unset($allforums,$list);
 
-$topic = $fm->_Read('forum'.$forum_id.'/'.$topic_id.'-thd.php', FALSE);
+$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php', FALSE);
 if (!isset($topic[$post_id])) {
 	$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['PostNoExists']);
 }
@@ -66,7 +66,8 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 						$forumname,
 						$topicname).$fm->input['preporttext'];
     $sendMail = ($fm->exbb['emailfunctions'] === TRUE && $fm->exbb['pmnewmes'] === TRUE) ? TRUE:FALSE;
-    if ($sendMail === TRUE) {    	$fm->_LoadLang('messenger');
+    if ($sendMail === TRUE) {
+    	$fm->_LoadLang('messenger');
     }
 
 	foreach ($fm->_Moderators as $moder_id) {
