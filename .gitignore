@@ -1,22 +1,24 @@
-/messages/*
-!/messages/index.html
+.idea/*
 
-/search/db/*
-/search/temp/*
+messages/*
+!messages/index.html
 
-!/search/db/index.html
-!/search/temp/index.html
+search/db/*
+search/temp/*
 
-/members/*
-!/members/index.html
+!search/db/index.html
+!search/temp/index.html
 
-/uploads/*
-!/uploads/index.html
+members/*
+!members/index.html
 
-/forum*/*
+uploads/*
+!uploads/index.html
 
-/modules/*/data/*
-!/modules/*/data/index.html
+forum*/*
 
-/data/*
-!/data/index.html
+modules/*/data/*
+!modules/*/data/index.html
+
+data/**/*
+!data/index.html
