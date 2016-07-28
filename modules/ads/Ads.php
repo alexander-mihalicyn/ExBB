@@ -12,9 +12,7 @@ if (!defined('IN_EXBB')) {
 	die;
 }
 
-define('FM_ADS_DIR', 'modules/ads/');
-define('FM_ADS_DATA_DIR', FM_ADS_DIR . 'data/');
-define('FM_ADS_BLOCK_FILE', FM_ADS_DATA_DIR . 'block.php');
+define('EXBB_MODULE_ADS_DATA_CONFIG', EXBB_DATA_DIR_MODULES . '/ads/block.php');
 
 class Ads {
 	var $config = array();
@@ -27,7 +25,7 @@ class Ads {
 	function getConfig() {
 		global $fm;
 
-		$this->config = $fm->_Read(FM_ADS_BLOCK_FILE);
+		$this->config = $fm->_Read(EXBB_MODULE_ADS_DATA_CONFIG);
 	}
 
 	function setupStatus() {

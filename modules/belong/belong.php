@@ -10,8 +10,8 @@
  * @version 1.0 $Id:$
  */
 
-define('BELONG_DATA_DIR', 'modules/belong/data/');
-define('BELONG_CONFIG_FILE', 'modules/belong/data/config.php');
+define('EXBB_MODULE_BELONG_DATA_DIR', EXBB_DATA_DIR_MODULES . '/belong');
+define('EXBB_MODULE_BELONG_DATA_CONFIG', EXBB_MODULE_BELONG_DATA_DIR.'/config.php');
 
 class Belong {
 	private $config = array();
@@ -20,7 +20,7 @@ class Belong {
 	public function __construct() {
 		global $fm;
 
-		$this->config = $fm->_Read(BELONG_CONFIG_FILE);
+		$this->config = $fm->_Read(EXBB_MODULE_BELONG_DATA_CONFIG);
 	}
 
 	public function getConfig() {
@@ -34,14 +34,14 @@ class Belong {
 	function saveConfig() {
 		global $fm;
 
-		$fm->_Read2Write($fpConfig, BELONG_CONFIG_FILE);
+		$fm->_Read2Write($fpConfig, EXBB_MODULE_BELONG_DATA_CONFIG);
 		$fm->_Write($fpConfig, $this->config);
 	}
 
 	function _getDbFilename($userId) {
 		global $fm;
 
-		return BELONG_DATA_DIR . ( intval(( $userId - 1 ) / $this->config['membersPerDb']) + 1 ) . '.db';
+		return EXBB_MODULE_BELONG_DATA_DIR . '/' . ( intval(( $userId - 1 ) / $this->config['membersPerDb']) + 1 ) . '.db';
 	}
 
 	function _createTable() {
@@ -238,11 +238,11 @@ class Belong {
 	}
 
 	function deleteForums($forums) {
-		;
+
 	}
 
 	function deleteUsers($users) {
-		;
+
 	}
 
 	function getTopics($userId, $offset, $length, &$allforums, &$found) {
@@ -306,14 +306,14 @@ class Belong {
 	}
 
 	function _deleteDbs() {
-		$dir = opendir(BELONG_DATA_DIR);
+		$dir = opendir(EXBB_MODULE_BELONG_DATA_DIR . '/');
 
 		while (( $file = readdir($dir) ) !== false) {
 			if (!preg_match('#\.db$#is', $file, $tst)) {
 				continue;
 			}
 
-			unlink(BELONG_DATA_DIR . $file);
+			unlink(EXBB_MODULE_BELONG_DATA_DIR . '/' . $file);
 		}
 
 		closedir($dir);
@@ -327,10 +327,6 @@ class Belong {
 			ksort($posts);
 
 			if ($dbname != $this->_getDbFilename($id)) {
-				if ($dbname) {
-					$this->_handle->exec($sql);
-				}
-
 				$this->_openSqlite($id);
 
 				$dbname = $this->_getDbFilename($id);
@@ -362,7 +358,7 @@ class Belong {
 		$index = array();
 		$count = 0;
 		foreach ($allforumsKeys as $forum) {
-			$listKeys = array_keys($fm->_Read("forum{$forum}/list.php"));
+			$listKeys = array_keys($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/list.php"));
 
 			if (isset( $this->config['last'] )) {
 				$listKeys = array_slice($listKeys, array_search($this->config['last'][1], $listKeys));
@@ -380,7 +376,7 @@ class Belong {
 					$fm->_Message($fm->LANG['ModuleTitle'], sprintf($fm->LANG['BelongIndexingProgress'], ( $percent - count($allforumsKeys) ) / $percent * 100, $forum, $topic), 'setmodule.php?module=belong&execute=index', 1);
 				}
 
-				$thread = $fm->_Read("forum{$forum}/{$topic}-thd.php");
+				$thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum ."/{$topic}-thd.php");
 
 				foreach ($thread as $post => $info) {
 					if (!$info['p_id'] && !file_exists(EXBB_DATA_DIR_MEMBERS . "/{$info['p_id']}.php")) {

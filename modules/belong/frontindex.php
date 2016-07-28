@@ -77,7 +77,7 @@ function viewTopics() {
     foreach ($topics as $info) {
         list($post, $forum, $topic) = $info;
         
-        $thread = $fm->_Read("forum{$forum}/{$topic}-thd.php");
+        $thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/{$topic}-thd.php");
         
         if (!$thread) {
             continue;
@@ -103,7 +103,7 @@ function viewTopics() {
         $postdate   = $fm->_DateFormat($postdate + $fm->user['timedif'] * 3600);
         
         if (!isset($viewsData[$forum])) {
-            $viewsData[$forum] = $fm->_Read("forum{$forum}/views.php");
+            $viewsData[$forum] = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/views.php");
         }
         
         $views = (isset($viewsData[$forum][$topic])) ? $viewsData[$forum][$topic] : 0;
@@ -158,13 +158,13 @@ function viewPosts() {
     $pages = Print_Paginator($found, "tools.php?action=belong&to={$fm->input['to']}&p={_P_}", $fm->exbb['posts_per_page'], 8, $first, TRUE);
     
     $username = "<a href=\"profile.php?action=show&member={$fm->input['to']}\">{$user['name']}</a>";
-    
+
     $viewsData = array();
     $postsData = '';
     foreach ($posts as $info) {
         list($post, $forum, $topic) = $info;
         
-        $thread = $fm->_Read("forum{$forum}/{$topic}-thd.php");
+        $thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/{$topic}-thd.php");
         
         if (!isset($thread[$post])) {
             continue;
@@ -173,7 +173,7 @@ function viewPosts() {
         $first = reset($thread);
         
         if (!isset($viewsData[$forum])) {
-            $viewsData[$forum] = $fm->_Read("forum{$forum}/views.php");
+            $viewsData[$forum] = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/views.php");
         }
         
         $postdate   = $fm->_DateFormat($post + $fm->user['timedif'] * 3600);

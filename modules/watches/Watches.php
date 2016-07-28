@@ -54,7 +54,7 @@ class Watches {
 		$where = array();
 		foreach (array_keys($forums) as $forum) {
 			$this->_filter = max($deadlines[0], $deadlines[$forum]);
-			$list[$forum] = array_filter($fm->_Read("forum{$forum}/list.php"), array( $this, '_filterTopics' ));
+			$list[$forum] = array_filter($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/list.php"), array( $this, '_filterTopics' ));
 			array_walk($list[$forum], array( $this, '_walkTopics' ));
 
 			$forums[$forum] = array();
@@ -151,7 +151,7 @@ class Watches {
 		$where = array();
 		foreach (array_keys($forums) as $forum) {
 			$this->_filter = max($deadlines[0], $deadlines[$forum]);
-			$list[$forum] = array_filter($fm->_Read("forum{$forum}/list.php"), array( $this, '_filterTopics' ));
+			$list[$forum] = array_filter($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum . "/list.php"), array( $this, '_filterTopics' ));
 
 			$forums[$forum] = array();
 

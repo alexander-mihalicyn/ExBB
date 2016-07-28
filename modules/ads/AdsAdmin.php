@@ -26,7 +26,7 @@ class AdsAdmin extends Ads {
 			'sourceCode'		=> $sourceCode
 		);
 		
-		$fm->_Read2Write($fpBlock, FM_ADS_BLOCK_FILE);
+		$fm->_Read2Write($fpBlock, EXBB_MODULE_ADS_DATA_CONFIG);
 		$fm->_Write($fpBlock, $block);
 	}
 }

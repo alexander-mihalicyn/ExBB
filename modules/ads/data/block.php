@@ -1,1 +1,0 @@
-<?die;?>a:5:{s:13:"onlyForGuests";b:0;s:9:"needPosts";i:20;s:15:"adminsSupmoders";b:1;s:9:"afterPost";i:1;s:10:"sourceCode";s:170:"<noindex><center><font style="font-size: 18px">Демонстрация работы модуля <b>Рекламный блок между сообщениями</b></font><div style="height: 5px"></div></center></noindex>";}

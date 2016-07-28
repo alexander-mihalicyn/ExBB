@@ -1,0 +1,1 @@
+<?die;?>a:5:{s:13:"onlyForGuests";b:0;s:9:"needPosts";i:20;s:15:"adminsSupmoders";b:1;s:9:"afterPost";i:1;s:10:"sourceCode";s:20:"Пример работы модуля";}

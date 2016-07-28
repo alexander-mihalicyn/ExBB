@@ -48,4 +48,21 @@ class FileSystemHelper {
 
 		rmdir($directory);
 	}
+
+	/**
+	 * Создаёт директорию на сервере
+	 *
+	 * @param string $directory путь к директории
+	 * @param int $chmod права на создаваемую директорию
+	 * @param bool $recursive создавать директорию рекурсивно
+	 *
+	 * @throws \Exception
+	 */
+	public static function createDirectory($directory, $chmod=0777, $recursive=false) {
+		if (is_dir($directory)) {
+			throw new \Exception('Directory "'.$directory.'" is already exists');
+		}
+
+		mkdir($directory, $chmod, $recursive);
+	}
 }

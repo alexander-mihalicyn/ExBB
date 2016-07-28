@@ -34,9 +34,7 @@ function changeConfig() {
 
 		$afterPost = $adsAdmin->config['afterPost'];
 
-		$sourceCode = htmlspecialchars($adsAdmin->config['sourceCode']);
-
-		unset( $adsAdmin );
+		$sourceCode = htmlspecialchars($adsAdmin->config['sourceCode'], ENT_COMPAT, 'Windows-1251');
 
 		include( 'admin/all_header.tpl' );
 		include( 'admin/nav_bar.tpl' );
