@@ -51,9 +51,9 @@ if ($fm->input['action'] == 'login' && $fm->_POST === true) {
 
 		// Advanced Visit Stats for ExBB FM 1.0 RC1 by yura3d
 		if ($fm->exbb['statvisit']) {
-			$statvisit = $fm->_Read('modules/statvisit/data/config.php');
+			$statvisit = $fm->_Read(EXBB_DATA_DIR_MODULES.'/advanced_stats/config.php');
 			if ($statvisit['day']) {
-				$today = $fm->_Read2Write($fp_today, 'modules/statvisit/data/today.php');
+				$today = $fm->_Read2Write($fp_today, EXBB_DATA_DIR_MODULES.'/advanced_stats/today.php');
 				if (!isset( $today['members'][$user['id']] ) && $today['guests'] > 0) {
 					$today['guests']--;
 				}

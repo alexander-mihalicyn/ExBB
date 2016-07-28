@@ -867,11 +867,11 @@ class FM extends VARS {
 		// Advanced Visit Stats for ExBB FM 1.0 RC1 by yura3d
 		$statvisit = $today = false;
 		if ($this->exbb['statvisit']) {
-			$statvisit = $this->_Read('modules/statvisit/data/config.php');
+			$statvisit = $this->_Read(EXBB_DATA_DIR_MODULES.'/advanced_stats/config.php');
 			if ($statvisit['day']) {
 				$day = date('d', $this->_Nowtime);
 
-				$today = $this->_Read2Write($fp_today, 'modules/statvisit/data/today.php');
+				$today = $this->_Read2Write($fp_today, EXBB_DATA_DIR_MODULES.'/advanced_stats/today.php');
 
 				if (empty( $today ) || $today['day'] != $day) {
 					$today = array( 'day' => $day, 'members' => array(), 'guests' => 0, );

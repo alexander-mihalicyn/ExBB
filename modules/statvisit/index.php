@@ -10,11 +10,11 @@
 if (!defined('IN_EXBB')) die('Emo sucks;)');
 $fm->_LoadModuleLang('statvisit');
 
-define('CONFIG', 'modules/statvisit/data/config.php');
+define('EXBB_MODULE_ADVANCED_STATS_DATA_CONFIG', EXBB_DATA_DIR_MODULES.'/advanced_stats/config.php');
 
 if ($fm->_POST !== TRUE) {
 	
-	$config = $fm->_Read(CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_ADVANCED_STATS_DATA_CONFIG);
 	
 	$forum_yes		= ($config['forum']) ? ' checked="checked"' : '';
 	$forum_no		= (!$config['forum']) ? ' checked="checked"' : '';
@@ -43,10 +43,8 @@ else {
 		'day'		=> $fm->_Boolean1('day')
 	);
 	
-	$fm->_Read2Write($fp_config, CONFIG);
+	$fm->_Read2Write($fp_config, EXBB_MODULE_ADVANCED_STATS_DATA_CONFIG);
 	$fm->_Write($fp_config, $config);
 	
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=statvisit', 1);
 }
-
-?>
