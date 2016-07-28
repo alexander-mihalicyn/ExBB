@@ -3,10 +3,10 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 $userstop = '';
 if ($fm->exbb['userstop'] === TRUE){
 	$fm->_LoadModuleLang('userstop');
-	include('modules/userstop/data/config.php');
+	include(EXBB_DATA_DIR_MODULES. '/userstop/config.php');
 
 	$deldate = mktime(0,0,0,date("m"),date("d") - FM_USERSTOP_DAYS,date("Y"));
-	$usertop =  $fm->_Read2Write($fp_usertop,'modules/userstop/data/userstop_data.php');
+	$usertop =  $fm->_Read2Write($fp_usertop,EXBB_DATA_DIR_MODULES. '/userstop/data.php');
 
 	$save_flag = FALSE;
 	$for_printarray = array();
@@ -43,4 +43,3 @@ function cmp($a, $b){
         if ($a == $b) return 0;
         return ($a > $b) ? -1 : 1;
 }
-?>

@@ -45,4 +45,3 @@ $_RESULT = array(
 	'topic' => $topic_id,
 	'forum' => $forum_id
 );
-?>

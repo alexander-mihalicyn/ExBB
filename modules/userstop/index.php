@@ -18,10 +18,10 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 define(\"FM_USERSTOP_DAYS\", {$fm->input['fordays']});
 define(\"FM_USERSTOP_SHOWPOSTS\", {$showposts});
 ?>";
-	$fm->_WriteText('modules/userstop/data/config.php', $moduleconfig);
+	$fm->_WriteText(EXBB_DATA_DIR_MODULES. '/userstop/config.php', $moduleconfig);
     $fm->_Message($fm->LANG['ModuleTitle'],$fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=userstop', 1);
 } else {
-		include('modules/userstop/data/config.php');
+		include(EXBB_DATA_DIR_MODULES. '/userstop/config.php');
 		$fordays	= FM_USERSTOP_DAYS;
 		$showposts_yes	= (FM_USERSTOP_SHOWPOSTS === TRUE) ? 'checked="checked"' : '';
 		$showposts_no	= (FM_USERSTOP_SHOWPOSTS === FALSE) ? 'checked="checked"' : '';
@@ -30,4 +30,3 @@ define(\"FM_USERSTOP_SHOWPOSTS\", {$showposts});
 		include('modules/userstop/admintemplates/index.tpl');
 		include('admin/footer.tpl');
 }
-?>
