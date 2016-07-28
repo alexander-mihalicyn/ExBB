@@ -12,10 +12,10 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 
 	$printval		= ($fm->_Boolean($fm->input,'printval') === TRUE) ? 'TRUE':'FALSE';
 	$moduleconfig 	= "<?php\nif (!defined('IN_EXBB')) die('Hack attempt!');\n\ndefine(\"FM_SHOW_TOPICS\", {$fm->input['threadsnum']});\ndefine(\"FM_PRINTVAL\", {$printval});\n?>";
-	$fm->_WriteText('modules/threadstop/data/config.php', $moduleconfig);
+	$fm->_WriteText(EXBB_DATA_DIR_MODULES.'/threadstop/config.php', $moduleconfig);
     $fm->_Message($fm->LANG['ModuleTitle'],$fm->LANG['ModuleUpdatedOk'], 'setmodule.php?module=threadstop', 1);
 } else {
-		include('modules/threadstop/data/config.php');
+		include(EXBB_DATA_DIR_MODULES.'/threadstop/config.php');
 		$threadsnum		= FM_SHOW_TOPICS;
 		$printval_yes	= (FM_PRINTVAL === TRUE) ? 'checked="checked"' : '';
 		$printval_no	= (FM_PRINTVAL === FALSE) ? 'checked="checked"' : '';
@@ -24,4 +24,3 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 		include('modules/threadstop/admintemplates/index.tpl');
 		include('admin/footer.tpl');
 }
-?>

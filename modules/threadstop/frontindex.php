@@ -11,7 +11,7 @@
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $fm->_LoadModuleLang('threadstop');
-include('modules/threadstop/data/config.php');
+include(EXBB_DATA_DIR_MODULES.'/threadstop/config.php');
 
 $allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 $arr_by_viewspost = array();
@@ -96,4 +96,3 @@ function _sort(&$array, $key, $state) {
 		return 0;";
 		uasort($array, create_function('$a,$b', $function));
 }
-?>
