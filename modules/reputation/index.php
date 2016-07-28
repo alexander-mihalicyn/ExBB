@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Reputation Mod for ExBB FM 1.0 RC1
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d
@@ -7,15 +6,15 @@
 	ICQ: 313321962
 */
 
-if (!defined('IN_EXBB')) die('Emo sucks;)');
+defined('IN_EXBB') or die;
 
 $fm->_LoadModuleLang('reputation', 1);
 
-define('CONFIG', 'modules/reputation/data/config.php');
+define('EXBB_MODULE_REPUTATION_DATA_CONFIG', EXBB_DATA_DIR_MODULES.'/reputation/config.php');
 
 if ($fm->_POST !== TRUE) {
 
-	$config = $fm->_Read(CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	
 	$msg				= $config['msg'];
 	$wait_days			= $config['wait_days'];
@@ -94,10 +93,8 @@ else {
 		'blacklist'			=> $blacklist
 	);
 	
-	$fm->_Read2Write($fp_config, CONFIG);
+	$fm->_Read2Write($fp_config, EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	$fm->_Write($fp_config, $config);
 	
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=reputation', 1);
 }
-
-?>

@@ -11,7 +11,7 @@ if (!defined('IN_EXBB')) die('Emo sucks;)');
 
 $fm->_LoadModuleLang('reputation');
 
-define('CONFIG', 'modules/reputation/data/config.php');
+define('EXBB_MODULE_REPUTATION_DATA_CONFIG', EXBB_DATA_DIR_MODULES.'/reputation/config.php');
 
 switch ($fm->_String('do')) {
 
@@ -31,7 +31,7 @@ function change_rep() {
 	if (!$fm->user['id']) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepGuest']);
 	
 	// Читаем конфиг (^__^)
-	$config = $fm->_Read(CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	
 	// Проверка на запрет админа ;)
 	if ($config['denied']) {
@@ -142,7 +142,7 @@ function show_rep() {
 	global $fm;
 	
 	// Читаем конфиг и список форумов, а также узнаем, являемся ли мы модератором в одном из них :)
-	$config = $fm->_Read(CONFIG);
+	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!defined('IS_ADMIN') && $fm->user['status'] != 'sm')
 		foreach ($allforums as $forum)
@@ -250,5 +250,3 @@ function show_rep() {
 	include('./templates/'.DEF_SKIN.'/modules/reputation/show_body.tpl');
 	include('./templates/'.DEF_SKIN.'/footer.tpl');
 }
-
-?>
