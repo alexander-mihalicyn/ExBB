@@ -153,9 +153,9 @@ class Controller extends BaseController {
 
 		$settingsFormData = [
 			'forum' => [
-				'chmodDirs' => 0777,
-				'chmodFiles' => 0777,
-				'chmodUploads' => 0644,
+				'chmodDirs' => '0777',
+				'chmodFiles' => '0777',
+				'chmodUploads' => '0644',
 
 				'title' => '',
 				'description' => '',
@@ -246,13 +246,17 @@ class Controller extends BaseController {
 	}
 
 	public function ActionFinish() {
+		global $fm;
+
 		if (!isset($this->session->data['adminAccountInstalled']) || !$this->session->data['adminAccountInstalled']) {
 			$this->redirect('index.php?action=adminAccountSettings');
 		}
 
 		$this->setActiveStep(4);
 
-		return $this->render('finish');
+		return $this->render('finish', [
+			'indexUrl' => $fm->exbb['boardurl'],
+		]);
 	}
 
 	private function setActiveStep($index) {

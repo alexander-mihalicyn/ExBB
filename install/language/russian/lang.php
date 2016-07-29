@@ -54,6 +54,7 @@ $lang['forumSettingsUrlInvalid'] = 'Вы ввели некорректный URL форума';
 $lang['forumSettingsTitleInvalid'] = 'Вы не ввели некорректное название форума';
 $lang['forumSettingsDescriptionInvalid'] = 'Вы ввели некорректное описание форума';
 $lang['forumSettingsEmailInvalid'] = 'Вы не ввели некорректный E-mail форума';
+$lang['forumSettingsChmodInvalid'] = 'Вы не ввели некорректное значение CHMOD';
 
 $lang['adminAccountSettingsLogin'] = 'Логин';
 $lang['adminAccountSettingsPassword'] = 'Пароль';

@@ -31,6 +31,13 @@ class ModelForumSettings extends BaseModel {
 			];
 		}
 
+		if (!is_numeric(trim($data['chmodDirs'])) || !is_numeric(trim($data['chmodFiles'])) || !is_numeric(trim($data['chmodUploads']))) {
+			$messages[] = [
+				'type' => 'error',
+				'text' => lang('forumSettingsChmodInvalid'),
+			];
+		}
+
 		if (!$this->validateEmail(trim($data['email']))) {
 			$messages[] = [
 				'type' => 'error',
@@ -69,10 +76,12 @@ class ModelForumSettings extends BaseModel {
 			'ch_dirs' => (int)trim($data['chmodDirs']),
 			'ch_files' => (int)trim($data['chmodFiles']),
 			'ch_upfiles' => (int)trim($data['chmodUploads']),
+			
+			'installed' => true,
 		]);
 	}
 
-	private function _saveForumConfig() {
+	private function _saveForumConfig($data) {
 		include EXBB_DATA_CONFIG;
 
 		$configFileContent = '<?php'.PHP_EOL.'defined(\'IN_EXBB\') or die(\'Hack attempt!\');'.PHP_EOL.PHP_EOL;
