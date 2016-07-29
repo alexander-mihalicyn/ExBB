@@ -1,6 +1,9 @@
 <?php
 defined('IN_EXBB') or die;
 
+define('EXBB_VERSION', '1.2.0');
+define('EXBB_VERSION_NAME', 'ExBB Forum Engine ' . EXBB_VERSION);
+
 // Debug flag
 define('DEBUG', false);
 

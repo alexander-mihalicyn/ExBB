@@ -14,8 +14,7 @@ class Session {
 		}
 			
 		$this->data =& $_SESSION;
-		
-		define('_SESSION_ID', session_name().'='.session_id());
+
 	}
 	
 	public function getId() {

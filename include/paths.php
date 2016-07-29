@@ -41,9 +41,6 @@ define('EXBB_DATA_NEWS', EXBB_DATA.'/news.php');
 // Путь к файлу со списком онлайн-пользователей
 define('EXBB_DATA_MEMBERS_ONLINE', EXBB_DATA.'/onlinedata.php');
 
-// Путь к файлу со списком онлайн-пользователей
-define('EXBB_DATA_MEMBERS_ONLINE', EXBB_DATA.'/onlinedata.php');
-
 // Путь к файлу со список E-mail, на которых не должны отправляться письма
 define('EXBB_DATA_SKIP_MAILS', EXBB_DATA.'/skip_mails.php');
 
@@ -78,3 +75,6 @@ define('EXBB_DATA_DIR_MESSAGES', EXBB_DATA.'/messages');
 
 // Путь к директории для хранения данных поиска
 define('EXBB_DATA_DIR_SEARCH', EXBB_DATA.'/search');
+
+// Путь к директории с загружаемыми данными
+define('EXBB_DIR_UPLOADS', EXBB_ROOT.'/uploads');

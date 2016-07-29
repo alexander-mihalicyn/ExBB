@@ -6,7 +6,7 @@ use ExBB\Helpers\FileSystemHelper;
 ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . __DIR__);
 
 define('EXBB_ROOT', dirname(__DIR__));
-define('EXBB_BASE', ROOT);
+define('EXBB_BASE', EXBB_ROOT);
 
 require __DIR__.'/paths.php';
 
