@@ -4,54 +4,54 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 /*
 	who online
 */
-$this->LANG['UsersNames'] = 'Èìåíà ïîëüçîâàòåëåé';
-$this->LANG['LastActionTime'] = 'Âðåìÿ ïîñëåäíåãî äåéñòâèÿ';
-$this->LANG['LastAction'] = 'Ïîñëåäíåå äåéñòâèå';
+$this->LANG['UsersNames'] = 'Ð˜Ð¼ÐµÐ½Ð° Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹';
+$this->LANG['LastActionTime'] = 'Ð’Ñ€ÐµÐ¼Ñ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½ÐµÐ³Ð¾ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ';
+$this->LANG['LastAction'] = 'ÐŸÐ¾ÑÐ»ÐµÐ´Ð½ÐµÐµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ';
 
 /*
 	show smiles
 */
-$this->LANG['SmilesNoCats']			= 'Íå çàäàíî íè îäíîé êàòåãîðèè!';
-$this->LANG['NoSmilesInCat']		= 'Äëÿ êàòåãîðèè íå çàäàíû ñìàéëèêè!';
-$this->LANG['AllSmiles']			= 'Êîëëåêöèÿ ñìàéëèêîâ';
+$this->LANG['SmilesNoCats']			= 'ÐÐµ Ð·Ð°Ð´Ð°Ð½Ð¾ Ð½Ð¸ Ð¾Ð´Ð½Ð¾Ð¹ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸!';
+$this->LANG['NoSmilesInCat']		= 'Ð”Ð»Ñ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ñ‹ ÑÐ¼Ð°Ð¹Ð»Ð¸ÐºÐ¸!';
+$this->LANG['AllSmiles']			= 'ÐšÐ¾Ð»Ð»ÐµÐºÑ†Ð¸Ñ ÑÐ¼Ð°Ð¹Ð»Ð¸ÐºÐ¾Ð²';
 
 /*
 	member list
 */
-$this->LANG['Memberlist']			= 'Ñïèñîê çàðåãèñòðèðîâàííûõ ïîëüçîâàòåëåé';
-$this->LANG['SortBy']				= 'Ñîðòèðîâàòü ïî ';
-$this->LANG['SortByPost']			= 'Ïî ñîîáùåíèÿì';
-$this->LANG['SortByName']			= 'Ïî èìåíè';
-$this->LANG['SortByJoin']			= 'Ïî äàòå ðåãèñòðàöèè';
-$this->LANG['SortASC']				= 'Âîçðàñòàíèå';
-$this->LANG['SortDESC']				= 'Óáûâàíèå';
-$this->LANG['Sorting']				= 'Ñîðòèðîâàòü';
-$this->LANG['Name']					= 'Èìÿ';
-$this->LANG['Status']				= 'Ñòàòóñ';
-$this->LANG['PostsTotal']			= 'Âñåãî ñîîáùåíèé';
-$this->LANG['RegedDate']			= 'Äàòà ðåãèñòðàöèè';
-$this->LANG['From']					= 'Îòêóäà';
-$this->LANG['Admin']				= 'Àäìèíèñòðàòîð';
-$this->LANG['SuperModer']			= 'Ñóïåðìîäåðàòîð';
-$this->LANG['User'] 				= 'Ïîëüçîâàòåëü';
-$this->LANG['Banned']				= 'Çàáàíåí';
-$this->LANG['Write']				= 'Íàïèñàòü';
-$this->LANG['Looked']				= 'Ñìîòðåòü';
-$this->LANG['PrintBy']				= 'Âûâîäèòü ïî ';
-$this->LANG['UsersByList']			= ' ïîëüçîâàòåëåé íà ñòðàíèöó';
+$this->LANG['Memberlist']			= 'Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹';
+$this->LANG['SortBy']				= 'Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ð¾ ';
+$this->LANG['SortByPost']			= 'ÐŸÐ¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸ÑÐ¼';
+$this->LANG['SortByName']			= 'ÐŸÐ¾ Ð¸Ð¼ÐµÐ½Ð¸';
+$this->LANG['SortByJoin']			= 'ÐŸÐ¾ Ð´Ð°Ñ‚Ðµ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¸';
+$this->LANG['SortASC']				= 'Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚Ð°Ð½Ð¸Ðµ';
+$this->LANG['SortDESC']				= 'Ð£Ð±Ñ‹Ð²Ð°Ð½Ð¸Ðµ';
+$this->LANG['Sorting']				= 'Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ';
+$this->LANG['Name']					= 'Ð˜Ð¼Ñ';
+$this->LANG['Status']				= 'Ð¡Ñ‚Ð°Ñ‚ÑƒÑ';
+$this->LANG['PostsTotal']			= 'Ð’ÑÐµÐ³Ð¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹';
+$this->LANG['RegedDate']			= 'Ð”Ð°Ñ‚Ð° Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¸';
+$this->LANG['From']					= 'ÐžÑ‚ÐºÑƒÐ´Ð°';
+$this->LANG['Admin']				= 'ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€';
+$this->LANG['SuperModer']			= 'Ð¡ÑƒÐ¿ÐµÑ€Ð¼Ð¾Ð´ÐµÑ€Ð°Ñ‚Ð¾Ñ€';
+$this->LANG['User'] 				= 'ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ';
+$this->LANG['Banned']				= 'Ð—Ð°Ð±Ð°Ð½ÐµÐ½';
+$this->LANG['Write']				= 'ÐÐ°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ';
+$this->LANG['Looked']				= 'Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ';
+$this->LANG['PrintBy']				= 'Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð¿Ð¾ ';
+$this->LANG['UsersByList']			= ' Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñƒ';
 /*
 	email by board
 */
-$this->LANG['MailByBoard'] 			= 'Íàïèñàòü ÷åðåç ôîðóì';
-$this->LANG['MailFunctionClosed'] 	= 'Ôóíêöèÿ ýëåêòðîííîé ïî÷òû îòêëþ÷åíà íà ôîðóìå!';
-$this->LANG['SendMailTo'] 			= 'Îòïðàâêà ïèñüìà äëÿ ';
-$this->LANG['SendMailOk'] 			= 'Âàøå ñîîáùåíèå óñïåøíî îòïðàâëåíî!';
-$this->LANG['Topic'] 				= 'Òåìà ñîîáùåíèÿ';
-$this->LANG['EmailMessage'] 		= 'Òåêñò ñîîáùåíèÿ';
-$this->LANG['FloodLimitNew'] 		= 'Êîíòðîëü ïîâòîðîâ çàïóùåí â êîíôåðåíöèè, Âàì íóæíî ïîäîæäàòü %d ñåêóíä, ÷òîáû îòïðàâèòü íîâîå ñîîáùåíèå!';
-$this->LANG['NoEmptyFields'] 		= 'Âû äîëæíû çàïîëíèòü âñå ïîëÿ ôîðìû!';
-$this->LANG['EmailByBordText'] 		= 'Çäðàâñòâóéòå %s.
-%s íàïèñàë(à) ýòî ïèñüìî ñ ôîðóìà "%s" ( %s )
+$this->LANG['MailByBoard'] 			= 'ÐÐ°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ñ‡ÐµÑ€ÐµÐ· Ñ„Ð¾Ñ€ÑƒÐ¼';
+$this->LANG['MailFunctionClosed'] 	= 'Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ñ‡Ñ‚Ñ‹ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð° Ð½Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ!';
+$this->LANG['SendMailTo'] 			= 'ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° Ð¿Ð¸ÑÑŒÐ¼Ð° Ð´Ð»Ñ ';
+$this->LANG['SendMailOk'] 			= 'Ð’Ð°ÑˆÐµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾!';
+$this->LANG['Topic'] 				= 'Ð¢ÐµÐ¼Ð° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ';
+$this->LANG['EmailMessage'] 		= 'Ð¢ÐµÐºÑÑ‚ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ';
+$this->LANG['FloodLimitNew'] 		= 'ÐšÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¾Ð² Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½ Ð² ÐºÐ¾Ð½Ñ„ÐµÑ€ÐµÐ½Ñ†Ð¸Ð¸, Ð’Ð°Ð¼ Ð½ÑƒÐ¶Ð½Ð¾ Ð¿Ð¾Ð´Ð¾Ð¶Ð´Ð°Ñ‚ÑŒ %d ÑÐµÐºÑƒÐ½Ð´, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ Ð½Ð¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ!';
+$this->LANG['NoEmptyFields'] 		= 'Ð’Ñ‹ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð²ÑÐµ Ð¿Ð¾Ð»Ñ Ñ„Ð¾Ñ€Ð¼Ñ‹!';
+$this->LANG['EmailByBordText'] 		= 'Ð—Ð´Ñ€Ð°Ð²ÑÑ‚Ð²ÑƒÐ¹Ñ‚Ðµ %s.
+%s Ð½Ð°Ð¿Ð¸ÑÐ°Ð»(Ð°) ÑÑ‚Ð¾ Ð¿Ð¸ÑÑŒÐ¼Ð¾ Ñ Ñ„Ð¾Ñ€ÑƒÐ¼Ð° "%s" ( %s )
 >------------------------------------------
 ';
 

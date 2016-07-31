@@ -4,111 +4,111 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 	All files
 */
 $this->LANG['ENCODING']			= 'windows-1251';
-$this->LANG['On']				= 'ВКЛ';
-$this->LANG['Off']				= 'ВЫКЛ';
-$this->LANG['Yes']				= 'да';
-$this->LANG['No']				= 'нет';
-$this->LANG['Save']				= 'Сохранить';
-$this->LANG['Send']				= 'Отправить';
-$this->LANG['Change']			= 'Изменить';
-$this->LANG['Delete']			= 'Удалить';
-$this->LANG['Back']				= 'Вернуться назад';
-$this->LANG['MainMsg']			= 'Сообщение!';
-$this->LANG['Guest']			= 'Гость';
-$this->LANG['CorrectPost']		= 'Пожалуйста, только корректным способом входите в скрипт!';
-$this->LANG['ModNotInstaled']	= 'Запрашиваемый модуль не установлен!';
-$this->LANG['ReloadingPage'] 	= '[перенаправление]';
-$this->LANG['Variable']			= 'Параметр';
-$this->LANG['VariableValue']	= 'Значение';
-$this->LANG['TotalPages'] 		= '<b>Страниц</b> ';
-$this->LANG['ToStart'] 			= 'В начало';
-$this->LANG['ToEnd'] 			= 'В конец';
-$this->LANG['PrevPage'] 		= 'Предыдущая страница';
-$this->LANG['NextPage'] 		= 'Следующая страница';
+$this->LANG['On']				= 'Р’РљР›';
+$this->LANG['Off']				= 'Р’Р«РљР›';
+$this->LANG['Yes']				= 'РґР°';
+$this->LANG['No']				= 'РЅРµС‚';
+$this->LANG['Save']				= 'РЎРѕС…СЂР°РЅРёС‚СЊ';
+$this->LANG['Send']				= 'РћС‚РїСЂР°РІРёС‚СЊ';
+$this->LANG['Change']			= 'РР·РјРµРЅРёС‚СЊ';
+$this->LANG['Delete']			= 'РЈРґР°Р»РёС‚СЊ';
+$this->LANG['Back']				= 'Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ';
+$this->LANG['MainMsg']			= 'РЎРѕРѕР±С‰РµРЅРёРµ!';
+$this->LANG['Guest']			= 'Р“РѕСЃС‚СЊ';
+$this->LANG['CorrectPost']		= 'РџРѕР¶Р°Р»СѓР№СЃС‚Р°, С‚РѕР»СЊРєРѕ РєРѕСЂСЂРµРєС‚РЅС‹Рј СЃРїРѕСЃРѕР±РѕРј РІС…РѕРґРёС‚Рµ РІ СЃРєСЂРёРїС‚!';
+$this->LANG['ModNotInstaled']	= 'Р—Р°РїСЂР°С€РёРІР°РµРјС‹Р№ РјРѕРґСѓР»СЊ РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ!';
+$this->LANG['ReloadingPage'] 	= '[РїРµСЂРµРЅР°РїСЂР°РІР»РµРЅРёРµ]';
+$this->LANG['Variable']			= 'РџР°СЂР°РјРµС‚СЂ';
+$this->LANG['VariableValue']	= 'Р—РЅР°С‡РµРЅРёРµ';
+$this->LANG['TotalPages'] 		= '<b>РЎС‚СЂР°РЅРёС†</b> ';
+$this->LANG['ToStart'] 			= 'Р’ РЅР°С‡Р°Р»Рѕ';
+$this->LANG['ToEnd'] 			= 'Р’ РєРѕРЅРµС†';
+$this->LANG['PrevPage'] 		= 'РџСЂРµРґС‹РґСѓС‰Р°СЏ СЃС‚СЂР°РЅРёС†Р°';
+$this->LANG['NextPage'] 		= 'РЎР»РµРґСѓСЋС‰Р°СЏ СЃС‚СЂР°РЅРёС†Р°';
 /*
 loginform.tpl
 */
-$this->LANG['Login']			= 'Логин';
-$this->LANG['Password']			= 'Пароль';
+$this->LANG['Login']			= 'Р›РѕРіРёРЅ';
+$this->LANG['Password']			= 'РџР°СЂРѕР»СЊ';
 /*
 	navbar.tpl
 */
-$this->LANG['Administrating']	= 'Администрирование ExBB FM';
-$this->LANG['AdminMenu']		= 'Меню Администрации';
-$this->LANG['AdminIndex']		= 'Главная страница';
-$this->LANG['ForumIndex']		= 'Список форумов';
-$this->LANG['General']			= 'Общие настройки';
-$this->LANG['Configuration'] 	= 'Конфигурация';
-$this->LANG['Secure']			= 'Безопасность';
-$this->LANG['PostsSetup']		= 'Темы и ответы';
-$this->LANG['WordCensor']		= 'Цензура';
-$this->LANG['Smilies']			= 'Смайлики';
-$this->LANG['ForumAdmin']		= 'Форумы';
-$this->LANG['Manage']			= 'Управление';
-$this->LANG['Modules']			= 'Модули';
-$this->LANG['BannedIp']			= 'Блокировка IP адресов';
-$this->LANG['Users']			= 'Пользователи';
-$this->LANG['UsersList']		= 'Список пользователей';
-$this->LANG['FoundUser']		= 'Найти пользователя';
-$this->LANG['UsersRecount']		= 'Пересчитать';
-$this->LANG['Ranks']			= 'Звания';
-$this->LANG['MassEmail']		= 'Массовая рассылка почты';
-$this->LANG['VisitsLog']		= 'История посещений';
+$this->LANG['Administrating']	= 'РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ ExBB FM';
+$this->LANG['AdminMenu']		= 'РњРµРЅСЋ РђРґРјРёРЅРёСЃС‚СЂР°С†РёРё';
+$this->LANG['AdminIndex']		= 'Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°';
+$this->LANG['ForumIndex']		= 'РЎРїРёСЃРѕРє С„РѕСЂСѓРјРѕРІ';
+$this->LANG['General']			= 'РћР±С‰РёРµ РЅР°СЃС‚СЂРѕР№РєРё';
+$this->LANG['Configuration'] 	= 'РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ';
+$this->LANG['Secure']			= 'Р‘РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ';
+$this->LANG['PostsSetup']		= 'РўРµРјС‹ Рё РѕС‚РІРµС‚С‹';
+$this->LANG['WordCensor']		= 'Р¦РµРЅР·СѓСЂР°';
+$this->LANG['Smilies']			= 'РЎРјР°Р№Р»РёРєРё';
+$this->LANG['ForumAdmin']		= 'Р¤РѕСЂСѓРјС‹';
+$this->LANG['Manage']			= 'РЈРїСЂР°РІР»РµРЅРёРµ';
+$this->LANG['Modules']			= 'РњРѕРґСѓР»Рё';
+$this->LANG['BannedIp']			= 'Р‘Р»РѕРєРёСЂРѕРІРєР° IP Р°РґСЂРµСЃРѕРІ';
+$this->LANG['Users']			= 'РџРѕР»СЊР·РѕРІР°С‚РµР»Рё';
+$this->LANG['UsersList']		= 'РЎРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№';
+$this->LANG['FoundUser']		= 'РќР°Р№С‚Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ';
+$this->LANG['UsersRecount']		= 'РџРµСЂРµСЃС‡РёС‚Р°С‚СЊ';
+$this->LANG['Ranks']			= 'Р—РІР°РЅРёСЏ';
+$this->LANG['MassEmail']		= 'РњР°СЃСЃРѕРІР°СЏ СЂР°СЃСЃС‹Р»РєР° РїРѕС‡С‚С‹';
+$this->LANG['VisitsLog']		= 'РСЃС‚РѕСЂРёСЏ РїРѕСЃРµС‰РµРЅРёР№';
 
 /*
 
-$lang['Server_time'] = 'Время на сервере: ';
-$lang['Hack_entry'] = 'Статус журнала Попыток взлома';
-$lang['Info'] = 'Информация';
+$lang['Server_time'] = 'Р’СЂРµРјСЏ РЅР° СЃРµСЂРІРµСЂРµ: ';
+$lang['Hack_entry'] = 'РЎС‚Р°С‚СѓСЃ Р¶СѓСЂРЅР°Р»Р° РџРѕРїС‹С‚РѕРє РІР·Р»РѕРјР°';
+$lang['Info'] = 'РРЅС„РѕСЂРјР°С†РёСЏ';
 #setmembers.php
 
-$lang['Choose_option'] = 'Пожалуйста выберите опцию';
-$lang['Users_recount'] = 'Пересчитать';
-$lang['Update_gur'] = 'Это гарантирует, что вся информация о посещениях пользователями обновлена.';
-$lang['Post_count'] = 'Кол-во сообщений:';
-//$lang['Update_notify'] = 'Администратор поменял Ваш пароль или имя на форуме';
-$lang['Timezone'] = 'Разница во времени';
+$lang['Choose_option'] = 'РџРѕР¶Р°Р»СѓР№СЃС‚Р° РІС‹Р±РµСЂРёС‚Рµ РѕРїС†РёСЋ';
+$lang['Users_recount'] = 'РџРµСЂРµСЃС‡РёС‚Р°С‚СЊ';
+$lang['Update_gur'] = 'Р­С‚Рѕ РіР°СЂР°РЅС‚РёСЂСѓРµС‚, С‡С‚Рѕ РІСЃСЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїРѕСЃРµС‰РµРЅРёСЏС… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё РѕР±РЅРѕРІР»РµРЅР°.';
+$lang['Post_count'] = 'РљРѕР»-РІРѕ СЃРѕРѕР±С‰РµРЅРёР№:';
+//$lang['Update_notify'] = 'РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ РїРѕРјРµРЅСЏР» Р’Р°С€ РїР°СЂРѕР»СЊ РёР»Рё РёРјСЏ РЅР° С„РѕСЂСѓРјРµ';
+$lang['Timezone'] = 'Р Р°Р·РЅРёС†Р° РІРѕ РІСЂРµРјРµРЅРё';
 
 #setmembertitles.php
 
-$lang['Save'] = 'Сохранить';
-$lang['Change'] = 'Изменить';
-$lang['From_admin'] = 'Это e-mail сообщение послано вам администратором сайта ';
+$lang['Save'] = 'РЎРѕС…СЂР°РЅРёС‚СЊ';
+$lang['Change'] = 'РР·РјРµРЅРёС‚СЊ';
+$lang['From_admin'] = 'Р­С‚Рѕ e-mail СЃРѕРѕР±С‰РµРЅРёРµ РїРѕСЃР»Р°РЅРѕ РІР°Рј Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРѕРј СЃР°Р№С‚Р° ';
 
 #setforums.php
 
-$lang['Recount_complete'] = 'Пересчёт выполнен';
+$lang['Recount_complete'] = 'РџРµСЂРµСЃС‡С‘С‚ РІС‹РїРѕР»РЅРµРЅ';
 
-$lang['Html_on_off'] = 'HTML Вкл или Выкл?';
-$lang['On'] = 'ВКЛ';
-$lang['Off'] = 'ВЫКЛ';
-$lang['No_dir'] = 'Необходимая директория не создана!';
-$lang['Forum_created'] = 'Форум создан';
-$lang['Forums_updated'] = 'Информация о форумах и категориях успешно изменена';
-$lang['Cat_del_error'] = 'В выбранной категории нет форумов для удаления';
-$lang['Edit'] = 'Редактировать';
-$lang['in_catry'] = 'в категории';
-$lang['Update'] = 'Обновить';
-$lang['Forum_edit_error'] = 'Ошибка в данных редактирования форума!';
+$lang['Html_on_off'] = 'HTML Р’РєР» РёР»Рё Р’С‹РєР»?';
+$lang['On'] = 'Р’РљР›';
+$lang['Off'] = 'Р’Р«РљР›';
+$lang['No_dir'] = 'РќРµРѕР±С…РѕРґРёРјР°СЏ РґРёСЂРµРєС‚РѕСЂРёСЏ РЅРµ СЃРѕР·РґР°РЅР°!';
+$lang['Forum_created'] = 'Р¤РѕСЂСѓРј СЃРѕР·РґР°РЅ';
+$lang['Forums_updated'] = 'РРЅС„РѕСЂРјР°С†РёСЏ Рѕ С„РѕСЂСѓРјР°С… Рё РєР°С‚РµРіРѕСЂРёСЏС… СѓСЃРїРµС€РЅРѕ РёР·РјРµРЅРµРЅР°';
+$lang['Cat_del_error'] = 'Р’ РІС‹Р±СЂР°РЅРЅРѕР№ РєР°С‚РµРіРѕСЂРёРё РЅРµС‚ С„РѕСЂСѓРјРѕРІ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ';
+$lang['Edit'] = 'Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ';
+$lang['in_catry'] = 'РІ РєР°С‚РµРіРѕСЂРёРё';
+$lang['Update'] = 'РћР±РЅРѕРІРёС‚СЊ';
+$lang['Forum_edit_error'] = 'РћС€РёР±РєР° РІ РґР°РЅРЅС‹С… СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С„РѕСЂСѓРјР°!';
 
 
-$lang['List_forum_rebuild'] = 'Нажмите продолжить, чтобы пересоздать список тем<p><a href="setforums.php?action=restore&forum=%d&step=1">Продолжить</a>';
-$lang['List_forum_no'] = 'Не создан список тем!';
+$lang['List_forum_rebuild'] = 'РќР°Р¶РјРёС‚Рµ РїСЂРѕРґРѕР»Р¶РёС‚СЊ, С‡С‚РѕР±С‹ РїРµСЂРµСЃРѕР·РґР°С‚СЊ СЃРїРёСЃРѕРє С‚РµРј<p><a href="setforums.php?action=restore&forum=%d&step=1">РџСЂРѕРґРѕР»Р¶РёС‚СЊ</a>';
+$lang['List_forum_no'] = 'РќРµ СЃРѕР·РґР°РЅ СЃРїРёСЃРѕРє С‚РµРј!';
 
 
 
 #setvariables.php
-$lang['Enabled'] = 'Включено';
-$lang['Disabled'] = 'Выключено';
-$lang['Modules_ok'] = 'Конфигурация модулей успешно изменена';
+$lang['Enabled'] = 'Р’РєР»СЋС‡РµРЅРѕ';
+$lang['Disabled'] = 'Р’С‹РєР»СЋС‡РµРЅРѕ';
+$lang['Modules_ok'] = 'РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ РјРѕРґСѓР»РµР№ СѓСЃРїРµС€РЅРѕ РёР·РјРµРЅРµРЅР°';
 
-$lang['Email_to'] = 'Отправка письма для ';
-$lang['Email_error'] = 'Письмо не отправлено!';
-$lang['Email_from'] = ' написал(а) это письмо с форума ';
-$lang['Flood_mail'] =  ' секунд, чтобы написать новое письмо';
+$lang['Email_to'] = 'РћС‚РїСЂР°РІРєР° РїРёСЃСЊРјР° РґР»СЏ ';
+$lang['Email_error'] = 'РџРёСЃСЊРјРѕ РЅРµ РѕС‚РїСЂР°РІР»РµРЅРѕ!';
+$lang['Email_from'] = ' РЅР°РїРёСЃР°Р»(Р°) СЌС‚Рѕ РїРёСЃСЊРјРѕ СЃ С„РѕСЂСѓРјР° ';
+$lang['Flood_mail'] =  ' СЃРµРєСѓРЅРґ, С‡С‚РѕР±С‹ РЅР°РїРёСЃР°С‚СЊ РЅРѕРІРѕРµ РїРёСЃСЊРјРѕ';
 
-$lang['Server_loads'] = 'Загрузка сервера';
-$lang['Server_loads_no'] = 'нет данных';
+$lang['Server_loads'] = 'Р—Р°РіСЂСѓР·РєР° СЃРµСЂРІРµСЂР°';
+$lang['Server_loads_no'] = 'РЅРµС‚ РґР°РЅРЅС‹С…';
 
 */
 

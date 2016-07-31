@@ -1,24 +1,24 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
-$this->LANG['ServerLoadsNo']	= 'нет данных';
+$this->LANG['ServerLoadsNo']	= 'РЅРµС‚ РґР°РЅРЅС‹С…';
 /*
 	index_body.tpl
 */
-$this->LANG['WelcomeAdmin']		= 'Центр Администрирования конференции';
-$this->LANG['ConfStatistic']	= 'Статистика Форумов';
-$this->LANG['Statistic']		= 'Статистика';
-$this->LANG['Value']			= 'Значение';
-$this->LANG['PostsTotal']		= 'Сообщений';
-$this->LANG['PostsPerDay']		= 'Сообщений в день';
-$this->LANG['TopicsTotal']		= 'Тем всего';
-$this->LANG['TopicsPerDay']		= 'Тем в день';
-$this->LANG['UsersTotal']		= 'Участников всего';
-$this->LANG['UsersPerDay']		= 'Пользователей в день';
-$this->LANG['BoardStarted']		= 'Дата запуска';
-$this->LANG['PHPVer']			= 'Версия PHP';
-$this->LANG['OnlineNow']		= 'Сейчас посетителей';
-$this->LANG['GzipCompression']	= 'сжатие Gzip';
-$this->LANG['UploadsSize']		= 'Размер папки <b>uploads</b>';
-$this->LANG['ServerLoads']		= 'Загрузка сервера';
+$this->LANG['WelcomeAdmin']		= 'Р¦РµРЅС‚СЂ РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёСЏ РєРѕРЅС„РµСЂРµРЅС†РёРё';
+$this->LANG['ConfStatistic']	= 'РЎС‚Р°С‚РёСЃС‚РёРєР° Р¤РѕСЂСѓРјРѕРІ';
+$this->LANG['Statistic']		= 'РЎС‚Р°С‚РёСЃС‚РёРєР°';
+$this->LANG['Value']			= 'Р—РЅР°С‡РµРЅРёРµ';
+$this->LANG['PostsTotal']		= 'РЎРѕРѕР±С‰РµРЅРёР№';
+$this->LANG['PostsPerDay']		= 'РЎРѕРѕР±С‰РµРЅРёР№ РІ РґРµРЅСЊ';
+$this->LANG['TopicsTotal']		= 'РўРµРј РІСЃРµРіРѕ';
+$this->LANG['TopicsPerDay']		= 'РўРµРј РІ РґРµРЅСЊ';
+$this->LANG['UsersTotal']		= 'РЈС‡Р°СЃС‚РЅРёРєРѕРІ РІСЃРµРіРѕ';
+$this->LANG['UsersPerDay']		= 'РџРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РІ РґРµРЅСЊ';
+$this->LANG['BoardStarted']		= 'Р”Р°С‚Р° Р·Р°РїСѓСЃРєР°';
+$this->LANG['PHPVer']			= 'Р’РµСЂСЃРёСЏ PHP';
+$this->LANG['OnlineNow']		= 'РЎРµР№С‡Р°СЃ РїРѕСЃРµС‚РёС‚РµР»РµР№';
+$this->LANG['GzipCompression']	= 'СЃР¶Р°С‚РёРµ Gzip';
+$this->LANG['UploadsSize']		= 'Р Р°Р·РјРµСЂ РїР°РїРєРё <b>uploads</b>';
+$this->LANG['ServerLoads']		= 'Р—Р°РіСЂСѓР·РєР° СЃРµСЂРІРµСЂР°';
 ?>

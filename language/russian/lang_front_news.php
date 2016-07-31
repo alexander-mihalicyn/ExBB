@@ -1,34 +1,34 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
-$this->LANG['NewsNotExists']			= 'Объявление, с указанным ID, не найдено!';
-$this->LANG['AddNewNews']				= 'Добавить объявление';
-$this->LANG['DellAllNews']				= 'Удалить все';
-$this->LANG['EmptyNewsTitle']			= 'Нет новостей';
-$this->LANG['EmptyNews']				= 'Новостей и объявлений нет';
+$this->LANG['NewsNotExists']			= 'РћР±СЉСЏРІР»РµРЅРёРµ, СЃ СѓРєР°Р·Р°РЅРЅС‹Рј ID, РЅРµ РЅР°Р№РґРµРЅРѕ!';
+$this->LANG['AddNewNews']				= 'Р”РѕР±Р°РІРёС‚СЊ РѕР±СЉСЏРІР»РµРЅРёРµ';
+$this->LANG['DellAllNews']				= 'РЈРґР°Р»РёС‚СЊ РІСЃРµ';
+$this->LANG['EmptyNewsTitle']			= 'РќРµС‚ РЅРѕРІРѕСЃС‚РµР№';
+$this->LANG['EmptyNews']				= 'РќРѕРІРѕСЃС‚РµР№ Рё РѕР±СЉСЏРІР»РµРЅРёР№ РЅРµС‚';
 
 /*
 	delete
 */
-$this->LANG['SureDelAllNews']			= 'Вы уверены, что хотите удалить все новости?';
-$this->LANG['SureDelSelectedNews']		= 'Вы уверены, что хотите удалить новость "<b>%s</b>"?';
-$this->LANG['DelNews']					= 'Удаление объявлений';
-$this->LANG['AllNewsDeletedOk']			= 'Все объявления успешно удалены!';
-$this->LANG['SelectedNewsDeletedOk']	= 'Выбранное объявление успешно удалено!';
+$this->LANG['SureDelAllNews']			= 'Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РІСЃРµ РЅРѕРІРѕСЃС‚Рё?';
+$this->LANG['SureDelSelectedNews']		= 'Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РЅРѕРІРѕСЃС‚СЊ "<b>%s</b>"?';
+$this->LANG['DelNews']					= 'РЈРґР°Р»РµРЅРёРµ РѕР±СЉСЏРІР»РµРЅРёР№';
+$this->LANG['AllNewsDeletedOk']			= 'Р’СЃРµ РѕР±СЉСЏРІР»РµРЅРёСЏ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅС‹!';
+$this->LANG['SelectedNewsDeletedOk']	= 'Р’С‹Р±СЂР°РЅРЅРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅРѕ!';
 
 /*
 	add & edit news
 */
-$this->LANG['SmilesOn']					= '<a href=javascript:void(0); onClick=window.open("tools.php?action=smiles","","width=320,height=400,scrollbars=yes")>Посмотреть все доступные смайлики</a>';
-$this->LANG['Smiles']					= 'Смайлики';
-$this->LANG['NewsTitle']				= 'Заголовок объявления';
-$this->LANG['EnterNewsText']			= 'Текст объявления';
-$this->LANG['AddNewsTitle']				= 'Создание нового объявления';
-$this->LANG['EditNewsTitle']			= 'Редактирование объявления';
-$this->LANG['NewsTitleNeeded']			= 'Вам нужно ввести заголовок объявления!';
-$this->LANG['NewsTextNeeded']			= 'Вам нужно ввести текст объявления!';
-$this->LANG['NewNewsAddedOk']			= 'Новое объявление успешно добавлено!';
-$this->LANG['DoubleAddedOk']			= 'Ваше объявление уже добавлено!';
-$this->LANG['NewsEditedOk']				= 'Объявление успешно отредактировано!';
-$this->LANG['EnableHTML']				= 'Включить HTML теги в заголовке и тексте объявления?';
+$this->LANG['SmilesOn']					= '<a href=javascript:void(0); onClick=window.open("tools.php?action=smiles","","width=320,height=400,scrollbars=yes")>РџРѕСЃРјРѕС‚СЂРµС‚СЊ РІСЃРµ РґРѕСЃС‚СѓРїРЅС‹Рµ СЃРјР°Р№Р»РёРєРё</a>';
+$this->LANG['Smiles']					= 'РЎРјР°Р№Р»РёРєРё';
+$this->LANG['NewsTitle']				= 'Р—Р°РіРѕР»РѕРІРѕРє РѕР±СЉСЏРІР»РµРЅРёСЏ';
+$this->LANG['EnterNewsText']			= 'РўРµРєСЃС‚ РѕР±СЉСЏРІР»РµРЅРёСЏ';
+$this->LANG['AddNewsTitle']				= 'РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РѕР±СЉСЏРІР»РµРЅРёСЏ';
+$this->LANG['EditNewsTitle']			= 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЉСЏРІР»РµРЅРёСЏ';
+$this->LANG['NewsTitleNeeded']			= 'Р’Р°Рј РЅСѓР¶РЅРѕ РІРІРµСЃС‚Рё Р·Р°РіРѕР»РѕРІРѕРє РѕР±СЉСЏРІР»РµРЅРёСЏ!';
+$this->LANG['NewsTextNeeded']			= 'Р’Р°Рј РЅСѓР¶РЅРѕ РІРІРµСЃС‚Рё С‚РµРєСЃС‚ РѕР±СЉСЏРІР»РµРЅРёСЏ!';
+$this->LANG['NewNewsAddedOk']			= 'РќРѕРІРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅРѕ!';
+$this->LANG['DoubleAddedOk']			= 'Р’Р°С€Рµ РѕР±СЉСЏРІР»РµРЅРёРµ СѓР¶Рµ РґРѕР±Р°РІР»РµРЅРѕ!';
+$this->LANG['NewsEditedOk']				= 'РћР±СЉСЏРІР»РµРЅРёРµ СѓСЃРїРµС€РЅРѕ РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРѕ!';
+$this->LANG['EnableHTML']				= 'Р’РєР»СЋС‡РёС‚СЊ HTML С‚РµРіРё РІ Р·Р°РіРѕР»РѕРІРєРµ Рё С‚РµРєСЃС‚Рµ РѕР±СЉСЏРІР»РµРЅРёСЏ?';
 ?>
