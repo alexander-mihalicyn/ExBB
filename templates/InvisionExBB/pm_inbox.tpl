@@ -84,4 +84,4 @@ echo <<<DATA
 				<img src="./templates/InvisionExBB/im/not_readed.gif" alt="{$fm->LANG['NotReadedSts']}" hspace="3" /> {$fm->LANG['MesNotReaded']}
 			</div>
 DATA;
-?>
+

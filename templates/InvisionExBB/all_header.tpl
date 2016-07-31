@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $GLOBALS['fm']->LANG['ENCODING']; ?>">
 	<meta http-equiv="Content-Language" content="ru">
 	<meta http-equiv="Cache-Control" content="private">
-	<meta name="description" content="ExBB Full Mods <?php echo $GLOBALS['fm']->exbb['version']; ?> Ôîðóì íà PHP">
+	<meta name="description" content="ExBB Full Mods <?php echo $GLOBALS['fm']->exbb['version']; ?> Ð¤Ð¾Ñ€ÑƒÐ¼ Ð½Ð° PHP">
 	<meta http-equiv="description" content="<?php echo $GLOBALS['fm']->exbb['description']; ?>">
 	<meta name="Keywords" content="<?php echo $GLOBALS['fm']->exbb['keywords']; ?>,<?php echo $GLOBALS['fm']->_Keywords; ?>"/>
 	<meta name="Resource-type" content="document">
@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="./templates/InvisionExBB/style.css" type="text/css">
 	<script type="text/javascript" language="JavaScript" src="javascript/JsHttpRequest/JsHttpRequest.js"></script>
 	<?php echo $GLOBALS['fm']->_Link; ?>
+
 	<script type="text/javascript" language="JavaScript" src="javascript/jquery.min.js"></script>
 	<script type="text/javascript" language="JavaScript" src="javascript/button.js"></script>
 </head>

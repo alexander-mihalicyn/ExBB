@@ -9,4 +9,4 @@ $forum_data .= <<<DATA
 					<td class="row2"><span class="desc">{$last_msg}<br />{$lastpostdate}<br />{$fm->LANG['Author']}: <b>{$poster}</b></span></td>
 				</tr>
 DATA;
-?>
+

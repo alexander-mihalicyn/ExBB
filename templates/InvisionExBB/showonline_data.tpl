@@ -12,4 +12,3 @@ $output .= <<<DATA
 					<td align="center">{$online['in']}</td>
 				</tr>
 DATA;
-?>

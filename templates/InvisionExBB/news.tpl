@@ -16,4 +16,3 @@ $news_data =<<<DATA
 				</tr>
 			</table>
 DATA;
-?>

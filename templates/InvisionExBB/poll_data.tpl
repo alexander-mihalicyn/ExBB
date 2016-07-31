@@ -7,4 +7,3 @@ $pollch .= <<<POLL
 						<td><span class="moder">[ {$votes} ]</span></td>
 					</tr>
 POLL;
-?>

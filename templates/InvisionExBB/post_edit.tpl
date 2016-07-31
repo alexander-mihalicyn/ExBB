@@ -44,7 +44,7 @@ DATA;
 echo <<<DATA
 						<tr>
 							<td class="pformright" align="center">
-								<b>{$fm->LANG['MessageЕext']}</b>
+								<b>{$fm->LANG['MessageР•ext']}</b>
 							</td>
 						</tr>
 						<tr>
@@ -89,7 +89,7 @@ echo <<<DATA
 							<td class="pformstrip"><b>{$fm->LANG['AdminOptions']}</b></td>
 						</tr>
 						<tr>
-							<td class="pformright">Добавить подпись редактора?
+							<td class="pformright">Р”РѕР±Р°РІРёС‚СЊ РїРѕРґРїРёСЃСЊ СЂРµРґР°РєС‚РѕСЂР°?
 								<input name="modertext" type="radio" value="yes"{$modertext_yes}>&nbsp;{$fm->LANG['Yes']}&nbsp;
 								<input name="modertext" type="radio" value="no"{$modertext_no}>&nbsp;{$fm->LANG['No']}
 							</td>
@@ -133,4 +133,3 @@ var error= {
 				</form>
 			</div>
 DATA;
-?>

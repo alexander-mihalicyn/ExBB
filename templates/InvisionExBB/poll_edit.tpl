@@ -42,4 +42,3 @@ echo <<<POLL
 			</form>
 			<br>
 POLL;
-?>

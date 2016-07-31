@@ -4,6 +4,7 @@
 		href="index.php"><?php echo $fm->exbb['boardname']; ?></a> &raquo; <?php echo $fm->LANG['Registration']; ?>
 </div>
 <br/>
+
 <form action="register.php?<?php echo $sesid; ?>" method="post" name="creator">
 	<input type="hidden" name="action" value="addmember">
 	<table cellpadding="6" cellspacing="1" border="0" width="100%" align="center" class="tableborder">
@@ -57,7 +58,7 @@
 				<td class="profilright"><img src="regimage.php" id="captcha" border="0" alt="captcha"></td>
 			</tr>
 			<tr>
-				<td class="profilleft"><b><?php echo $fm->LANG['CaptchaÑonfirm']; ?></b><br/><span
+				<td class="profilleft"><b><?php echo $fm->LANG['CaptchaÐ¡onfirm']; ?></b><br/><span
 						class="desc"><?php echo $fm->LANG['CaptchaNote']; ?></span></td>
 				<td class="profilright"><input type="text" style="width: 130px" name="captcha" size="13" maxlength="10"
 											   onblur="verify_register(this);"/>

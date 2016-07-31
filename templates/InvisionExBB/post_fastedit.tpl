@@ -52,80 +52,80 @@ echo <<<DATA
             <tr>
               <td colspan="12"> <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td nowrap><span class="dats"> &nbsp;Цвет шрифта:
+                    <td nowrap><span class="dats"> &nbsp;Р¦РІРµС‚ С€СЂРёС„С‚Р°:
                       <select name="addbbcodecolor" onChange="bbfontstyle('[color=' + this.form.addbbcodecolor.options[this.form.addbbcodecolor.selectedIndex].value + ']', '[/color]');this.selectedIndex=0;" onMouseOver="helpline('fontcolor')">
-                        <option style="color:black; background-color: #FAFAFA" value="#444444" class="dats">По
-                        умолчанию</option>
-                        <option style="color:darkred; background-color: #FAFAFA" value="darkred" class="dats">Тёмно-красный</option>
-                        <option style="color:red; background-color: #FAFAFA" value="red" class="dats">Красный</option>
-                        <option style="color:orange; background-color: #FAFAFA" value="orange" class="dats">Оранжевый</option>
-                        <option style="color:brown; background-color: #FAFAFA" value="brown" class="dats">Коричневый</option>
-                        <option style="color:yellow; background-color: #FAFAFA" value="yellow" class="dats">Жёлтый</option>
-                        <option style="color:green; background-color: #FAFAFA" value="green" class="dats">Зелёный</option>
-                        <option style="color:olive; background-color: #FAFAFA" value="olive" class="dats">Оливковый</option>
-                        <option style="color:cyan; background-color: #FAFAFA" value="cyan" class="dats">Голубой</option>
-                        <option style="color:blue; background-color: #FAFAFA" value="blue" class="dats">Синий</option>
-                        <option style="color:darkblue; background-color: #FAFAFA" value="darkblue" class="dats">Тёмно-синий</option>
-                        <option style="color:indigo; background-color: #FAFAFA" value="indigo" class="dats">Индиго</option>
-                        <option style="color:violet; background-color: #FAFAFA" value="violet" class="dats">Фиолетовый</option>
-                        <option style="color:white; background-color: #FAFAFA" value="white" class="dats">Белый</option>
-                        <option style="color:black; background-color: #FAFAFA" value="black" class="dats">Чёрный</option>
+                        <option style="color:black; background-color: #FAFAFA" value="#444444" class="dats">РџРѕ
+                        СѓРјРѕР»С‡Р°РЅРёСЋ</option>
+                        <option style="color:darkred; background-color: #FAFAFA" value="darkred" class="dats">РўС‘РјРЅРѕ-РєСЂР°СЃРЅС‹Р№</option>
+                        <option style="color:red; background-color: #FAFAFA" value="red" class="dats">РљСЂР°СЃРЅС‹Р№</option>
+                        <option style="color:orange; background-color: #FAFAFA" value="orange" class="dats">РћСЂР°РЅР¶РµРІС‹Р№</option>
+                        <option style="color:brown; background-color: #FAFAFA" value="brown" class="dats">РљРѕСЂРёС‡РЅРµРІС‹Р№</option>
+                        <option style="color:yellow; background-color: #FAFAFA" value="yellow" class="dats">Р–С‘Р»С‚С‹Р№</option>
+                        <option style="color:green; background-color: #FAFAFA" value="green" class="dats">Р—РµР»С‘РЅС‹Р№</option>
+                        <option style="color:olive; background-color: #FAFAFA" value="olive" class="dats">РћР»РёРІРєРѕРІС‹Р№</option>
+                        <option style="color:cyan; background-color: #FAFAFA" value="cyan" class="dats">Р“РѕР»СѓР±РѕР№</option>
+                        <option style="color:blue; background-color: #FAFAFA" value="blue" class="dats">РЎРёРЅРёР№</option>
+                        <option style="color:darkblue; background-color: #FAFAFA" value="darkblue" class="dats">РўС‘РјРЅРѕ-СЃРёРЅРёР№</option>
+                        <option style="color:indigo; background-color: #FAFAFA" value="indigo" class="dats">РРЅРґРёРіРѕ</option>
+                        <option style="color:violet; background-color: #FAFAFA" value="violet" class="dats">Р¤РёРѕР»РµС‚РѕРІС‹Р№</option>
+                        <option style="color:white; background-color: #FAFAFA" value="white" class="dats">Р‘РµР»С‹Р№</option>
+                        <option style="color:black; background-color: #FAFAFA" value="black" class="dats">Р§С‘СЂРЅС‹Р№</option>
                       </select>
-                      &nbsp;Размер шрифта:
+                      &nbsp;Р Р°Р·РјРµСЂ С€СЂРёС„С‚Р°:
                       <select name="addbbcodesize" onChange="bbfontstyle('[size=' + this.form.addbbcodesize.options[this.form.addbbcodesize.selectedIndex].value + ']', '[/size]')" onMouseOver="helpline('fontsize')">
-                        <option value="7" class="dats">Очень маленький</option>
-                        <option value="9" class="dats">Маленький</option>
-                        <option value="12" selected class="dats">По умолчанию</option>
-                        <option value="18" class="dats">Большой</option>
-                        <option  value="24" class="dats">Огромный</option>
+                        <option value="7" class="dats">РћС‡РµРЅСЊ РјР°Р»РµРЅСЊРєРёР№</option>
+                        <option value="9" class="dats">РњР°Р»РµРЅСЊРєРёР№</option>
+                        <option value="12" selected class="dats">РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ</option>
+                        <option value="18" class="dats">Р‘РѕР»СЊС€РѕР№</option>
+                        <option  value="24" class="dats">РћРіСЂРѕРјРЅС‹Р№</option>
                       </select>
                       </span></td>
-                    <td nowrap="nowrap" align="right"><span class="dats"> <a href="javascript:bbstyle(-1)" class="dats" onMouseOver="helpline('close')">Закрыть
-                      тэги</a></span></td>
+                    <td nowrap="nowrap" align="right"><span class="dats"> <a href="javascript:bbstyle(-1)" class="dats" onMouseOver="helpline('close')">Р—Р°РєСЂС‹С‚СЊ
+                      С‚СЌРіРё</a></span></td>
                   </tr>
                 </table></td>
             </tr>
             <tr>
               <td colspan="12"> <span class="dats">
-                <input type="text" name="helpbox" size="45" maxlength="100" style="width:450px; font-size:10px" class="helpline" value="Подсказка: Можно быстро применить стили к выделенному тексту" />
+                <input type="text" name="helpbox" size="45" maxlength="100" style="width:450px; font-size:10px" class="helpline" value="РџРѕРґСЃРєР°Р·РєР°: РњРѕР¶РЅРѕ Р±С‹СЃС‚СЂРѕ РїСЂРёРјРµРЅРёС‚СЊ СЃС‚РёР»Рё Рє РІС‹РґРµР»РµРЅРЅРѕРјСѓ С‚РµРєСЃС‚Сѓ" />
                 </span></td>
             </tr>
           </table></td>
       </tr>
       <tr>
-        <td class="pformright" valign='top'> <textarea cols='90' rows='11' wrap="virtual"  name="inpost" tabindex='3' class='textinput' onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);">[quote:Anastasia]...а чего дальше то делать?[/quote]
-найди файл readme или файл с указаниями по инсталяции и действуйте согласно инструкциям в файле.</textarea></td>
+        <td class="pformright" valign='top'> <textarea cols='90' rows='11' wrap="virtual"  name="inpost" tabindex='3' class='textinput' onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);">[quote:Anastasia]...Р° С‡РµРіРѕ РґР°Р»СЊС€Рµ С‚Рѕ РґРµР»Р°С‚СЊ?[/quote]
+РЅР°Р№РґРё С„Р°Р№Р» readme РёР»Рё С„Р°Р№Р» СЃ СѓРєР°Р·Р°РЅРёСЏРјРё РїРѕ РёРЅСЃС‚Р°Р»СЏС†РёРё Рё РґРµР№СЃС‚РІСѓР№С‚Рµ СЃРѕРіР»Р°СЃРЅРѕ РёРЅСЃС‚СЂСѓРєС†РёСЏРј РІ С„Р°Р№Р»Рµ.</textarea></td>
       </tr>
       <tr>
         <td class='pformright'><input type=checkbox name="inshowsignature" value="yes" checked>
-          Хотите добавить свою подпись?<br> <input type=checkbox name="inshowemoticons" value="yes" checked>
-          Вы хотите <b>разрешить</b> <a href=javascript:void(0); onClick=window.open("tools.php?action=smiles","","width=320,height=400,scrollbars=yes")>смайлики</a>
-          в этом сообщении? </td>
+          РҐРѕС‚РёС‚Рµ РґРѕР±Р°РІРёС‚СЊ СЃРІРѕСЋ РїРѕРґРїРёСЃСЊ?<br> <input type=checkbox name="inshowemoticons" value="yes" checked>
+          Р’С‹ С…РѕС‚РёС‚Рµ <b>СЂР°Р·СЂРµС€РёС‚СЊ</b> <a href=javascript:void(0); onClick=window.open("tools.php?action=smiles","","width=320,height=400,scrollbars=yes")>СЃРјР°Р№Р»РёРєРё</a>
+          РІ СЌС‚РѕРј СЃРѕРѕР±С‰РµРЅРёРё? </td>
       </tr>
       <tr>
-        <td class='pformstrip' align='center' style='text-align:left'> <b>Опции
-          модератора</b></td>
+        <td class='pformstrip' align='center' style='text-align:left'> <b>РћРїС†РёРё
+          РјРѕРґРµСЂР°С‚РѕСЂР°</b></td>
       </tr>
       <tr>
-        <td class='pformright'><b>Добавить подпись редактора?</b><br> <input name="modertext" type="radio" value="yes" checked>
-          &nbsp;да&nbsp;&nbsp;&nbsp; <input name="modertext" type="radio" value="no">
-          &nbsp;нет </td>
+        <td class='pformright'><b>Р”РѕР±Р°РІРёС‚СЊ РїРѕРґРїРёСЃСЊ СЂРµРґР°РєС‚РѕСЂР°?</b><br> <input name="modertext" type="radio" value="yes" checked>
+          &nbsp;РґР°&nbsp;&nbsp;&nbsp; <input name="modertext" type="radio" value="no">
+          &nbsp;РЅРµС‚ </td>
       </tr>
       <tr>
         <td class='pformright'> <input class="tab" type=checkbox name="deletepost" value="yes">
-          Удалить это сообщение? Только для администратора или модератора форума<br>
+          РЈРґР°Р»РёС‚СЊ СЌС‚Рѕ СЃРѕРѕР±С‰РµРЅРёРµ? РўРѕР»СЊРєРѕ РґР»СЏ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР° РёР»Рё РјРѕРґРµСЂР°С‚РѕСЂР° С„РѕСЂСѓРјР°<br>
           <input class="tab" type=checkbox name="lockedit" value="1">
-          Запретить правку сообщения? </td>
+          Р—Р°РїСЂРµС‚РёС‚СЊ РїСЂР°РІРєСѓ СЃРѕРѕР±С‰РµРЅРёСЏ? </td>
       </tr>
       <tr>
         <td class='pformright'><TEXTAREA class="textarea1"  cols=60 name=mo_edit rows=3 wrap=VIRTUAL></TEXTAREA></td>
       </tr>
       <tr>
-        <td class='pformstrip' align='center' style='text-align:center'> <input type="submit" value="Отправить" name="submit" onClick="return Formchecker(this.form)" tabindex='4' class='forminput' accesskey='s' />
-          &nbsp; <input type="reset"  value="Очистить"  tabindex='5'  class='forminput' />
+        <td class='pformstrip' align='center' style='text-align:center'> <input type="submit" value="РћС‚РїСЂР°РІРёС‚СЊ" name="submit" onClick="return Formchecker(this.form)" tabindex='4' class='forminput' accesskey='s' />
+          &nbsp; <input type="reset"  value="РћС‡РёСЃС‚РёС‚СЊ"  tabindex='5'  class='forminput' />
         </td>
       </tr>
     </table>
   </form>
 DATA;
-?>
+

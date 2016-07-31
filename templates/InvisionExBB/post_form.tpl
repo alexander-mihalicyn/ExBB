@@ -44,6 +44,7 @@ $post_form .= <<<DATA
 							</td>
 						</tr>
 DATA;
+
 if ($upload !== 0) {
 $post_form .= <<<DATA
 						<tr valign="top">

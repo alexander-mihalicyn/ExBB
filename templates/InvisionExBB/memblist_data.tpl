@@ -11,4 +11,3 @@ $members_data .= <<<DATA
 					<td>{$user['icq']}</td>
 				</tr>
 DATA;
-?>

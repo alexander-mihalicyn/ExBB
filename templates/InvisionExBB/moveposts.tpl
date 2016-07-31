@@ -13,7 +13,7 @@ echo <<<DATA
 				{$hidden}
 				<table class="tableborder" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td class="maintitle" colspan="2"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0" alt="&gt;" width="8" height="8" />&nbsp;Опции выделения</td>
+						<td class="maintitle" colspan="2"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0" alt="&gt;" width="8" height="8" />&nbsp;РћРїС†РёРё РІС‹РґРµР»РµРЅРёСЏ</td>
 					</tr>
 					<tr>
 						<td class="pformleft"><b>{$selectdesc}</b></td>
@@ -26,4 +26,3 @@ echo <<<DATA
 				</table>
 			</form>
 DATA;
-?>

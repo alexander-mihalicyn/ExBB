@@ -18,4 +18,3 @@ $inbox_data .= <<<DATA
 							<td><input name="msg[]" type="checkbox" value="$message_id"></td>
 						</tr>
 DATA;
-?>

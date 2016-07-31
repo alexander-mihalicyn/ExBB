@@ -44,4 +44,3 @@ start_chat();
 //-->
 </script>
 DATA;
-?>

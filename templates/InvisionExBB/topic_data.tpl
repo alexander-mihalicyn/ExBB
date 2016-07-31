@@ -1,6 +1,6 @@
 <?php
 $topic_data .= <<<DATA
-			<table class="topic">
+<table class="topic">
 				<tr class="row4">
 					<td class="normalname"><a name="{$key}"></a>{$username}</td>
 					<td class="postdetails">

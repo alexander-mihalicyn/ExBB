@@ -4,6 +4,7 @@
 		href="index.php"><?php echo $fm->exbb['boardname']; ?></a> &raquo; <?php echo $PageTitle; ?>
 </div>
 <br/>
+
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 	<input name="action" type="hidden" value="activate">
 	<table cellpadding="6" cellspacing="1" border="0" width="100%" align="center" class="tableborder">

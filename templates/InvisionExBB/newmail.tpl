@@ -77,4 +77,3 @@ function NewPm() {
 	</div>
 </div>
 DATA;
-?>

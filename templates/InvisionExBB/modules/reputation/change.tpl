@@ -37,4 +37,3 @@ return false;
           </div>
           <br>
 DATA;
-?>

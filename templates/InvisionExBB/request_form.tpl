@@ -1,6 +1,6 @@
 <?php
 $RequestForm = <<<DATA
-			<br />
+<br />
 				<form action="{$_SERVER['PHP_SELF']}" method="post" name="request">
 					{$hiddinfield}
 					<table cellpadding="4" cellspacing="1" border="0" width="100%" align="center" class="tableborder">
@@ -22,4 +22,3 @@ $RequestForm = <<<DATA
 				</form>
 				<br>
 DATA;
-?>

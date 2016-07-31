@@ -1,11 +1,9 @@
 <br/>
-
 <?php if ($catrow) : ?>
 <table class="tableborder" width="100%" border="0" cellspacing="1" cellpadding="4">
 	<tr>
 		<th colspan="5" class="maintitle" align="left"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0"
-															alt="&gt;" width="8" height="8"/>&nbsp;<a
-					href="index.php?c=<?php echo $in_cat; ?>"><?php echo $category; ?></a></th>
+															alt="&gt;" width="8" height="8"/>&nbsp;<a href="index.php?c=<?php echo $in_cat; ?>"><?php echo $category; ?></a></th>
 	</tr>
 	<tr>
 		<th align="center" width="2%" class="titlemedium"><img src="./templates/InvisionExBB/im/spacer.gif" alt=""

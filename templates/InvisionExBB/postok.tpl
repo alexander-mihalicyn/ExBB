@@ -1,6 +1,6 @@
 <?php
 echo <<<DATA
-			<br />
+<br />
 			<table width="100%" align="center">
 				<tr>
 					<td valign="middle">

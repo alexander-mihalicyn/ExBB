@@ -1,6 +1,7 @@
 <?php
 include('./templates/InvisionExBB/form_code.tpl');
 include('./templates/InvisionExBB/smile_map.tpl');
+
 echo <<<DATA
 <script type="text/javascript" language="JavaScript" src="javascript/formcode.js"></script>
 			<br>

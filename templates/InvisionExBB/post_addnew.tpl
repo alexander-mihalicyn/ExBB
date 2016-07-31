@@ -146,4 +146,3 @@ echo <<<DATA
 				</form>
 			</div>
 DATA;
-?>

@@ -10,5 +10,3 @@ echo <<<DATA
 			<br>
 			{$newsbody}
 DATA;
-?>
-

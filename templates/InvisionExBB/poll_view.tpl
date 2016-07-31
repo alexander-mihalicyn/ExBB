@@ -5,4 +5,3 @@ $pollch .= <<<POLL
 						<td colspan="3" align="left"><span class="moder">{$ptext}</span></td>
 					</tr>
 POLL;
-?>

@@ -15,4 +15,3 @@ echo <<<DATA
             </table><br>
             {$pages}
 DATA;
-?>

@@ -1,7 +1,7 @@
 <?php
 $err = ($error) ? '<font color="#ff0000">'.implode('<br>', $error).'<br><br>' : '';
-echo <<
-<DATA
+
+echo <<<DATA
 <div id="navstrip" align="left"><br>
 	<img src="./templates/InvisionExBB/im/nav.gif" border="0" alt="&gt;"/>&nbsp;<a
 			href="index.php">{$fm->exbb['boardname']}</a> &nbsp;&raquo;&nbsp; <a

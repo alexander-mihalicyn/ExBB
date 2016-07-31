@@ -1,6 +1,6 @@
 <?php
 /*
-	Login form
+Login form
 */
 $logins = ($fm->user['id'] !== 0) ? '' : <<<LOGINS
 <div align="right">
@@ -74,12 +74,12 @@ DATA;
 DATA;
 	}
 	echo <<<DATA
-	<!-- ÒÎÏ-ËÈÑÒ ÏÎËÜÇÎÂÀÒÅËÅÉ -->
+	<!-- Ð¢ÐžÐŸ-Ð›Ð˜Ð¡Ð¢ ÐŸÐžÐ›Ð¬Ð—ÐžÐ’ÐÐ¢Ð•Ð›Ð•Ð™ -->
 	{$userstop}
-	<!-- ÒÎÏ-ËÈÑÒ ÏÎËÜÇÎÂÀÒÅËÅÉ -->
-	<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+	<!-- Ð¢ÐžÐŸ-Ð›Ð˜Ð¡Ð¢ ÐŸÐžÐ›Ð¬Ð—ÐžÐ’ÐÐ¢Ð•Ð›Ð•Ð™ -->
+	<!-- Ð”Ð•ÐÐ¬ Ð ÐžÐ–Ð”Ð•ÐÐ˜Ð¯ -->
 	{$birstdaylist}
-	<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+	<!-- Ð”Ð•ÐÐ¬ Ð ÐžÐ–Ð”Ð•ÐÐ˜Ð¯ -->
 	<tr>
 		<td class="row2" width="5%" align="center" valign="middle"><img src="./templates/InvisionExBB/im/stats.gif"
 																		border="0" alt="Board Stats"/></td>
@@ -101,7 +101,7 @@ DATA;
 DATA;
 	if ($fm->exbb['rss'] === TRUE) {
 	echo <<<DATA
-	<a href="tools.php?action=rss" target="_blank" title="RSS êàíàë ôîðóìà {$GLOBALS['fm']->exbb['boardname']}"><img
+	<a href="tools.php?action=rss" target="_blank" title="RSS ÐºÐ°Ð½Ð°Ð» Ñ„Ð¾Ñ€ÑƒÐ¼Ð° {$GLOBALS['fm']->exbb['boardname']}"><img
 				src="./im/images/rss20.gif" width="80" height="15" alt="RSS" border="0"></a>
 DATA;
 	}

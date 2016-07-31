@@ -19,4 +19,3 @@ $select_birstday =<<<BIRSTDAY
 						<td class="profilright"><input class="tab" type="radio" name="showyear" value="yes" {$show_yes} />{$fm->LANG['Yes']}&nbsp;&nbsp;<input class="tab" type="radio" name="showyear" value="no" {$show_no} />{$fm->LANG['No']}</td>
 					</tr>
 BIRSTDAY;
-?>

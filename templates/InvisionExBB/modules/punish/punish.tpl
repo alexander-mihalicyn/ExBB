@@ -6,7 +6,8 @@ $punish_data =<<<DATA
 				</tr>
 DATA;
 }
-echo<<<DATA
+
+echo <<<DATA
 			<br>
 			<table width="100%" cellpadding="3" cellspacing="1" class="tableborder" align="center">
 				<tr>

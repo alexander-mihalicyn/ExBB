@@ -20,4 +20,3 @@ $content.= <<<DATA
 		</table>
 		<br>
 DATA;
-?>

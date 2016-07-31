@@ -4,6 +4,7 @@ $subforums .= <<<DATA
 					<td class="row4" align="center">{$folderpicture}</td>
 					<td class="row4">
 DATA;
+
 if ($sponsor) {
 $subforums .= <<<DATA
 <div style="float: right">

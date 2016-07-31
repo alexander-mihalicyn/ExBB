@@ -35,4 +35,3 @@ echo <<<DATA
   		</div>
   		<br>
 DATA;
-?>

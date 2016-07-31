@@ -8,7 +8,6 @@ padding: 0 0 0 16px;
 color: #ff0000;
 background: url('im/wrong.gif') no-repeat;
 }
-
 .chat_your {
 background: #FFF799;
 }
@@ -195,7 +194,7 @@ margin:2px;}
 
 
 /*popup_loginform*/
-/* Базовые стили слоя затемнения и модального окна  */
+/* Р‘Р°Р·РѕРІС‹Рµ СЃС‚РёР»Рё СЃР»РѕСЏ Р·Р°С‚РµРјРЅРµРЅРёСЏ Рё РјРѕРґР°Р»СЊРЅРѕРіРѕ РѕРєРЅР°  */
 .overlay {
 top: 0;
 right: 0;
@@ -203,11 +202,11 @@ bottom: 0;
 left: 0;
 z-index: 1;
 visibility: hidden;
-/* фон затемнения */
+/* С„РѕРЅ Р·Р°С‚РµРјРЅРµРЅРёСЏ */
 background-color: rgba(0, 0, 0, 0.7);
 opacity: 0;
-position: fixed; /* фиксированное поцизионирование */
-cursor: default; /* тип курсара */
+position: fixed; /* С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРµ РїРѕС†РёР·РёРѕРЅРёСЂРѕРІР°РЅРёРµ */
+cursor: default; /* С‚РёРї РєСѓСЂСЃР°СЂР° */
 -webkit-transition: opacity .5s;
 -moz-transition: opacity .5s;
 -ms-transition: opacity .5s;
@@ -227,13 +226,13 @@ display:block;
 margin: auto;
 width: 100%;
 height: auto;
-/* скругление углов встроенных картинок */
+/* СЃРєСЂСѓРіР»РµРЅРёРµ СѓРіР»РѕРІ РІСЃС‚СЂРѕРµРЅРЅС‹С… РєР°СЂС‚РёРЅРѕРє */
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 -ms-border-radius: 4px;
 border-radius: 4px;
 }
-/* встроенные элементы м-медиа, фреймы */
+/* РІСЃС‚СЂРѕРµРЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ Рј-РјРµРґРёР°, С„СЂРµР№РјС‹ */
 embed, iframe {
 top: 0;
 right: 0;
@@ -245,20 +244,20 @@ min-width: 320px;
 max-width: 600px;
 width: 100%;
 }
-.popup h1 { /* заголовок 1 */
+.popup h1 { /* Р·Р°РіРѕР»РѕРІРѕРє 1 */
 color: #008000;
 text-align: left;
 text-shadow: 0 1px 3px rgba(0,0,0,.3);
 font:24px 'Trebuchet MS', Helvetica, sans-serif;
 font-weight: bold;
 }
-.popup h2 { /* заголовок 2 */
+.popup h2 { /* Р·Р°РіРѕР»РѕРІРѕРє 2 */
 color: #008000;
 text-align: left;
 text-shadow: 0 1px 3px rgba(0,0,0,.3);
 font:22px 'Trebuchet MS', Helvetica, sans-serif;
 }
-/*** Формируем стили модального окна ***/
+/*** Р¤РѕСЂРјРёСЂСѓРµРј СЃС‚РёР»Рё РјРѕРґР°Р»СЊРЅРѕРіРѕ РѕРєРЅР° ***/
 .popup {
 top: 0;
 right: 0;
@@ -271,38 +270,38 @@ margin: 0 auto;
 width: 90%;
 min-width: 320px;
 max-width: 600px;
-/* фиксированное позиционирование, окно стабильно при прокрутке */
+/* С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРµ РїРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ, РѕРєРЅРѕ СЃС‚Р°Р±РёР»СЊРЅРѕ РїСЂРё РїСЂРѕРєСЂСѓС‚РєРµ */
 position: fixed;
 padding: 15px;
 border: 1px solid #383838;
-/* скругление углов */
+/* СЃРєСЂСѓРіР»РµРЅРёРµ СѓРіР»РѕРІ */
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 -ms-border-radius: 4px;
 border-radius: 4px;
 background-color: #FFFFFF;
-/* внешняя тень блока */
+/* РІРЅРµС€РЅСЏСЏ С‚РµРЅСЊ Р±Р»РѕРєР° */
 -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
-/* полная прозрачность окна, появление при клике */
+/* РїРѕР»РЅР°СЏ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ РѕРєРЅР°, РїРѕСЏРІР»РµРЅРёРµ РїСЂРё РєР»РёРєРµ */
 opacity: 0;
-/* эффект перехода (появление) */
+/* СЌС„С„РµРєС‚ РїРµСЂРµС…РѕРґР° (РїРѕСЏРІР»РµРЅРёРµ) */
 -webkit-transition: all ease .5s;
 -moz-transition: all ease .5s;
 -ms-transition: all ease .5s;
 -o-transition: all ease .5s;
 transition: all ease .5s;
 }
-/* активируем появление окна и затемнение фона */
+/* Р°РєС‚РёРІРёСЂСѓРµРј РїРѕСЏРІР»РµРЅРёРµ РѕРєРЅР° Рё Р·Р°С‚РµРјРЅРµРЅРёРµ С„РѕРЅР° */
 .overlay:target+.popup {
-top: 20%; /* положение окна от верха страницы при появлении */
+top: 20%; /* РїРѕР»РѕР¶РµРЅРёРµ РѕРєРЅР° РѕС‚ РІРµСЂС…Р° СЃС‚СЂР°РЅРёС†С‹ РїСЂРё РїРѕСЏРІР»РµРЅРёРё */
 visibility: visible;
-opacity: 1; /* убираем прозрачность */
+opacity: 1; /* СѓР±РёСЂР°РµРј РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ */
 }
-/* формируем кнопку закрытия */
+/* С„РѕСЂРјРёСЂСѓРµРј РєРЅРѕРїРєСѓ Р·Р°РєСЂС‹С‚РёСЏ */
 .close {
 position: absolute;
 top: -10px;
@@ -323,7 +322,7 @@ text-align: center;
 text-decoration: none;
 font-weight: bold;
 line-height: 20px;
-/* задаём значения и эффект перехода при наведении */
+/* Р·Р°РґР°С‘Рј Р·РЅР°С‡РµРЅРёСЏ Рё СЌС„С„РµРєС‚ РїРµСЂРµС…РѕРґР° РїСЂРё РЅР°РІРµРґРµРЅРёРё */
 -webkit-transition: all ease .8s;
 -moz-transition: all ease .8s;
 -ms-transition: all ease .8s;
@@ -338,14 +337,15 @@ font-size: 12px;
 }
 .close:hover {
 background-color: rgba(252, 20, 0, 0.8);
-/* крутим кнопку при наведении */
+/* РєСЂСѓС‚РёРј РєРЅРѕРїРєСѓ РїСЂРё РЅР°РІРµРґРµРЅРёРё */
 -webkit-transform: rotate(360deg);
 -moz-transform: rotate(360deg);
 -ms-transform: rotate(360deg);
 -o-transform: rotate(360deg);
 transform: rotate(360deg);    
 }
-/* опционально при добавлении вложений */
+/* РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё РІР»РѕР¶РµРЅРёР№ */
 .popup p, .popup div {
-margin-bottom: 10px;
+	margin-bottom: 10px;
+}
 /*end_popup_loginform*/

@@ -13,4 +13,3 @@ $postsData .= <<<DATA
                     </table>
                     <div class="delemiter"></div>
 DATA;
-?>

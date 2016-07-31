@@ -25,4 +25,3 @@ $mod_options = <<<DATA
 	<input type="button" value="Go!" onClick="CheckFormAction();" />
 </form>
 DATA;
-?>

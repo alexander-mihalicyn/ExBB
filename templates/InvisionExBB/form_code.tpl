@@ -1,5 +1,6 @@
 <?php
 $form_code = '&nbsp;';
+
 if ($fm->exbb['exbbcodes'] === TRUE) {
 $form_code = <<<COD
 <script type="text/javascript" language="JavaScript">
@@ -45,7 +46,7 @@ $form_code = <<<COD
 		php: {0:'[php]',1:'[/php]',2:'{$fm->LANG['HelpPHP']}'},
 		offtop: {0:'[off]',1:'[/off]',2:'{$fm->LANG['HelpOfftop']}'},
 		rus: {0:'[rus]',1:'[/rus]',2:'{$fm->LANG['HelpRus']}'},
-		quot: {0:'«',1:'»',2:'{$fm->LANG['HelpQuot']}'},
+		quot: {0:'Â«',1:'Â»',2:'{$fm->LANG['HelpQuot']}'},
 		marquee: {0:'[marquee]',1:'[/marquee]',2:'{$fm->LANG['HelpMarquee']}'},
 		hr: {0:'[hr]',1:'',2:'{$fm->LANG['HelpHr']}'},
 		search: {0:'[search]',1:'[/search]',2:'{$fm->LANG['HelpSearch']}'},

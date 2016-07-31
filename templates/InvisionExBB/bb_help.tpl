@@ -1,6 +1,5 @@
 <?php
 echo <<<DATA
-
 			<div class="tableborder">
 <table class="tablebasic" cellspacing="1" cellpadding="4" width="100%">
 	<tr>

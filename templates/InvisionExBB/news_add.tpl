@@ -46,7 +46,7 @@ $newsbody .= <<<DATA
 					</tr>
 					<tr>
 						<td class="pformleft">
-							{$fm->LANG['EnableHTML']}  <input name="html" type="radio" value="yes" {$html_yes}> δΰ <input name="html" type="radio" value="no" {$html_no}> νες
+							{$fm->LANG['EnableHTML']}  <input name="html" type="radio" value="yes" {$html_yes}> Π΄Π° <input name="html" type="radio" value="no" {$html_no}> Π½ΠµΡ‚
 						</td>
 					</tr>
 					<tr>
@@ -68,4 +68,3 @@ var error= {
 </script>
 			</form>
 DATA;
-?>

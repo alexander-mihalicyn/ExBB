@@ -14,4 +14,3 @@ $mod_punish =<<<PUNISH
 					</td>
 				</tr>
 PUNISH;
-?>

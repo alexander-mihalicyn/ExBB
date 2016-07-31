@@ -7,4 +7,3 @@ $rep_data .= '<tr style="padding: 4px; font-weight: normal;">
                     <td align="center" class="'.$rep_class.'">'.$rep_forpost.'</td>
                     <td class="'.$rep_class.'">'.$rep_reason.'</td>
                 </tr>';
-?>

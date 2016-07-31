@@ -1,5 +1,6 @@
 <?php
 $navi = ($subf) ? '<a href="index.php?c='.$pcatid.'">'.$pcatname.'</a>&nbsp;&raquo;&nbsp;<a href="forums.php?forum='.$subf.'">'.$pforumname.'</a>' : '<a href="index.php?c='.$catid.'">'.$category.'</a>';
+
 echo <<<DATA
 			<br />
 			<div id="navstrip" align="left">

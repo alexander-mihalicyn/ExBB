@@ -90,4 +90,3 @@ var error= {
 			</form>
 			<br>
 DATA;
-?>

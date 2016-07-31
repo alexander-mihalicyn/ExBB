@@ -5,4 +5,3 @@ $show_birstday = <<<BIRSTDAY
 					<td class="pformright"><span class="gen">{$fullbirstday}</span></td>
 				</tr>
 BIRSTDAY;
-?>

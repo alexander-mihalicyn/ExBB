@@ -2,20 +2,20 @@
 $logins = ($fm->user['id'] !== 0) ? '' : <<<LOGINS
 <table width="100%" cellpadding="0" cellspacing="1" class="tableborder">
 <tr>
-<td class="maintitle"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0" alt="&gt;" width="8" height="8" />&nbsp;Вход на сайт</td>
+<td class="maintitle"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0" alt="&gt;" width="8" height="8" />&nbsp;Р’С…РѕРґ РЅР° СЃР°Р№С‚</td>
 </tr>
 <tr>
 <td align="center">
 <br />
 <form style="display:inline" action="loginout.php" method="post">
 <input type=hidden name="action" value="login">
-<b>Логин : </b>&nbsp;&nbsp;<input type="text" class="forminput" size="30" name="imembername" onfocus=this.value="" value="" /><br /><br />
-<b>Пароль : </b><input type="password" class="forminput" size="30" name="ipassword" onfocus=this.value="" value="" /><br /><br />
+<b>Р›РѕРіРёРЅ : </b>&nbsp;&nbsp;<input type="text" class="forminput" size="30" name="imembername" onfocus=this.value="" value="" /><br /><br />
+<b>РџР°СЂРѕР»СЊ : </b><input type="password" class="forminput" size="30" name="ipassword" onfocus=this.value="" value="" /><br /><br />
 <input type="submit" class="forminput" name="submit" value="{$fm->LANG['Login']}">
 </form>
 <br /><br />
 <b><a href="profile.php?action=lostpassword" title="{$fm->LANG['ForgottenPass']}">{$fm->LANG['ForgottenPass']}</a><br /><br />
-Еще не зарегистрирован? <a href="register.php" title="{$fm->LANG['Registration']}">Зарегистрируйся!</a></b>
+Р•С‰Рµ РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ? <a href="register.php" title="{$fm->LANG['Registration']}">Р—Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№СЃСЏ!</a></b>
 <br /><br />
 </td>
 </tr>
@@ -26,6 +26,7 @@ $logins = ($fm->user['id'] !== 0) ? '' : <<<LOGINS
 LOGINS;
 
 $unread			= ($fm->user['unread'] === 0) ? '':' ( '.$fm->user['unread'].' )';
+
 $admincenter	= (defined('IS_ADMIN')) ? '
 &nbsp;&middot; <a href="announcements.php" title="'.$fm->LANG['Announ'].'">'.$fm->LANG['Announ'].'</a>
 &nbsp;&middot; <a href="admincenter.php" title="'.$fm->LANG['Admincenter'].'"  target="_blank"><font color=red>'.$fm->LANG['Admincenter'].'</font></a>
@@ -38,7 +39,7 @@ $loginout		= ($fm->user['id'] !== 0) ? '
 &nbsp;&middot; <a href="tools.php?action=rules" title="'.$fm->LANG['ForumRules'].'"><font color="red">'.$fm->LANG['ForumRules'].'</font></a> )
 '
 :
-'( <a href="#win1">Вход</a><a href="#x" class="overlay" id="win1"></a><span class="popup">'.$logins.'<a class="close" title="Закрыть" href="#close"></a></span> 
+'( <a href="#win1">Р’С…РѕРґ</a><a href="#x" class="overlay" id="win1"></a><span class="popup">'.$logins.'<a class="close" title="Р—Р°РєСЂС‹С‚СЊ" href="#close"></a></span> 
 &middot; <a href="register.php" title="'.$fm->LANG['Registration'].'">'.$fm->LANG['Registration'].'</a>
 &nbsp;&middot; <a href="tools.php?action=rules" title="'.$fm->LANG['ForumRules'].'"><font color="red">'.$fm->LANG['ForumRules'].'</font></a>  )
 ';

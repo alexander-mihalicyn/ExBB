@@ -3,6 +3,7 @@
 	<img src="./templates/InvisionExBB/im/nav.gif" border="0"  alt="&gt;" />&nbsp;<a href="index.php"><?php echo $fm->exbb['boardname']; ?></a>&nbsp;&raquo;&nbsp;<?php echo $fm->LANG['SendPassTitle']; ?>
 </div>
 <br>
+
 <form action="profile.php" method="post">
 	<input type="hidden" name="action" value="lostpassword">
 	<table cellpadding="4" cellspacing="1" border="0" width="100%" align="center" class="tableborder">
@@ -21,7 +22,7 @@
 				<script language="JavaScript" src="javascript/reload_captcha.js"></script></td>
 			</tr>
 			<tr>
-				<td class="profilleft"><b><?php echo $fm->LANG['CaptchaÑonfirm']; ?></b><br /><span class="desc"><?php echo $fm->LANG['CaptchaNote']; ?></span></td>
+				<td class="profilleft"><b><?php echo $fm->LANG['CaptchaÐ¡onfirm']; ?></b><br /><span class="desc"><?php echo $fm->LANG['CaptchaNote']; ?></span></td>
 				<td class="profilright"><input type="text" style="width: 130px" name="captcha" size="13" maxlength="10" onblur="verify_register(this);" />
 					<span id="verify_captcha"></span>
 					<script language="JavaScript" src="javascript/verify_forms.js"></script>

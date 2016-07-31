@@ -7,7 +7,7 @@ echo <<<DATA
 			<table border="0" width="100%">
 				<tr>
 					<td>{$searchinmessage}</td>
-					<td align="right" valign="bottom"><a href="index.php?action=resetall" title="Отметить все темы как прочтённые">Отметить все темы как прочтённые</a></td>
+					<td align="right" valign="bottom"><a href="index.php?action=resetall" title="РћС‚РјРµС‚РёС‚СЊ РІСЃРµ С‚РµРјС‹ РєР°Рє РїСЂРѕС‡С‚С‘РЅРЅС‹Рµ">РћС‚РјРµС‚РёС‚СЊ РІСЃРµ С‚РµРјС‹ РєР°Рє РїСЂРѕС‡С‚С‘РЅРЅС‹Рµ</a></td>
 				</tr>
 			</table>
 			{$pages}
@@ -55,4 +55,3 @@ echo <<<DATA
 				</tr>
 			</table>
 DATA;
-?>

@@ -1,9 +1,8 @@
 #newmail-shadow div {
         background-color: red;
-        width: 275 px;
-        height: 145;
-        filter:
-                progid:DXImageTransform.Microsoft.Blur(PixelRadius='8',MakeShadow='true',ShadowOpacity='0.6')
+        width: 275px;
+        height: 145px;
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='8',MakeShadow='true',ShadowOpacity='0.6')
                 progid:DXImageTransform.Microsoft.MotionBlur(Strength=20, Direction=180, Add='false')
                 progid:DXImageTransform.Microsoft.MotionBlur(Strength=10, Direction=90, Add='false')
 }

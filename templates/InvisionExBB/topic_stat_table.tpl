@@ -23,4 +23,3 @@ echo <<<TOPIC
 			</tr>
 		</table>
 TOPIC;
-?>

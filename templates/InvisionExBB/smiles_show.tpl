@@ -21,4 +21,3 @@ echo <<<DATA
 			<br>
 			<div align="center">{$pages}</div>
 DATA;
-?>

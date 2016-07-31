@@ -44,4 +44,4 @@ function conf() {
 				</tr>
 			</table>
 DATA;
-?>
+

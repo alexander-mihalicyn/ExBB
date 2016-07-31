@@ -7,12 +7,13 @@ echo <<<DATA
 <meta http-equiv="Content-Type" content="text/html; charset={$GLOBALS['fm']->LANG['ENCODING']}">
 <meta http-equiv="Content-Language" content="ru">
 <meta http-equiv="Cache-Control" content="private">
-<meta name="description" content="ExBB Full Mods {$GLOBALS['fm']->exbb['version']} Ôîðóì íà PHP">
+<meta name="description" content="ExBB Full Mods {$GLOBALS['fm']->exbb['version']} Ð¤Ð¾Ñ€ÑƒÐ¼ Ð½Ð° PHP">
 <meta http-equiv="description" content="{$GLOBALS['fm']->exbb['description']}">
 <meta name="Keywords" content="{$GLOBALS['fm']->exbb['keywords']},{$GLOBALS['fm']->_Keywords}" />
 <meta name="Resource-type" content="document">
 <meta name="document-state" content="dynamic">
 <meta name="Robots" content="index,follow">
+
 <style type="text/css">
 <!--
 BODY {font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;}
@@ -56,7 +57,7 @@ a.copyright:hover {color: #000000;text-decoration: underline;}
 	<div align="center">
 		{$GLOBALS['fm']->_Counters}<br />
 		<span class="copyright">
-			{$GLOBALS['fm']->LANG['Powered']} <a href="http://www.exbb.info/" title="Ñêðèïò ôîðóìà ExBB, ãðóïïà ðàçðàáîò÷èêîâ ExBB Group" target="_blank">ExBB FM 1.0 Final</a>
+			{$GLOBALS['fm']->LANG['Powered']} <a href="http://www.exbb.info/" title="Ð¡ÐºÑ€Ð¸Ð¿Ñ‚ Ñ„Ð¾Ñ€ÑƒÐ¼Ð° ExBB, Ð³Ñ€ÑƒÐ¿Ð¿Ð° Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¾Ð² ExBB Group" target="_blank">ExBB FM 1.0 Final</a>
         </span><br /><br />
 		<br />
 	</div>

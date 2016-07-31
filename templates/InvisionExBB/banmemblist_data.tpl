@@ -22,4 +22,3 @@ $banmembers_data .= <<<DATA
 <td class="row2">{$user['whounban']}</td>
 </tr>
 DATA;
-?>

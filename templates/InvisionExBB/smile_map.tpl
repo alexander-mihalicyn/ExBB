@@ -1,5 +1,6 @@
 <?php
 $smile_map = '&nbsp;';
+
 if ($fm->exbb['emoticons'] === TRUE) {
 $smile_map = <<<DATA
 <!-- SMILES TABLE START //-->

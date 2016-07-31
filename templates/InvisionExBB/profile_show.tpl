@@ -1,6 +1,6 @@
 <?php
 echo <<<DATA
-			<br>
+<br>
 			<div id="navstrip" align="left">
 				<img src="./templates/InvisionExBB/im/nav.gif" border="0" alt="&gt;"/>&nbsp;<a href="index.php">{$fm->exbb['boardname']}</a> &nbsp;&raquo;&nbsp; {$fm->LANG['UserInfo']}
 			</div>
@@ -59,9 +59,9 @@ echo <<<DATA
 					<td class="pformleft" valign="top"><b>{$fm->LANG['PM']}</b></td>
 					<td class="pformright"><a href="messenger.php?action=new&touser={$user['id']}" target="_blank" title="{$fm->LANG['SendPm']} {$user['name']}">{$fm->LANG['SendPm']} <b>{$user['name']}</b></a></td>
 				</tr>
-<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+<!-- Ð”Ð•ÐÐ¬ Ð ÐžÐ–Ð”Ð•ÐÐ˜Ð¯ -->
 {$mod_punish}
-<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+<!-- Ð”Ð•ÐÐ¬ Ð ÐžÐ–Ð”Ð•ÐÐ˜Ð¯ -->
 				<tr>
 					<td class="pformstrip" align="center" colspan="2">&nbsp;</td>
 				</tr>

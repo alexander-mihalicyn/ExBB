@@ -27,4 +27,3 @@ $newsbody .= <<<DATA
 			</table>
 			<br>
 DATA;
-?>

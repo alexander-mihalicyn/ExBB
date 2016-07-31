@@ -17,6 +17,7 @@ echo <<<DATA
 						<td class="profilright"><input type="text" style="width: 200px" name="password" maxlength="16"></td>
 					</tr>
 DATA;
+
 if ($fm->exbb['emailfunctions'] === TRUE) {
 echo <<<DATA
 					<tr>
@@ -72,18 +73,18 @@ DATA;
 }
 if ($fm->exbb['emailfunctions'] === TRUE && $fm->exbb['pmnewmes'] === TRUE){
 echo <<<DATA
-					<tr><!-- /* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */ -->
+					<tr><!-- /* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */ -->
 						<td class="profilleft" valign="top"><b>{$fm->LANG['NewPMNotify']}</b><br /><span class="desc">{$fm->LANG['NewPMNotifyDesc']}</span></td>
 						<td class="profilright"><input type="radio" name="pm_newmes" value="yes"{$pm_newmes_yes} /> {$fm->LANG['Yes']} &nbsp; <input type="radio" name="pm_newmes" value="no"{$pm_newmes_no}/> {$fm->LANG['No']}</td>
-					</tr><!-- /* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */ -->
+					</tr><!-- /* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */ -->
 DATA;
 }
 if ($fm->exbb['visiblemode'] === TRUE){
 echo <<<DATA
-					<tr><!-- /* Ñêðûòûé ðåæèì ïðåáûâàíèÿ íà ôîðóìå */ -->
+					<tr><!-- /* Ð¡ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼ Ð¿Ñ€ÐµÐ±Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð½Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ */ -->
 						<td class="profilleft" valign="top"><b>{$fm->LANG['VisibleMode']}</b><br /><span class="desc">{$fm->LANG['VisibleModeDesc']}</span></td>
 						<td class="profilright"><input type="radio" name="visiblemode" value="yes"{$visiblemode_yes}/> {$fm->LANG['Yes']} &nbsp; <input type="radio" name="visiblemode" value="no"{$visiblemode_no}/> {$fm->LANG['No']}</td>
-					</tr><!-- /* Ñêðûòûé ðåæèì ïðåáûâàíèÿ íà ôîðóìå */ -->
+					</tr><!-- /* Ð¡ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼ Ð¿Ñ€ÐµÐ±Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð½Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ */ -->
 DATA;
 }
 if ($fm->exbb['userperpage'] === TRUE) {

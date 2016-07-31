@@ -7,4 +7,3 @@ $PreviewData = <<<DATA
 			</div>
 			<br>
 DATA;
-?>

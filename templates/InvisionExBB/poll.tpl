@@ -31,4 +31,4 @@ $poll_html = <<<POLL
 <br>
 <!-- Poll Table -->
 POLL;
-?>
+

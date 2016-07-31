@@ -4,6 +4,7 @@
 			href="index.php"><?php echo $fm->exbb['boardname']; ?></a>&nbsp;&raquo;&nbsp;<a
 			href="tools.php?action=banmembers"><?php echo $fm->LANG['BanMemberlist']; ?></a>
 </div>
+
 <table width="100%" cellpadding="0" cellspacing="1" class="tableborder">
 	<tr>
 		<td class="maintitle" colspan="8"><img src="./templates/InvisionExBB/im/nav_m.gif" border="0" alt="&gt;"

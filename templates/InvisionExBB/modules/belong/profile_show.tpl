@@ -5,4 +5,3 @@ $show_belong = <<<DATA
 					<td class="pformright"><a href="tools.php?action=belong&to={$user_id}&what=topics">{$fm->LANG['BelongFindAllTopics']}</a> &bull; <a href="tools.php?action=belong&to={$user_id}">{$fm->LANG['BelongFindAllPosts']}</a></td>
 				</tr>
 DATA;
-?>

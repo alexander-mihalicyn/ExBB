@@ -6,4 +6,3 @@ $datashow .= <<<DATA
 					<td width="34%">{$cell2}</td>
 				</tr>
 DATA;
-?>

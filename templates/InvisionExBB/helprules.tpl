@@ -24,4 +24,3 @@ echo <<<DATA
 			<br>
 			{$content}
 DATA;
-?>

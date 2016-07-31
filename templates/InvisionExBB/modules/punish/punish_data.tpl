@@ -13,4 +13,3 @@ DATA;
 $punish_data .= <<<DATA
 				</tr>
 DATA;
-?>

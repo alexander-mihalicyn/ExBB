@@ -17,5 +17,3 @@ $data .= <<<DATA
 					</td>
 				</tr>
 DATA;
-?>
-

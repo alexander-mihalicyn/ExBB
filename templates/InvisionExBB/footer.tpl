@@ -5,7 +5,7 @@ echo <<<DATA
 	<td align="center">{$GLOBALS['fm']->_Counters}<br/>
 						<span class="copyright">
 						{$GLOBALS['fm']->LANG['Powered']} <a href="http://www.exbb.info/"
-															 title="Ñêðèïò ôîðóìà ExBB, ãðóïïà ðàçðàáîò÷èêîâ ExBB Group"
+															 title="Ð¡ÐºÑ€Ð¸Ð¿Ñ‚ Ñ„Ð¾Ñ€ÑƒÐ¼Ð° ExBB, Ð³Ñ€ÑƒÐ¿Ð¿Ð° Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¾Ð² ExBB Group"
 															 target="_blank">ExBB FM 1.0 Final</a>
             			</span><br/><br/>
 	</td>
@@ -15,4 +15,3 @@ echo <<<DATA
 </tr>
 </table>
 DATA;
-?>

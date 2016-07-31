@@ -1,6 +1,6 @@
 <?php
 echo <<<DATA
-			<br>
+<br>
 			<div id="navstrip" align="left">
 				<img src="./templates/InvisionExBB/im/nav.gif" border="0"  alt="&gt;" />&nbsp;<a href="index.php">{$fm->exbb['boardname']}</a>&nbsp;&raquo;&nbsp;{$fm->LANG['Search']}
 			</div>
