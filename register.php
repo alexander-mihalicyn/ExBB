@@ -63,13 +63,13 @@ if ($fm->input['action'] == 'addmember') {
 	$fm->input['inmembername'] = preg_replace("/\s{1,}/", " ", $fm->input['inmembername']);
 	$wrongchars = ( $fm->exbb['ru_nicks'] === true ) ? $fm->LANG['WrongCharsRuYes'] : $fm->LANG['WrongCharsRuNo'];
 
-	if ($fm->exbb['ru_nicks'] === false && preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername'])) {
+	if ($fm->exbb['ru_nicks'] === false && preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#isu", $fm->input['inmembername'])) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['RuNicksOff']);
 	}
-	if (preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername']) && preg_match("#[a-z|A-Z]{1,}#is", $fm->input['inmembername'])) {
+	if (preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername']) && preg_match("#[a-z|A-Z]{1,}#isu", $fm->input['inmembername'])) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['IntNameRuOrEn']);
 	}
-	if (preg_match("#(guest|admin|moder|админ|" . $fm->LANG['Guest'] . "|модер|[^0-9A-Za-zА-Яа-я-_\.\s])#is", $fm->_LowerCase($fm->input['inmembername']))) {
+	if (preg_match("#(guest|admin|moder|админ|" . $fm->LANG['Guest'] . "|модер|[^0-9A-Za-zА-Яа-я-_\.\s])#isu", $fm->_LowerCase($fm->input['inmembername']))) {
 		$fm->_Message($fm->LANG['Registration'], $wrongchars);
 	}
 	if ($fm->exbb['wordcensor'] === true && $fm->bads_filter($fm->input['inmembername'], 0) === true) {

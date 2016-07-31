@@ -168,7 +168,7 @@ if ($fm->input['action'] === 'show') {
 	$avatar = '<img src="im/avatars/' . $user['avatar'] . '" style="padding: 2px;border: solid 1px grey;">';
 
 	if (isset( $user['lastpost']['date'] )) {
-		$postdate = $fm->_DateFormat($user['lastpost']['date'] + $fm->user['timedif']['usertime'] * 3600);
+		$postdate = $fm->_DateFormat($user['lastpost']['date'] + $fm->user['timedif'] * 3600);
 		$topicTitle = preg_replace("#([^\s]{32})(.+)#is", "$1&shy;$2", $user['lastpost']['name']);
 		$lastpostdetails = $fm->LANG['LastPost'] . ': <a href="' . $user['lastpost']['link'] . '">' . $topicTitle . '</a> - ' . $postdate;
 	}

@@ -814,6 +814,7 @@ class FM extends VARS {
 		include( $skins[$mode][1] );
 		include( $skins[$mode][2] );
 		include( 'page_tail.php' );
+		die;
 	}
 
 
