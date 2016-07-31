@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Reputation Mod for ExBB FM 1.0 RC1
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d
@@ -23,36 +22,36 @@ switch ($fm->_String('do')) {
 	default:		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 }
 
-// Ôóíêöèÿ èçìåíåíèÿ ðåïóòàöèè
+// Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸
 function change_rep() {
 	global $fm;
 	
-	// Ïðîâåðêà íà àâòîðèçàöèþ
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸ÑŽ
 	if (!$fm->user['id']) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepGuest']);
 	
-	// ×èòàåì êîíôèã (^__^)
+	// Ð§Ð¸Ñ‚Ð°ÐµÐ¼ ÐºÐ¾Ð½Ñ„Ð¸Ð³ (^__^)
 	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	
-	// Ïðîâåðêà íà çàïðåò àäìèíà ;)
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð·Ð°Ð¿Ñ€ÐµÑ‚ Ð°Ð´Ð¼Ð¸Ð½Ð° ;)
 	if ($config['denied']) {
 		$blacklist = array_map(array($fm, '_LowerCase'), $config['blacklist']);
 		if (in_array($fm->_LowerCase($fm->user['name']), $blacklist))
 			$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepDenied']);
 	}
 	
-	// Ïðîâåðêà íà íàëè÷èå íåîáõîäèìîãî êîë-âà ñîîáùåíèé
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾Ð³Ð¾ ÐºÐ¾Ð»-Ð²Ð° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹
 	if ($fm->user['posts'] < $config['msg'])
 		$fm->_Message($fm->LANG['Reputation'], sprintf($fm->LANG['RepMsg'], $config['msg']));
 	
-	// Ïðîâåðêà ïî âðåìåíè ïîñëåäíåãî èçìåíåíèÿ ðåïóòàöèè
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¿Ð¾ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½ÐµÐ³Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸
 	if (isset($fm->user['rep_time']) && $fm->_Nowtime - $fm->user['rep_time'] < $config['wait_days'] * 86400 + $config['wait_hours'] * 3600 + $config['wait_minutes'] * 60)
 		$fm->_Message($fm->LANG['Reputation'], sprintf($fm->LANG['RepWait'], (($config['wait_days']) ? $config['wait_days'].' '.$fm->LANG['RepDays'].' ' : '').
 			(($config['wait_hours']) ? $config['wait_hours'].' '.$fm->LANG['RepHours'].' ' : '').
 			(($config['wait_minutes']) ? $config['wait_minutes'].' '.$fm->LANG['RepMinutes'] : '')));
 			
-	// Íå íàõîäèòñÿ ëè ñîîáùåíèå, çà êîòîðîå ìû áóäåì èçìåíÿòü ðåïóòàöèþ ïîëüçîâàòåëþ, â ïðèâàòíîì ôîðóìå?
-	// Åñëè äà, òî ïðîâåðèì åñòü ëè ó íàñ äîñòóï â ýòîò ôîðóì
-	// Òàêæå ïðîâåðèì, íå äîñòóïåí ëè ýòîò ôîðóì òîëüêî àäìèíèñòðàòîðàì è ìîäåðàòîðàì
+	// ÐÐµ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð»Ð¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ, Ð·Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð¼Ñ‹ Ð±ÑƒÐ´ÐµÐ¼ Ð¸Ð·Ð¼ÐµÐ½ÑÑ‚ÑŒ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ, Ð² Ð¿Ñ€Ð¸Ð²Ð°Ñ‚Ð½Ð¾Ð¼ Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ?
+	// Ð•ÑÐ»Ð¸ Ð´Ð°, Ñ‚Ð¾ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ð¼ ÐµÑÑ‚ÑŒ Ð»Ð¸ Ñƒ Ð½Ð°Ñ Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ð² ÑÑ‚Ð¾Ñ‚ Ñ„Ð¾Ñ€ÑƒÐ¼
+	// Ð¢Ð°ÐºÐ¶Ðµ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ð¼, Ð½Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Ð»Ð¸ ÑÑ‚Ð¾Ñ‚ Ñ„Ð¾Ñ€ÑƒÐ¼ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð°Ð´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð°Ð¼ Ð¸ Ð¼Ð¾Ð´ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð°Ð¼
 	$fm->_Intvals(array('forum', 'topic', 'post'));
 	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!isset($allforums[$fm->input['forum']])) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMsg']);
@@ -61,22 +60,22 @@ function change_rep() {
 	if ($allforums[$fm->input['forum']]['stview'] == 'admo' && !defined('IS_ADMIN') && $fm->user['status'] != 'sm' && !isset($allforums[$fm->input['forum']]['moderator'][$fm->user['id']]))
 		$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoAllows']);
 	
-	// Èùåì ñîîáùåíèå, çà êîòîðîå ñîáèðàåìñÿ èçìåíÿòü ðåïóòàöèþ ïîëüçîâàòåëþ
+	// Ð˜Ñ‰ÐµÐ¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ, Ð·Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÐ¼ÑÑ Ð¸Ð·Ð¼ÐµÐ½ÑÑ‚ÑŒ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
 	$thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $fm->input['forum'].'/'.$fm->input['topic'].'-thd.php');
 	if (!isset($thread[$fm->input['post']])) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMsg']);
 	
-	// Ïîëó÷àåì id ïîëüçîâàòåëÿ, êîòîðîìó ñîáèðàåìñÿ èçìåíÿòü ðåïóòàöèþ
-	// Ïðîâåðèì id íà ïîïûòêó èçìåíèòü ðåïóòàöèþ ãîñòþ èëè ñàìîìó ñåáå
+	// ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ id Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼Ñƒ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÐ¼ÑÑ Ð¸Ð·Ð¼ÐµÐ½ÑÑ‚ÑŒ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ð¼ id Ð½Ð° Ð¿Ð¾Ð¿Ñ‹Ñ‚ÐºÑƒ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ Ð³Ð¾ÑÑ‚ÑŽ Ð¸Ð»Ð¸ ÑÐ°Ð¼Ð¾Ð¼Ñƒ ÑÐµÐ±Ðµ
 	$member = $thread[$fm->input['post']]['p_id'];
 	if (!$member) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepTryGuest']);
 	if ($member == $fm->user['id']) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepTrySelf']);
 	
-	// Ïðîâåðèì ïîëüçîâàòåëÿ íà ñóùåñòâîâàíèå, ïðî÷èòàåì ïðîôèëü ïîëüçîâàòåëÿ ;)
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ð¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð½Ð° ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸Ðµ, Ð¿Ñ€Ð¾Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ ;)
 	$member = $fm->_Getmember($member);
 	if (!$member) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMember']);
 	
-	// Ïðî÷èòàåì èñòîðèþ èçìåíåíèÿ ðåïóòàöèè ïîëüçîâàòåëÿ è ïðîâåðèì, íå ïûòàåìñÿ ëè ìû íàêðóòèòü åìó ðåïóòàöèþ ;)
-	// Òàêæå ïðîâåðèì, íå èçìåíÿëè ëè ìû óæå ðåïóòàöèþ ïîëüçîâàòåëþ çà ýòî ñîîáùåíèå
+	// ÐŸÑ€Ð¾Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð¸ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ð¼, Ð½Ðµ Ð¿Ñ‹Ñ‚Ð°ÐµÐ¼ÑÑ Ð»Ð¸ Ð¼Ñ‹ Ð½Ð°ÐºÑ€ÑƒÑ‚Ð¸Ñ‚ÑŒ ÐµÐ¼Ñƒ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ ;)
+	// Ð¢Ð°ÐºÐ¶Ðµ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ð¼, Ð½Ðµ Ð¸Ð·Ð¼ÐµÐ½ÑÐ»Ð¸ Ð»Ð¸ Ð¼Ñ‹ ÑƒÐ¶Ðµ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ Ð·Ð° ÑÑ‚Ð¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ
 	$rep = $fm->_Read('modules/reputation/data/'.$member['id'].'.php');
 	foreach ($rep as $time => $info) {
 		if ($fm->user['id'] == $info['who'] && $fm->_Nowtime - $time < $config['protect_days'] * 86400 + $config['protect_hours'] * 3600 + $config['protect_minutes'] * 60)
@@ -88,7 +87,7 @@ function change_rep() {
 	}
 	
 	if (($size = strlen($fm->_String('reason'))) < $config['size_min'] || $size > $config['size_max'] || $fm->_POST !== TRUE) {
-		// Îòîáðàæàåì ôîðìó èçìåíåíèÿ ðåïóòàöèè
+		// ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÐµÐ¼ Ñ„Ð¾Ñ€Ð¼Ñƒ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸
 		$rep_change	= sprintf($fm->LANG['RepChange'], $member['name']);
 		$fm->_Title	= ' :: '.$rep_change;
 		$rep_action	= ($fm->input['do'] == 'down') ? $fm->LANG['RepDoDown'] : $fm->LANG['RepDoUp'];
@@ -103,14 +102,14 @@ function change_rep() {
 		include('./templates/'.DEF_SKIN.'/footer.tpl');
 	}
 	else {
-		// Èçìåíèì ÷èñëåííîå çíà÷åíèå ðåïóòàöèè â ôàéëå ïîëüçîâàòåëÿ
+		// Ð˜Ð·Ð¼ÐµÐ½Ð¸Ð¼ Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð² Ñ„Ð°Ð¹Ð»Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 		$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$member['id'].'.php');
 		if (!isset($member['reputation'])) $member['reputation'] = 0;
 		if ($fm->input['do'] == 'down') $member['reputation']--;
 		else $member['reputation']++;
 		$fm->_Write($fp_member, $member);
 		
-		// Äîáàâèì çàïèñü îá èçìåíåíèè ðåïóòàöèè â èñòîðèþ èçìåíåíèÿ ðåïóòàöèè ïîëüçîâàòåëÿ
+		// Ð”Ð¾Ð±Ð°Ð²Ð¸Ð¼ Ð·Ð°Ð¿Ð¸ÑÑŒ Ð¾Ð± Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð² Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 		$rep = $fm->_Read2Write($fp_rep, 'modules/reputation/data/'.$member['id'].'.php');
 		$time = $fm->_Nowtime;
 		while (isset($rep[$time])) $time++;
@@ -125,50 +124,50 @@ function change_rep() {
 		krsort($rep);
 		$fm->_Write($fp_rep, $rep);
 		
-		// Îáíîâèì âðåìÿ èçìåíåíèÿ ðåïóòàöèè äëÿ èçìåíÿþùåãî ïîëüçîâàòåëÿ
+		// ÐžÐ±Ð½Ð¾Ð²Ð¸Ð¼ Ð²Ñ€ÐµÐ¼Ñ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð´Ð»Ñ Ð¸Ð·Ð¼ÐµÐ½ÑÑŽÑ‰ÐµÐ³Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 		$name = $member['name'];
 		$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$fm->user['id'].'.php');
 		$member['rep_time'] = $time;
 		$fm->_Write($fp_member, $member);
 		
-		// Âñ¸! ;)
+		// Ð’ÑÑ‘! ;)
 		$fm->_Message($fm->LANG['Reputation'], sprintf($fm->LANG['RepOk'], $name),
 			'topic.php?forum='.$fm->input['forum'].'&topic='.$fm->input['topic'].'&postid='.$fm->input['post'].'#'.$fm->input['post']);
 	}
 }
 
-// Ôóíêöèÿ ïðîñìîòðà èñòîðèè èçìåíåíèÿ ðåïóòàöèè ïîëüçîâàòåëåé
+// Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð° Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ð¸ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹
 function show_rep() {
 	global $fm;
 	
-	// ×èòàåì êîíôèã è ñïèñîê ôîðóìîâ, à òàêæå óçíàåì, ÿâëÿåìñÿ ëè ìû ìîäåðàòîðîì â îäíîì èç íèõ :)
+	// Ð§Ð¸Ñ‚Ð°ÐµÐ¼ ÐºÐ¾Ð½Ñ„Ð¸Ð³ Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ„Ð¾Ñ€ÑƒÐ¼Ð¾Ð², Ð° Ñ‚Ð°ÐºÐ¶Ðµ ÑƒÐ·Ð½Ð°ÐµÐ¼, ÑÐ²Ð»ÑÐµÐ¼ÑÑ Ð»Ð¸ Ð¼Ñ‹ Ð¼Ð¾Ð´ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð¾Ð¼ Ð² Ð¾Ð´Ð½Ð¾Ð¼ Ð¸Ð· Ð½Ð¸Ñ… :)
 	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	if (!defined('IS_ADMIN') && $fm->user['status'] != 'sm')
 		foreach ($allforums as $forum)
 			$fm->_GetModerators($forum['id'], $allforums);
 	
-	// Ïðîâåðÿåì ðàçðåøåíèå ãîñòÿì ïðîñìàòðèâàòü èñòîðèþ èçìåíåíèÿ ðåïóòàöèè
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ Ñ€Ð°Ð·Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ð³Ð¾ÑÑ‚ÑÐ¼ Ð¿Ñ€Ð¾ÑÐ¼Ð°Ñ‚Ñ€Ð¸Ð²Ð°Ñ‚ÑŒ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸
 	if ($config['guest'] && !$fm->user['id'])
 		$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepGuestDenied']);
 	
-	// Ïðîâåðèì ñóùåñòâîâàíèå ïîëüçîâàòåëÿ, çàîäíî ïðî÷èòàåì åãî ïðîôèëü
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ð¼ ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ, Ð·Ð°Ð¾Ð´Ð½Ð¾ Ð¿Ñ€Ð¾Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ ÐµÐ³Ð¾ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ
 	$fm->_Intval('member');
 	if (!file_exists(EXBB_DATA_DIR_MEMBERS . '/'.$fm->input['member'].'.php')) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepNoMember']);
 	
-	// ×èòàåì èñòîðèþ èçìåíåíèÿ ðåïóòàöèè, ïðè å¸ îòñóòñòâèè âûâîäèì ñîîáùåíèå îá îøèáêå
+	// Ð§Ð¸Ñ‚Ð°ÐµÐ¼ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸, Ð¿Ñ€Ð¸ ÐµÑ‘ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²Ð¸Ð¸ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¾Ð± Ð¾ÑˆÐ¸Ð±ÐºÐµ
 	$rep = $fm->_Read('modules/reputation/data/'.$fm->input['member'].'.php');
 	if (!$rep) $fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepEmpty']);
 	krsort($rep);
 	
-	// Ïîñ÷èòàåì ñêîëüêî âñåãî áûëî ïîëîæèòåëüíûõ è îòðèöàòåëüíûõ èçìåíåíèé
+	// ÐŸÐ¾ÑÑ‡Ð¸Ñ‚Ð°ÐµÐ¼ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð²ÑÐµÐ³Ð¾ Ð±Ñ‹Ð»Ð¾ Ð¿Ð¾Ð»Ð¾Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¸ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¹
 	$down = $up = 0;
 	foreach ($rep as $time => $info)
 		if ($info['change'] == 'down') $down++;
 		else $up++;
 	$total = $down + $up;
 	
-	// Ïðî÷èòàåì ïðîôèëü ïîëüçîâàòåëÿ è âûïîëíèì ñèíõðîíèçàöèþ åãî ðåïóòàöèè ïðè íåîáõîäèìîñòè
+	// ÐŸÑ€Ð¾Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð¸ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ð¼ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸ÑŽ ÐµÐ³Ð¾ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¿Ñ€Ð¸ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ÑÑ‚Ð¸
 	$member = $fm->_Read2Write($fp_member, EXBB_DATA_DIR_MEMBERS . '/'.$fm->input['member'].'.php');
 	if ($member['reputation'] != $up - $down) {
 		$member['reputation'] = $up - $down;
@@ -176,7 +175,7 @@ function show_rep() {
 	}
 	else $fm->_Fclose($fp_member);
 	
-	// Ñôîðìèðóåì ñïèñîê çàïèñåé
+	// Ð¡Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÐµÐ¼ ÑÐ¿Ð¸ÑÐ¾Ðº Ð·Ð°Ð¿Ð¸ÑÐµÐ¹
 	$rep_keys = array_keys($rep);
 	$pages = Print_Paginator($total, 'tools.php?action=reputation&do=show&member='.$member['id'].'&p={_P_}',
 		$config['per_page'], 8, $first, TRUE);
@@ -188,14 +187,14 @@ function show_rep() {
 		$rep_row = $rep[$time];
 		$id_topic = $rep_row['forum'].':'.$rep_row['topic'];
 		
-		// Ïîëó÷àåì èíôîðìàöèþ î ïîëüçîâàòåëÿõ, èçìåíÿâøèõ ðåïóòàöèþ
+		// ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑÑ…, Ð¸Ð·Ð¼ÐµÐ½ÑÐ²ÑˆÐ¸Ñ… Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ
 		if (!isset($members[$rep_row['who']]) && ($_member = $fm->_Getmember($rep_row['who'])))
 			$members[$rep_row['who']] = array(
 				'name'		=> $_member['name'],
 				'status'	=> $_member['status']
 			);
 		
-		// Ïîëó÷àåì èíôîðìàöèþ î ñîîáùåíèÿõ, çà êîòîðûå ïîëüçîâàòåëþ èçìåíèëè ðåïóòàöèþ
+		// ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸ÑÑ…, Ð·Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð»Ð¸ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ
 		if (!isset($topics[$id_topic]) && ($_thread = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $rep_row['forum'].'/'.$rep_row['topic'].'-thd.php'))) {
 			$_keys = array_keys($_thread);
 			$firstkey = reset($_keys);
@@ -205,10 +204,10 @@ function show_rep() {
 			);
 		}
 		
-		// Çàïîëíÿåì êîëîíêó ñ êàðòèíêîé, îáîçíà÷àþùåé ïîíèæåíèå / ïîâûøåíèå ðåïóòàöèè
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ Ñ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¾Ð¹, Ð¾Ð±Ð¾Ð·Ð½Ð°Ñ‡Ð°ÑŽÑ‰ÐµÐ¹ Ð¿Ð¾Ð½Ð¸Ð¶ÐµÐ½Ð¸Ðµ / Ð¿Ð¾Ð²Ñ‹ÑˆÐµÐ½Ð¸Ðµ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸
 		$rep_did = ($rep_row['change'] == 'down') ? $fm->LANG['RepDidDown'] : $fm->LANG['RepDidUp'];
 		
-		// Çàïîëíÿåì êîëîíêó ïîëüçîâàòåëÿ
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 		if (isset($members[$rep_row['who']])) {
 			switch ($members[$rep_row['who']]['status']) {
 				case 'ad':	$class = ' class="admin"';
@@ -221,10 +220,10 @@ function show_rep() {
 		}
 		else $rep_who = $fm->LANG['RepMemberDeleted'];
 		
-		// Çàïîëíÿåì êîëîíêó äàòû
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ Ð´Ð°Ñ‚Ñ‹
 		$rep_when = date('d.m.Y, H:i', $time + $fm->user['timedif'] * 3600);
 		
-		// Çàïîëíÿåì êîëîíêó ññûëêè íà ñîîáùåíèå, çà êîòîðîå ïîëüçîâàòåëþ èçìåíèëè ðåïóòàöèþ
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ ÑÑÑ‹Ð»ÐºÐ¸ Ð½Ð° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ, Ð·Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð»Ð¸ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸ÑŽ
 		if (!isset($topics[$id_topic]) || !in_array($rep_row['post'], $topics[$id_topic]['posts']))
 			$rep_forpost = $fm->LANG['RepPostMovedDeleted'];
 		elseif (!empty($allforums[$rep_row['forum']]['private']) && empty($fm->user['private'][$rep_row['forum']]) && !defined('IS_ADMIN'))
@@ -235,13 +234,13 @@ function show_rep() {
 			$rep_forpost = '<a href="topic.php?forum='.$rep_row['forum'].'&topic='.$rep_row['topic'].'&postid='.$rep_row['post'].'#'.$rep_row['post'].'">'.$topics[$id_topic]['name'].'</a>'
 			.' &mdash; <a href="forums.php?forum='.$rep_row['forum'].'">'.$allforums[$rep_row['forum']]['name'].'</a>';
 		
-		// Çàïîëíÿåì êîëîíêó ïðè÷èíû
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÐºÐ¾Ð»Ð¾Ð½ÐºÑƒ Ð¿Ñ€Ð¸Ñ‡Ð¸Ð½Ñ‹
 		$rep_reason = nl2br($fm->chunk_split($rep_row['reason']));
 		
 		include('templates/'.DEF_SKIN.'/modules/reputation/show_data.tpl');
 	}
 	
-	// Âûâîäèì èñòîðèþ èçìåíåíèÿ ðåïóòàöèè ;) Âñ¸!
+	// Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ñ€ÐµÐ¿ÑƒÑ‚Ð°Ñ†Ð¸Ð¸ ;) Ð’ÑÑ‘!
 	$rep_history = sprintf($fm->LANG['RepHistory'], $member['name']);
 	$fm->_Title = ' :: '.$rep_history;
 	$rep_stat = sprintf($fm->LANG['RepStat'], $member['name'], $up - $down, $total, $up, $down);

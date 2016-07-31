@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
 * "Punishment of the user" mods for  ExBB v.1.9.1                          *
-* Copyright (c) 2004 by Alisher Mutalov aka Markus®                        *
+* Copyright (c) 2004 by Alisher Mutalov aka MarkusÂ®                        *
 *                                                                          *
 * http://www.tvoyweb.ru                                                    *
 * http://www.tvoyweb.ru/forums/                                            *

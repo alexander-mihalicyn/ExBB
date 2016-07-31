@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Mailer Mod for ExBB FM 1.0 RC1.01
 	Copyright (c) 2005 - 2012 by Yuri Antonov aka yura3d

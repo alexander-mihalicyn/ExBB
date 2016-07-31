@@ -1,5 +1,6 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $fm->_LoadModuleLang('birstday');
 
 if ($fm->_Boolean($fm->input,'dosave') === TRUE){
@@ -31,4 +32,3 @@ define(\"FM_BIRSTEMAIL\", {$birst_em});
 		include('modules/birstday/admintemplates/index.tpl');
 		include('admin/footer.tpl');
 }
-?>

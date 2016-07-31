@@ -1,14 +1,13 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
-$this->LANG['TopicMiss']			= 'Íå íàéäåí ôàéë óêàçàííîé òåìû!';
-$this->LANG['PostNoExists']			= 'Íå íàéäåíî óêàçàííîå ñîîáùåíèå!';
-$this->LANG['TableTitle'] 			= 'Ñîîáùèòü ìîäåðàòîðó ôîðóìà';
-$this->LANG['YouCanAddMessage'] 	= 'Âû ìîæåòå äîáàâèòü ñâîå ñîîáùåíèå';
-$this->LANG['Name']					= 'Èìÿ';
-$this->LANG['ReportAddedOk']		= 'Ñïàñèáî! Âàøà æàëîáà ïåðåäàíà ìîäåðàòîðàì ðàçäåëà ôîðóìà';
-$this->LANG['PMSubject'] 			= 'Ñîîáùåíèå î íàðóøåíèÿõ ïðàâèë â òåìå';
-$this->LANG['PMText']				= 'Ïîëüçîâàòåëü [url=%s/profile.php?action=show&member=%d]%s[/url], ñîîáùàåò Âàì î íàðóøåíèÿõ â òåìå [url=%s/topic.php?forum=%d&topic=%d&postid=%d#%d]"%s - %s"[/url].
-Ïîæàëóéñòà ïðèìèòå ìåðû.
+$this->LANG['TopicMiss']			= 'ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ Ñ„Ð°Ð¹Ð» ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ð¹ Ñ‚ÐµÐ¼Ñ‹!';
+$this->LANG['PostNoExists']			= 'ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ!';
+$this->LANG['TableTitle'] 			= 'Ð¡Ð¾Ð¾Ð±Ñ‰Ð¸Ñ‚ÑŒ Ð¼Ð¾Ð´ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ñƒ Ñ„Ð¾Ñ€ÑƒÐ¼Ð°';
+$this->LANG['YouCanAddMessage'] 	= 'Ð’Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐ²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ';
+$this->LANG['Name']					= 'Ð˜Ð¼Ñ';
+$this->LANG['ReportAddedOk']		= 'Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾! Ð’Ð°ÑˆÐ° Ð¶Ð°Ð»Ð¾Ð±Ð° Ð¿ÐµÑ€ÐµÐ´Ð°Ð½Ð° Ð¼Ð¾Ð´ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð°Ð¼ Ñ€Ð°Ð·Ð´ÐµÐ»Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ð°';
+$this->LANG['PMSubject'] 			= 'Ð¡Ð¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¾ Ð½Ð°Ñ€ÑƒÑˆÐµÐ½Ð¸ÑÑ… Ð¿Ñ€Ð°Ð²Ð¸Ð» Ð² Ñ‚ÐµÐ¼Ðµ';
+$this->LANG['PMText']				= 'ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ [url=%s/profile.php?action=show&member=%d]%s[/url], ÑÐ¾Ð¾Ð±Ñ‰Ð°ÐµÑ‚ Ð’Ð°Ð¼ Ð¾ Ð½Ð°Ñ€ÑƒÑˆÐµÐ½Ð¸ÑÑ… Ð² Ñ‚ÐµÐ¼Ðµ [url=%s/topic.php?forum=%d&topic=%d&postid=%d#%d]"%s - %s"[/url].
+ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° Ð¿Ñ€Ð¸Ð¼Ð¸Ñ‚Ðµ Ð¼ÐµÑ€Ñ‹.
 ';
-?>

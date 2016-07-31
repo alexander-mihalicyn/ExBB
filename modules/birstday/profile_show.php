@@ -1,5 +1,6 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $show_birstday = '';
 if ($fm->exbb['birstday'] === TRUE){
 	$fm->_LoadModuleLang('birstday');

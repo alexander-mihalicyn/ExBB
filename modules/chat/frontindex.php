@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Chat for ExBB FM 1.0 RC2
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d
@@ -16,7 +15,7 @@ $fm->_LoadModuleLang('chat');
 if (!$fm->user['id'])
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ChatNeedLogin']);
 
-// Ïðîâåðêà íà íàëè÷èå øàáëîíîâ â ñêèíå äëÿ ÷àòà
+// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð² Ð² ÑÐºÐ¸Ð½Ðµ Ð´Ð»Ñ Ñ‡Ð°Ñ‚Ð°
 $chat_skins = array(DEF_SKIN, $fm->exbb['default_style'], 'InvisionExBB');
 foreach ($chat_skins as $skin)
 	if (file_exists('templates/'.$skin.'/modules/chat/')) {

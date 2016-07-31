@@ -1,6 +1,5 @@
 <?php
 echo <<<DATA
-
 			<h1>{$fm->LANG['ModuleTitle']}</h1>
 			<form action="setmodule.php?module=awards" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="module" value="ads" />

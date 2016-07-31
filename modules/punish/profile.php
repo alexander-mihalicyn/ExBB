@@ -20,4 +20,3 @@ if ($fm->exbb['punish'] === TRUE){
 		include('./templates/'.DEF_SKIN.'/modules/punish/profile.tpl');
 	}
 }
-?>

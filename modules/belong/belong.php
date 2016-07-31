@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Belong Mod for ExBB FM 1.0 RC2
  *
@@ -400,5 +399,3 @@ class Belong {
 		$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['BelongIndexingOk'], 'setmodule.php?module=belong', 1);
 	}
 }
-
-?>

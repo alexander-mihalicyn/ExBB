@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Mailer Mod for ExBB FM 1.0 RC1.01
 	Copyright (c) 2005 - 2012 by Yuri Antonov aka yura3d
@@ -12,7 +11,7 @@ define('IN_EXBB', true);
 define('FM_PATH',			dirname(dirname(dirname(__FILE__))) . '/');
 define('FM_BOARDINFO',		'data/boardinfo.php');
 
-// Óïðîù¸ííîå ÿäðî ExBB
+// Ð£Ð¿Ñ€Ð¾Ñ‰Ñ‘Ð½Ð½Ð¾Ðµ ÑÐ´Ñ€Ð¾ ExBB
 class FM {
 	var $exbb	= array();
 	var $_fps	= array();

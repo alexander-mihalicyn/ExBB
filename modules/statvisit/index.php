@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Advanced Visit Stats for ExBB FM 1.0 RC1
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d
@@ -35,7 +34,7 @@ if ($fm->_POST !== TRUE) {
 }
 else {
 	
-	// Ôîðìèðóåì íîâûé ìàññèâ êîíôèãà ìîäà
+	// Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÐµÐ¼ Ð½Ð¾Ð²Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð° Ð¼Ð¾Ð´Ð°
 	$config = array(
 		'forum'		=> $fm->_Boolean1('forum'),
 		'topic'		=> $fm->_Boolean1('topic'),

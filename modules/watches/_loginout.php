@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Watches Mod for ExBB FM 1.0 RC2
 	Copyright (c) 2004 - 2011 by Yuri Antonov aka yura3d

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Belong Mod for ExBB FM 1.0 RC2
  * @copyright ExBB Group, http://www.exbb.org/
@@ -20,5 +19,3 @@ if ($fm->exbb['belong']) {
     
     include('templates/' . DEF_SKIN . '/modules/belong/profile_show.tpl');
 }
-
-?>

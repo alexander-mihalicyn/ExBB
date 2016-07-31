@@ -5,4 +5,3 @@ $admin_birsday = <<<BIRSTDAY
                 <td class="row2">{$fullbirstday}</td>
         </tr>
 BIRSTDAY;
-?>

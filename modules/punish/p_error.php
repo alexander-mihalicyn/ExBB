@@ -3,6 +3,7 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 
 if ($fm->exbb['punish'] === TRUE && isset($fm->user['punned']) && ($total_pun = count($fm->user['punned'])) !== 0) {
 	include(EXBB_DATA_DIR_MODULES.'/punish/config.php');
+
 	$fm->_LoadModuleLang('punish');
 	if ($total_pun == 5){
 		$fm->_Message($fm->LANG['MainMsg'],$fm->LANG['PunYouBlocked']);

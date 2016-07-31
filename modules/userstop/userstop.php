@@ -1,6 +1,8 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $userstop = '';
+
 if ($fm->exbb['userstop'] === TRUE){
 	$fm->_LoadModuleLang('userstop');
 	include(EXBB_DATA_DIR_MODULES. '/userstop/config.php');

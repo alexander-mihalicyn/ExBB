@@ -54,4 +54,3 @@ echo <<<DATA
 			<div align="center" class="gensmall"><br>Reputation Mod for ExBB FM {$fm->exbb['version']} by 
 			<a href="http://www.exbb.org/">yura3d</a></div>
 DATA;
-?>

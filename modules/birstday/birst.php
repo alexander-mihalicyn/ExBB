@@ -15,7 +15,7 @@ if ($fm->exbb['birstday']){
 	$todayyear			= date("Y", time());
 
 	$birsdaydata		= $fm->_Read2Write($fp_birsday,EXBB_DATA_DIR_MODULES.'/birthday/data.php');
-	//[0]  - ãîä; [1] - ôëàã äëÿ ìûëà è ËÑ; [2] - ëîãèí; [3] - åìàèë; [4] - ôëàã äëÿ ïîêàçà âîçðàñòà
+	//[0]  - Ð³Ð¾Ð´; [1] - Ñ„Ð»Ð°Ð³ Ð´Ð»Ñ Ð¼Ñ‹Ð»Ð° Ð¸ Ð›Ð¡; [2] - Ð»Ð¾Ð³Ð¸Ð½; [3] - ÐµÐ¼Ð°Ð¸Ð»; [4] - Ñ„Ð»Ð°Ð³ Ð´Ð»Ñ Ð¿Ð¾ÐºÐ°Ð·Ð° Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ð°
 
 	if (count($birsdaydata) && isset($birsdaydata[$todaykey])) {
 		foreach ($birsdaydata[$todaykey] as $user_id => $info) {
@@ -52,6 +52,7 @@ if ($fm->exbb['birstday']){
 	($save_flag === TRUE) ? $fm->_Write($fp_birsday,$birsdaydata):fclose($fp_birsday);
 	$birsdayprint = (count($birsdayprint)) ? implode ( ', ', $birsdayprint):$fm->LANG['NoBirstToday'];
 	include('templates/'.DEF_SKIN.'/modules/birstday/board_body.tpl');
+
 	unset($birstdayconf,$data,$birsdaydata,$birsdayprint);
 	$fm->_Title = ($birsdaytitle === FALSE) ? '':' :: '.$birsdaytitle;
 	$rowspan++;
@@ -94,4 +95,3 @@ function birstday_pm($id) {
         unset($inbox,$user);
         if ($fm->user['id'] == $id) $fm->user['new_pm'] = TRUE;
 }
-?>

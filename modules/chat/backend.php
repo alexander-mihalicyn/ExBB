@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Chat for ExBB FM 1.0 RC2
 	Copyright (c) 2008 - 2009 by Yuri Antonov aka yura3d

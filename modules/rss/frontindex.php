@@ -29,6 +29,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && count($allforums) === 0){
 			$num	= $fm->_Intval('num', 10);
 
 			$alllist = array();
+			
 			foreach ($allforums as $forum_id => $forum) {
 					$list		= array_filter($fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php'),"newposts");
 					$alllist	= array_merge ($alllist, $list);
@@ -62,13 +63,13 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && count($allforums) === 0){
 					$postlink		= $fm->exbb['boardurl'].'/topic.php?'.htmlentities('forum='.$topic['fid'].'&topic='.$topic['id'].'&postid='.$post_id.'#'.$post_id);
 					$postlink1		= $fm->exbb['boardurl'].'/topic.php?'.htmlentities('forum='.$topic['fid'].'&topic='.$topic['id'].'&postid='.$post_id.'#'.$post_id);
 					$post 			= str_replace($search, $replace, $fm->formatpost($lastpost['post'],$lastpost['html'],$lastpost['smiles']));
-					$description	= "<![CDATA[<b>В форуме: ".$allforums[$topic['fid']]['name']."</b><br />Автор: ".$topic['poster']."<br />----------<br />".$post."]]>";
+					$description	= "<![CDATA[<b>Р’ С„РѕСЂСѓРјРµ: ".$allforums[$topic['fid']]['name']."</b><br />РђРІС‚РѕСЂ: ".$topic['poster']."<br />----------<br />".$post."]]>";
 					$pubDate		= date("r",$topic['postdate']);
 					unset($topicdata);
 
 	$rss_data .= <<<RSSDATA
 			<item>
-				<title>Тема: {$topic['name']}</title>
+				<title>РўРµРјР°: {$topic['name']}</title>
 				<link>{$postlink}</link>
 				<description>{$description}</description>
 				<pubDate>{$pubDate}</pubDate>
@@ -89,14 +90,14 @@ echo <<<RSS
 <!-- generator="ExBB FeedCreator 1.0" -->
 <rss version="2.0">
 	<channel>
-		<title>Последние сообщения на форуме {$fm->exbb['boardname']}</title>
+		<title>РџРѕСЃР»РµРґРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ РЅР° С„РѕСЂСѓРјРµ {$fm->exbb['boardname']}</title>
 		<link>{$fm->exbb['boardurl']}</link>
 		<description>{$fm->exbb['boarddesc']}</description>
 		<generator>ExBB Full Mods 0.1.5 FeedCreator 1.1</generator>
 		<image>
 			<url>{$fm->exbb['boardurl']}/im/logo_ExBB.gif</url>
 			<link>{$fm->exbb['boardurl']}</link>
-			<title>Последние сообщения на форуме</title>
+			<title>РџРѕСЃР»РµРґРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ РЅР° С„РѕСЂСѓРјРµ</title>
 		</image>
 		<lastBuildDate>{$date}</lastBuildDate>
 		$rss_data

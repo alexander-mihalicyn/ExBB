@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
 * "Members Control" mods for  ExBB v.1.9.1                                 *
-* Copyright (c) 2004 by Alisher Mutalov aka Markus®                        *
+* Copyright (c) 2004 by Alisher Mutalov aka MarkusÂ®                        *
 *                                                                          *
 * http://www.tvoyweb.ru                                                    *
 * http://www.tvoyweb.ru/forums/                                            *
@@ -46,6 +46,7 @@ function memlist() {
 
 		$per_page  = abs($fm->_Intval('pg', 25));
 		$get_param = 'setmodule.php?module=memcontrol&s='.$sort.'&order='.$order.'&p={_P_}&pg='.$per_page;
+	
 		$pages = Print_Paginator(count($users),$get_param,$per_page,8,$first,TRUE);
 
 		$userskeys = array_slice(array_keys($users),$first,$per_page);

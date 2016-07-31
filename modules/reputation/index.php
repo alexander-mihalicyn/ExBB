@@ -13,7 +13,6 @@ $fm->_LoadModuleLang('reputation', 1);
 define('EXBB_MODULE_REPUTATION_DATA_CONFIG', EXBB_DATA_DIR_MODULES.'/reputation/config.php');
 
 if ($fm->_POST !== TRUE) {
-
 	$config = $fm->_Read(EXBB_MODULE_REPUTATION_DATA_CONFIG);
 	
 	$msg				= $config['msg'];
@@ -41,7 +40,6 @@ if ($fm->_POST !== TRUE) {
 	include('admin/footer.tpl');
 }
 else {
-	
 	$fm->_Intvals(array('msg', 'wait_days', 'wait_hours', 'wait_minutes', 'protect_days',
 		'protect_hours', 'protect_minutes', 'size_min', 'size_max', 'per_page'));
 	$fm->_Boolean1('guest');
@@ -76,7 +74,7 @@ else {
 	}
 	if ($blacklist) sort($blacklist);
 	
-	// Ôîğìèğóåì íîâûé ìàññèâ êîíôèãà
+	// Ğ¤Ğ¾Ñ€Ğ¼Ğ¸Ñ€ÑƒĞµĞ¼ Ğ½Ğ¾Ğ²Ñ‹Ğ¹ Ğ¼Ğ°ÑÑĞ¸Ğ² ĞºĞ¾Ğ½Ñ„Ğ¸Ğ³Ğ°
 	$config = array(
 		'msg'				=> $fm->input['msg'],
 		'wait_days'			=> $fm->input['wait_days'],

@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
 * "IP BanPlus" mods for  ExBB Full Mods v.0.1.5								*
-* Copyright (c) 2004 by Alisher Mutalov aka Markus®    	                    *
+* Copyright (c) 2004 by Alisher Mutalov aka MarkusÂ®    	                    *
 *																			*
 * http://www.tvoyweb.ru														*
 * http://www.tvoyweb.ru/forums/												*
@@ -11,6 +11,7 @@
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $fm->_LoadModuleLang('threadstop');
+
 include(EXBB_DATA_DIR_MODULES.'/threadstop/config.php');
 
 $allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);

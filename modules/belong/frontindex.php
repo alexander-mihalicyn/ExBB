@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Belong Mod for ExBB FM 1.0 RC2
  * @copyright ExBB Group, http://www.exbb.org/
@@ -203,5 +202,3 @@ function viewPosts() {
     include('templates/' . MODULE_SKIN . '/modules/belong/posts_body.tpl');
     include('templates/' . MODULE_SKIN . '/footer.tpl');
 }
-
-?>

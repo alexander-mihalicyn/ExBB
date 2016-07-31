@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Belong Mod for ExBB FM 1.0 RC2
  * @copyright ExBB Group, http://www.exbb.org/
@@ -63,5 +62,3 @@ function index() {
     $belong = new Belong;
     $belong->index();
 }
-
-?>

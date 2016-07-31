@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
 * "IP BanPlus" mods for  ExBB Full Mods v.0.1.5								*
-* Copyright (c) 2004 by Alisher Mutalov aka Markus®    	                    *
+* Copyright (c) 2004 by Alisher Mutalov aka MarkusÂ®    	                    *
 *																			*
 * http://www.tvoyweb.ru														*
 * http://www.tvoyweb.ru/forums/												*
@@ -20,6 +20,7 @@ if (($post_id = $fm->_Intval('postid')) === 0 || ($topic_id = $fm->_Intval('topi
 }
 
 $list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/list.php');
+
 if (!isset($list[$topic_id]) || !file_exists(EXBB_DATA_DIR_FORUMS . '/' . $forum_id.'/'.$topic_id.'-thd.php')) {
 	$fm->_Message($fm->LANG['MainMsg'],"AAA".$fm->LANG['TopicMiss']);
 }
@@ -85,7 +86,7 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 			$moder['new_pm'] = TRUE;
 			$fm->_Write($fp_moder,$moder);
 
-			/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+			/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 			if ($sendMail === TRUE && $moder['sendnewpm'] === TRUE){
 				$email = sprintf($fm->LANG['NewPMNotify'],
 								$moder['name'],
@@ -97,7 +98,7 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 
 				$fm->_Mail($fm->exbb['boardname'],$fm->exbb['adminemail'],$moder['mail'],$fm->LANG['EmailNewPMTitle'],$email);
 			}
-			/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+			/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 			unset($moder);
 	}
 	$fm->_Message($fm->LANG['TableTitle'],$fm->LANG['ReportAddedOk'],'topic.php?forum='.$forum_id.'&topic='.$topic_id.'&postid='.$post_id.'#'.$post_id);

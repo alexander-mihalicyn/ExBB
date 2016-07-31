@@ -23,4 +23,3 @@ echo <<<DATA
 			<a href="http://www.exbb.org/">yura3d</a></div>
 			
 DATA;
-?>

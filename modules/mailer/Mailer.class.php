@@ -8,15 +8,15 @@
 
 defined('IN_EXBB') or die;
 
-define('EXBB_MODULE_MAILER_DATA_DIR', EXBB_DATA_DIR_MODULES . '/mailer');		// Ïóòü ê ïàïêå äàííûõ ìîäóëÿ
-define('EXBB_MODULE_MAILER_DATA_LOCK', EXBB_MODULE_MAILER_DATA_DIR . '/lock.php');		// Áëîêèðàòîð äîñòóïà
-define('EXBB_MODULE_MAILER_DATA_CONFIG', EXBB_MODULE_MAILER_DATA_DIR . '/config.php');		// Êîíôèãóðàöèÿ
-define('EXBB_MODULE_MAILER_DATA_QUEUE', EXBB_MODULE_MAILER_DATA_DIR . '/list.php');		// Ñïèñîê ïèñåì â î÷åðåäè
-define('EXBB_MODULE_MAILER_DATA_MAIL', EXBB_MODULE_MAILER_DATA_DIR . '/%d.php');			// Ïèñüìî
-define('FM_MAILER_ACCOUNT_PRIORITY',		1);										// Ïðèîðèòåò ó÷¸òíûõ ïèñåì
-define('FM_MAILER_PERSON_PRIORITY',			2);										// Ïðèîðèòåò ïåðñîíàëüíûõ ïèñåì
-define('FM_MAILER_SUBSCRIBERS_PRIORITY',	3);										// Ïðèîðèòåò ïîäïèñîê
-define('FM_MAILER_MASS_PRIORITY',			4);										// Ïðèîðèòåò ìàññîâîé ðàññûëêè
+define('EXBB_MODULE_MAILER_DATA_DIR', EXBB_DATA_DIR_MODULES . '/mailer');		// ÐŸÑƒÑ‚ÑŒ Ðº Ð¿Ð°Ð¿ÐºÐµ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¼Ð¾Ð´ÑƒÐ»Ñ
+define('EXBB_MODULE_MAILER_DATA_LOCK', EXBB_MODULE_MAILER_DATA_DIR . '/lock.php');		// Ð‘Ð»Ð¾ÐºÐ¸Ñ€Ð°Ñ‚Ð¾Ñ€ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð°
+define('EXBB_MODULE_MAILER_DATA_CONFIG', EXBB_MODULE_MAILER_DATA_DIR . '/config.php');		// ÐšÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ñ
+define('EXBB_MODULE_MAILER_DATA_QUEUE', EXBB_MODULE_MAILER_DATA_DIR . '/list.php');		// Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð¿Ð¸ÑÐµÐ¼ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸
+define('EXBB_MODULE_MAILER_DATA_MAIL', EXBB_MODULE_MAILER_DATA_DIR . '/%d.php');			// ÐŸÐ¸ÑÑŒÐ¼Ð¾
+define('FM_MAILER_ACCOUNT_PRIORITY',		1);										// ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ ÑƒÑ‡Ñ‘Ñ‚Ð½Ñ‹Ñ… Ð¿Ð¸ÑÐµÐ¼
+define('FM_MAILER_PERSON_PRIORITY',			2);										// ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¸ÑÐµÐ¼
+define('FM_MAILER_SUBSCRIBERS_PRIORITY',	3);										// ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ¾Ðº
+define('FM_MAILER_MASS_PRIORITY',			4);										// ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð¼Ð°ÑÑÐ¾Ð²Ð¾Ð¹ Ñ€Ð°ÑÑÑ‹Ð»ÐºÐ¸
 
 class Mailer {
 	var $config		= array();
@@ -131,6 +131,7 @@ class Mailer {
 		
 		// Config start
 		$config = $this->getConfig();
+		
 		if (!$config['cron'] || $this->isCron()) {
 			$config['last']		= isset($config['last']) ? $config['last'] : 0;
 			$config['sent']		= isset($config['sent']) && $fm->_Nowtime - $config['last'] <= $config['period'] ? $config['sent'] : 0;

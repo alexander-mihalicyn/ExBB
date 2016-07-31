@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Ads Mod for ExBB FM 1.0 RC2
 	Copyright (c) 2004 - 2011 by Yuri Antonov aka yura3d
@@ -55,5 +54,3 @@ function changeConfig() {
 
 	$fm->_Message($fm->LANG['ModuleTitle'], $fm->LANG['ModuleUpdateOk'], 'setmodule.php?module=ads', 1);
 }
-
-?>

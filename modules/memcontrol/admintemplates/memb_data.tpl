@@ -10,4 +10,3 @@ $memb_data .= <<<DATA
 					<td><input name="del[{$user_id}]" type="checkbox" value="{$user_id}"></td>
 				</tr>
 DATA;
-?>

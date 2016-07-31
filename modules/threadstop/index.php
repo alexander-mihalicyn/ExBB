@@ -1,5 +1,6 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $fm->_LoadModuleLang('threadstop');
 
 if ($fm->_Boolean($fm->input,'dosave') === TRUE){

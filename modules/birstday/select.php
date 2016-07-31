@@ -2,6 +2,7 @@
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $select_birstday = '';
+
 if ($requirepass === FALSE && $fm->exbb['birstday'] === TRUE){
 	$fm->_LoadModuleLang('birstday');
 	$select_birstday = ($fm->input['action'] == 'agreed') ? select():select($fm->user);
@@ -56,4 +57,3 @@ function select($info='') {
          include ('templates/'.DEF_SKIN.'/modules/birstday/select.tpl');
          return $select_birstday;
 }
-?>

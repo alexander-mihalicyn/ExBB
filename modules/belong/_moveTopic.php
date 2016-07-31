@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Belong Mod for ExBB FM 1.0 RC2
  * @copyright ExBB Group, http://www.exbb.org/
@@ -20,5 +19,3 @@ if ($fm->exbb['belong']) {
     $belong->moveTopic($forum_id, $topic_id, $toforum_id, $newtopic_id, $autors);
     unset($belong);
 }
-
-?>

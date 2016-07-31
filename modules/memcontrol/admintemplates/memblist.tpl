@@ -85,4 +85,3 @@ function ChekUncheck() {
 				</table>
 			</form>
 MEMBERS;
-?>

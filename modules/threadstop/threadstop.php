@@ -4,6 +4,7 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 $fm->_LoadModuleLang('threadstop');
 
 $allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
+
 if (!defined('IS_ADMIN') && $fm->user['status'] != 'sm')
 	foreach ($allforums as $forum)
 		$fm->_GetModerators($forum['id'], $allforums);

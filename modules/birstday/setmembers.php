@@ -1,6 +1,8 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
+
 $admin_birsday = '';
+
 if ($fm->exbb['birstday'] === TRUE){
 	$fm->_LoadModuleLang('birstday');
 	if ($includemode == 'edit') {
