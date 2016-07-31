@@ -21,7 +21,6 @@ $newsbody .= <<<DATA
 				<tr>
 					<td class="darkrow3">
 						<div align="left" style="float:left;">&nbsp;{$fm->LANG['PostDate']} <b>{$dateposted}</b></div>
-        				<div align="right"><a href="#top" onClick="scroll(0,0);return false"><img src="./templates/InvisionExBB/im/gotop.gif" alt="Top" border="0" /></a></div>
 					</td>
 				</tr>
 			</table>

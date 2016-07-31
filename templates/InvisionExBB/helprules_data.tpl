@@ -14,9 +14,6 @@ $content.= <<<DATA
 						{$text}
 					</td>
 				</tr>
-				<tr class="darkrow3">
-					<td class="postdetails"><a href="#top" onClick="scroll(0,0);return false"><img src="./templates/InvisionExBB/im/gotop.gif" alt="Top" border="0" /></a></td>
-				</tr>
 		</table>
 		<br>
 DATA;
