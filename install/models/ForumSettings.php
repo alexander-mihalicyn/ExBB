@@ -1,14 +1,19 @@
 <?php
+use ExBB\Helpers\FileSystemHelper;
+
+/**
+ * Class ModelForumSettings
+ */
 class ModelForumSettings extends BaseModel {
 	public function validate($data) {
 		$messages = [];
 
 		/**if (empty($data['url'])) {
-		$messages[] = [
-		'type' => 'error',
-		'text' => lang('forumSettingsUrlEmpty'),
-		];
-		}*/
+		 * $messages[] = [
+		 * 'type' => 'error',
+		 * 'text' => lang('forumSettingsUrlEmpty'),
+		 * ];
+		 * }*/
 
 		if (empty(trim($data['title']))) {
 			$messages[] = [
@@ -18,11 +23,11 @@ class ModelForumSettings extends BaseModel {
 		}
 
 		/**if (empty($data['description'])) {
-		$messages[] = [
-		'type' => 'error',
-		'text' => lang('forumSettingsDescriptionEmpty'),
-		];
-		}*/
+		 * $messages[] = [
+		 * 'type' => 'error',
+		 * 'text' => lang('forumSettingsDescriptionEmpty'),
+		 * ];
+		 * }*/
 
 		if (empty(trim($data['email']))) {
 			$messages[] = [
@@ -76,40 +81,54 @@ class ModelForumSettings extends BaseModel {
 			'ch_dirs' => (int)trim($data['chmodDirs']),
 			'ch_files' => (int)trim($data['chmodFiles']),
 			'ch_upfiles' => (int)trim($data['chmodUploads']),
-			
+
 			'installed' => true,
 		]);
+	}
+
+	/**
+	 * Выполняет сбрасывание базы данных форума в начальное (пустое) состояние
+	 *
+	 */
+	public function resetData() {
+		if (is_dir(EXBB_DATA)) {
+			FileSystemHelper::deleteDirectoryRecursive(EXBB_DATA);
+		}
+
+		FileSystemHelper::copyDirectory(EXBB_INSTALLATION_ROOT.'/data', EXBB_DATA);
 	}
 
 	private function _saveForumConfig($data) {
 		include EXBB_DATA_CONFIG;
 
-		$configFileContent = '<?php'.PHP_EOL.'defined(\'IN_EXBB\') or die(\'Hack attempt!\');'.PHP_EOL.PHP_EOL;
+		$configFileContent = '<?php' . PHP_EOL . 'defined(\'IN_EXBB\') or die(\'Hack attempt!\');' . PHP_EOL . PHP_EOL;
 
 		foreach ($this->exbb as $var => $value) {
-			if (isset($data[$var])) {
-				$value = $data[$var];
+			if (isset($data[ $var ])) {
+				$value = $data[ $var ];
 			}
 
-			$configFileContent .= '$this->exbb[\''.$var.'\'] = ';
+			$configFileContent .= '$this->exbb[\'' . $var . '\'] = ';
 
 			if (is_string($value)) {
-				$configFileContent .= '"'.$value.'"';
-			}
-			else if ($var == 'ch_dirs' || $var == 'ch_files' || $var == 'ch_upfiles') {
-				$configFileContent .= '0'.(int)$value;
-			}
-			else if (is_numeric($value)) {
-				$configFileContent .= $value;
-			}
-			else if (is_bool($value)) {
-				$configFileContent .= ($value) ? 'true' : 'false';
-			}
-			else {
-				$configFileContent .= $value;
+				$configFileContent .= '"' . $value . '"';
+			} else {
+				if ($var == 'ch_dirs' || $var == 'ch_files' || $var == 'ch_upfiles') {
+					$configFileContent .= '0' . (int)$value;
+				} else {
+					if (is_numeric($value)) {
+						$configFileContent .= $value;
+					} else {
+						if (is_bool($value)) {
+							$configFileContent .= ($value) ? 'true' : 'false';
+						} else {
+							$configFileContent .= $value;
+						}
+					}
+				}
 			}
 
-			$configFileContent .= ';'.PHP_EOL;
+			$configFileContent .= ';' . PHP_EOL;
 		}
 
 		file_put_contents(EXBB_DATA_CONFIG, $configFileContent, LOCK_EX);

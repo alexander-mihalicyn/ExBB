@@ -18,7 +18,7 @@ class ModelAdminAccountSettings extends BaseModel {
 			];
 		}
 
-		if (!preg_match("/^[A-Za-zà-ÿÀ-ß¸¨0-9\.\s_]+$/si", $login)) {
+		if (!preg_match("/^[A-Za-zÐ°-ÑÐ-Ð¯Ñ‘Ð0-9\.\s_]+$/si", $login)) {
 			$messages[] = [
 				'type' => 'error',
 				'text' => lang('adminAccountLoginInvalid'),
@@ -32,7 +32,7 @@ class ModelAdminAccountSettings extends BaseModel {
 			];
 		}
 
-		if (mb_strlen($password, 'Windows-1251') < 6) {
+		if (mb_strlen($password, 'Windows-1251') < 5) {
 			$messages[] = [
 				'type' => 'error',
 				'text' => lang('adminAccountPasswordShort'),

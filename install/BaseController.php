@@ -46,9 +46,9 @@ abstract class BaseController {
 	abstract public function ActionIndex();
 
 	/**
-	 * Загружает модель
+	 * Р—Р°РіСЂСѓР¶Р°РµС‚ РјРѕРґРµР»СЊ
 	 *
-	 * @param string $model название модели
+	 * @param string $model РЅР°Р·РІР°РЅРёРµ РјРѕРґРµР»Рё
 	 *
 	 * @return mixed
 	 */
@@ -61,10 +61,10 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Отображает полный шаблон страницы
+	 * РћС‚РѕР±СЂР°Р¶Р°РµС‚ РїРѕР»РЅС‹Р№ С€Р°Р±Р»РѕРЅ СЃС‚СЂР°РЅРёС†С‹
 	 *
-	 * @param string $view название шаблона
-	 * @param array $data данные для шаблона
+	 * @param string $view РЅР°Р·РІР°РЅРёРµ С€Р°Р±Р»РѕРЅР°
+	 * @param array $data РґР°РЅРЅС‹Рµ РґР»СЏ С€Р°Р±Р»РѕРЅР°
 	 *
 	 * @return string
 	 */
@@ -78,10 +78,10 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Отображает указанный шаблон
+	 * РћС‚РѕР±СЂР°Р¶Р°РµС‚ СѓРєР°Р·Р°РЅРЅС‹Р№ С€Р°Р±Р»РѕРЅ
 	 *
-	 * @param string $view название шаблона
-	 * @param array $data данные для шаблона
+	 * @param string $view РЅР°Р·РІР°РЅРёРµ С€Р°Р±Р»РѕРЅР°
+	 * @param array $data РґР°РЅРЅС‹Рµ РґР»СЏ С€Р°Р±Р»РѕРЅР°
 	 *
 	 * @return string
 	 */
@@ -95,9 +95,9 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Выполняет переадресацию на указанный URL
+	 * Р’С‹РїРѕР»РЅСЏРµС‚ РїРµСЂРµР°РґСЂРµСЃР°С†РёСЋ РЅР° СѓРєР°Р·Р°РЅРЅС‹Р№ URL
 	 *
-	 * @param string $url URL для переадресации
+	 * @param string $url URL РґР»СЏ РїРµСЂРµР°РґСЂРµСЃР°С†РёРё
 	 * @param int $method
 	 */
 	protected function redirect($url, $method=null) {

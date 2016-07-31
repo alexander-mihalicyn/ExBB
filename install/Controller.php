@@ -46,85 +46,25 @@ class Controller extends BaseController {
 		$checkingErrors = false;
 		$checkingWarnings = false;
 
-		// Массив файлов для проверки
-		$fileSystemObjectsChecklist = [
-			// Основные директории
-			EXBB_DATA,
-			EXBB_DATA_DIR_FORUMS,
-			EXBB_DATA_DIR_LOGS,
-			EXBB_DATA_DIR_MEMBERS,
-			EXBB_DATA_DIR_MESSAGES,
-			EXBB_DATA_DIR_SEARCH,
-			EXBB_DATA_DIR_BANNED_MEMBERS,
-			EXBB_DATA_DIR_MODULES,
-			EXBB_DIR_UPLOADS,
+		$checkModel = $this->loadModel('CheckServer');
+		$fileSystemObjectsList = $checkModel->checkFilesPermissions();
 
-			// Основные файлы
-			EXBB_DATA_CONFIG,
-			EXBB_DATA_CONFIG_BACKUP,
-			EXBB_DATA_FORUMS_LIST,
-			EXBB_DATA_FORUMS_LIST_BACKUP,
-			EXBB_DATA_BADWORDS,
-			EXBB_DATA_BANNED_USERS_LIST,
-			EXBB_DATA_BANNED_BY_IP_LIST,
-			EXBB_DATA_BANNERS,
-			EXBB_DATA_COUNTERS,
-			EXBB_DATA_BOARD_STATS,
-			EXBB_DATA_MEMBERS_TITLES,
-			EXBB_DATA_NEWS,
-			EXBB_DATA_MEMBERS_ONLINE,
-			EXBB_DATA_SKIP_MAILS,
-			EXBB_DATA_SMILES_LIST,
-			EXBB_DATA_USERS_LIST,
-			EXBB_DATA_TEMP_USERS_LIST,
-		];
-
-		$fileSystemObjectsList = [];
-
-		foreach ($fileSystemObjectsChecklist as $object) {
-			$objectData = [
-				'path' => str_replace(EXBB_ROOT . '/', '', $object),
-			];
-
-			$objectData['isExists'] = file_exists($object);
-
-			if ($objectData['isExists']) {
-				$objectData['isReadable'] = is_readable($object);
-				$objectData['isWriteable'] = is_writeable($object);
-			}
-			else {
-				$objectData['isReadable'] = false;
-				$objectData['isWriteable'] = false;
-			}
-
+		foreach ($fileSystemObjectsList as $objectData) {
 			if (!$objectData['isExists'] || !$objectData['isReadable'] || !$objectData['isWriteable']) {
 				$checkingErrors = true;
 			}
-
-			$fileSystemObjectsList[] = $objectData;
 		}
 
-		$phpVersionStatus = version_compare(PHP_VERSION, REQUIRED_PHP_VERSION, '>=');
+		$serverConfigurationCheckList = $checkModel->checkServerConfiguration();
 
-		$phpExtensionsCheckList = [
-			[
-				'title' => lang('phpParameterSQLite3'),
-				'status' => extension_loaded('sqlite3')
-			],
-
-			[
-				'title' => lang('phpParameterGzip'),
-				'status' => function_exists('ob_gzhandler')
-			],
-		];
-
-		if (!$phpVersionStatus) {
-			$checkingErrors = true;
-		}
-
-		foreach ($phpExtensionsCheckList as $object) {
+		foreach ($serverConfigurationCheckList as $object) {
 			if (!$object['status']) {
-				$checkingWarnings = true;
+				if ($object['code'] == 'phpVersion') {
+					$checkingErrors = true;
+				}
+				else {
+					$checkingWarnings = true;
+				}
 			}
 		}
 
@@ -132,10 +72,7 @@ class Controller extends BaseController {
 
 		return $this->render('check', [
 			'fileSystemObjectsCheckList' => $fileSystemObjectsList,
-			'currentPhpVersion' => PHP_VERSION,
-			'requiredPhpVersion' => REQUIRED_PHP_VERSION,
-			'phpVersionStatus' => $phpVersionStatus,
-			'phpExtensionsCheckList' => $phpExtensionsCheckList,
+			'serverConfigurationCheckList' => $serverConfigurationCheckList,
 
 			'checkingErrors' => $checkingErrors,
 			'checkingWarnings' => $checkingWarnings,
@@ -182,7 +119,8 @@ class Controller extends BaseController {
 				]);
 			}
 
-			// Сохраняем настройки
+			// РЎРѕС…СЂР°РЅСЏРµРј РЅР°СЃС‚СЂРѕР№РєРё
+			$modelSettings->resetData();
 			$modelSettings->saveConfig($data);
 
 			$this->session->data['settingsInstalled'] = true;

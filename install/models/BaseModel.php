@@ -1,4 +1,5 @@
 <?php
+use ExBB\DataBase\FileDB;
 
 /**
  * Class BaseModel
@@ -9,10 +10,16 @@ class BaseModel {
 	 */
 	protected $fm;
 
+	/**
+	 * @var \ExBB\DataBase\FileDB
+	 */
+	protected $db;
+
 	public function __construct() {
 		global $fm;
 
 		$this->fm = $fm;
+		$this->db = new FileDB();
 	}
 
 	protected function sanitizeString($string) {
@@ -20,7 +27,7 @@ class BaseModel {
 	}
 
 	/**
-	 * Проверяет валидность E-mail
+	 * РџСЂРѕРІРµСЂСЏРµС‚ РІР°Р»РёРґРЅРѕСЃС‚СЊ E-mail
 	 *
 	 * @param string $email E-mail
 	 *

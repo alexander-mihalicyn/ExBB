@@ -6,6 +6,8 @@ define('IN_EXBB', true);
 define('EXBB_ROOT', dirname(__DIR__));
 define('EXBB_BASE', EXBB_ROOT);
 
+define('EXBB_INSTALLATION_ROOT', __DIR__);
+
 require EXBB_ROOT.'/include/paths.php';
 require EXBB_ROOT.'/include/lib.php';
 require EXBB_ROOT.'/include/page_header.php';

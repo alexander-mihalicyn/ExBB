@@ -18,24 +18,16 @@
 	</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td class="b-table__cell_<?php echo ($phpVersionStatus) ? 'success' : 'error'; ?>">
-				<?php echo lang('phpParameterVersion'); ?>
-			</td>
-			<td class="b-table__cell_<?php echo ($phpVersionStatus) ? 'success' : 'error'; ?>"><?php echo $currentPhpVersion; ?></td>
-			<td><?php echo $requiredPhpVersion; ?></td>
-		</tr>
-
-	<?php foreach ($phpExtensionsCheckList as $object) : ?>
+	<?php foreach ($serverConfigurationCheckList as $object) : ?>
 		<tr>
 			<td class="b-table__cell_<?php echo ($object['status']) ? 'success' : 'warning'; ?>">
 				<?php echo $object['title']; ?>
 			</td>
 			<td class="b-table__cell_<?php echo ($object['status']) ? 'success' : 'warning'; ?>">
-				<?php echo ($object['status']) ? lang('phpParameterSupported') : lang('phpParameterNotSupported'); ?>
+				<?php echo $object['currentValue']; ?>
 			</td>
 			<td>
-				<?php echo lang('phpParameterSupported'); ?>
+				<?php echo $object['optimalValue']; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -46,7 +38,7 @@
 <table class="b-table">
 	<thead>
 		<tr>
-			<th>Путь</th>
+			<th><?php echo lang('filePath'); ?></th>
 			<th><?php echo lang('fileIsExists'); ?></th>
 			<th><?php echo lang('fileIsReadable'); ?></th>
 			<th><?php echo lang('fileIsWriteable'); ?></th>

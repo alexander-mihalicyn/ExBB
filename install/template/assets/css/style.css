@@ -21,25 +21,6 @@ a.b-link--red:hover {
 	color: #dd6900;
 }
 
-.main {border: 1px solid #CCCCCC;padding: 0px;width:80%;text-align: center;}
-.inmain {margin: 3px;padding:5px;background-color: #ECECEC;text-align: left;}
-.inmain h1, h3, h2{margin: 2px;padding: 0px;font-size: 12pt;}
-.inmain h1 {text-align: left;}
-.inmain h3 {color: red;text-align: right;}
-.inmain h2 {padding: 15px;font-size: 10pt;text-align: center;}
-.inmain .warning {color: red;}
-.inmain .ok {color: green;}
-span.ok, span.warning {font-weight: bolder;}
-.inmain div {width: 80%;margin:0 auto;font-weight: normal;}
-div.warning span {color: black;}
-div.return {font-size: 10pt;text-align: center;}
-.inmain div div.field {width: 100%;text-align: right;border-bottom: solid 1px black;padding: 5px 0px 5px 0px;vertical-align: bottom;}
-table {width:80%;border-bottom: solid 1px black;}
-table.check {width: 70%;}
-table th {text-align: center;padding: 3px;border-top: solid 1px black;}
-table td {border-top: solid 1px black;padding: 3px 0px 3px 0px;}
-form table {margin: 3px;text-align: left;}
-
 *, *:after, *:before {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;

@@ -1,85 +1,85 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
-$lang['installation'] = 'Программа установки';
+$lang['installation'] = 'РџСЂРѕРіСЂР°РјРјР° СѓСЃС‚Р°РЅРѕРІРєРё';
 $lang['welcomeToInstallation'] = '
-	<p>Данная программа предназначена для установки ExBB Forum Engine.</p>
-	<p>Для начала установки форума убедитесь что на все папки и файлы внутри директории <strong>data/</strong> установлены права (CHMOD) на запись. О том, как правильно установить права на запись, можно узнать на <a href="http://exbb.info/community">форуме поддержки</a> или у вашего хостинг-пройвайдера.</p>
-	<p>При возникновении проблем, трудностей или вопросов при установке, вы можете обратиться на <a href="http://exbb.info/community">форум поддержки</a></p>
+	<p>Р”Р°РЅРЅР°СЏ РїСЂРѕРіСЂР°РјРјР° РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё ExBB Forum Engine.</p>
+	<p>Р”Р»СЏ РЅР°С‡Р°Р»Р° СѓСЃС‚Р°РЅРѕРІРєРё С„РѕСЂСѓРјР° СѓР±РµРґРёС‚РµСЃСЊ С‡С‚Рѕ РЅР° РІСЃРµ РїР°РїРєРё Рё С„Р°Р№Р»С‹ РІРЅСѓС‚СЂРё РґРёСЂРµРєС‚РѕСЂРёРё <strong>data/</strong> СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ РїСЂР°РІР° (CHMOD) РЅР° Р·Р°РїРёСЃСЊ. Рћ С‚РѕРј, РєР°Рє РїСЂР°РІРёР»СЊРЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїСЂР°РІР° РЅР° Р·Р°РїРёСЃСЊ, РјРѕР¶РЅРѕ СѓР·РЅР°С‚СЊ РЅР° <a href="http://exbb.info/community">С„РѕСЂСѓРјРµ РїРѕРґРґРµСЂР¶РєРё</a> РёР»Рё Сѓ РІР°С€РµРіРѕ С…РѕСЃС‚РёРЅРі-РїСЂРѕР№РІР°Р№РґРµСЂР°.</p>
+	<p>РџСЂРё РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРё РїСЂРѕР±Р»РµРј, С‚СЂСѓРґРЅРѕСЃС‚РµР№ РёР»Рё РІРѕРїСЂРѕСЃРѕРІ РїСЂРё СѓСЃС‚Р°РЅРѕРІРєРµ, РІС‹ РјРѕР¶РµС‚Рµ РѕР±СЂР°С‚РёС‚СЊСЃСЏ РЅР° <a href="http://exbb.info/community">С„РѕСЂСѓРј РїРѕРґРґРµСЂР¶РєРё</a></p>
 ';
 
-$lang['yes'] = 'Да';
-$lang['no'] = 'Нет';
+$lang['yes'] = 'Р”Р°';
+$lang['no'] = 'РќРµС‚';
 
-$lang['checkPHPConfiguration'] = 'Проверка конфигурации PHP';
-$lang['phpParameter'] = 'Параметр';
-$lang['phpParameterCurrentValue'] = 'Текущее значение';
-$lang['phpParameterOptimalValue'] = 'Рекомендуемое (минимальное) значение';
+$lang['checkPHPConfiguration'] = 'РџСЂРѕРІРµСЂРєР° РєРѕРЅС„РёРіСѓСЂР°С†РёРё PHP';
+$lang['phpParameter'] = 'РџР°СЂР°РјРµС‚СЂ';
+$lang['phpParameterCurrentValue'] = 'РўРµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ';
+$lang['phpParameterOptimalValue'] = 'Р РµРєРѕРјРµРЅРґСѓРµРјРѕРµ (РјРёРЅРёРјР°Р»СЊРЅРѕРµ) Р·РЅР°С‡РµРЅРёРµ';
 
-$lang['phpParameterVersion'] = 'Версия PHP';
-$lang['phpParameterSQLite3'] = 'Модуль SQLite3';
-$lang['phpParameterGzip'] = 'GZIP сжатие';
+$lang['phpParameterVersion'] = 'Р’РµСЂСЃРёСЏ PHP';
+$lang['phpParameterSQLite3'] = 'РњРѕРґСѓР»СЊ SQLite3';
+$lang['phpParameterGzip'] = 'GZIP СЃР¶Р°С‚РёРµ';
 
-$lang['phpParameterSupported'] = 'Поддерживается';
-$lang['phpParameterNotSupported'] = 'Не поддерживается';
+$lang['phpParameterSupported'] = 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ';
+$lang['phpParameterNotSupported'] = 'РќРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ';
 
-$lang['checkFilesPermissions'] = 'Проверка доступности файлов';
-$lang['fileIsExists'] = 'Существует';
-$lang['fileIsWriteable'] = 'Доступен для записи';
-$lang['fileIsReadable'] = 'Доступен для чтения';
-$lang['filePath'] = 'Путь';
+$lang['checkFilesPermissions'] = 'РџСЂРѕРІРµСЂРєР° РґРѕСЃС‚СѓРїРЅРѕСЃС‚Рё С„Р°Р№Р»РѕРІ';
+$lang['fileIsExists'] = 'РЎСѓС‰РµСЃС‚РІСѓРµС‚';
+$lang['fileIsWriteable'] = 'Р”РѕСЃС‚СѓРїРµРЅ РґР»СЏ Р·Р°РїРёСЃРё';
+$lang['fileIsReadable'] = 'Р”РѕСЃС‚СѓРїРµРЅ РґР»СЏ С‡С‚РµРЅРёСЏ';
+$lang['filePath'] = 'РџСѓС‚СЊ';
 
-$lang['checkingErrors'] = 'Во время проверки требований были обнаружены ошибки. Для продолжения установки требуется исправить их и обновить страницу.';
-$lang['checkingNotErrors'] = 'Ошибок обнаружено не было. Вы можете продолжить установку';
-$lang['checkingWarnings'] = 'Во время проверки требований были обнаружены несоответствия оптимальным параметрам. Рекомендуется исправить их перед продолжением установки.';
+$lang['checkingErrors'] = 'Р’Рѕ РІСЂРµРјСЏ РїСЂРѕРІРµСЂРєРё С‚СЂРµР±РѕРІР°РЅРёР№ Р±С‹Р»Рё РѕР±РЅР°СЂСѓР¶РµРЅС‹ РѕС€РёР±РєРё. Р”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ СѓСЃС‚Р°РЅРѕРІРєРё С‚СЂРµР±СѓРµС‚СЃСЏ РёСЃРїСЂР°РІРёС‚СЊ РёС… Рё РѕР±РЅРѕРІРёС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ.';
+$lang['checkingNotErrors'] = 'РћС€РёР±РѕРє РѕР±РЅР°СЂСѓР¶РµРЅРѕ РЅРµ Р±С‹Р»Рѕ. Р’С‹ РјРѕР¶РµС‚Рµ РїСЂРѕРґРѕР»Р¶РёС‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ';
+$lang['checkingWarnings'] = 'Р’Рѕ РІСЂРµРјСЏ РїСЂРѕРІРµСЂРєРё С‚СЂРµР±РѕРІР°РЅРёР№ Р±С‹Р»Рё РѕР±РЅР°СЂСѓР¶РµРЅС‹ РЅРµСЃРѕРѕС‚РІРµС‚СЃС‚РІРёСЏ РѕРїС‚РёРјР°Р»СЊРЅС‹Рј РїР°СЂР°РјРµС‚СЂР°Рј. Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РёСЃРїСЂР°РІРёС‚СЊ РёС… РїРµСЂРµРґ РїСЂРѕРґРѕР»Р¶РµРЅРёРµРј СѓСЃС‚Р°РЅРѕРІРєРё.';
 
-$lang['forumSettings'] = 'Настройки форума';
-$lang['adminAccountSettings'] = 'Настройки аккаунта администратора';
-$lang['otherSettings'] = 'Другие настройки';
+$lang['forumSettings'] = 'РќР°СЃС‚СЂРѕР№РєРё С„РѕСЂСѓРјР°';
+$lang['adminAccountSettings'] = 'РќР°СЃС‚СЂРѕР№РєРё Р°РєРєР°СѓРЅС‚Р° Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°';
+$lang['otherSettings'] = 'Р”СЂСѓРіРёРµ РЅР°СЃС‚СЂРѕР№РєРё';
 
-$lang['forumSettingUrlLabel'] = 'URL форума';
-$lang['forumSettingUrlHelp'] = ' URL (должен начинаться с http://) адрес, где находится движок с форумом (например http://www.your_site.ru/forum)';
-$lang['forumSettingChmodNewDirectoriesLabel'] = 'Права (CHMOD) на создаваемые папки';
-$lang['forumSettingChmodNewFilesLabel'] = 'Права (CHMOD) на создаваемые файлы';
-$lang['forumSettingChmodUploadsLabel'] = 'Права (CHMOD) на создаваемые файлы';
-$lang['forumSettingTitle'] = 'Название форума';
-$lang['forumSettingDescription'] = 'Описание форума';
-$lang['forumSettingEmail'] = 'E-mail форума';
-$lang['forumSettingInstallDemoData'] = 'Установить демо-данные';
-$lang['forumSettingsUrlEmpty'] = 'Вы не ввели URL форума';
-$lang['forumSettingsTitleEmpty'] = 'Вы не ввели название форума';
-$lang['forumSettingsDescriptionEmpty'] = 'Вы не ввели описание форума';
-$lang['forumSettingsEmailEmpty'] = 'Вы не ввели E-mail форума';
-$lang['forumSettingsUrlInvalid'] = 'Вы ввели некорректный URL форума';
-$lang['forumSettingsTitleInvalid'] = 'Вы не ввели некорректное название форума';
-$lang['forumSettingsDescriptionInvalid'] = 'Вы ввели некорректное описание форума';
-$lang['forumSettingsEmailInvalid'] = 'Вы не ввели некорректный E-mail форума';
-$lang['forumSettingsChmodInvalid'] = 'Вы не ввели некорректное значение CHMOD';
+$lang['forumSettingUrlLabel'] = 'URL С„РѕСЂСѓРјР°';
+$lang['forumSettingUrlHelp'] = ' URL (РґРѕР»Р¶РµРЅ РЅР°С‡РёРЅР°С‚СЊСЃСЏ СЃ http://) Р°РґСЂРµСЃ, РіРґРµ РЅР°С…РѕРґРёС‚СЃСЏ РґРІРёР¶РѕРє СЃ С„РѕСЂСѓРјРѕРј (РЅР°РїСЂРёРјРµСЂ http://www.your_site.ru/forum)';
+$lang['forumSettingChmodNewDirectoriesLabel'] = 'РџСЂР°РІР° (CHMOD) РЅР° СЃРѕР·РґР°РІР°РµРјС‹Рµ РїР°РїРєРё';
+$lang['forumSettingChmodNewFilesLabel'] = 'РџСЂР°РІР° (CHMOD) РЅР° СЃРѕР·РґР°РІР°РµРјС‹Рµ С„Р°Р№Р»С‹';
+$lang['forumSettingChmodUploadsLabel'] = 'РџСЂР°РІР° (CHMOD) РЅР° СЃРѕР·РґР°РІР°РµРјС‹Рµ С„Р°Р№Р»С‹';
+$lang['forumSettingTitle'] = 'РќР°Р·РІР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingDescription'] = 'РћРїРёСЃР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingEmail'] = 'E-mail С„РѕСЂСѓРјР°';
+$lang['forumSettingInstallDemoData'] = 'РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґРµРјРѕ-РґР°РЅРЅС‹Рµ';
+$lang['forumSettingsUrlEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё URL С„РѕСЂСѓРјР°';
+$lang['forumSettingsTitleEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РЅР°Р·РІР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingsDescriptionEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РѕРїРёСЃР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingsEmailEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё E-mail С„РѕСЂСѓРјР°';
+$lang['forumSettingsUrlInvalid'] = 'Р’С‹ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ URL С„РѕСЂСѓРјР°';
+$lang['forumSettingsTitleInvalid'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РЅР°Р·РІР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingsDescriptionInvalid'] = 'Р’С‹ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РѕРїРёСЃР°РЅРёРµ С„РѕСЂСѓРјР°';
+$lang['forumSettingsEmailInvalid'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ E-mail С„РѕСЂСѓРјР°';
+$lang['forumSettingsChmodInvalid'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ CHMOD';
 
-$lang['adminAccountSettingsLogin'] = 'Логин';
-$lang['adminAccountSettingsPassword'] = 'Пароль';
-$lang['adminAccountSettingsConfirmPassword'] = 'Подтверждение пароля';
+$lang['adminAccountSettingsLogin'] = 'Р›РѕРіРёРЅ';
+$lang['adminAccountSettingsPassword'] = 'РџР°СЂРѕР»СЊ';
+$lang['adminAccountSettingsConfirmPassword'] = 'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ РїР°СЂРѕР»СЏ';
 $lang['adminAccountSettingsEmail'] = 'E-mail';
-$lang['adminAccountLoginEmpty'] = 'Вы не ввели логин';
-$lang['adminAccountPasswordEmpty'] = 'Вы не ввели пароль';
-$lang['adminAccountConfirmPasswordInvalid'] = 'Введённые пароли не совпадают';
-$lang['adminAccountPasswordShort'] = 'Минимальная длина пароля - 6 символов';
-$lang['adminAccountEmailEmpty'] = 'Вы не ввели E-mail';
-$lang['adminAccountEmailInvalid'] = 'Вы ввели некорректный E-mail';
-$lang['adminAccountLoginInvalid'] = 'Вы ввели некорректный логин';
+$lang['adminAccountLoginEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё Р»РѕРіРёРЅ';
+$lang['adminAccountPasswordEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё РїР°СЂРѕР»СЊ';
+$lang['adminAccountConfirmPasswordInvalid'] = 'Р’РІРµРґС‘РЅРЅС‹Рµ РїР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚';
+$lang['adminAccountPasswordShort'] = 'РњРёРЅРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅР° РїР°СЂРѕР»СЏ - 5 СЃРёРјРІРѕР»РѕРІ';
+$lang['adminAccountEmailEmpty'] = 'Р’С‹ РЅРµ РІРІРµР»Рё E-mail';
+$lang['adminAccountEmailInvalid'] = 'Р’С‹ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ E-mail';
+$lang['adminAccountLoginInvalid'] = 'Р’С‹ РІРІРµР»Рё РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ Р»РѕРіРёРЅ';
 
-$lang['installtionStepWelcome'] = 'Добро пожаловать';
-$lang['installtionStepCheckingRequirements'] = 'Проверка требований';
-$lang['installtionStepForumSettings'] = 'Начальная настройка';
-$lang['installtionStepAdminAccountSettings'] = 'Создание аккаунта администратора';
-$lang['installtionStepFinal'] = 'Завершение установки';
-$lang['continueInstallation'] = 'Продолжить установку';
-$lang['indexPage'] = 'Просмотр форума';
-$lang['startInstallation'] = 'Начать установку';
-$lang['finishInstallation'] = 'Завершить установку';
+$lang['installtionStepWelcome'] = 'Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ';
+$lang['installtionStepCheckingRequirements'] = 'РџСЂРѕРІРµСЂРєР° С‚СЂРµР±РѕРІР°РЅРёР№';
+$lang['installtionStepForumSettings'] = 'РќР°С‡Р°Р»СЊРЅР°СЏ РЅР°СЃС‚СЂРѕР№РєР°';
+$lang['installtionStepAdminAccountSettings'] = 'РЎРѕР·РґР°РЅРёРµ Р°РєРєР°СѓРЅС‚Р° Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°';
+$lang['installtionStepFinal'] = 'Р—Р°РІРµСЂС€РµРЅРёРµ СѓСЃС‚Р°РЅРѕРІРєРё';
+$lang['continueInstallation'] = 'РџСЂРѕРґРѕР»Р¶РёС‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ';
+$lang['indexPage'] = 'РџСЂРѕСЃРјРѕС‚СЂ С„РѕСЂСѓРјР°';
+$lang['startInstallation'] = 'РќР°С‡Р°С‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ';
+$lang['finishInstallation'] = 'Р—Р°РІРµСЂС€РёС‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ';
 $lang['installationFinished'] = '
-<p>Поздравляем!</p>
-<p>Установка успешно завершена!</p>
-<p>В случае возникновения вопросов вы можете обратиться на <a href="http://exbb.info/community">форум поддержики ExBB Forum Engine</a></p>
-<p>Спасибо, что воспользовались нашим форумом!</p>
+<p>РџРѕР·РґСЂР°РІР»СЏРµРј!</p>
+<p>РЈСЃС‚Р°РЅРѕРІРєР° СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅР°!</p>
+<p>Р’ СЃР»СѓС‡Р°Рµ РІРѕР·РЅРёРєРЅРѕРІРµРЅРёСЏ РІРѕРїСЂРѕСЃРѕРІ РІС‹ РјРѕР¶РµС‚Рµ РѕР±СЂР°С‚РёС‚СЊСЃСЏ РЅР° <a href="http://exbb.info/community">С„РѕСЂСѓРј РїРѕРґРґРµСЂР¶РёРєРё ExBB Forum Engine</a></p>
+<p>РЎРїР°СЃРёР±Рѕ, С‡С‚Рѕ РІРѕСЃРїРѕР»СЊР·РѕРІР°Р»РёСЃСЊ РЅР°С€РёРј С„РѕСЂСѓРјРѕРј!</p>
 ';
