@@ -7,4 +7,3 @@ $ranksdata .= <<<DATA
 						<td class="{$back_clr}"><a href="setranks.php?action=delete&amp;id={$id}">{$fm->LANG['Delete']}</a></td>
 					</tr>
 DATA;
-?>

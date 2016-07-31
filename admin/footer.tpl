@@ -4,4 +4,3 @@ echo <<<DATA
 	</tr>
 </table>
 DATA;
-?>

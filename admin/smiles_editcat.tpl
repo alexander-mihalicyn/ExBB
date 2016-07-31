@@ -17,5 +17,5 @@ echo <<<DATA
 				</table>
 			</form>
 			<br clear="all" />
+
 DATA;
-?>

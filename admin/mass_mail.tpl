@@ -24,4 +24,4 @@ echo <<<DATA
 			</form>
 			<br />
 DATA;
-?>
+

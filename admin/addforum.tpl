@@ -104,4 +104,3 @@ echo <<<DATA
 			</form>
 			<br clear="all" />
 DATA;
-?>

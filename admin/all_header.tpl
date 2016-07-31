@@ -16,4 +16,3 @@ echo <<<DATA
 </head>
 <body bgcolor="#E5E5E5" text="#000000" link="#006699" vlink="#5493B4" />
 DATA;
-?>

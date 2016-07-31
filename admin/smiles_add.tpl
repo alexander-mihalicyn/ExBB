@@ -32,4 +32,3 @@ function show_smiley(newimage){
 			</form>
 			<br clear="all" />
 DATA;
-?>

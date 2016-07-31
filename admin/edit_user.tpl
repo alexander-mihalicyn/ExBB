@@ -37,9 +37,9 @@ echo <<<DATA
 				<tr>
 					<th class="thHead" colspan="2">{$fm->LANG['Profile']}</th>
 				</tr>
-				<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+				<!-- Birthday -->
 				{$admin_birsday}
-				<!-- ÄÅÍÜ ÐÎÆÄÅÍÈß -->
+				<!-- Birthday -->
 				<tr class="gen">
 					<td class="row1">{$fm->LANG['WWW']}</td>
 					<td class="row2"><input class="post" type="text" maxlength="255" size="50" name="homepage" value="{$user['www']}" /> &nbsp; $homepage</td>
@@ -105,4 +105,4 @@ echo <<<DATA
 			</table>
 		</form>
 DATA;
-?>
+

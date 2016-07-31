@@ -84,4 +84,4 @@ $forum_data	.= <<<DATA
 					</td>
 				</tr>
 DATA;
-?>
+

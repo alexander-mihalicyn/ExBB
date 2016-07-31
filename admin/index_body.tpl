@@ -57,4 +57,3 @@ echo <<<DATA
 			</table>
 			<br />
 DATA;
-?>

@@ -74,4 +74,4 @@ echo <<<DATA
 		</td>
 		<td valign="top">
 DATA;
-?>
+

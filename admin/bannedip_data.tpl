@@ -7,4 +7,3 @@ $ipdata .=<<<DATA
 					<td class="row2" width="60%"><span class="cattitle"><a href="setbannedip.php?action=delet&amp;id={$id}">{$fm->LANG['Delete']}</a></span</td>
 				</tr>
 DATA;
-?>

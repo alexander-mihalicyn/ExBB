@@ -18,4 +18,4 @@ echo <<<DATA
 				</table>
 			</form>
 DATA;
-?>
+

@@ -18,4 +18,3 @@ $datashow .= <<<DATA
                 </td>
         </tr>
 DATA;
-?>

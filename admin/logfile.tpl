@@ -27,10 +27,9 @@ echo <<<DATA
                         	<input name="log_name" type="hidden" value="{$log_name}">
                         	{$fm->LANG['DelLog']} &nbsp; <input class="mainoption" type="submit" name="DelLog" value="{$fm->LANG['DelLogDay']}"> &nbsp;
 							<input class="mainoption" type="submit" name="DelAllLog" value="{$fm->LANG['DelAllLogs']}">
-						</form>
+</form>
 
-					</a></td>
-				</tr>
-			</table>
+</a></td>
+</tr>
+</table>
 DATA;
-?>

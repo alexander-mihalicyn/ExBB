@@ -39,4 +39,3 @@ echo <<<DATA
 			</table>
 			<br clear="all" />
 DATA;
-?>

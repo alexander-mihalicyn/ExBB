@@ -8,4 +8,3 @@ $datashow .= <<<DATA
 						<td class="{$back_clr}"><a href="setsmiles.php?action=delete&amp;id={$data['id']}&amp;cat={$curcatid}">{$fm->LANG['Delete']}</a></td>
 					</tr>
 DATA;
-?>
