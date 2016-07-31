@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  * ExBB v.1.1                                                               *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock             *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock             *
  *                                                                          *
  * http://www.exbb.net                                                      *
  * email: admin@exbb.net                                                    *
@@ -17,6 +17,7 @@
  ***************************************************************************/
 define('IN_EXBB', true);
 define('IS_REGISTER', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -62,13 +63,13 @@ if ($fm->input['action'] == 'addmember') {
 	$fm->input['inmembername'] = preg_replace("/\s{1,}/", " ", $fm->input['inmembername']);
 	$wrongchars = ( $fm->exbb['ru_nicks'] === true ) ? $fm->LANG['WrongCharsRuYes'] : $fm->LANG['WrongCharsRuNo'];
 
-	if ($fm->exbb['ru_nicks'] === false && preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername'])) {
+	if ($fm->exbb['ru_nicks'] === false && preg_match("#[Р°-СЏС‘Т‘С”С–С—СћС–|Рђ-РЇРЃТђР„Р†Р‡РЋР†]{1,}#is", $fm->input['inmembername'])) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['RuNicksOff']);
 	}
-	if (preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername']) && preg_match("#[a-z|A-Z]{1,}#is", $fm->input['inmembername'])) {
+	if (preg_match("#[Р°-СЏС‘Т‘С”С–С—СћС–|Рђ-РЇРЃТђР„Р†Р‡РЋР†]{1,}#is", $fm->input['inmembername']) && preg_match("#[a-z|A-Z]{1,}#is", $fm->input['inmembername'])) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['IntNameRuOrEn']);
 	}
-	if (preg_match("#(guest|admin|moder|админ|" . $fm->LANG['Guest'] . "|модер|[^0-9A-Za-zА-Яа-я-_\.\s])#is", $fm->_LowerCase($fm->input['inmembername']))) {
+	if (preg_match("#(guest|admin|moder|Р°РґРјРёРЅ|" . $fm->LANG['Guest'] . "|РјРѕРґРµСЂ|[^0-9A-Za-zРђ-РЇР°-СЏ-_\.\s])#is", $fm->_LowerCase($fm->input['inmembername']))) {
 		$fm->_Message($fm->LANG['Registration'], $wrongchars);
 	}
 	if ($fm->exbb['wordcensor'] === true && $fm->bads_filter($fm->input['inmembername'], 0) === true) {
@@ -185,11 +186,11 @@ if ($fm->input['action'] == 'addmember') {
 		$user['pass'] = md5($user['pass']);
 		$user['last_visit'] = $fm->_Nowtime;
 
-		/* День Рождения */
+		/* Р”РµРЅСЊ Р РѕР¶РґРµРЅРёСЏ */
 		include( 'modules/birstday/register_save.php' );
-		/* День Рождения */
+		/* Р”РµРЅСЊ Р РѕР¶РґРµРЅРёСЏ */
 
-		/* Приветсвие нового пользователя */
+		/* РџСЂРёРІРµС‚СЃРІРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 		if ($fm->exbb['pm'] === true && $fm->exbb['newusergreatings'] === true) {
 			$user['new_pm'] = true;
 			$fm->LANG['NewUserPMMsg'] = sprintf($fm->LANG['NewUserPMMsg'], $fm->input['inmembername'], $fm->exbb['boardurl'], $fm->exbb['boardurl']);
@@ -205,7 +206,7 @@ if ($fm->input['action'] == 'addmember') {
 			$fm->_Write($fp_inbox, $inbox);
 			unset( $inbox );
 		}
-		/* Приветсвие нового пользователя */
+		/* РџСЂРёРІРµС‚СЃРІРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 
 		$fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id . '.php');
 		$fm->_Write($fp_user, $user);
@@ -294,7 +295,7 @@ elseif ($fm->input['action'] == 'activate') {
 		$user['pass'] = md5($user['pass']);
 		$user['last_visit'] = $fm->_Nowtime;
 
-		/* Приветсвие нового пользователя */
+		/* РџСЂРёРІРµС‚СЃРІРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 		if ($fm->exbb['newusergreatings'] === true) {
 			$user['new_pm'] = true;
 			$fm->LANG['NewUserPMMsg'] = sprintf($fm->LANG['NewUserPMMsg'], $user['name'], $fm->exbb['boardurl'], $fm->exbb['boardurl']);
@@ -310,7 +311,7 @@ elseif ($fm->input['action'] == 'activate') {
 			$fm->_Write($fp_inbox, $inbox);
 			unset( $inbox );
 		}
-		/* Приветсвие нового пользователя */
+		/* РџСЂРёРІРµС‚СЃРІРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 
 		$fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $id . '.php');
 		$fm->_Write($fp_user, $user);
@@ -395,9 +396,9 @@ elseif ($fm->input['action'] == 'agreed') {
 		}
 		$basetimes = $fm->_DateFormat(time());
 
-		/* День рождения */
+		/* Р”РµРЅСЊ СЂРѕР¶РґРµРЅРёСЏ */
 		include( 'modules/birstday/select.php' );
-		/* День рождения */
+		/* Р”РµРЅСЊ СЂРѕР¶РґРµРЅРёСЏ */
 	} //simple reg form   end agree//
 }
 else {

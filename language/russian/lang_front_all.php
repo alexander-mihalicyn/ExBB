@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 
-$this->LANG['ENCODING']				= 'windows-1251';
+$this->LANG['ENCODING']				= 'UTF-8';
 $this->LANG['BoardClosed']			= 'Форум закрыт';
 $this->LANG['DelleteInstallDir']	= 'В целях безопасности удалите пожалуйста директорию "install" и все файлы находящиеся в ней!';
 $this->LANG['On']					= 'ВКЛ';

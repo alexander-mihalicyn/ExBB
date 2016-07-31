@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -16,6 +16,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -25,7 +26,7 @@ $fm->_LoadLang('forums');
 if ($fm->user['id'] === 0) {
 	$fm->_Message($fm->LANG['MessageEdit'], $fm->LANG['GuestNoEdit']);
 }
-/* Штрафы на форуме */
+/* РЁС‚СЂР°С„С‹ РЅР° С„РѕСЂСѓРјРµ */
 include( 'modules/punish/p_error.php' );
 
 switch ($fm->input['action']) {
@@ -344,7 +345,7 @@ function deletepost() {
 	reset($topic);
 	$first_key = key($topic);
 
-	/* Удаляем первое сообщение темы? */
+	/* РЈРґР°Р»СЏРµРј РїРµСЂРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ С‚РµРјС‹? */
 	if ($first_key === $post_id) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['PostDeleting'], $fm->LANG['PostDeletingFirst']);
@@ -407,11 +408,11 @@ function deletepost() {
 	}
 	$allforums[$forum_id]['posts']--;
 
-	// Обновим ластпост в родительском форуме, если удаляемое сообщение было в нём последним
+	// РћР±РЅРѕРІРёРј Р»Р°СЃС‚РїРѕСЃС‚ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ, РµСЃР»Рё СѓРґР°Р»СЏРµРјРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ Р±С‹Р»Рѕ РІ РЅС‘Рј РїРѕСЃР»РµРґРЅРёРј
 	$pcatid = $allforums[$forum_id]['catid'];
 	if (stristr($pcatid, 'f')) {
 		$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
-		$allforums[$pforum]['posts']--; // Уменьшаем число ответов в родительском форуме на единицу
+		$allforums[$pforum]['posts']--; // РЈРјРµРЅСЊС€Р°РµРј С‡РёСЃР»Рѕ РѕС‚РІРµС‚РѕРІ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ РЅР° РµРґРёРЅРёС†Сѓ
 		if (@$allforums[$pforum]['last_sub'] == $forum_id && @$allforums[$pforum]['last_post_id'] == $topic_id && @$allforums[$pforum]['last_key'] == $post_id) {
 			relast_post($pforum);
 		}
@@ -419,12 +420,12 @@ function deletepost() {
 
 	$fm->_Write($fp_allforums, $allforums);
 
-	// Черканём запись в логе об удалении сообщения ;)
+	// Р§РµСЂРєР°РЅС‘Рј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ РѕР± СѓРґР°Р»РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёСЏ ;)
 	$fm->_WriteLog(sprintf($fm->LANG['DeletePostLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	unset( $allforums, $list, $last_post );
 
-	/* Обновим количество постов у юзера, пост которого удалили */
+	/* РћР±РЅРѕРІРёРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕСЃС‚РѕРІ Сѓ СЋР·РµСЂР°, РїРѕСЃС‚ РєРѕС‚РѕСЂРѕРіРѕ СѓРґР°Р»РёР»Рё */
 	if ($poster_id !== 0 && $fm->_Checkuser($poster_id)) {
 		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $poster_id . '.php');
 		if ($user['posts'] > 0) {
@@ -481,7 +482,7 @@ function edit_topic_title() {
 		$fm->input['topictitle'] = $fm->bads_filter(substr($fm->input['topictitle'], 0, 255));
 		$fm->input['description'] = $fm->bads_filter(substr($fm->input['description'], 0, 160));
 		$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(substr($fm->_String('keywords'), 0, 255)));
-		// Обновление названия темы в родительском форуме, если тема находится в подфоруме
+		// РћР±РЅРѕРІР»РµРЅРёРµ РЅР°Р·РІР°РЅРёСЏ С‚РµРјС‹ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ, РµСЃР»Рё С‚РµРјР° РЅР°С…РѕРґРёС‚СЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ
 		$pcatid = $allforums[$forum_id]['catid'];
 		if (stristr($pcatid, 'f')) {
 			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
@@ -503,7 +504,7 @@ function edit_topic_title() {
 		$topic[$list[$topic_id]['date']]['keywords'] = $fm->input['keywords'];
 		$fm->_Write($fp_topic, $topic);
 
-		// Черканём запись в логе об изменении заголовка темы
+		// Р§РµСЂРєР°РЅС‘Рј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ РѕР± РёР·РјРµРЅРµРЅРёРё Р·Р°РіРѕР»РѕРІРєР° С‚РµРјС‹
 		if ($old_name != $list[$topic_id]['name']) {
 			$fm->_WriteLog(sprintf($fm->LANG['EditTopicLog'], $old_name, $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 		}
@@ -552,18 +553,18 @@ function deletethread() {
 		$allforums[$forum_id]['posts'] -= ( $del_posts = $list[$topic_id]['posts'] );
 		$allforums[$forum_id]['topics']--;
 
-		/* Удалим топик из list.php */
+		/* РЈРґР°Р»РёРј С‚РѕРїРёРє РёР· list.php */
 		$last_time = $list[$topic_id]['postdate'];
 		$last_topic = $list[$topic_id]['name'];
 		unset( $list[$topic_id] );
 		$fm->_Write($fp_list, $list);
 
-		/* Удалим инфу о кол-ве просмотров темы из views.php */
+		/* РЈРґР°Р»РёРј РёРЅС„Сѓ Рѕ РєРѕР»-РІРµ РїСЂРѕСЃРјРѕС‚СЂРѕРІ С‚РµРјС‹ РёР· views.php */
 		$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 		unset( $views[$topic_id] );
 		$fm->_Write($fp_views, $views);
 
-		/* Обновим инфо о постах пользователей */
+		/* РћР±РЅРѕРІРёРј РёРЅС„Рѕ Рѕ РїРѕСЃС‚Р°С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ */
 		$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
@@ -579,7 +580,7 @@ function deletethread() {
 			UpdateAutorsInfoDelete($users, $forum_id);
 		}
 
-		/* Проверим был ли удаляемый топик последним в который постили, если да, то переделаем ластпост :) */
+		/* РџСЂРѕРІРµСЂРёРј Р±С‹Р» Р»Рё СѓРґР°Р»СЏРµРјС‹Р№ С‚РѕРїРёРє РїРѕСЃР»РµРґРЅРёРј РІ РєРѕС‚РѕСЂС‹Р№ РїРѕСЃС‚РёР»Рё, РµСЃР»Рё РґР°, С‚Рѕ РїРµСЂРµРґРµР»Р°РµРј Р»Р°СЃС‚РїРѕСЃС‚ :) */
 		if ($allforums[$forum_id]['last_post_id'] == $topic_id) {
 			reset($list);
 			$last_id = key($list);
@@ -598,7 +599,7 @@ function deletethread() {
 
 		unset( $list );
 
-		/* Обновление ластпоста в родительском форуме при удалении темы в подфоруме */
+		/* РћР±РЅРѕРІР»РµРЅРёРµ Р»Р°СЃС‚РїРѕСЃС‚Р° РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ РїСЂРё СѓРґР°Р»РµРЅРёРё С‚РµРјС‹ РІ РїРѕРґС„РѕСЂСѓРјРµ */
 		$pcatid = $allforums[$forum_id]['catid'];
 		$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
 		if ($pforum) {
@@ -629,7 +630,7 @@ function deletethread() {
 			unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-poll.php');
 		}
 		include( 'modules/belong/_deleteTopic.php' );
-		// Черканём в логе запись об удалении темы =)
+		// Р§РµСЂРєР°РЅС‘Рј РІ Р»РѕРіРµ Р·Р°РїРёСЃСЊ РѕР± СѓРґР°Р»РµРЅРёРё С‚РµРјС‹ =)
 		$fm->_WriteLog(sprintf($fm->LANG['DeleteThreadLog'], $last_topic, strip_tags($allforums[$forum_id]['name'])), 2);
 
 		$fm->_Message($fm->LANG['DeleteTopic'], $fm->LANG['DeleteTopicOk'], 'forums.php?forum=' . $forum_id);
@@ -724,7 +725,7 @@ function movetopic() {
 			$fm->_Write($fp_t_track, $_t_track);
 		}
 
-		/* Перенос кол-ва просмотров темы из старого views.php в новый */
+		/* РџРµСЂРµРЅРѕСЃ РєРѕР»-РІР° РїСЂРѕСЃРјРѕС‚СЂРѕРІ С‚РµРјС‹ РёР· СЃС‚Р°СЂРѕРіРѕ views.php РІ РЅРѕРІС‹Р№ */
 		$old_views = $fm->_Read2Write($fp_old_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 		$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/views.php');
 		$views[$newtopic_id] = $old_views[$topic_id];
@@ -758,13 +759,13 @@ function movetopic() {
 		$ptcatid = $allforums[$toforum_id]['catid'];
 		$ptforum = ( stristr($ptcatid, 'f') ) ? substr($ptcatid, 1, strlen($ptcatid) - 1) : 0;
 
-		// Если тема при переносе уходит за пределы текущего родительского форума, то из него вычитаются она сама и её ответы :)
+		// Р•СЃР»Рё С‚РµРјР° РїСЂРё РїРµСЂРµРЅРѕСЃРµ СѓС…РѕРґРёС‚ Р·Р° РїСЂРµРґРµР»С‹ С‚РµРєСѓС‰РµРіРѕ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ С„РѕСЂСѓРјР°, С‚Рѕ РёР· РЅРµРіРѕ РІС‹С‡РёС‚Р°СЋС‚СЃСЏ РѕРЅР° СЃР°РјР° Рё РµС‘ РѕС‚РІРµС‚С‹ :)
 		if ($pforum && $forum_id != $ptforum) {
 			$allforums[$pforum]['topics']--;
 			$allforums[$pforum]['posts'] -= $tolist[$newtopic_id]['posts'];
 		}
 
-		// Если тема приходит из-за пределов родительского раздела, то в нём необходимо увеличить кол-во тем на одну и прибавить ответы темы ;)
+		// Р•СЃР»Рё С‚РµРјР° РїСЂРёС…РѕРґРёС‚ РёР·-Р·Р° РїСЂРµРґРµР»РѕРІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ СЂР°Р·РґРµР»Р°, С‚Рѕ РІ РЅС‘Рј РЅРµРѕР±С…РѕРґРёРјРѕ СѓРІРµР»РёС‡РёС‚СЊ РєРѕР»-РІРѕ С‚РµРј РЅР° РѕРґРЅСѓ Рё РїСЂРёР±Р°РІРёС‚СЊ РѕС‚РІРµС‚С‹ С‚РµРјС‹ ;)
 		if ($ptforum && $toforum_id != $pforum) {
 			$allforums[$ptforum]['topics']++;
 			$allforums[$ptforum]['posts'] += $tolist[$newtopic_id]['posts'];
@@ -799,7 +800,7 @@ function movetopic() {
 		@$allforums[$forum_id]['last_post'] = $list[$first_key]['name'];
 		@$allforums[$forum_id]['last_post_id'] = $first_key;
 
-		// Обновление ластпоста в исходном и новом родительских форумах
+		// РћР±РЅРѕРІР»РµРЅРёРµ Р»Р°СЃС‚РїРѕСЃС‚Р° РІ РёСЃС…РѕРґРЅРѕРј Рё РЅРѕРІРѕРј СЂРѕРґРёС‚РµР»СЊСЃРєРёС… С„РѕСЂСѓРјР°С…
 		if ($pforum && $pforum != $ptforum && @$tolist[$newtopic_id]['postdate'] == @$allforums[$pforum]['last_time']) {
 			relast_post($pforum);
 		}
@@ -817,13 +818,13 @@ function movetopic() {
 			$allforums[$ptforum]['last_sub'] = $toforum_id;
 		}
 
-		// Оставим запись в логе о перемещении темы
+		// РћСЃС‚Р°РІРёРј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ Рѕ РїРµСЂРµРјРµС‰РµРЅРёРё С‚РµРјС‹
 		$fm->_WriteLog(sprintf($fm->LANG['MoveTopicLog'], $tolist[$newtopic_id]['name'], strip_tags($allforums[$forum_id]['name']), strip_tags($allforums[$toforum_id]['name'])), 2);
 
 		$fm->_Write($fp_allforums, $allforums);
 		unset( $tolist, $allforums, $list );
 
-		// Обновим статистику постов у пользователей
+		// РћР±РЅРѕРІРёРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕСЃС‚РѕРІ Сѓ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 		$thread = $fm->_Read($newtopicfile);
 		foreach ($thread as $id => $post) {
 			if (!isset( $autors[$post['p_id']] )) {
@@ -847,7 +848,7 @@ function movetopic() {
 	}
 }
 
-/*	Удаление ссылок на перемещённые темы	*/
+/*	РЈРґР°Р»РµРЅРёРµ СЃСЃС‹Р»РѕРє РЅР° РїРµСЂРµРјРµС‰С‘РЅРЅС‹Рµ С‚РµРјС‹	*/
 function unlink_topic() {
 	global $fm;
 
@@ -865,7 +866,7 @@ function unlink_topic() {
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
 
-	// Запишем в лог информацию об удалении ссылки на тему
+	// Р—Р°РїРёС€РµРј РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± СѓРґР°Р»РµРЅРёРё СЃСЃС‹Р»РєРё РЅР° С‚РµРјСѓ
 	$fm->_WriteLog(sprintf($fm->LANG['UnlinkTopicLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	unset( $list[$topic_id] );
@@ -953,7 +954,7 @@ function restore() {
 		uasort($list, 'sort_by_postdate');
 		$fm->_Write($fp_list, $list);
 
-		// Сделаем запись в логе о восстановлении темы
+		// РЎРґРµР»Р°РµРј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ Рѕ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРё С‚РµРјС‹
 		$fm->_WriteLog(sprintf($fm->LANG['RestoreTopicLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 		$fm->_Message($fm->LANG['TopicRestore'], $fm->LANG['TopicRestoreOk'], 'topic.php?forum=' . $forum_id . '&topic=' . $topic_id);
@@ -998,7 +999,7 @@ function top_recount() {
 	$list[$topic_id]['posts'] = $new_count;
 	$fm->_Write($fp_list, $list);
 
-	// Запишем в лог информацию об обновлении статистики темы
+	// Р—Р°РїРёС€РµРј РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±РЅРѕРІР»РµРЅРёРё СЃС‚Р°С‚РёСЃС‚РёРєРё С‚РµРјС‹
 	$fm->_WriteLog(sprintf($fm->LANG['RecountTopicLog'], strip_tags($allforums[$forum_id]['name']), $list[$topic_id]['name']), 2);
 
 	unset( $allforums, $list, $topic );
@@ -1007,7 +1008,7 @@ function top_recount() {
 	$fm->_Message($fm->LANG['TopicRecount'], sprintf($fm->LANG['TopicRecountInfo'], $old_count, $new_count), 'topic.php?forum=' . $forum_id . '&topic=' . $topic_id);
 }
 
-/*	Добавление опроса в существующую тему	*/
+/*	Р”РѕР±Р°РІР»РµРЅРёРµ РѕРїСЂРѕСЃР° РІ СЃСѓС‰РµСЃС‚РІСѓСЋС‰СѓСЋ С‚РµРјСѓ	*/
 function addpoll() {
 	global $fm;
 
@@ -1120,7 +1121,7 @@ function poll_edit() {
 				$list[$topic_id]['poll'] = false;
 				$fm->_Write($fp_list, $list);
 
-				// Запишем в лог информацию об удалении опроса
+				// Р—Р°РїРёС€РµРј РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± СѓРґР°Р»РµРЅРёРё РѕРїСЂРѕСЃР°
 				$fm->_WriteLog(sprintf($fm->LANG['DeletePollLog'], $list[$topic_id]['name'], strip_tags($forumname)), 2);
 
 				$fm->_Message($fm->LANG['PollDel'], $fm->LANG['PollDeleteOk'], 'topic.php?forum=' . $forum_id . '&topic=' . $topic_id);
@@ -1183,7 +1184,7 @@ function poll_edit() {
 			$poll_data['pollname'] = $fm->input['pollname'];
 			$fm->_Write($fp_poll, $poll_data);
 
-			// Запишем в лог информацию об изменении опроса
+			// Р—Р°РїРёС€РµРј РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РёР·РјРµРЅРµРЅРёРё РѕРїСЂРѕСЃР°
 			$fm->_WriteLog(sprintf($fm->LANG['EditPollLog'], $list[$topic_id]['name'], strip_tags($forumname)), 2);
 
 			$fm->_FcloseAll();
@@ -1239,7 +1240,7 @@ function un_lockthread($mode) {
 	$topic[$firstkey]['state'] = $list[$topic_id]['state'];
 	$fm->_Write($fp_topic, $topic);
 
-	// Черканём запись в логе о закрытии / открытии темы
+	// Р§РµСЂРєР°РЅС‘Рј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ Рѕ Р·Р°РєСЂС‹С‚РёРё / РѕС‚РєСЂС‹С‚РёРё С‚РµРјС‹
 	$fm->_WriteLog(sprintf($mode == 'lock' ? $fm->LANG['CloseTopicLog'] : $fm->LANG['OpenTopicLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	unset( $allforums, $topic );
@@ -1276,7 +1277,7 @@ function un_pinthread($mode) {
 	$list[$topic_id]['pinned'] = ( $mode == 'pin' ) ? true : false;
 	$fm->_Write($fp_list, $list);
 
-	// Запишем в лог сообщение о прикреплении / откреплении темы
+	// Р—Р°РїРёС€РµРј РІ Р»РѕРі СЃРѕРѕР±С‰РµРЅРёРµ Рѕ РїСЂРёРєСЂРµРїР»РµРЅРёРё / РѕС‚РєСЂРµРїР»РµРЅРёРё С‚РµРјС‹
 	$fm->_WriteLog(sprintf($mode == 'pin' ? $fm->LANG['PinTopicLog'] : $fm->LANG['UnpinTopicLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	unset( $allforums, $list );
@@ -1285,21 +1286,21 @@ function un_pinthread($mode) {
 	$fm->_Message($fm->LANG['TopicPinning'], $OkMessage, 'topic.php?forum=' . $forum_id . '&topic=' . $topic_id);
 }
 
-/*	Прикрепление сообщений	*/
+/*	РџСЂРёРєСЂРµРїР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёР№	*/
 /*	http://www.exbb.org/	*/
 function pinmsg() {
 	global $fm;
 
 	$fm->_Intvals(array( 'forum', 'topic', 'post' ));
 
-	// Проверка прав доступа к этой функции
+	// РџСЂРѕРІРµСЂРєР° РїСЂР°РІ РґРѕСЃС‚СѓРїР° Рє СЌС‚РѕР№ С„СѓРЅРєС†РёРё
 	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 	$fm->_GetModerators($fm->input['forum'], $allforums);
 	if ($fm->_Moderator === false) {
 		$fm->_Message($fm->LANG['MsgPin'], $fm->LANG['EditNo']);
 	}
 
-	// Проверка на существование сообщения
+	// РџСЂРѕРІРµСЂРєР° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
 	if (!file_exists(EXBB_DATA_DIR_FORUMS . '/' . $fm->input['forum'] . '/' . $fm->input['topic'] . '-thd.php')) {
 		$fm->_Message($fm->LANG['TopicOpen'], $fm->LANG['TopicMiss']);
 	}
@@ -1308,13 +1309,13 @@ function pinmsg() {
 		$fm->_Message($fm->LANG['TopicOpen'], $fm->LANG['MissMsg']);
 	}
 
-	// Найдём ключ первого сообщения и получим массив ключей прикреплённых сообщений
+	// РќР°Р№РґС‘Рј РєР»СЋС‡ РїРµСЂРІРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ Рё РїРѕР»СѓС‡РёРј РјР°СЃСЃРёРІ РєР»СЋС‡РµР№ РїСЂРёРєСЂРµРїР»С‘РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 	$firstkey = min(array_keys($threads));
 	if (!isset( $threads[$firstkey]['pinmsg'] )) {
 		$threads[$firstkey]['pinmsg'] = array();
 	}
 
-	// Добавление / удаление ключа сообщения в массиве прикреплённых сообщений
+	// Р”РѕР±Р°РІР»РµРЅРёРµ / СѓРґР°Р»РµРЅРёРµ РєР»СЋС‡Р° СЃРѕРѕР±С‰РµРЅРёСЏ РІ РјР°СЃСЃРёРІРµ РїСЂРёРєСЂРµРїР»С‘РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 	if (!in_array($fm->input['post'], $threads[$firstkey]['pinmsg'])) {
 		$threads[$firstkey]['pinmsg'][] = $fm->input['post'];
 		$msg = $fm->LANG['MsgPinned'];
@@ -1326,14 +1327,14 @@ function pinmsg() {
 		$msg = $fm->LANG['MsgUnpinned'];
 	}
 
-	// Удаление ключей удалённых / перемещённых ранее сообщений
+	// РЈРґР°Р»РµРЅРёРµ РєР»СЋС‡РµР№ СѓРґР°Р»С‘РЅРЅС‹С… / РїРµСЂРµРјРµС‰С‘РЅРЅС‹С… СЂР°РЅРµРµ СЃРѕРѕР±С‰РµРЅРёР№
 	foreach ($threads[$firstkey]['pinmsg'] as $offset => $key) {
 		if (!isset( $threads[$key] )) {
 			unset( $threads[$firstkey]['pinmsg'][$offset] );
 		}
 	}
 
-	// Упорядочение массива ключей прикреплённых сообщений
+	// РЈРїРѕСЂСЏРґРѕС‡РµРЅРёРµ РјР°СЃСЃРёРІР° РєР»СЋС‡РµР№ РїСЂРёРєСЂРµРїР»С‘РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 	if (empty( $threads[$firstkey]['pinmsg'] )) {
 		unset( $threads[$firstkey]['pinmsg'] );
 	}
@@ -1341,13 +1342,13 @@ function pinmsg() {
 		sort($threads[$firstkey]['pinmsg']);
 	}
 
-	// Сохраняем файл темы
+	// РЎРѕС…СЂР°РЅСЏРµРј С„Р°Р№Р» С‚РµРјС‹
 	$fm->_Write($fp_threads, $threads);
 
-	// Запись в лог инфы о прикреплении / откреплении сообщения
+	// Р—Р°РїРёСЃСЊ РІ Р»РѕРі РёРЅС„С‹ Рѕ РїСЂРёРєСЂРµРїР»РµРЅРёРё / РѕС‚РєСЂРµРїР»РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёСЏ
 	$fm->_WriteLog(sprintf(( $msg == $fm->LANG['MsgPinned'] ) ? $fm->LANG['PinMsgLog'] : $fm->LANG['UnpinMsgLog'], $threads[$firstkey]['name'], strip_tags($allforums[$fm->input['forum']]['name'])), 2);
 
-	// Всё! ;)
+	// Р’СЃС‘! ;)
 	$fm->_Message($fm->LANG['MsgPin'], $msg, 'topic.php?forum=' . $fm->input['forum'] . '&topic=' . $fm->input['topic'] . '&postid=' . $fm->input['post'] . '#' . $fm->input['post']);
 }
 
@@ -1379,7 +1380,7 @@ function del_subscribed() {
 	}
 	$fm->_Write($fp_t_track, $_t_track);
 
-	// Черканём запись в логе об отмене подписки пользователей на тему
+	// Р§РµСЂРєР°РЅС‘Рј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ РѕР± РѕС‚РјРµРЅРµ РїРѕРґРїРёСЃРєРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅР° С‚РµРјСѓ
 	$fm->_WriteLog(sprintf($fm->LANG['UnsubscribeLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	unset( $allforums );
@@ -1469,17 +1470,17 @@ function delselected() {
 	$allforums[$forum_id]['last_post_id'] = $lasttopic;
 	$allforums[$forum_id]['posts'] -= $countremoved;
 
-	// Если тема с удаляемыми сообщениями находится в подфоруме и в неё постили последней, то обновим ластпост родительского форума
+	// Р•СЃР»Рё С‚РµРјР° СЃ СѓРґР°Р»СЏРµРјС‹РјРё СЃРѕРѕР±С‰РµРЅРёСЏРјРё РЅР°С…РѕРґРёС‚СЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ Рё РІ РЅРµС‘ РїРѕСЃС‚РёР»Рё РїРѕСЃР»РµРґРЅРµР№, С‚Рѕ РѕР±РЅРѕРІРёРј Р»Р°СЃС‚РїРѕСЃС‚ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ С„РѕСЂСѓРјР°
 	$pcatid = $allforums[$forum_id]['catid'];
 	if (stristr($pcatid, 'f')) {
 		$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
 		if ($allforums[$pforum]['last_post_id'] == $topic_id && @$allforums[$pforum]['last_sub'] == $forum_id) {
-			$allforums[$pforum]['posts'] -= $countremoved; // Вычтим удалённые сообщения из родительского форума
+			$allforums[$pforum]['posts'] -= $countremoved; // Р’С‹С‡С‚РёРј СѓРґР°Р»С‘РЅРЅС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ РёР· СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ С„РѕСЂСѓРјР°
 			relast_post($pforum);
 		}
 	}
 
-	// Запишем в лог информацию об удалении сообщений
+	// Р—Р°РїРёС€РµРј РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± СѓРґР°Р»РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 	$fm->_WriteLog($countremoved == 1 ? sprintf($fm->LANG['DeletePostLog'], $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])) : sprintf($fm->LANG['DeletePostsLog'], $countremoved, $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name'])), 2);
 
 	$fm->_Write($fp_allforums, $allforums);
@@ -1562,13 +1563,13 @@ function innew() {
 			$newtopic_id++;
 		}
 
-		/* УДАЛЯЕМ ПОСТЫ ИЗ СТАРОЙ ТЕМЫ, СОЗДАЕМ МАССИВ НОВОЙ ТЕМЫ И СОХРАНЯЕМ ФАЙЛ СТАРОЙ ТЕМЫ */
+		/* РЈР”РђР›РЇР•Рњ РџРћРЎРўР« РР— РЎРўРђР РћР™ РўР•РњР«, РЎРћР—Р”РђР•Рњ РњРђРЎРЎРР’ РќРћР’РћР™ РўР•РњР« Р РЎРћРҐР РђРќРЇР•Рњ Р¤РђР™Р› РЎРўРђР РћР™ РўР•РњР« */
 		$newtopic = UpdateOldTopicFile($topic, $postkey, "innew");
 
-		/* ОБНОВИМ ИНФОРМАЦИЮ В LIST.PHP СТАРОГО РАЗДЕЛА */
+		/* РћР‘РќРћР’РРњ РРќР¤РћР РњРђР¦РР® Р’ LIST.PHP РЎРўРђР РћР“Рћ Р РђР—Р”Р•Р›Рђ */
 		UpdateOldList($topic, $list);
 
-		/* С АТТАЧАМИ ЕСЛИ КОЛ-ВО АТТАЧЕЙ БОЛЬШЕ 0 */
+		/* РЎ РђРўРўРђР§РђРњР Р•РЎР›Р РљРћР›-Р’Рћ РђРўРўРђР§Р•Р™ Р‘РћР›Р¬РЁР• 0 */
 		if (count($attaches) !== 0) {
 			$_attaches = UpdateAttaches($newtopic, $attaches);
 		}
@@ -1576,7 +1577,7 @@ function innew() {
 			$newtopic[$post_id]['attach_id'] = $attach_id;
 		}
 
-		/* СОЗДАЕМ ВРЕМЕННЫЙ МАССИВ НОВОЙ ТЕМЫ И СОЗДАЕМ ФАЙЛ НОВОЙ ТЕМЫ */
+		/* РЎРћР—Р”РђР•Рњ Р’Р Р•РњР•РќРќР«Р™ РњРђРЎРЎРР’ РќРћР’РћР™ РўР•РњР« Р РЎРћР—Р”РђР•Рњ Р¤РђР™Р› РќРћР’РћР™ РўР•РњР« */
 		ksort($newtopic, SORT_NUMERIC);
 
 		reset($newtopic);
@@ -1593,7 +1594,7 @@ function innew() {
 		$newtopic[$newfirstkey]['desc'] = $fm->input['description'];
 
 		$fm->_Read2Write($fp_newtopic, EXBB_DATA_DIR_FORUMS . '/' . $toforum_id . '/' . $newtopic_id . '-thd.php');
-		$fm->_Write($fp_newtopic, $newtopic); //Закрыли и сохранили файл новой темы
+		$fm->_Write($fp_newtopic, $newtopic); //Р—Р°РєСЂС‹Р»Рё Рё СЃРѕС…СЂР°РЅРёР»Рё С„Р°Р№Р» РЅРѕРІРѕР№ С‚РµРјС‹
 
 		$tpm_list['name'] = $fm->input['topictitle'];
 		$tpm_list['id'] = $newtopic_id;
@@ -1611,9 +1612,9 @@ function innew() {
 		$tpm_list['postkey'] = $newlastkey;
 		$tpm_list['poll'] = false;
 
-		/* ДОБАВЛЕМЯ ИНФОРМАЦИЮ В LIST.PHP И ALLFORUMS.PHP */
+		/* Р”РћР‘РђР’Р›Р•РњРЇ РРќР¤РћР РњРђР¦РР® Р’ LIST.PHP Р ALLFORUMS.PHP */
 		if ($movingFlag === true) {
-			/* ОБНОВИМ ИНФОРМАЦИЮ О ПОСТАХ АВТОРОВ СООБЩЕНИЙ */
+			/* РћР‘РќРћР’РРњ РРќР¤РћР РњРђР¦РР® Рћ РџРћРЎРўРђРҐ РђР’РўРћР РћР’ РЎРћРћР‘Р©Р•РќРР™ */
 			UpdateAutorsInfo($autors);
 
 			$newlist[$newtopic_id] = $tpm_list;
@@ -1660,8 +1661,8 @@ function innew() {
 		$allforums[$forum_id]['posts'] = ( $movingFlag === true ) ? $allforums[$forum_id]['posts'] - $countmoving : $allforums[$forum_id]['posts'] - 1;
 		$allforums[$forum_id]['topics'] = count($list);
 
-		// Если посты переносятся в тему, находящуюся в подфоруме, то обновляем ластпост родительского форума
-		// Также в этом форуме увеличим число тем на 1 и число ответов на кол-во перемещаемых сообщений минус 1
+		// Р•СЃР»Рё РїРѕСЃС‚С‹ РїРµСЂРµРЅРѕСЃСЏС‚СЃСЏ РІ С‚РµРјСѓ, РЅР°С…РѕРґСЏС‰СѓСЋСЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ, С‚Рѕ РѕР±РЅРѕРІР»СЏРµРј Р»Р°СЃС‚РїРѕСЃС‚ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ С„РѕСЂСѓРјР°
+		// РўР°РєР¶Рµ РІ СЌС‚РѕРј С„РѕСЂСѓРјРµ СѓРІРµР»РёС‡РёРј С‡РёСЃР»Рѕ С‚РµРј РЅР° 1 Рё С‡РёСЃР»Рѕ РѕС‚РІРµС‚РѕРІ РЅР° РєРѕР»-РІРѕ РїРµСЂРµРјРµС‰Р°РµРјС‹С… СЃРѕРѕР±С‰РµРЅРёР№ РјРёРЅСѓСЃ 1
 		$pcatid = $allforums[$toforum_id]['catid'];
 		if (stristr($pcatid, 'f')) {
 			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
@@ -1670,8 +1671,8 @@ function innew() {
 			relast_post($pforum);
 		}
 
-		// Если посты перенесены из темы, находящейся в подфоруме, то обновим ластпост родительского форума
-		// Также вычтем из числа ответов этого форума кол-во перемещённых сообщений
+		// Р•СЃР»Рё РїРѕСЃС‚С‹ РїРµСЂРµРЅРµСЃРµРЅС‹ РёР· С‚РµРјС‹, РЅР°С…РѕРґСЏС‰РµР№СЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ, С‚Рѕ РѕР±РЅРѕРІРёРј Р»Р°СЃС‚РїРѕСЃС‚ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ С„РѕСЂСѓРјР°
+		// РўР°РєР¶Рµ РІС‹С‡С‚РµРј РёР· С‡РёСЃР»Р° РѕС‚РІРµС‚РѕРІ СЌС‚РѕРіРѕ С„РѕСЂСѓРјР° РєРѕР»-РІРѕ РїРµСЂРµРјРµС‰С‘РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 		$pcatid = $allforums[$forum_id]['catid'];
 		if (stristr($pcatid, 'f')) {
 			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
@@ -1683,7 +1684,7 @@ function innew() {
 
 		$fm->_SAVE_STATS(array( 'totalposts' => array( 1, -1 ), 'totalthreads' => array( 1, 1 ) ));
 		include( 'modules/belong/_inNew.php' );
-		// Оставим запись в логе о перемещении сообщений в новую тему
+		// РћСЃС‚Р°РІРёРј Р·Р°РїРёСЃСЊ РІ Р»РѕРіРµ Рѕ РїРµСЂРµРјРµС‰РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№ РІ РЅРѕРІСѓСЋ С‚РµРјСѓ
 		$fm->_WriteLog(sprintf($fm->LANG['InNewLog'], $countmoving, $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name']), $fm->input['topictitle'], strip_tags($allforums[$toforum_id]['name'])), 2);
 
 		$fm->_Message($fm->LANG['MoveSelectedInNew'], $fm->LANG['SelectInNewOk'], 'topic.php?forum=' . $toforum_id . '&topic=' . $newtopic_id);
@@ -1765,14 +1766,14 @@ function inexists() {
 
 		$newtopic_idTitle = ( $movingFlag === true ) ? $newlist[$newtopic_id]['name'] : $list[$topic_id]['name'];
 
-		/* УДАЛЯЕМ ПОСТЫ ИЗ СТАРОЙ ТЕМЫ, СОЗДАЕМ МАССИВ НОВОЙ ТЕМЫ И СОХРАНЯЕМ ФАЙЛ СТАРОЙ ТЕМЫ*/
+		/* РЈР”РђР›РЇР•Рњ РџРћРЎРўР« РР— РЎРўРђР РћР™ РўР•РњР«, РЎРћР—Р”РђР•Рњ РњРђРЎРЎРР’ РќРћР’РћР™ РўР•РњР« Р РЎРћРҐР РђРќРЇР•Рњ Р¤РђР™Р› РЎРўРђР РћР™ РўР•РњР«*/
 		$tmp_newtopic = UpdateOldTopicFile($topic, $postkey, "inexists");
 		ksort($tmp_newtopic, SORT_NUMERIC);
 
-		/* ОБНОВИМ ИНФОРМАЦИЮ В LIST.PHP СТАРОГО РАЗДЕЛА */
+		/* РћР‘РќРћР’РРњ РРќР¤РћР РњРђР¦РР® Р’ LIST.PHP РЎРўРђР РћР“Рћ Р РђР—Р”Р•Р›Рђ */
 		UpdateOldList($topic, $list);
 
-		/* РАЗБИРАЕМСЯ С АТТАЧАМИ ЕСЛИ КОЛ-ВО АТТАЧЕЙ БОЛЬШЕ 0 */
+		/* Р РђР—Р‘РР РђР•РњРЎРЇ РЎ РђРўРўРђР§РђРњР Р•РЎР›Р РљРћР›-Р’Рћ РђРўРўРђР§Р•Р™ Р‘РћР›Р¬РЁР• 0 */
 		if (count($attaches) !== 0) {
 			UpdateAttaches($tmp_newtopic, $attaches);
 		}
@@ -1815,9 +1816,9 @@ function inexists() {
 		$newauthor = GetName($newtopic[$newfirstkey]['p_id']);
 		$newlastposter = GetName($newtopic[$newlastkey]['p_id']);
 
-		/* START ДОБАВЛЕМЯ ИНФОРМАЦИЮ В LIST.PHP И ALLFORUMS.PHP */
+		/* START Р”РћР‘РђР’Р›Р•РњРЇ РРќР¤РћР РњРђР¦РР® Р’ LIST.PHP Р ALLFORUMS.PHP */
 		if ($movingFlag === true) {
-			/* START ОБНОВИМ ИНФОРМАЦИЮ О ПОСТАХ АВТОРОВ СООБЩЕНИЙ */
+			/* START РћР‘РќРћР’РРњ РРќР¤РћР РњРђР¦РР® Рћ РџРћРЎРўРђРҐ РђР’РўРћР РћР’ РЎРћРћР‘Р©Р•РќРР™ */
 			UpdateAutorsInfo($autors);
 			$newlist[$newtopic_id]['author'] = $newauthor;
 			$newlist[$newtopic_id]['a_id'] = $newtopic[$newfirstkey]['p_id'];
@@ -1876,8 +1877,8 @@ function inexists() {
 		$allforums[$forum_id]['last_post'] = $list[$oldlasttopic]['name'];
 		$allforums[$forum_id]['last_post_id'] = $oldlasttopic;
 
-		// Если сообщения перемещаются в тему, находящуюся в подфоруме, то обновим ластпост в родительском форуме
-		// Также прибавим к числу ответов этого форума кол-во перемещаемых сообщений
+		// Р•СЃР»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РїРµСЂРµРјРµС‰Р°СЋС‚СЃСЏ РІ С‚РµРјСѓ, РЅР°С…РѕРґСЏС‰СѓСЋСЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ, С‚Рѕ РѕР±РЅРѕРІРёРј Р»Р°СЃС‚РїРѕСЃС‚ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ
+		// РўР°РєР¶Рµ РїСЂРёР±Р°РІРёРј Рє С‡РёСЃР»Сѓ РѕС‚РІРµС‚РѕРІ СЌС‚РѕРіРѕ С„РѕСЂСѓРјР° РєРѕР»-РІРѕ РїРµСЂРµРјРµС‰Р°РµРјС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 		$pcatid = $allforums[$toforum_id]['catid'];
 		if (stristr($pcatid, 'f')) {
 			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
@@ -1885,8 +1886,8 @@ function inexists() {
 			relast_post($pforum);
 		}
 
-		// Если сообщения перемещаются из темы, находящейся в подфоруме, то обновим ластпост в родительском форуме
-		// Также вычтем из числа ответов этого форума кол-во перемещаемых сообщений
+		// Р•СЃР»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РїРµСЂРµРјРµС‰Р°СЋС‚СЃСЏ РёР· С‚РµРјС‹, РЅР°С…РѕРґСЏС‰РµР№СЃСЏ РІ РїРѕРґС„РѕСЂСѓРјРµ, С‚Рѕ РѕР±РЅРѕРІРёРј Р»Р°СЃС‚РїРѕСЃС‚ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ
+		// РўР°РєР¶Рµ РІС‹С‡С‚РµРј РёР· С‡РёСЃР»Р° РѕС‚РІРµС‚РѕРІ СЌС‚РѕРіРѕ С„РѕСЂСѓРјР° РєРѕР»-РІРѕ РїРµСЂРµРјРµС‰Р°РµРјС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 		$pcatid = $allforums[$forum_id]['catid'];
 		if (stristr($pcatid, 'f')) {
 			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
@@ -1894,7 +1895,7 @@ function inexists() {
 			relast_post($pforum);
 		}
 
-		// Запись в лог о переносе сообщений
+		// Р—Р°РїРёСЃСЊ РІ Р»РѕРі Рѕ РїРµСЂРµРЅРѕСЃРµ СЃРѕРѕР±С‰РµРЅРёР№
 		$fm->_WriteLog(sprintf($fm->LANG['InExistsLog'], $countmoving, $list[$topic_id]['name'], strip_tags($allforums[$forum_id]['name']), @$newtopicname, strip_tags($allforums[$toforum_id]['name'])), 2);
 
 		unset( $list, $newlastposter, $newlist );
@@ -1978,7 +1979,7 @@ function delattach() {
 		unlink(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/attaches-' . $topic_id . '.php');
 	}
 
-	// Запись в лог информации об удалении прикреплённых файлов в теме
+	// Р—Р°РїРёСЃСЊ РІ Р»РѕРі РёРЅС„РѕСЂРјР°С†РёРё РѕР± СѓРґР°Р»РµРЅРёРё РїСЂРёРєСЂРµРїР»С‘РЅРЅС‹С… С„Р°Р№Р»РѕРІ РІ С‚РµРјРµ
 	if ($unlinked) {
 		$fm->_WriteLog(sprintf($fm->LANG['DelAttachLog'], $unlinked, count($postkey), $list[$topic_id]['name'], $allforums[$forum_id]['name']), 2);
 	}
@@ -2056,7 +2057,7 @@ function UpdateOldTopicFile(&$topic, &$postkey, $mode) {
 
 	foreach ($postkey as $post_id) {
 		if (isset( $topic[$post_id] )) {
-			$newtopic[$post_id] = $topic[$post_id];//переносим все данные переносимого сообщения в новый массив
+			$newtopic[$post_id] = $topic[$post_id];//РїРµСЂРµРЅРѕСЃРёРј РІСЃРµ РґР°РЅРЅС‹Рµ РїРµСЂРµРЅРѕСЃРёРјРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ РІ РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
 			$newtopic[$post_id]['moved'] = $mode . "::" . $forum_id . "::" . $topic_id . "::" . $list[$topic_id]['name'];
 			if ($topic[$post_id]['p_id'] !== 0) {
 				$autor_id = $topic[$post_id]['p_id'];

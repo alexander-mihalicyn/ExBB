@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -21,6 +21,7 @@ include( './include/common.php' );
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('forums');
+
 $allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST);
 if (( $forum_id = $fm->_Intval('forum') ) == 0 || !isset( $allforums[$forum_id] )) {
 	$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['ForumNotExists']);
@@ -169,7 +170,7 @@ foreach ($allforums_keys as $id) {
 	$sforumname = '<a href="forums.php?forum=' . $id . '">' . $forum['name'] . '</a>';
 	$sforumdescription = $forum['desc'];
 
-	// Ñïîíñîð ðàçäåëà
+	// Ð¡Ð¿Ð¾Ð½ÑÐ¾Ñ€ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°
 	$sponsor = ( $fm->exbb['sponsor'] && isset( $forum['sponsor'] ) ) ? $forum['sponsor'] : '';
 
 	$fm->_GetModerators($id, $allforums);
@@ -486,5 +487,3 @@ function viewing(&$statviewing, &$statforum) {
 	$statviewing = $viewing;
 	$statforum = $showonline;
 }
-
-?>

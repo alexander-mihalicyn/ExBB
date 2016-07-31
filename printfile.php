@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -17,6 +17,7 @@
  ****************************************************************************/
 define('ATTACH', true);
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -122,7 +123,7 @@ function attachment() {
 		}
 	}
 
-	// Ïîëó÷àåì íîìåð áàéòà, íà÷èíàÿ ñ êîòîðîãî áóäåì îòäàâàòü ôàéë ïîëüçîâàòåëþ
+	// ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð½Ð¾Ð¼ÐµÑ€ Ð±Ð°Ð¹Ñ‚Ð°, Ð½Ð°Ñ‡Ð¸Ð½Ð°Ñ Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð±ÑƒÐ´ÐµÐ¼ Ð¾Ñ‚Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
 	$range = (int)( ( isset( $_SERVER['HTTP_RANGE'] ) ) ? strtr($_SERVER['HTTP_RANGE'], array( 'bytes=' => '', '-' => '' )) : 0 );
 
 	if (!$range) {
@@ -170,7 +171,7 @@ function attachment() {
 			break;
 		}
 
-		// Îòâåò ñåðâåðà â çàâèñèìîñòè îò íîâîãî ñêà÷èâàíèÿ ëèáî äîêà÷êè
+		// ÐžÑ‚Ð²ÐµÑ‚ ÑÐµÑ€Ð²ÐµÑ€Ð° Ð² Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚ Ð½Ð¾Ð²Ð¾Ð³Ð¾ ÑÐºÐ°Ñ‡Ð¸Ð²Ð°Ð½Ð¸Ñ Ð»Ð¸Ð±Ð¾ Ð´Ð¾ÐºÐ°Ñ‡ÐºÐ¸
 		if ($range > 0) {
 			header("HTTP/1.1 206 Partial Content");
 		}
@@ -178,12 +179,12 @@ function attachment() {
 			header("HTTP/1.1 200 OK");
 		}
 
-		// Ïðåîáðàçîâàíèå çàãîëîâêà ôàéëà â çàâèñèìîñòè îò áðàóçåðà
+		// ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ° Ñ„Ð°Ð¹Ð»Ð° Ð² Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚ Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€Ð°
 		if (stristr(@$_SERVER['HTTP_USER_AGENT'], 'Opera')) {
 			$attaches[$attach_id]['file'] = iconv('cp1251', 'utf-8', $attaches[$attach_id]['file']);
 		}
 
-		// Content-Encoding âñåãäà none äëÿ ïîäàâëåíèÿ ëþáûõ âèäîâ ñæàòèÿ íà óðîâíå ñåðâåðà, ïðîêñè è ò ï.
+		// Content-Encoding Ð²ÑÐµÐ³Ð´Ð° none Ð´Ð»Ñ Ð¿Ð¾Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð»ÑŽÐ±Ñ‹Ñ… Ð²Ð¸Ð´Ð¾Ð² ÑÐ¶Ð°Ñ‚Ð¸Ñ Ð½Ð° ÑƒÑ€Ð¾Ð²Ð½Ðµ ÑÐµÑ€Ð²ÐµÑ€Ð°, Ð¿Ñ€Ð¾ÐºÑÐ¸ Ð¸ Ñ‚ Ð¿.
 		header("Content-Type: " . $type);
 		header("Content-Encoding: none");
 		header("Content-Transfer-Encoding: binary");
@@ -192,12 +193,12 @@ function attachment() {
 		$file = @fopen('uploads/' . $attaches[$attach_id]['id'], 'rb');
 		flock($file, 1);
 
-		// Çàãîëîâîê äëèíû îòäàâàåìîé ÷àñòè è çàãîëîâîê äëÿ ïîääåðæêè äîêà÷êè ôàéëà
+		// Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð´Ð»Ð¸Ð½Ñ‹ Ð¾Ñ‚Ð´Ð°Ð²Ð°ÐµÐ¼Ð¾Ð¹ Ñ‡Ð°ÑÑ‚Ð¸ Ð¸ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð´Ð»Ñ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ¸ Ð´Ð¾ÐºÐ°Ñ‡ÐºÐ¸ Ñ„Ð°Ð¹Ð»Ð°
 		header("Accept-Ranges: bytes");
 		header("Content-Length: " . (string)( $attaches[$attach_id]['size'] - $range ));
 		header("Content-Range: " . (string)$range . "-" . (string)( $attaches[$attach_id]['size'] - 1 ) . "/" . (string)$attaches[$attach_id]['size']);
 
-		// Îòäà¸ì ñîäåðæèìîå ôàéëà íà÷èíàÿ îò çàïðàøèâàåìîãî áàéòà
+		// ÐžÑ‚Ð´Ð°Ñ‘Ð¼ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ Ñ„Ð°Ð¹Ð»Ð° Ð½Ð°Ñ‡Ð¸Ð½Ð°Ñ Ð¾Ñ‚ Ð·Ð°Ð¿Ñ€Ð°ÑˆÐ¸Ð²Ð°ÐµÐ¼Ð¾Ð³Ð¾ Ð±Ð°Ð¹Ñ‚Ð°
 		if ($range > 0) {
 			fseek($file, $range);
 		}

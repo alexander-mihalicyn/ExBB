@@ -32,13 +32,13 @@ function verify_register_inmembername() {
 	if ($fm->input['value'] === '')
 		verify_result(0, $fm->LANG['VerifyNameEmpty']);
 	
-	if ($fm->exbb['ru_nicks'] === FALSE && preg_match('#[à-ÿÀ-ß¸¨]{1,}#is', $fm->input['value']))
+	if ($fm->exbb['ru_nicks'] === FALSE && preg_match('#[Ð°-ÑÐ-Ð¯Ñ‘Ð]{1,}#is', $fm->input['value']))
 		verify_result(0, $fm->LANG['VerifyRuNicks']);
 	
-	if (preg_match('#[à-ÿÀ-ß¸¨]{1,}#is', $fm->input['value']) && preg_match('#[a-zA-Z]{1,}#is', $fm->input['value']))
+	if (preg_match('#[Ð°-ÑÐ-Ð¯Ñ‘Ð]{1,}#is', $fm->input['value']) && preg_match('#[a-zA-Z]{1,}#is', $fm->input['value']))
 		verify_result(0, $fm->LANG['VerifyRuOrEn']);
 	
-	if (preg_match('#(guest|admin|moder|'.$fm->LANG['Guest'].'|àäìèí|ìîäåð|[^0-9a-zA-Zà-ÿÀ-ß¸¨\-_\.\s])#is', $fm->input['value']))
+	if (preg_match('#(guest|admin|moder|'.$fm->LANG['Guest'].'|Ð°Ð´Ð¼Ð¸Ð½|Ð¼Ð¾Ð´ÐµÑ€|[^0-9a-zA-ZÐ°-ÑÐ-Ð¯Ñ‘Ð\-_\.\s])#is', $fm->input['value']))
 		verify_result(0, $fm->LANG['VerifyNameProtect']);
 	
 	if ($fm->exbb['wordcensor'] === TRUE && $fm->bads_filter($fm->input['value'], 0) === TRUE)

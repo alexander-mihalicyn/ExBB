@@ -20,5 +20,4 @@ forum*/*
 modules/*/data/*
 !modules/*/data/index.html
 
-data/**/*
-!data/index.html
+data/*

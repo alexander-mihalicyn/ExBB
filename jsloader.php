@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.9                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.revansh.com                                                *
  * email: admin@exbb.revansh.com                                            *
@@ -22,6 +22,7 @@ include( './include/common.php' );
 
 // Load JsHttpRequest backend.
 require_once "include/JsHttpRequest/JsHttpRequest.php";
+
 // Create main library object. You MUST specify page encoding!
 $JsHttpRequest = new JsHttpRequest($fm->LANG['ENCODING']);
 
@@ -80,4 +81,3 @@ else {
 		echo $fm->LANG['ModNotInstalled'];
 	}
 }
-?>

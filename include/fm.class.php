@@ -16,9 +16,7 @@ class FM extends VARS {
 	 * @var array
 	 */
 	public $LANG = [ ];
-	/*
-		Начало отсчета времени работы скрипта integer
-	*/
+
 	/**
 	 * @var float|int
 	 */
@@ -198,6 +196,7 @@ class FM extends VARS {
 		else {
 			$this->exbb = [
 				'gzip_compress' => false,
+				'installed' => false,
 			];
 		}
 
@@ -1343,11 +1342,11 @@ class FM extends VARS {
 	 * @param $list
 	 */
 	function _SendMail($list) {
-		$headers = 'From: =?windows-1251?B?' . base64_encode($list[0]) . '?= <' . $list[1] . ">\n";
+		$headers = 'From: =?utf-8?B?' . base64_encode($list[0]) . '?= <' . $list[1] . ">\n";
 		$headers .= 'Reply-To: ' . $list[1] . "\n";
 		$headers .= 'Return-Path: ' . $list[1] . "\n";
-		$headers .= "MIME-Version: 1.0\nContent-type: text/plain; charset=windows-1251\nContent-Transfer-Encoding: 8bit\nDate: " . gmdate('D, d M Y H:i:s', time()) . " UT\nX-Priority: 3\nX-Mailer: PHP\n";
-		$list[3] = '=?windows-1251?B?' . base64_encode($list[3]) . '?=';
+		$headers .= "MIME-Version: 1.0\nContent-type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nDate: " . gmdate('D, d M Y H:i:s', time()) . " UT\nX-Priority: 3\nX-Mailer: PHP\n";
+		$list[3] = '=?utf-8?B?' . base64_encode($list[3]) . '?=';
 		$skip_mails = ( file_exists(EXBB_DATA_SKIP_MAILS) ) ? file(EXBB_DATA_SKIP_MAILS) : array();
 		if (count($skip_mails) !== 0) {
 			unset( $skip_mails[0] );

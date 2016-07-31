@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.9                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -19,6 +19,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('setmembers', true);
@@ -126,10 +127,10 @@ elseif ($fm->input['action'] == 'edit_user') {
 		if (empty( $private )) {
 			$private = $fm->LANG['NoPrivateForums'];
 		}
-		/* Äåíü ðîæäåíèÿ */
+		/* Ð”ÐµÐ½ÑŒ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ */
 		$includemode = 'edit';
 		include( 'modules/birstday/setmembers.php' );
-		/* Äåíü ðîæäåíèÿ */
+		/* Ð”ÐµÐ½ÑŒ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ */
 
 		$user['title'] = $fm->Clean_Value($user['title']);
 		$user['sig'] = $fm->Clean_Value(str_replace('<br>', "\n", $user['sig']));

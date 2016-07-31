@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="Windows-1251">
+	<meta charset="UTF-8">
 	<title><?php echo $title; ?> :: <?php echo EXBB_VERSION_NAME; ?></title>
 
 	<link rel="stylesheet" href="template/assets/css/style.css" />

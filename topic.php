@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -16,6 +16,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -84,7 +85,7 @@ unset( $list, $viewsdata );
 
 $topic['name'] = $fm->chunk_split($topic['name']);
 $topic['name'] = ( isset( $topic['tnun'] ) && $topic['tnun'] !== 0 ) ? $topic['name'] . ' - ' . $topic['tnun'] : $topic['name'];
-$topic['desc'] = ( isset( $topic['desc'] ) && !empty( $topic['desc'] ) ) ? 'Описание: ' . $fm->chunk_split($topic['desc']) : 'Без описания';
+$topic['desc'] = ( isset( $topic['desc'] ) && !empty( $topic['desc'] ) ) ? 'РћРїРёСЃР°РЅРёРµ: ' . $fm->chunk_split($topic['desc']) : 'Р‘РµР· РѕРїРёСЃР°РЅРёСЏ';
 $topic['state'] = ( isset( $topic['state'] ) ) ? $topic['state'] : 'closed';
 $topic['poll'] = ( isset( $topic['poll'] ) ) ? true : false;
 
@@ -92,7 +93,7 @@ $NewTopicButton = '<a href="post.php?action=new&forum=' . $forum_id . '"><img sr
 $NewPollButton = ( $allforums[$forum_id]['polls'] === true ) ? '&nbsp;<a href="post.php?action=new&poll=yes&forum=' . $forum_id . '"><img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/newpoll.gif" border="0"></a>' : '';
 $ReplyButton = ( $topic['state'] == 'open' ) ? '<a href="post.php?action=reply&forum=' . $forum_id . '&topic=' . $topic_id . '"><img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/replytothread.gif" border="0"></a>' : '<img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/closed.gif" border="0">';
 
-/* ПОДСВЕТКА ПОИСКА */
+/* РџРћР”РЎР’Р•РўРљРђ РџРћРРЎРљРђ */
 $findstring = $search_link = '';
 if ($fm->_String('search_id') !== '') {
 	$search_array = $fm->_Read(EXBB_DATA_DIR_SEARCH . '/temp/' . $fm->input['search_id']);
@@ -105,7 +106,7 @@ if ($fm->_String('search_id') !== '') {
 		unlink(EXBB_DATA_DIR_SEARCH . '/temp/' . $fm->input['search_id']);
 	}
 }
-/* ПОДСВЕТКА ПОИСКА */
+/* РџРћР”РЎР’Р•РўРљРђ РџРћРРЎРљРђ */
 
 $threads = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php', false);
 $threads_keys = array_keys($threads);
@@ -113,7 +114,7 @@ $end_key = end($threads_keys);
 sort($threads_keys, SORT_NUMERIC);
 $firstkey = reset($threads_keys);
 require( 'modules/watches/_topic.php' );
-/*	Прикрепление сообщений	*/
+/*	РџСЂРёРєСЂРµРїР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёР№	*/
 $_pinmsg = ( isset( $threads[$firstkey]['pinmsg'] ) ) ? $threads[$firstkey]['pinmsg'] : array();
 foreach ($_pinmsg as $offset => $key) {
 	if (!isset( $threads[$key] )) {
@@ -192,7 +193,7 @@ $_icon['report'] = ( $fm->exbb['text_menu'] === true ) ? $fm->LANG['IconReport']
 $_icon['reply'] = ( $fm->exbb['text_menu'] === true ) ? $fm->LANG['IconReply'] : '<img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/reply.gif" border="0" title="' . $fm->LANG['IconReply'] . '" alt="' . $fm->LANG['IconReply'] . '">';
 $_icon['quote'] = ( $fm->exbb['text_menu'] === true ) ? $fm->LANG['IconQuote'] : '<img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/quote.gif" border="0" title="' . $fm->LANG['IconQuote'] . '" alt="' . $fm->LANG['IconQuote'] . '">';
 $_icon['postid'] = ( $fm->exbb['text_menu'] === true ) ? $fm->LANG['IconPostid'] : '<img src="./templates/' . DEF_SKIN . '/im/postid.gif" border="0" title="' . $fm->LANG['ViewPostAddress'] . '" alt="Post Id">';
-// ********* мод сказать "спасибо" *********
+// ********* РјРѕРґ СЃРєР°Р·Р°С‚СЊ "СЃРїР°СЃРёР±Рѕ" *********
 $_icon['$thank_i'] = ( $fm->exbb['text_menu'] === true ) ? $fm->LANG['IconThank'] : '<img src="./templates/' . DEF_SKIN . '/im/' . DEF_LANG . '/thanks.gif" border="0" title="' . $fm->LANG['DescThank'] . '" alt="' . $fm->LANG['IconThank'] . '">';
 if ($fm->input['action'] == 'thanks' && $fm->user['id'] != 0) {
 	$key = $fm->input['post'];
@@ -296,7 +297,7 @@ foreach ($threads_keys as $id => $key) {
 	}
 
 	$username = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;"><b>' . $users[$member_id]['user'] . '</b></a>' : '<b>' . $users[$member_id]['user'] . '</b>';
-	$username2 = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;" title="Нажмите сюда для вставки ника автора этого поста в ваше сообщение"><b>Обратиться по нику</b></a>' : '';
+	$username2 = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;" title="РќР°Р¶РјРёС‚Рµ СЃСЋРґР° РґР»СЏ РІСЃС‚Р°РІРєРё РЅРёРєР° Р°РІС‚РѕСЂР° СЌС‚РѕРіРѕ РїРѕСЃС‚Р° РІ РІР°С€Рµ СЃРѕРѕР±С‰РµРЅРёРµ"><b>РћР±СЂР°С‚РёС‚СЊСЃСЏ РїРѕ РЅРёРєСѓ</b></a>' : '';
 	$usertitle = $users[$member_id]['usertitle'];
 	$teamcon = $users[$member_id]['team'];
 	$useravatar = $users[$member_id]['useravatar'];
@@ -315,10 +316,10 @@ foreach ($threads_keys as $id => $key) {
 	$pm = $users[$member_id]['pm'];
 	$reputation = ( isset( $users[$member_id]['reputation'] ) ) ? sprintf($fm->LANG['ReputationIs'], sprintf($users[$member_id]['reputation'], $key, $key)) : '';
 	$karma = ( $users[$member_id]['karmalink'] !== '' ) ? sprintf($users[$member_id]['karmalink'], $member_id, $key, $users[$member_id]['karma']) : '';
-	$pun = $users[$member_id]['pun'];/*  ШТРАФЫ  */
+	$pun = $users[$member_id]['pun'];/*  РЁРўР РђР¤Р«  */
 	$addpun = sprintf($users[$member_id]['addpun'], $forum_id, $topic_id, $key);
 
-	/*	Прикрепление сообщений	*/
+	/*	РџСЂРёРєСЂРµРїР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёР№	*/
 	if ($fm->_Moderator === true) {
 		$pinmsg = ( in_array($key, $_pinmsg) ) ? 'pinned.gif' : 'pin.gif';
 		$pinmsg = '<a href="postings.php?action=pinmsg&forum=' . $forum_id . '&topic=' . $topic_id . '&post=' . $key . '"><img src="templates/' . DEF_SKIN . '/im/' . $pinmsg . '" border="0"></a>';
@@ -327,22 +328,22 @@ foreach ($threads_keys as $id => $key) {
 		$pinmsg = ( in_array($key, $_pinmsg) ) ? '<img src="templates/' . DEF_SKIN . '/im/pinned.gif" border="0">' : '';
 	}
 
-	/*  Опции сообщения */
+	/*  РћРїС†РёРё СЃРѕРѕР±С‰РµРЅРёСЏ */
 	$edit = ( $fm->_Moderator === true || ( $fm->user['id'] === $member_id && $fm->user['id'] && $topic['state'] != 'closed' ) ) ? '<a href="postings.php?action=edit&forum=' . $forum_id . '&topic=' . $topic_id . '&postid=' . $key . '">' . $_icon['edit'] . '</a>' . $_icon['divider'] : '';
 	$del = ( $fm->_Moderator === true ) ? '<a href="postings.php?action=processedit&deletepost=yes&forum=' . $forum_id . '&topic=' . $topic_id . '&postid=' . $key . '" onClick="DelPost(this,' . $key . '); return false">' . $_icon['del'] . '</a>' . $_icon['divider'] : '';
 	$quote = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;" title="' . $fm->LANG['IconQuote'] . '">' . $_icon['quote'] . '</a>' . $_icon['divider'] : "";
-	$quote2 = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;" title="Для вставки цитаты из этого поста выделите текст и нажмите на эту ссылку"><b>Ответить с цитированием</b></a>' . $_icon['divider'] : "";
+	$quote2 = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$member_id]['user']) . '\'); return false;" title="Р”Р»СЏ РІСЃС‚Р°РІРєРё С†РёС‚Р°С‚С‹ РёР· СЌС‚РѕРіРѕ РїРѕСЃС‚Р° РІС‹РґРµР»РёС‚Рµ С‚РµРєСЃС‚ Рё РЅР°Р¶РјРёС‚Рµ РЅР° СЌС‚Сѓ СЃСЃС‹Р»РєСѓ"><b>РћС‚РІРµС‚РёС‚СЊ СЃ С†РёС‚РёСЂРѕРІР°РЅРёРµРј</b></a>' . $_icon['divider'] : "";
 	$reply = ( $access === true && $topic['state'] != 'closed' ) ? '<a href="post.php?action=replyquote&forum=' . $forum_id . '&topic=' . $topic_id . '&postid=' . $key . '" title="' . $fm->LANG['IconReply'] . '">' . $_icon['reply'] . '</a>' . $_icon['divider'] : "";
 	$report = ( $access === true && $topic['state'] != 'closed' && $fm->exbb['preport'] === true && $fm->user['id'] !== 0 ) ? '<a href="tools.php?action=preport&forum=' . $forum_id . '&topic=' . $topic_id . '&postid=' . $key . '" title="' . $fm->LANG['Report2Moder'] . '">' . $_icon['report'] . '</a>' . $_icon['divider'] : '';
 	$postId = '<a href="#" onClick="PostId(this,' . $key . '); return false;" title="' . $fm->LANG['IconPostid'] . '">' . $_icon['postid'] . '</a>';
 
-	/* Модераторскоя опция удаления сообщений скопом */
+	/* РњРѕРґРµСЂР°С‚РѕСЂСЃРєРѕСЏ РѕРїС†РёСЏ СѓРґР°Р»РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёР№ СЃРєРѕРїРѕРј */
 	$delbox = ( $fm->_Moderator === true && $key != $firstkey ) ? '<input name="postkey[]" type="checkbox" value="' . $key . '">' : "";
 
 	$postdate = $fm->_DateFormat($key + $fm->user['timedif'] * 3600);
 	$info = $fm->LANG['PostDate'] . ' <b>' . $postdate . '</b> ' . $postIP;
 
-	// ********* мод сказать "спасибо" *********
+	// ********* РјРѕРґ СЃРєР°Р·Р°С‚СЊ "СЃРїР°СЃРёР±Рѕ" *********
 	$say_thank_b = ( $access === true && $topic['state'] != 'closed' && $fm->user['id'] != 0 && $fm->user['id'] != $member_id ) ? '<a href="topic.php?action=thanks&forum=' . $forum_id . '&topic=' . $topic_id . '&post=' . $key . '" title=' . $fm->LANG['DescThank'] . '>' . $_icon['$thank_i'] . '</a>' . $_icon['divider'] : '';
 	$say_thank_d = '';
 	if (isset( $threads[$key]['thanks'] )) {
@@ -392,14 +393,14 @@ foreach ($threads_keys as $id => $key) {
 
 	$postbackcolor = ( !( $id % 2 ) ) ? 'row1' : 'row2';
 
-	/*  Перенесенные посты */
+	/*  РџРµСЂРµРЅРµСЃРµРЅРЅС‹Рµ РїРѕСЃС‚С‹ */
 	if (isset( $threads[$key]['moved'] )) {
 		list( $type, $forimid, $topicid, $topicname ) = explode("::", $threads[$key]['moved']);
 		$post = '<span class="movedpost">' . $fm->LANG['Moved' . $type] . '"<a href="topic.php?forum=' . $forimid . '&topic=' . $topicid . '" target="_blank">' . $topicname . '</a>"</span><br>' . $post;
 	}
 	require( 'modules/ads/_topicPost.php' );
 	$unread_anchor = ( $key === $unread_key ) ? '<a name="unread"></a>' : '';
-	/*  Перенесенные посты */
+	/*  РџРµСЂРµРЅРµСЃРµРЅРЅС‹Рµ РїРѕСЃС‚С‹ */
 	include( './templates/' . DEF_SKIN . '/topic_data.tpl' );
 }
 require( 'modules/ads/_topicPostLast.php' );
@@ -428,7 +429,7 @@ if ($access === true && $topic['state'] != 'closed') {
 	$enctype = ( $upload !== 0 ) ? ' enctype="multipart/form-data"' : '';
 
 	if ($fm->user['id'] !== 0 && $fm->exbb['emailfunctions'] === true && $fm->user['mail']) {
-		//  Опция подписки на тему //
+		//  РћРїС†РёСЏ РїРѕРґРїРёСЃРєРё РЅР° С‚РµРјСѓ //
 		$trackdata = $fm->_Read2Write($fp_track, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_t_track.php');
 		switch ($fm->input['action']) {
 			case 'untrack':
@@ -451,7 +452,7 @@ if ($access === true && $topic['state'] != 'closed') {
 				$options['track'] = ( isset( $trackdata[$topic_id][$fm->user['id']] ) ) ? '<a href="topic.php?action=untrack&forum=' . $forum_id . '&topic=' . $topic_id . '&p=' . $current_page . '">' . $fm->LANG['UntrackTopic'] . '</a>' : '<a href="topic.php?action=track&forum=' . $forum_id . '&topic=' . $topic_id . '&p=' . $current_page . '">' . $fm->LANG['TrackTopic'] . '</a>';
 		}
 		unset( $trackdata );
-		//  Опция подписки на тему //
+		//  РћРїС†РёСЏ РїРѕРґРїРёСЃРєРё РЅР° С‚РµРјСѓ //
 	}
 	include( './templates/' . DEF_SKIN . '/post_form.tpl' );
 }
@@ -478,7 +479,7 @@ $fm->_Keywords = ( !empty( $threads[$firstkey]['keywords'] ) ) ? $threads[$first
 if ($fm->exbb['imgpreview']) {
 	$fm->_Link .= "\n<link href=\"clearbox/css/clearbox.css\" rel=\"stylesheet\" type=\"text/css\" />\n<script src=\"clearbox/js/clearbox.js\" type=\"text/javascript\"></script>";
 }
-$fm->_Link .= "\n<LINK rel=\"Start\" title=\"Первая страница темы - First page\" type=\"text/html\" href=\"{$fm->exbb['boardurl']}/topic.php?forum={$forum_id}&topic={$topic_id}\">
+$fm->_Link .= "\n<LINK rel=\"Start\" title=\"РџРµСЂРІР°СЏ СЃС‚СЂР°РЅРёС†Р° С‚РµРјС‹ - First page\" type=\"text/html\" href=\"{$fm->exbb['boardurl']}/topic.php?forum={$forum_id}&topic={$topic_id}\">
 <script type=\"text/javascript\" language=\"JavaScript\" src=\"javascript/board.js\"></script>
 <script type=\"text/javascript\" language=\"JavaScript\">
 <!--
@@ -531,7 +532,7 @@ function setup_member($user_id) {
 	if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !stristr($user['www'], 'http://' . $fm->exbb_domain)) {
 		$user['www'] = $fm->out_redir . $user['www'];
 	}
-	$user['title'] = ( $user['status'] == "banned" ) ? '<font color="#cc0000"><b>Забанен</b></font>' : $user['title'];
+	$user['title'] = ( $user['status'] == "banned" ) ? '<font color="#cc0000"><b>Р—Р°Р±Р°РЅРµРЅ</b></font>' : $user['title'];
 	$users[$user_id] = array( 'user' => $user['name'], 'usertitle' => $user['title'], 'team' => '', 'useravatar' => ( $fm->exbb['avatars'] === true && $user['avatar'] != 'noavatar.gif' && $user['avatar'] != '' ) ? '<br><img src="./im/avatars/' . $user['avatar'] . '" border="0">' : '<br /><img src="im/avatars/noavatar.gif" border="0" />', 'usergraphic' => '', 'onl' => '', 'posts' => sprintf($fm->LANG['UsertotalPosts'], $user['posts']), 'jnd' => $fm->LANG['UserRegDate'] . ' <b>' . ( ( $user['joined'] ) ? $fm->_JoinDate($user['joined']) : $fm->LANG['NA'] ) . '</b> &nbsp;', 'location' => ( $fm->exbb['location'] === true && $user['location'] != '' ) ? '<br>' . $fm->LANG['From'] . ': ' . $user['location'] : '', 'prf' => '<a href="profile.php?action=show&member=' . $user_id . '" title="' . $fm->LANG['UserProfile'] . ' ' . $user['name'] . '" target="_blank">' . $_icon['prf'] . '</a>' . $_icon['divider'], 'eml' => '', 'www' => ( $user['www'] !== '' ) ? '<a href="' . $user['www'] . '" target="_blank">' . $_icon['www'] . '</a>' . $_icon['divider'] : '', 'icq' => ( $user['icq'] != '' ) ? '<a href="' . ( ( $fm->exbb['redirect'] ) ? $fm->out_redir : '' ) . 'http://people.icq.com/' . $user['icq'] . '">' . sprintf($_icon['icq'], $user['icq']) . '</a> ' . $_icon['divider'] : '', 'uin' => ( $user['icq'] != '' ) ? $user['icq'] : '', 'aim' => ( $user['aim'] != '' ) ? '<a href="aim:goim?screenname=' . $user['aim'] . '&amp;message=Hello+Are+you+there?">' . $_icon['aol'] . '</a>' . $_icon['divider'] : '', 'pm' => ( $fm->exbb['pm'] === true && $fm->user['id'] !== 0 ) ? '<a href="messenger.php?action=new&touser=' . $user_id . '" title="' . $fm->LANG['SendPm'] . ' ' . $user['name'] . '" target="_blank">' . $_icon['pm'] . '</a>' : '', 'signature' => ( $fm->exbb['sig'] === true && $user['sig_on'] === true && $user['sig'] != '' ) ? '<br><br>-----<br>' . $user['sig'] : '', 'karma' => '', 'karmalink' => '', 'pun' => '', 'addpun' => '' );
 
 
@@ -560,7 +561,7 @@ function setup_member($user_id) {
 
 	if ($users[$user_id]['usertitle'] == '') {
 
-		// Хоть убейте, но не помню что здесь должно было быть ==))
+		// РҐРѕС‚СЊ СѓР±РµР№С‚Рµ, РЅРѕ РЅРµ РїРѕРјРЅСЋ С‡С‚Рѕ Р·РґРµСЃСЊ РґРѕР»Р¶РЅРѕ Р±С‹Р»Рѕ Р±С‹С‚СЊ ==))
 	}
 
 	if ($fm->exbb['ratings'] === true) {
@@ -582,7 +583,7 @@ function setup_member($user_id) {
 		$users[$user_id]['eml'] = '<a href="tools.php?action=mail&member=' . $user_id . '" title="' . $fm->LANG['ForumEml'] . '">' . $_icon['eml'] . '</a>' . $_icon['divider'];
 	}
 
-	/* Репутация */
+	/* Р РµРїСѓС‚Р°С†РёСЏ */
 	if ($fm->exbb['reputation']) {
 		$reputation = ( isset( $user['reputation'] ) ) ? $user['reputation'] : 0;
 		$reputation = '<b>' . $reputation . '</b>';
@@ -594,29 +595,29 @@ function setup_member($user_id) {
 		}
 		$users[$user_id]['reputation'] = $reputation;
 	}
-	/* Репутация */
+	/* Р РµРїСѓС‚Р°С†РёСЏ */
 
-	/*  КАРМА  */
+	/*  РљРђР РњРђ  */
 	if ($fm->exbb['karma'] === true) {
 		$users[$user_id]['karma'] = ( isset( $user['karma'] ) ) ? $user['karma'] : 0;
 		$users[$user_id]['karmalink'] = ( $fm->user['id'] !== 0 ) ? $fm->LANG['Karma'] . '<a href="#" onClick="Karma(\'plus\', ' . $user_id . '); return false">' . $fm->LANG['KarmaAdd'] . '</a>/<a href="#" onClick="Karma(\'minus\', ' . $user_id . '); return false">' . $fm->LANG['KarmaDel'] . '</a><br>' : $fm->LANG['Karma'];
 	}
-	/*  КАРМА  */
+	/*  РљРђР РњРђ  */
 
-	/*  ШТРАФЫ  */
+	/*  РЁРўР РђР¤Р«  */
 	if ($fm->exbb['punish'] === true) {
 		$pun_arr = array( "", "[+]", "[+][+]", "[+][+][+]", "[+][+][+][+]", "[+][+][+][+][+]" );
 		$users[$user_id]['pun'] = ( isset( $user['punned'] ) && is_array($user['punned']) ) ? $pun_arr[count($user['punned'])] : '';
 		$users[$user_id]['addpun'] = ( $fm->_Moderator === true ) ? "<a href=\"tools.php?action=punish&do=doact&forum=%1\$d&topic=%2\$d&postid=%3\$d\" onClick=\"window.open('tools.php?action=punish&do=doact&forum=%1\$d&topic=%2\$d&postid=%3\$d','punish','width=700,height=350,scrollbars=yes'); return false;\" title=\"" . $fm->LANG['OpenPunWin'] . "\">" . $_icon['addpun'] . "</a>" . $_icon['divider'] : '';
 	}
-	/*  ШТРАФЫ  */
+	/*  РЁРўР РђР¤Р«  */
 
-	/*  Статус юзера On-Off-line  */
+	/*  РЎС‚Р°С‚СѓСЃ СЋР·РµСЂР° On-Off-line  */
 	if ($fm->exbb['showuseronline'] === true) {
 		$user['visible'] = ( $fm->exbb['visiblemode'] === true ) ? $user['visible'] : false;
 		$users[$user_id]['onl'] = ( $user['visible'] === false && isset( $fm->_OnlineIds[$user_id] ) ) ? $fm->LANG['UserOnLine'] : $fm->LANG['UserOffLine'];
 	}
-	/*  Статус юзера On-Off-line  */
+	/*  РЎС‚Р°С‚СѓСЃ СЋР·РµСЂР° On-Off-line  */
 }
 
 function poll($forum_id, $topic_id) {

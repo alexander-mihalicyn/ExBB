@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  * "IP BanPlus" mods for  ExBB v.1.9.1                                      *
- * Copyright (c) 2004 by Alisher Mutalov aka Markus®                        *
+ * Copyright (c) 2004 by Alisher Mutalov aka MarkusÂ®                        *
  *                                                                          *
  * http://www.tvoyweb.ru                                                    *
  * http://www.tvoyweb.ru/forums/                                            *
@@ -12,6 +12,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('setbannedip', true);

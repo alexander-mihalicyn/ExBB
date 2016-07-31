@@ -1,9 +1,21 @@
 <?php
 namespace ExBB;
 
+/**
+ * Класс для работы с сессиями
+ *
+ * Class Session
+ * @package ExBB
+ */
 class Session {
-	public $data = array();
-			
+	/**
+	 * @var array массив данных сессии
+	 */
+	public $data = [];
+
+	/**
+	 *
+	 */
 	public function __construct() {		
 		if (!session_id()) {
 			ini_set('session.use_cookies', 'On');
@@ -16,7 +28,12 @@ class Session {
 		$this->data =& $_SESSION;
 
 	}
-	
+
+	/**
+	 * Возвращает ID сессии
+	 *
+	 * @return string
+	 */
 	public function getId() {
 		return session_id();
 	}

@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.9                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -19,6 +19,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('setforums', true);
@@ -139,7 +140,7 @@ elseif ($fm->input['action'] == "doaddcat" || $fm->input['action'] == "doaddforu
 	$allforums[$forum_id]['upload'] = ( $fm->_Intval('upsize') !== 0 ) ? $fm->input['upsize'] * 1024 : 0;
 	$allforums[$forum_id]['last_time'] = 0;
 
-	// Ñïîíñîð ðàçäåëà
+	// Ð¡Ð¿Ð¾Ð½ÑÐ¾Ñ€ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°
 	if ($fm->exbb['sponsor']) {
 		$allforums[$forum_id]['sponsor'] = $fm->html_replace($fm->_String('sponsor'));
 	}
@@ -167,8 +168,8 @@ elseif ($fm->input['action'] == "edit") {
 	$forummoderator = implode(',', $allforums[$forum_id]['moderator']);
 	$forumgraphic = $allforums[$forum_id]['icon'];
 
-	$forumname = htmlspecialchars($allforums[$forum_id]['name'], ENT_COMPAT, 'windows-1251');
-	$forumdescription = htmlspecialchars($allforums[$forum_id]['desc'], ENT_COMPAT, 'windows-1251');
+	$forumname = htmlspecialchars($allforums[$forum_id]['name'], ENT_COMPAT, 'UTF-8');
+	$forumdescription = htmlspecialchars($allforums[$forum_id]['desc'], ENT_COMPAT, 'UTF-8');
 	$do = $fm->LANG['EditForum'];
 
 	$codes_on = ( $allforums[$forum_id]['codes'] ) ? 'selected' : '';
@@ -187,7 +188,7 @@ elseif ($fm->input['action'] == "edit") {
 	$access2reply_reged = ( $allforums[$forum_id]['strep'] == 'reged' ) ? 'selected' : '';
 	$access2reply_no = ( $allforums[$forum_id]['strep'] == 'admo' ) ? 'selected' : '';
 	$upsize = $allforums[$forum_id]['upload'] / 1024;
-	$sponsor = ( $fm->exbb['sponsor'] && isset( $allforums[$forum_id]['sponsor'] ) ) ? htmlspecialchars($allforums[$forum_id]['sponsor'], ENT_COMPAT, 'windows-1251') : '';
+	$sponsor = ( $fm->exbb['sponsor'] && isset( $allforums[$forum_id]['sponsor'] ) ) ? htmlspecialchars($allforums[$forum_id]['sponsor'], ENT_COMPAT, 'UTF-8') : '';
 	$button = $fm->LANG['Save'];
 	$safe_mode = '';
 	$hidden = '<input type="hidden" name="action" value="doedit">
@@ -229,7 +230,7 @@ elseif ($fm->input['action'] == "doedit") {
 	$allforums[$forum_id]['icon'] = ( preg_match("#^[A-Za-z0-9-_]{1,16}\.[A-Za-z]{3,4}$#is", $fm->input['forumgraphic']) && file_exists('im/images/' . $fm->input['forumgraphic']) ) ? $fm->input['forumgraphic'] : '';
 	$allforums[$forum_id]['upload'] = ( $fm->_Intval('upsize') !== 0 ) ? $fm->input['upsize'] * 1024 : 0;
 
-	// Ñïîíñîð ðàçäåëà
+	// Ð¡Ð¿Ð¾Ð½ÑÐ¾Ñ€ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°
 	if ($fm->exbb['sponsor']) {
 		$allforums[$forum_id]['sponsor'] = $fm->html_replace($fm->_String('sponsor'));
 	}
@@ -273,7 +274,7 @@ elseif ($fm->input['action'] == "editcatname") {
 	}
 	else {
 		$fm->_Fclose($fp_allforums);
-		$categoryname = htmlspecialchars($categories[$catid], ENT_COMPAT, 'windows-1251');
+		$categoryname = htmlspecialchars($categories[$catid], ENT_COMPAT, 'UTF-8');
 		include( './admin/all_header.tpl' );
 		include( './admin/nav_bar.tpl' );
 		include( './admin/edit_catname.tpl' );

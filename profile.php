@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -16,6 +16,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -92,7 +93,7 @@ if ($fm->input['action'] === 'show') {
 						$user_ban['whounban_id'] = $fm->user['id'];
 						$user_ban['whounban_name'] = ( isset( $fm->LANG['Pun' . $fm->user['status']] ) ? $fm->LANG['Pun' . $fm->user['status']] . ' ' : '' ) . $fm->user['name'];
 
-						$user_ban['permanently'] = false;//ïåðìàíåíòíûé áàí ñíÿò
+						$user_ban['permanently'] = false;//Ð¿ÐµÑ€Ð¼Ð°Ð½ÐµÐ½Ñ‚Ð½Ñ‹Ð¹ Ð±Ð°Ð½ ÑÐ½ÑÑ‚
 
 						if (isset( $banlist[$user['id']] )) {
 							unset( $banlist[$user['id']] );
@@ -102,7 +103,7 @@ if ($fm->input['action'] === 'show') {
 						$banlist[$user['id']]['m'] = $user['mail'];
 						$banlist[$user['id']]['ip'] = $user['ip'];
 
-						unset( $user_ban['permanently'] );//áàí íå ïåðìàíåíòíûé
+						unset( $user_ban['permanently'] );//Ð±Ð°Ð½ Ð½Ðµ Ð¿ÐµÑ€Ð¼Ð°Ð½ÐµÐ½Ñ‚Ð½Ñ‹Ð¹
 					}
 
 					$fm->_Write($fp_banlist, $banlist);
@@ -110,7 +111,7 @@ if ($fm->input['action'] === 'show') {
 				}
 				elseif ($days === -1) {
 					$user_ban = $fm->_Read2Write($fp_ban, EXBB_DATA_DIR_BANNED_MEMBERS . '/' . $user_id . '.php');
-					$user_ban['permanently'] = true; //âå÷íûé áàí
+					$user_ban['permanently'] = true; //Ð²ÐµÑ‡Ð½Ñ‹Ð¹ Ð±Ð°Ð½
 					$user_ban['user_id'] = $user_id;
 					$user_ban['user_name'] = $user['name'];
 					$user_ban['days'] = -1;
@@ -141,7 +142,7 @@ if ($fm->input['action'] === 'show') {
 			$user['status'] = ( $user['status'] == 'me' ) ? 'banned' : 'me';
 			$fm->_Write($fp_user, $user);
 
-			$fm->_WriteLog(sprintf(( $user['status'] == 'banned' ) ? $fm->LANG['UserBanLog'] : $fm->LANG['UserUnbanLog'], '<b>' . $fm->user['name'] . '</b>', '<b>' . $user['name'] . '</b>'), 2); // Çàïèñü â ëîã
+			$fm->_WriteLog(sprintf(( $user['status'] == 'banned' ) ? $fm->LANG['UserBanLog'] : $fm->LANG['UserUnbanLog'], '<b>' . $fm->user['name'] . '</b>', '<b>' . $user['name'] . '</b>'), 2); // Ð—Ð°Ð¿Ð¸ÑÑŒ Ð² Ð»Ð¾Ð³
 			$fm->_Message($fm->LANG['UsersBan'], sprintf(( $user['status'] == 'banned' ) ? $fm->LANG['UserBanned'] : $fm->LANG['UserUnbanned'], $user['name']), 'profile.php?action=show&member=' . $user_id);
 		}
 	}
@@ -515,28 +516,28 @@ else {
 		$showmyno = ( !$fm->user['showemail'] ) ? 'checked' : '';
 		$showmyes = ( $fm->user['showemail'] ) ? 'checked' : '';
 
-		/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+		/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 		if ($fm->exbb['pmnewmes'] == true) {
 			$pm_newmes_no = ( !$fm->user['sendnewpm'] ) ? 'checked' : '';
 			$pm_newmes_yes = ( $fm->user['sendnewpm'] ) ? 'checked' : '';
 		}
-		/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+		/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 	}
 
 	$sig_onno = ( !$fm->user['sig_on'] ) ? 'checked' : '';
 	$sig_onyes = ( $fm->user['sig_on'] ) ? 'checked' : '';
 
-	/* Ñêðûòûé ðåæèì ïðåáûâàíèÿ íà ôîðóìå */
+	/* Ð¡ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼ Ð¿Ñ€ÐµÐ±Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð½Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ */
 	if ($fm->exbb['visiblemode'] == 1) {
 		$visiblemode_no = ( !$fm->user['visible'] ) ? 'checked' : '';
 		$visiblemode_yes = ( $fm->user['visible'] ) ? 'checked' : '';
 	}
-	/* Ñêðûòûé ðåæèì ïðåáûâàíèÿ íà ôîðóìå */
+	/* Ð¡ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼ Ð¿Ñ€ÐµÐ±Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð½Ð° Ñ„Ð¾Ñ€ÑƒÐ¼Ðµ */
 
-	/* Äåíü ðîæäåíèÿ */
+	/* Ð”ÐµÐ½ÑŒ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ */
 	$requirepass = false;
 	include( 'modules/birstday/select.php' );
-	/* Äåíü ðîæäåíèÿ */
+	/* Ð”ÐµÐ½ÑŒ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ */
 
 	$fm->_Title = ' :: ' . $fm->LANG['ProfileEditing'];
 	include( './templates/' . DEF_SKIN . '/all_header.tpl' );

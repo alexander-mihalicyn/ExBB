@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.7                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -101,6 +101,7 @@ function Banned($n) {
 
 function php($code) {
 	global $fm, $html;
+
 	if ($html === false) {
 		$code[1] = $fm->html_replace($code[1]);
 	}
@@ -461,7 +462,7 @@ function replace_img_link($imlink) {
 function keywordsProcessor($keywords) {
 	global $fm;
 
-	return preg_replace('#((^|\s|,)[a-zA-Zà-ÿÀ-ß¸³¢´º¿¨²¡¥ª¯0-9]{1,2}(?=($|\s|,))|[^a-zA-Zà-ÿÀ-ß¸³¢´º¿¨²¡¥ª¯0-9,\s])#is', '', $fm->html_replace($keywords));
+	return preg_replace('#((^|\s|,)[a-zA-ZÐ°-ÑÐ-Ð¯Ñ‘Ñ–ÑžÒ‘Ñ”Ñ—ÐÐ†ÐŽÒÐ„Ð‡0-9]{1,2}(?=($|\s|,))|[^a-zA-ZÐ°-ÑÐ-Ð¯Ñ‘Ñ–ÑžÒ‘Ñ”Ñ—ÐÐ†ÐŽÒÐ„Ð‡0-9,\s])#is', '', $fm->html_replace($keywords));
 }
 
 ?>

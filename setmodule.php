@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.9                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.revansh.com                                                *
  * email: admin@exbb.revansh.com                                            *
@@ -19,6 +19,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_String('module');
 $fm->_LoadLang('setmodule', true);

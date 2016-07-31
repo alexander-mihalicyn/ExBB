@@ -82,11 +82,11 @@ RSSDATA;
 		$MyETag = '"RSS'.gmdate("YmdHis", $_RSS_lastposttime).'"';
 		$MyGMTtime=gmdate("D, d M Y H:i:s", $_RSS_lastposttime)." GMT";
 
-		header ('Content-Type: text/xml; charset=windows-1251');
+		header ('Content-Type: text/xml; charset=UTF-8');
 		header("Last-Modified: ".$MyGMTtime);
 		header("Etag: ".$MyETag);
 echo <<<RSS
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- generator="ExBB FeedCreator 1.0" -->
 <rss version="2.0">
 	<channel>

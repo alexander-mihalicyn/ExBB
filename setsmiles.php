@@ -19,6 +19,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('setsmiles', true);

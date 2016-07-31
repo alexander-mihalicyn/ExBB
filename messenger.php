@@ -1,12 +1,12 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.revansh.com                                                *
  * email: admin@exbb.revansh.com                                            *
  *                                                                            *
- * Modified in the PM Box Comfort v.1.1 by Mutalov Alisher aka Markus®        *
+ * Modified in the PM Box Comfort v.1.1 by Mutalov Alisher aka MarkusÂ®        *
  *                                                                            *
  * http://www.tvoyweb.ru                                                    *
  * http://www.tvoyweb.ru/forums                                                *
@@ -21,6 +21,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -76,7 +77,7 @@ elseif ($fm->input['action'] == 'outbox') {
 	$totaloutbox = count($outboxdata);
 	krsort($outboxdata);
 
-	//Âûâîäèì ñïèñîê ñîîáùåíèé
+	//Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ ÑÐ¿Ð¸ÑÐ¾Ðº ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹
 	$inbox_data = "";
 	if ($totaloutbox != 0) {
 		foreach ($outboxdata as $message_id => $msg) {
@@ -184,7 +185,7 @@ elseif (( $fm->input['action'] == 'send' && $fm->_String('dosend') == '' ) || ( 
 		if ($inboxdata[$message_id]['status'] === false) {
 			$inboxdata[$message_id]['status'] = true;
 			$fm->_Write($fp_inbox, $inboxdata);
-			//Îòìå÷àåì êàê ïðî÷èòàííîå ó îòïðàâèòåëÿ
+			//ÐžÑ‚Ð¼ÐµÑ‡Ð°ÐµÐ¼ ÐºÐ°Ðº Ð¿Ñ€Ð¾Ñ‡Ð¸Ñ‚Ð°Ð½Ð½Ð¾Ðµ Ñƒ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÐµÐ»Ñ
 			$senderoutbox = $fm->_Read2Write($fp_senderoutbox, EXBB_DATA_DIR_MESSAGES . '/' . $sender_id . '-out.php');
 
 			if (isset( $senderoutbox[$message_id] )) {
@@ -305,13 +306,13 @@ elseif ($fm->input['action'] == 'send') {
 	$_SESSION['double'][$TextHash] = 'messenger.php';
 	$_SESSION['lastpm'] = $fm->_Nowtime;
 
-	/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+	/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 	if ($fm->exbb['emailfunctions'] === true && $fm->exbb['pmnewmes'] === true && isset( $touserdata['sendnewpm'] ) && $touserdata['sendnewpm'] === true) {
 		$email = sprintf($fm->LANG['NewPMNotify'], $touserdata['name'], $fm->exbb['boardname'], $fm->exbb['boardurl'], $fm->user['name'], $MessageTitle, $MessageText);
 		$subject = $fm->LANG['EmailNewPMTitle'];
 		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $touserdata['mail'], $subject, $email);
 	}
-	/* Óâåäîìëåíèÿ ïî E-mail î íîâûõ ËÑ */
+	/* Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¿Ð¾ E-mail Ð¾ Ð½Ð¾Ð²Ñ‹Ñ… Ð›Ð¡ */
 
 	$fm->_Message($fm->LANG['NewPMCreating'], sprintf($fm->LANG['NewPMSendedOk'], $touserdata['name']), 'messenger.php');
 }

@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.9                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -19,6 +19,7 @@ define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
 $fm->_GetVars(true);
 $fm->_BOARDSTATS();
 $fm->_LoadLang('admincenter', true);
@@ -71,4 +72,3 @@ include( './admin/nav_bar.tpl' );
 include( './admin/index_body.tpl' );
 include( './admin/footer.tpl' );
 include( 'page_tail.php' );
-?>

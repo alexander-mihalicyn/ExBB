@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -16,6 +16,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -75,7 +76,7 @@ function showOnline() {
 			$online['in'] = $fm->LANG['BoardMain'];
 		}
 		$actdate = $fm->_DateFormat($online['t'] + $fm->user['timedif'] * 3600);
-		$bot = ( $online['b'] !== false ) ? ' ' . $online['b'] . ' bot гуляет' : '';
+		$bot = ( $online['b'] !== false ) ? ' ' . $online['b'] . ' bot РіСѓР»СЏРµС‚' : '';
 		$online['n'] = ( $online['id'] !== 0 ) ? '<a href="profile.php?action=show&member=' . $online['id'] . '"  target="_blank" title="' . $fm->LANG['UserProfile'] . ' ' . $online['n'] . '">' . $online['n'] . '</a>' : $online['n'];
 		$online['ip'] = ( defined('IS_ADMIN') ) ? sprintf($fm->LANG['ViewIpInfo'], $online['ip']) : '';
 		include( './templates/' . DEF_SKIN . '/showonline_data.tpl' );
@@ -106,7 +107,7 @@ function showHelpRules($mode) {
 		}
 	}
 	else {
-		$rules_topics = "<center>Правила не установлены</center>";
+		$rules_topics = "<center>РџСЂР°РІРёР»Р° РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹</center>";
 		$rules_content = '';
 	}
 	$fm->_Title = ' :: ' . $PageTitle;
@@ -255,7 +256,7 @@ function banmemberslist() {
 	$is_moder = ( $fm->user['status'] == 'ad' || $fm->user['status'] == 'sm' ) ? true : false;
 
 	foreach ($banlist_keys AS $key => $user_id) {
-		//Если есть информация о бане - это второй цикл
+		//Р•СЃР»Рё РµСЃС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р±Р°РЅРµ - СЌС‚Рѕ РІС‚РѕСЂРѕР№ С†РёРєР»
 		if ($fm->_CheckBanMember($user_id)) {
 			continue;
 		}
@@ -269,8 +270,8 @@ function banmemberslist() {
 		$user['user_name'] = $user_info['name'];
 		$user_name = '<font color=\'red\'>' . $user_info['name'] . '</font>';
 		$user['date'] = 'N/A';
-		$user['end'] = 'никогда';
-		$user['days'] = 'вечно';
+		$user['end'] = 'РЅРёРєРѕРіРґР°';
+		$user['days'] = 'РІРµС‡РЅРѕ';
 		$user['whounban'] = '-';
 		$user['reason'] = 'N/A';
 
@@ -288,7 +289,7 @@ function banmemberslist() {
 
 			$user_info = $fm->_Getmember($user_id);
 
-			//Авторазбанивание
+			//РђРІС‚РѕСЂР°Р·Р±Р°РЅРёРІР°РЅРёРµ
 			$fm->_AutoUnBan($user_info);
 
 			$user = $fm->_GetBanMember($user_id);
@@ -304,8 +305,8 @@ function banmemberslist() {
 				$user['days'] = $user['days'] > 0 ? $user['days'] : $fm->LANG['BanUnSeted'];
 			}
 			else {
-				$user['days'] = 'вечно';
-				$user['end'] = 'никогда';
+				$user['days'] = 'РІРµС‡РЅРѕ';
+				$user['end'] = 'РЅРёРєРѕРіРґР°';
 			}
 
 			$user['whounban'] = ( isset( $user['whounban_id'] ) AND $user['whounban_id'] > 0 ) ? '<a href="profile.php?action=show&member=' . $user['whounban_id'] . '" title="' . $fm->LANG['UserProfile'] . ' ' . $user['whounban_name'] . '">' . $user['whounban_name'] . '</a>' : ( $user['days'] === 0 ? 'Auto' : '-' );
@@ -329,10 +330,10 @@ function banmemberslist() {
 function memberslist() {
 	global $fm;
 	if (!$fm->user['id']) {
-		$fm->_Message($fm->LANG['MainMsg'], "Гости не могут просматривать список пользователей.
+		$fm->_Message($fm->LANG['MainMsg'], "Р“РѕСЃС‚Рё РЅРµ РјРѕРіСѓС‚ РїСЂРѕСЃРјР°С‚СЂРёРІР°С‚СЊ СЃРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№.
 <br>
 <br>
-<a href = \"loginout.php\">Войдите</a> или <a href = \"register.php\">зарегистрируйтесь</a>");
+<a href = \"loginout.php\">Р’РѕР№РґРёС‚Рµ</a> РёР»Рё <a href = \"register.php\">Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ</a>");
 	}
 	$sort = $fm->_String('s');
 	$order = $fm->_String('order', 'ASC');

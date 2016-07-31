@@ -30,7 +30,6 @@ $site_size = 3;
 # Every substring - 3
 $_SEARCH['INDEXING_SCHEME'] = 2;
 
-
 switch ($site_size) {
    case 1: $_SEARCH['HASHSIZE'] = 20001; break;
    case 2: $_SEARCH['HASHSIZE'] = 50001; break;
@@ -46,7 +45,7 @@ function get_query(&$wholeword,&$querymode,&$query_arr) {
 		$query = $_SEARCH['search_keywords'];
 		$stype = $_SEARCH['stype'];
 		$query = $fm->_LowerCase($query);
-		$query = preg_replace('/\b([a-zA-Zа-яА-ЯёЁ\-\+\!]{1,3})\b/', "", $query);
+		$query = preg_replace('/\b([a-zA-ZР°-СЏРђ-РЇС‘РЃ\-\+\!]{1,3})\b/', "", $query);
 		$_SEARCH['search_keywords'] = $query;
 		$query_arr = preg_split("/\s+/",$query);
 		$query_arr = array_unique($query_arr);
@@ -250,7 +249,7 @@ function boolean($inforum,&$query_arr,&$querymode,&$allres) {
 		}
 }
 
-// Проверка темы на существование
+// РџСЂРѕРІРµСЂРєР° С‚РµРјС‹ РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ
 $finfo = array();
 function _check($inforum, $k) {
 	global $finfo;
@@ -268,7 +267,7 @@ function _check($inforum, $k) {
 	$row = substr($_finfo, $k, strpos(substr($_finfo, $k, $size - $k), "\n"));
 	
 	list($f, $t) = explode('::', $row);
-	if (file_exists('forum'.$f.'/'.$t.'-thd.php')) return TRUE;
+	if (file_exists(EXBB_DATA_DIR_FORUMS.'/'.$f.'/'.$t.'-thd.php')) return TRUE;
 	return FALSE;
 }
 
@@ -338,8 +337,8 @@ function index_file($topicfile,$forum_id,$topic_id,$topicname = '') {
 		$html_text	= $fm->_LowerCase($html_text.' '.$topicname);
 		//$html_text 	= str_replace($str_search, $_TransTable,$html_text);
 
-		$serach		= array('/[^a-zA-Zа-яА-ЯёЁ]/is',
-							'#\b[a-zA-Zа-яА-ЯёЁ]{1,2}\b#is',
+		$serach		= array('/[^a-zA-ZР°-СЏРђ-РЇС‘РЃ]/is',
+							'#\b[a-zA-ZР°-СЏРђ-РЇС‘РЃ]{1,2}\b#is',
 							'/\s+/s');
 		$replace	= array("\040","\040", "\040");
 

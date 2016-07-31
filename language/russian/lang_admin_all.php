@@ -3,7 +3,7 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 /*
 	All files
 */
-$this->LANG['ENCODING']			= 'windows-1251';
+$this->LANG['ENCODING']			= 'UTF-8';
 $this->LANG['On']				= 'ВКЛ';
 $this->LANG['Off']				= 'ВЫКЛ';
 $this->LANG['Yes']				= 'да';

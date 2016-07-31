@@ -23,7 +23,7 @@ class BaseModel {
 	}
 
 	protected function sanitizeString($string) {
-		return htmlspecialchars(trim($string), ENT_COMPAT, 'Windows-1251');
+		return htmlspecialchars(trim($string), ENT_COMPAT, 'UTF-8');
 	}
 
 	/**

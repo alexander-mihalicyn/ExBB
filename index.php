@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -70,6 +70,7 @@ $lastcat = -1;
 $newposts = 0;
 $allforums_keys = array_keys($allforums);
 $subforums = array();
+
 require( 'modules/watches/_index.php' );
 
 $viewData = array();
@@ -107,7 +108,7 @@ foreach ($allforums_keys as $key => $id) {
 					$f_readed = ( $f_readed > $fm->user['last_visit'] ) ? $f_readed : $fm->user['last_visit'];
 
 					if ($allforums[$subid]['last_time'] > $fm->user['last_visit']) {
-						$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+						$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $subid . '/list.php');
 
 						if (count($alltopic) > 0) {
 							$did = $id;
@@ -157,7 +158,7 @@ foreach ($allforums_keys as $key => $id) {
 
 	$sub = ( $sub ) ? sprintf($fm->LANG['Subforums'], '<br>' . implode('<br>', $sub) . '<br>') : '';
 
-	// Сколько человек просматривают этот форум?
+	// РЎРєРѕР»СЊРєРѕ С‡РµР»РѕРІРµРє РїСЂРѕСЃРјР°С‚СЂРёРІР°СЋС‚ СЌС‚РѕС‚ С„РѕСЂСѓРј?
 	$viewing = ( isset( $statvisit[$id] ) ) ? ' ' . sprintf($fm->LANG['Viewing'], $statvisit[$id]) : '';
 
 	$fm->_GetModerators($id, $allforums);
@@ -181,7 +182,7 @@ foreach ($allforums_keys as $key => $id) {
 			$f_readed = $fm->_GetCookie('f' . $id, 0);
 			$f_readed = ( $f_readed > $fm->user['last_visit'] ) ? $f_readed : $fm->user['last_visit'];
 			if ($forum['last_time'] > $fm->user['last_visit']) {
-				$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
+				$alltopic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum['id'] . '/list.php');
 				if (sizeof($alltopic) > 0) {
 					$alltopic = array_filter($alltopic, "NEW_POSTS");
 					$totalnew = sizeof($alltopic);
@@ -204,7 +205,7 @@ foreach ($allforums_keys as $key => $id) {
 
 	$LastTopicDate = ( $forum['last_time'] > 0 ) ? date("d.m.Y - H:i", $forum['last_time'] + $fm->user['timedif'] * 3600) : $fm->LANG['NA'];
 
-	// Спонсор раздела
+	// РЎРїРѕРЅСЃРѕСЂ СЂР°Р·РґРµР»Р°
 	$sponsor = ( $fm->exbb['sponsor'] && isset( $forum['sponsor'] ) ) ? $forum['sponsor'] : '';
 
 	$lastpost = $LastPosterName = $LastTopicName = '';
@@ -224,7 +225,7 @@ foreach ($allforums_keys as $key => $id) {
 	$board_data .= ob_get_clean();
 }
 
-// СКРЫТЫЙ РЕЖИМ ПРЕБЫВАНИЯ НА ФОРУМЕ //
+// РЎРљР Р«РўР«Р™ Р Р•Р–РРњ РџР Р•Р‘Р«Р’РђРќРРЇ РќРђ Р¤РћР РЈРњР• //
 $countonline = ( $fm->exbb['visiblemode'] === true ) ? sprintf($fm->LANG['OnlineDataVSHide'], $fm->exbb['membergone'], $fm->_OnlineTotal, $fm->_OnlineGuest, $fm->_Members, $fm->_Invisible) : sprintf($fm->LANG['OnlineData'], $fm->exbb['membergone'], $fm->_OnlineTotal, $fm->_Members, $fm->_OnlineGuest);
 //END Invisible Mode Module
 $online_last = $countonline . '';
@@ -238,10 +239,10 @@ if ($todayvisit) {
 }
 $fm->LANG['NewPosts'] = sprintf($fm->LANG['NewPostsTopics'], $newposts);
 
-/* Топ-Лист Пользователей */
+/* РўРѕРї-Р›РёСЃС‚ РџРѕР»СЊР·РѕРІР°С‚РµР»РµР№ */
 include( 'modules/userstop/userstop.php' );
 
-/* ДЕНЬ РОЖДЕНИЯ */
+/* Р”Р•РќР¬ Р РћР–Р”Р•РќРРЇ */
 include( 'modules/birstday/birst.php' );
 
 // Chat Informer for ExBB FM 1.0 RC2 by yura3d (http://www.exbb.org/)

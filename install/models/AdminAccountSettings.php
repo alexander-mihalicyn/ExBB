@@ -32,7 +32,7 @@ class ModelAdminAccountSettings extends BaseModel {
 			];
 		}
 
-		if (mb_strlen($password, 'Windows-1251') < 5) {
+		if (mb_strlen($password, 'UTF-8') < 5) {
 			$messages[] = [
 				'type' => 'error',
 				'text' => lang('adminAccountPasswordShort'),
@@ -67,7 +67,7 @@ class ModelAdminAccountSettings extends BaseModel {
 		$users = [];
 
 		$users[1] = [
-			'n' => mb_strtolower(trim($data['login']), 'Windows-1251'),
+			'n' => mb_strtolower(trim($data['login']), 'UTF-8'),
 			'm' => trim($data['email']),
 			'p' => 0,
 		];

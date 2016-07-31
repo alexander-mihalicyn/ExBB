@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20хх by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20С…С… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -15,23 +15,24 @@
  *   (at your option) any later version.                                    *
  *                                                                            *
  ****************************************************************************/
-define('FM_ADMIN_ID', 1);//ID админа форума
+define('FM_ADMIN_ID', 1);//ID Р°РґРјРёРЅР° С„РѕСЂСѓРјР°
 
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 /*
-	Не изменяйте эту константу, если не знаете зачем она!Best perfomance (more files) - 204800 (200 kB)Optimal - 150-200 kB Maximum - 300 kB
+	РќРµ РёР·РјРµРЅСЏР№С‚Рµ СЌС‚Сѓ РєРѕРЅСЃС‚Р°РЅС‚Сѓ, РµСЃР»Рё РЅРµ Р·РЅР°РµС‚Рµ Р·Р°С‡РµРј РѕРЅР°!Best perfomance (more files) - 204800 (200 kB)Optimal - 150-200 kB Maximum - 300 kB
 */
 define('FM_MAX_THREAD_SIZE', $fm->exbb['max_threads']); # 200 kB
 
-define('FM_SUBPOST_TIME', $fm->exbb['sub_post'] * 60);//Интервал склевания поста
+define('FM_SUBPOST_TIME', $fm->exbb['sub_post'] * 60);//РРЅС‚РµСЂРІР°Р» СЃРєР»РµРІР°РЅРёСЏ РїРѕСЃС‚Р°
 
 $fm->_GetVars();
 $fm->_String('action');
 $fm->_LoadLang('forums');
 
-/* Штрафы на форуме */
+/* РЁС‚СЂР°С„С‹ РЅР° С„РѕСЂСѓРјРµ */
 include( 'modules/punish/p_error.php' );
 
 switch ($fm->input['action']) {
@@ -161,7 +162,7 @@ function addnewthread() {
 		$fm->_Message($fm->LANG['TopicCreate'], $fm->LANG['EmptyTitle']);
 	}
 
-	if (preg_match("#^[^A-Za-zА-Яа-яёЁ0-9\"'\*]#is", $fm->html_replace($fm->input['topictitle']))) {
+	if (preg_match("#^[^A-Za-zРђ-РЇР°-СЏС‘РЃ0-9\"'\*]#is", $fm->html_replace($fm->input['topictitle']))) {
 		$fm->_Fclose($fp_allforums);
 		$fm->_Message($fm->LANG['TopicCreate'], $fm->LANG['TopicTitleRule']);
 	}
@@ -197,7 +198,7 @@ function addnewthread() {
 		$fm->_Write($fp_poll, $_Poll);
 	}
 
-	/* Обновляем информацию в allforums.php */
+	/* РћР±РЅРѕРІР»СЏРµРј РёРЅС„РѕСЂРјР°С†РёСЋ РІ allforums.php */
 	$allforums[$forum_id]['posts']++;
 	$allforums[$forum_id]['topics']++;
 	$allforums[$forum_id]['last_post'] = $fm->input['topictitle'];
@@ -207,7 +208,7 @@ function addnewthread() {
 	$allforums[$forum_id]['last_poster_id'] = $fm->user['id'];
 	$allforums[$forum_id]['last_time'] = $fm->_Nowtime;
 
-	/* Если новая тема создана в подфоруме, то обновим инфу о ластпосте в родительском форуме (на главной) ;) */
+	/* Р•СЃР»Рё РЅРѕРІР°СЏ С‚РµРјР° СЃРѕР·РґР°РЅР° РІ РїРѕРґС„РѕСЂСѓРјРµ, С‚Рѕ РѕР±РЅРѕРІРёРј РёРЅС„Сѓ Рѕ Р»Р°СЃС‚РїРѕСЃС‚Рµ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ (РЅР° РіР»Р°РІРЅРѕР№) ;) */
 	$pcatid = $allforums[$forum_id]['catid'];
 	$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
 	if ($pforum) {
@@ -227,7 +228,7 @@ function addnewthread() {
 
 	$fm->_Write($fp_allforums, $allforums);
 
-	/* Обновляем информацию в соответствующем list.php */
+	/* РћР±РЅРѕРІР»СЏРµРј РёРЅС„РѕСЂРјР°С†РёСЋ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРј list.php */
 	$list[$topic_id]['name'] = $fm->input['topictitle'];
 	$list[$topic_id]['id'] = $topic_id;
 	$list[$topic_id]['fid'] = $forum_id;
@@ -246,12 +247,12 @@ function addnewthread() {
 	uasort($list, 'sort_by_postdate');
 	$fm->_Write($fp_list, $list);
 
-	// Создадим элемент в массиве просмотров
+	// РЎРѕР·РґР°РґРёРј СЌР»РµРјРµРЅС‚ РІ РјР°СЃСЃРёРІРµ РїСЂРѕСЃРјРѕС‚СЂРѕРІ
 	$views = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 	$views[$topic_id] = 0;
 	$fm->_Write($fp_views, $views);
 
-	/* Сохраняем новую тему */
+	/* РЎРѕС…СЂР°РЅСЏРµРј РЅРѕРІСѓСЋ С‚РµРјСѓ */
 	$topic = $fm->_Read2Write($fp_topic, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 
 	$topic[$fm->_Nowtime]['p_id'] = $fm->user['id'];
@@ -271,9 +272,9 @@ function addnewthread() {
 	}
 	$fm->_Write($fp_topic, $topic);
 
-	/* Обновляем информацию пользователя */
+	/* РћР±РЅРѕРІР»СЏРµРј РёРЅС„РѕСЂРјР°С†РёСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 	if ($fm->user['id'] !== 0) {
-		/* Топ-лист пользователей */
+		/* РўРѕРї-Р»РёСЃС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ */
 		include( 'modules/userstop/post.php' );
 
 		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php');
@@ -303,7 +304,7 @@ function addnewthread() {
 		$email = sprintf($fm->LANG['NewPostThanks'], $fm->user['name'], $fm->exbb['boardurl'] . '/topic.php?forum=' . $forum_id . '&topic=' . $topic_id, $fm->exbb['boardname'], $fm->exbb['boardurl']);
 		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $fm->user['mail'], $fm->LANG['NewTopicInForum'] . '"' . strip_tags($forumname) . '"', $email);
 
-		/* Отправка всем подписавшимся за слежением новых тем */
+		/* РћС‚РїСЂР°РІРєР° РІСЃРµРј РїРѕРґРїРёСЃР°РІС€РёРјСЃСЏ Р·Р° СЃР»РµР¶РµРЅРёРµРј РЅРѕРІС‹С… С‚РµРј */
 		$emailers = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_f_track.php');
 		if (isset( $emailers[$fm->user['id']] )) {
 			unset( $emailers[$fm->user['id']] );
@@ -357,13 +358,13 @@ function reply() {
 	$topic = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/' . $topic_id . '-thd.php');
 	krsort($topic, SORT_NUMERIC);
 
-	/* Вложенные цитаты */
+	/* Р’Р»РѕР¶РµРЅРЅС‹Рµ С†РёС‚Р°С‚С‹ */
 	$inpost = '';
 	if ($fm->input['action'] === 'replyquote' && ( $post_id = $fm->_Intval('postid') ) !== 0 && isset( $topic[$post_id] )) {
 		$quter_name = GetName($topic[$post_id]['p_id']);
 		$fm->input['inpost'] = '[quote=' . $quter_name . ']' . $topic[$post_id]['post'] . '[/quote]';
 	}
-	/* Вложенные цитаты */
+	/* Р’Р»РѕР¶РµРЅРЅС‹Рµ С†РёС‚Р°С‚С‹ */
 
 	$forumcodes = ( $fm->exbb['exbbcodes'] === true && $allforums[$forum_id]['codes'] === true ) ? true : false;
 
@@ -411,10 +412,10 @@ function reply() {
 
 		$postId = '<a href="#" onClick="PostId(this,' . $key . '); return false;" title="' . $fm->LANG['IconPostid'] . '">' . $icon_postid . '</a>';
 		$quote = '<a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;" title="' . $fm->LANG['IconQuote'] . '">' . $icon_quote . '</a>' . $icon_divider;
-		$quote2 = '<b><a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;" title="Для вставки цитаты выделите текст и нажмите сюда">Ответить с цитированием</a></b>' . $icon_divider;
+		$quote2 = '<b><a href="#" name="quote" onmouseover="copyQ();" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;" title="Р”Р»СЏ РІСЃС‚Р°РІРєРё С†РёС‚Р°С‚С‹ РІС‹РґРµР»РёС‚Рµ С‚РµРєСЃС‚ Рё РЅР°Р¶РјРёС‚Рµ СЃСЋРґР°">РћС‚РІРµС‚РёС‚СЊ СЃ С†РёС‚РёСЂРѕРІР°РЅРёРµРј</a></b>' . $icon_divider;
 
 		$username = '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;"><b>' . $users[$user_id]['n'] . '</b></a>';
-		$username2 = '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;" title="Нажмите сюда для вставки ника в сообщение">Обратиться по нику</a>';
+		$username2 = '<a href="#" name="bold" onClick="bbcode(this,\'' . addslashes($users[$user_id]['n']) . '\'); return false;" title="РќР°Р¶РјРёС‚Рµ СЃСЋРґР° РґР»СЏ РІСЃС‚Р°РІРєРё РЅРёРєР° РІ СЃРѕРѕР±С‰РµРЅРёРµ">РћР±СЂР°С‚РёС‚СЊСЃСЏ РїРѕ РЅРёРєСѓ</a>';
 		$postIP = ( defined('IS_ADMIN') ) ? sprintf($fm->LANG['ViewIpInfo'], $postinfo['ip']) : '&nbsp;';
 		$usertitle = $users[$user_id]['t'];
 		$postdate = $fm->_DateFormat($key + $fm->user['timedif'] * 3600);
@@ -588,7 +589,7 @@ function addreply() {
 		unset( $attach );
 		$last_key = $fm->_Nowtime;
 
-		// Сохраним информацию о кол-ве просмотров на случай обнуления views.php
+		// РЎРѕС…СЂР°РЅРёРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РєРѕР»-РІРµ РїСЂРѕСЃРјРѕС‚СЂРѕРІ РЅР° СЃР»СѓС‡Р°Р№ РѕР±РЅСѓР»РµРЅРёСЏ views.php
 		$views = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
 		if (isset( $views[$topic_id] )) {
 			$viewsArrayKeys = array_keys($topic);
@@ -596,7 +597,7 @@ function addreply() {
 		}
 	}
 
-	/* Сохраняем флокнутые файлы*/
+	/* РЎРѕС…СЂР°РЅСЏРµРј С„Р»РѕРєРЅСѓС‚С‹Рµ С„Р°Р№Р»С‹*/
 	$fm->_Write($fp_topic, $topic);
 
 	$TotalPosts = count($topic) - 1;
@@ -617,7 +618,7 @@ function addreply() {
 	$allforums[$forum_id]['last_key'] = $last_key;
 	$allforums[$forum_id]['last_time'] = $fm->_Nowtime;
 
-	/* Если ответ был в подфорум, то выведем инфу о ластпосте также в родительском форуме на главной */
+	/* Р•СЃР»Рё РѕС‚РІРµС‚ Р±С‹Р» РІ РїРѕРґС„РѕСЂСѓРј, С‚Рѕ РІС‹РІРµРґРµРј РёРЅС„Сѓ Рѕ Р»Р°СЃС‚РїРѕСЃС‚Рµ С‚Р°РєР¶Рµ РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј С„РѕСЂСѓРјРµ РЅР° РіР»Р°РІРЅРѕР№ */
 	$pcatid = $allforums[$forum_id]['catid'];
 	$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
 	if ($pforum) {
@@ -644,7 +645,7 @@ function addreply() {
 	$list[$topic_id]['postkey'] = $last_key;
 	$list[$topic_id]['postdate'] = $fm->_Nowtime;
 
-	// Удаление старого ключа views из list.php - пример работы конвертации на лету
+	// РЈРґР°Р»РµРЅРёРµ СЃС‚Р°СЂРѕРіРѕ РєР»СЋС‡Р° views РёР· list.php - РїСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ РєРѕРЅРІРµСЂС‚Р°С†РёРё РЅР° Р»РµС‚Сѓ
 	if (isset( $list[$topic_id]['views'] )) {
 		unset( $list[$topic_id]['views'] );
 	}
@@ -653,7 +654,7 @@ function addreply() {
 	$fm->_Write($fp_list, $list);
 
 	if ($fm->user['id'] !== 0 && $PostAdded === true) {
-		/* Топ-лист пользователей */
+		/* РўРѕРї-Р»РёСЃС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ */
 		include( 'modules/userstop/post.php' );
 		$user = $fm->_Read2Write($fp_user, EXBB_DATA_DIR_MEMBERS . '/' . $fm->user['id'] . '.php');
 		$user['posts'] += 1 + $continueTopic;
@@ -686,7 +687,7 @@ function addreply() {
 			unset( $emailers[$fm->user['id']] );
 		}
 
-		/* Отправка всем подписавшимся на тему */
+		/* РћС‚РїСЂР°РІРєР° РІСЃРµРј РїРѕРґРїРёСЃР°РІС€РёРјСЃСЏ РЅР° С‚РµРјСѓ */
 		if (count($emailers) !== 0 && $PostAdded === true) {
 			$email = sprintf($fm->LANG['NewPostNotify'], $forumname, $fm->exbb['boardname'], $fm->user['name'], date("d-m-Y H:i:s", $fm->_Nowtime), $fm->input['inpost'], $fm->exbb['boardurl'] . '/topic.php?forum=' . $forum_id . '&topic=' . $topic_id . '&postid=' . $last_key, $fm->exbb['boardurl'], $forum_id, $topic_id);
 			$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $emailers, $fm->LANG['NotifyNewPost'] . '"' . strip_tags($forumname) . '"', $email);
@@ -794,5 +795,3 @@ function check_captcha() {
 		$fm->_Message($fm->LANG['Captcha'], $fm->LANG['CaptchaMes']);
 	}
 }
-
-?>

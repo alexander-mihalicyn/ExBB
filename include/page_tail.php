@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
 * ExBB v.1.1                                                              	*
-* Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock            	*
+* Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock            	*
 *                                                                         	*
 * http://www.exbb.net                                             			*
 * email: admin@exbb.net                                           			*
@@ -19,6 +19,7 @@ if (!defined('IN_EXBB')) die('Hack attempt!');
 
 $GLOBALS['fm']->_FcloseAll();
 $totaltime = $GLOBALS['fm']->_TotalTime();
+
 $_GZIP_STATUS = ($GLOBALS['fm']->_PageGziped === TRUE) ? 'Gzipped':'Gzip Disabled';
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20õõ by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20Ñ…Ñ… by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -21,6 +21,7 @@ include( './include/common.php' );
 $fm->_GetVars();
 $fm->_String('action', 'default');
 $fm->_LoadLang('news');
+
 $fm->_Title = ' :: ' . $fm->LANG['Announ'];
 $fm->_Link .= "\n<script type=\"text/javascript\" language=\"JavaScript\" src=\"javascript/board.js\"></script>
 <script type=\"text/javascript\" language=\"JavaScript\">
@@ -202,4 +203,3 @@ include( './templates/' . DEF_SKIN . '/logos.tpl' );
 include( './templates/' . DEF_SKIN . '/news_show.tpl' );
 include( './templates/' . DEF_SKIN . '/footer.tpl' );
 include( 'page_tail.php' );
-?>

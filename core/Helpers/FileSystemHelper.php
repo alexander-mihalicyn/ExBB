@@ -7,9 +7,9 @@ namespace ExBB\Helpers;
  */
 class FileSystemHelper {
 	/**
-	 * Óäàëÿåò äèðåêòîðèþ
+	 * Ð£Ð´Ð°Ð»ÑÐµÑ‚ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸ÑŽ
 	 *
-	 * @param string $directory íàçâàíèå äèðåêòîðèè
+	 * @param string $directory Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸
 	 *
 	 * @throws \Exception
 	 */
@@ -22,9 +22,9 @@ class FileSystemHelper {
 	}
 
 	/**
-	 * Ðåêóðñèâíî óäàëÿåò äèðåêòîðèþ (âìåñòå ñî âñåì å¸ ñîäåðæèìûì)
+	 * Ð ÐµÐºÑƒÑ€ÑÐ¸Ð²Ð½Ð¾ ÑƒÐ´Ð°Ð»ÑÐµÑ‚ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸ÑŽ (Ð²Ð¼ÐµÑÑ‚Ðµ ÑÐ¾ Ð²ÑÐµÐ¼ ÐµÑ‘ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ñ‹Ð¼)
 	 *
-	 * @param string $directory íàçâàíèå äèðåêòîðèè
+	 * @param string $directory Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸
 	 *
 	 * @throws \Exception
 	 */
@@ -33,28 +33,24 @@ class FileSystemHelper {
 			throw new \Exception('Directory "'.$directory.'" is not found');
 		}
 
-		$objects = glob($directory.'/*');
+		$files = new \RecursiveIteratorIterator(
+			new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS),
+			\RecursiveIteratorIterator::CHILD_FIRST
+		);
 
-		if (!empty($objects)) {
-			foreach ($objects as $object) {
-				if (is_dir($object)) {
-					static::deleteDirectoryRecursive($object);
-				}
-				else {
-					unlink($object);
-				}
-			}
+		foreach ($files as $fileinfo) {
+			($fileinfo->isDir()) ? rmdir($fileinfo->getRealPath()) : unlink($fileinfo->getRealPath());
 		}
 
 		rmdir($directory);
 	}
 
 	/**
-	 * Ñîçäà¸ò äèðåêòîðèþ íà ñåðâåðå
+	 * Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ñ‚ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸ÑŽ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ
 	 *
-	 * @param string $directory ïóòü ê äèðåêòîðèè
-	 * @param int $chmod ïðàâà íà ñîçäàâàåìóþ äèðåêòîðèþ
-	 * @param bool $recursive ñîçäàâàòü äèðåêòîðèþ ðåêóðñèâíî
+	 * @param string $directory Ð¿ÑƒÑ‚ÑŒ Ðº Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸
+	 * @param int $chmod Ð¿Ñ€Ð°Ð²Ð° Ð½Ð° ÑÐ¾Ð·Ð´Ð°Ð²Ð°ÐµÐ¼ÑƒÑŽ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸ÑŽ
+	 * @param bool $recursive ÑÐ¾Ð·Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸ÑŽ Ñ€ÐµÐºÑƒÑ€ÑÐ¸Ð²Ð½Ð¾
 	 *
 	 * @throws \Exception
 	 */
@@ -64,5 +60,21 @@ class FileSystemHelper {
 		}
 
 		mkdir($directory, $chmod, $recursive);
+	}
+
+	public static function copyDirectory($source, $destination, $chmodDirs=0777, $chmodFiles=0777) {
+		mkdir($destination, $chmodDirs);
+
+		$iterator = new \RecursiveIteratorIterator(
+			new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
+			\RecursiveIteratorIterator::SELF_FIRST);
+
+		foreach ($iterator as $item) {
+			if ($item->isDir()) {
+				mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+			} else {
+				copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+			}
+		}
 	}
 }

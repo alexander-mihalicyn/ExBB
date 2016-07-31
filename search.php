@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
  * ExBB v.1.1                                                                *
- * Copyright (c) 2002-20ıı by Alexander Subhankulov aka Warlock                *
+ * Copyright (c) 2002-20—Ö—Ö by Alexander Subhankulov aka Warlock                *
  *                                                                            *
  * http://www.exbb.net                                                        *
  * email: admin@exbb.net                                                    *
@@ -16,6 +16,7 @@
  *                                                                            *
  ****************************************************************************/
 define('IN_EXBB', true);
+
 include( './include/common.php' );
 
 $fm->_GetVars();
@@ -155,7 +156,7 @@ function search() {
 	}
 	elseif ($fm->input['action'] == 'start') {
 
-		preg_match_all('/([^a-zA-Z‡-ˇ¿-ﬂ∏®]|^)([a-zA-Z‡-ˇ¿-ﬂ∏®]{4,})(?![a-zA-Z‡-ˇ¿-ﬂ∏®])/', $fm->input['search_keywords'], $key_words);
+		preg_match_all('/([^a-zA-Z–∞-—è–ê-–Ø—ë–Å]|^)([a-zA-Z–∞-—è–ê-–Ø—ë–Å]{4,})(?![a-zA-Z–∞-—è–ê-–Ø—ë–Å])/', $fm->input['search_keywords'], $key_words);
 		if (!count($key_words[0])) {
 			$fm->_Message($fm->LANG['Search'], $fm->LANG['SEARCHNOPARAM']);
 		}
@@ -247,7 +248,7 @@ function search() {
 
 		$t_visits = $fm->_GetCookieArray('t_visits');
 		$found = $_found = 0;
-		$entered_word = preg_replace('/([^a-zA-Z‡-ˇ¿-ﬂ∏®]|^)([a-zA-Z‡-ˇ¿-ﬂ∏®]{1,3})(?![a-zA-Z‡-ˇ¿-ﬂ∏®])/', '', $_SEARCH['entered_word']);
+		$entered_word = preg_replace('/([^a-zA-Z–∞-—è–ê-–Ø—ë–Å]|^)([a-zA-Z–∞-—è–ê-–Ø—ë–Å]{1,3})(?![a-zA-Z–∞-—è–ê-–Ø—ë–Å])/', '', $_SEARCH['entered_word']);
 		$entered_word = preg_replace('/([[:punct:]]+)/', '', $entered_word);
 		$entered_word = urlencode($entered_word);
 		$fm->input['p'] = abs($fm->_Intval('p', 1));
@@ -310,7 +311,7 @@ function search() {
 			$list = array();
 		}
 		$pages = Print_Paginator($found, 'search.php?action=next&search_id=' . $fm->input['search_id'] . '&p={_P_}', $fm->exbb['topics_per_page'], 8, $first, true);
-		$searchinmessage = sprintf($fm->LANG['YOUSEARCH'], preg_replace('/([^a-zA-Z‡-ˇ¿-ﬂ∏®]|^)([a-zA-Z‡-ˇ¿-ﬂ∏®]{1,3})(?![a-zA-Z‡-ˇ¿-ﬂ∏®])/', '$1<font color="red">$2</font>', $_SEARCH['entered_word']));
+		$searchinmessage = sprintf($fm->LANG['YOUSEARCH'], preg_replace('/([^a-zA-Z–∞-—è–ê-–Ø—ë–Å]|^)([a-zA-Z–∞-—è–ê-–Ø—ë–Å]{1,3})(?![a-zA-Z–∞-—è–ê-–Ø—ë–Å])/', '$1<font color="red">$2</font>', $_SEARCH['entered_word']));
 
 		$fm->LANG['NewPosts'] = $fm->LANG['PRINTRESULT'];
 		$fm->_Title = ' :: ' . $fm->LANG['Search'] . ' :: ' . $fm->LANG['PRINTRESULT'];
