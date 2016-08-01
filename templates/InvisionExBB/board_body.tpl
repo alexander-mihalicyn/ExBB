@@ -43,7 +43,8 @@ echo <<<DATA
 				<a href="tools.php?action=threadstop"
 				   title="{$fm->LANG['TopicsRaiting']}">{$fm->LANG['TopicsRaiting']}</a>
 			</div>
-			<a href="index.php?action=resetall" title="{$fm->LANG['MarkAllForums']}">{$fm->LANG['MarkAllForums']}</a>
+			<a href="index.php?action=resetall" title="{$fm->LANG['MarkAllForums']}">{$fm->LANG['MarkAllForums']}</a><br>
+			<a href="index.php?r=account/deleteCookies" title="{$fm->LANG['DeleteCookies']}">{$fm->LANG['DeleteCookies']}</a>
 		</td>
 	</tr>
 </table>

@@ -66,9 +66,10 @@ class Request {
 	 * @param string $name имя cookie
 	 * @param string $value значение cookie
 	 * @param int $expire срок жизни
+	 * @param string $path путь
 	 */
-	public function setCookie($name, $value = '', $expire = self::COOKIE_EXPIRE_YEAR) {
-		setcookie($name, $value, time()+$expire, '/','');
+	public function setCookie($name, $value = '', $expire = self::COOKIE_EXPIRE_YEAR, $path='/') {
+		setcookie($name, $value, time()+$expire, $path,'');
 	}
 
 	/**

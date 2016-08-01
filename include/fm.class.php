@@ -803,9 +803,6 @@ class FM extends VARS {
 	 * @param int $mode
 	 */
 	function _Message($msg_title, $msg_text, $meta = '', $mode = 0) {
-		if (!$mode) {
-			echo '&nbsp;';
-		}
 		$this->_Link = ( $meta !== '' ) ? "<meta http-equiv='refresh' content='" . $this->_Refresh . "; url=" . $meta . "'>" : '';
 		$return = ( $meta === '' ) ? ' <a href="javascript:history.go(-1)"> << ' . $this->LANG['Back'] . '</a>' : $this->LANG['ReloadingPage'];
 		$this->_Title = ' :: ' . $msg_title;

@@ -54,6 +54,7 @@ $this->LANG['TopicsRaiting'] 		= 'Рейтинг популярных тем';
 $this->LANG['PrintPage']			= 'Версия для печати';
 $this->LANG['TopicSee']				= 'Просмотр темы';
 $this->LANG['BoardMarked'] 			= 'Все форумы отмечены как прочтённые';
+$this->LANG['DeleteCookies'] 			= 'Удалить установленные форумом cookies';
 $this->LANG['TotalPages']			= '<b>Страниц</b> ';
 $this->LANG['ToStart']				= 'В начало';
 $this->LANG['ToEnd']				= 'В конец';
