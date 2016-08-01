@@ -26,3 +26,4 @@ if (DEBUG) {
 }
 
 include __DIR__ . '/autoloader.php';
+include __DIR__ . '/templateAdapter.php';
