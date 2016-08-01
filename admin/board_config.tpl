@@ -103,6 +103,10 @@ echo <<<DATA
 						<th class="thHead" colspan="2">{$fm->LANG['AbilitiesSettings']}</th>
 					</tr>
 					<tr class="gen">
+						<td class="row1"><b>{$fm->LANG['HideLinksFromGuests']}</b></td>
+						<td class="row2"><input type="radio" name="new_exbb[b][hideLinksFromGuests]" value="yes" {$hideLinksFromGuests_yes} /> {$fm->LANG['Yes']}&nbsp;&nbsp;<input type="radio" name="new_exbb[b][hideLinksFromGuests]" value="no" {$hideLinksFromGuests_no} /> {$fm->LANG['No']}</td>
+					</tr>
+					<tr class="gen">
 						<td class="row1"><b>{$fm->LANG['TextMenu']}</b></td>
 						<td class="row2"><input type="radio" name="new_exbb[b][text_menu]" value="yes" {$txtmenu_yes} /> {$fm->LANG['Yes']}&nbsp;&nbsp;<input type="radio" name="new_exbb[b][text_menu]" value="no" {$txtmenu_no} /> {$fm->LANG['No']}</td>
 					</tr>

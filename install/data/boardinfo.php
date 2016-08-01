@@ -1,8 +1,8 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
 $this->exbb['boardurl'] = 'http://site.ru/forum';
-$this->exbb['boardname'] = 'Название форума';
-$this->exbb['boarddesc'] = 'Описание форума';
+$this->exbb['boardname'] = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ';
+$this->exbb['boarddesc'] = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ';
 $this->exbb['description'] = '';
 $this->exbb['keywords'] = '';
 $this->exbb['default_lang'] = 'russian';
@@ -84,4 +84,4 @@ $this->exbb['ads'] = FALSE;
 $this->exbb['sponsor'] = FALSE;
 $this->exbb['chat'] = FALSE;
 $this->exbb['redirect'] = TRUE;
-?>
+$this->exbb['hideLinksFromGuests'] = false;

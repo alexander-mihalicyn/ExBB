@@ -108,6 +108,7 @@ $this->LANG['EmailSettings']		= 'Настройки e-mail функций';
 $this->LANG['AdminEmail']			= 'E-mail адрес администратора';
 $this->LANG['BoardEmail']			= 'Включить функции электронной почты на конференции?';
 $this->LANG['BoardEmailMes']		= 'Включение этой функции позволит пользователям подписываться на интересные темы';
+$this->LANG['HideLinksFromGuests']		= 'Скрывать ссылки от гостей?';
 
 /*
 	module

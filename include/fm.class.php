@@ -1063,7 +1063,7 @@ class FM extends VARS {
 	 * @return string
 	 */
 	function url_text($matches) {
-		if (!$this->user['id']) {
+		if (!$this->user['id'] && $this->exbb['hideLinksFromGuests']) {
 			return '<i>' . $this->LANG['ViewLinkReged'] . '</i> ';
 		}
 		$matches[3] = trim($matches[3]);

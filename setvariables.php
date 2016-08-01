@@ -133,6 +133,9 @@ elseif ($fm->input['action'] == 'main') {
 	$emails_yes = ( $fm->exbb['emailfunctions'] ) ? 'checked="checked"' : '';
 	$emails_no = ( !$fm->exbb['emailfunctions'] ) ? 'checked="checked"' : '';
 
+	$hideLinksFromGuests_yes = ( $fm->exbb['hideLinksFromGuests'] ) ? 'checked="checked"' : '';
+	$hideLinksFromGuests_no = ( !$fm->exbb['hideLinksFromGuests'] ) ? 'checked="checked"' : '';
+
 	$langs_select = $style_select = '';
 
 	$languagedir = 'language';
