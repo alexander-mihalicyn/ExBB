@@ -11,6 +11,8 @@ use ExBB\Base\Controller;
  */
 abstract class BaseController extends Controller {
 	public function __construct() {
+		parent::__construct();
+
 		$this->viewsPath = EXBB_ROOT.'/admin/views';
 		$this->modelsPath = EXBB_ROOT.'/admin/models';
 		$this->appNamespacePrefix = 'Admin';

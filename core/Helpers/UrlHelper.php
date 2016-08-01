@@ -20,7 +20,7 @@ class UrlHelper {
 	public static function to($route, $parameters=null, $anchor=null) {
 		global $fm; // Временное решение
 
-		$entryPoint = (!empty($route[3])) ? $route[3] : 'index';
+		$entryPoint = (!empty($route[2])) ? $route[2] : 'index';
 
 		$url = $fm->exbb['boardurl'] . '/' . $entryPoint . '.php';
 
