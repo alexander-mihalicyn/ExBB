@@ -230,7 +230,7 @@ function mailtouser() {
 		$fm->input['subject'] = $fm->bads_filter(substr($fm->input['subject'], 0, 255));
 		$fm->input['message'] = $fm->bads_filter($fm->input['message']);
 
-		$email = sprintf($fm->LANG['EmailByBordText'], $user['name'], $fm->user['name'], $fm->exbb['boardname'], $fm->exbb['boardurl']) . $fm->input['message'];
+		$email = sprintf($fm->LANG['EmailByBordText'], $user['name'], $fm->user['name'], $fm->exbb['boardname'], $fm->exbb['boardurl']) . htmlspecialchars_decode($fm->input['message'], ENT_QUOTES);
 		$fm->_Mail($fm->exbb['boardname'], $fm->user['mail'], $user['mail'], $fm->input['subject'], $email);
 		$fm->_Message($fm->LANG['MailByBoard'], $fm->LANG['SendMailOk'], 'index.php');
 	}

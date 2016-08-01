@@ -308,7 +308,7 @@ elseif ($fm->input['action'] == 'send') {
 
 	/* Уведомления по E-mail о новых ЛС */
 	if ($fm->exbb['emailfunctions'] === true && $fm->exbb['pmnewmes'] === true && isset( $touserdata['sendnewpm'] ) && $touserdata['sendnewpm'] === true) {
-		$email = sprintf($fm->LANG['NewPMNotify'], $touserdata['name'], $fm->exbb['boardname'], $fm->exbb['boardurl'], $fm->user['name'], $MessageTitle, $MessageText);
+		$email = sprintf($fm->LANG['NewPMNotify'], $touserdata['name'], $fm->exbb['boardname'], $fm->exbb['boardurl'], $fm->user['name'], $MessageTitle, htmlspecialchars_decode($MessageText, ENT_QUOTES));
 		$subject = $fm->LANG['EmailNewPMTitle'];
 		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $touserdata['mail'], $subject, $email);
 	}

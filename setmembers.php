@@ -221,7 +221,7 @@ elseif ($fm->input['action'] == 'massmail') {
 
 		$total_mails = sizeof($usersmails);
 		if ($total_mails > 0) {
-			$message = sprintf($fm->LANG['MassMailText'], $fm->exbb['boardname'], $fm->exbb['boardurl'], $fm->input['message']);
+			$message = sprintf($fm->LANG['MassMailText'], $fm->exbb['boardname'], $fm->exbb['boardurl'], htmlspecialchars_decode($fm->input['message'], ENT_QUOTES));
 			$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $usersmails, $fm->input['subject'], $message);
 			$fm->_WriteLog($fm->LANG['LogMassMail'], 1);
 			$fm->_Message($fm->LANG['AdminMassMail'], sprintf($fm->LANG['MassMailSended'], $total_mails), 'setmembers.php?action=massmail', 1);

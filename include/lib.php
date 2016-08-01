@@ -56,9 +56,9 @@ function get_rd($sess_id = 0) {
 
 function MAP_MAIL($n) {
 	global $skip_mails, $usersmails;
-	preg_match("#(@.+)$#is", $n['m'], $match);
+	preg_match("#(@.+)$#isu", $n['m'], $match);
 
-	if (!isset( $skip_mails[$match[1]] )) {
+	if (!empty($match[1]) && !isset( $skip_mails[$match[1]] )) {
 		$usersmails[] = $n['m'];
 	}
 
