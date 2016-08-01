@@ -102,20 +102,14 @@ class Controller {
 	 * Выполняется перед подключением файла с представлением
 	 */
 	protected function beforeRender() {
-		global $fm; // Временное решение
 
-		include $this->viewsPath.'/all_header.tpl';
-		include $this->viewsPath.'/logos.tpl';
 	}
 
 	/**
 	 * Выполняется после подключения файла с представлением
 	 */
 	protected function afterRender() {
-		global $fm; // Временное решение
 
-		include $this->viewsPath.'/footer.tpl';
-		include EXBB_ROOT.'page_tail.php';
 	}
 
 	/**
