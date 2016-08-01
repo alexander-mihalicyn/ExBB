@@ -15,10 +15,48 @@
  *   (at your option) any later version.                                    *
  *                                                                            *
  ****************************************************************************/
+use ExBB\Request;
+
 define('IN_ADMIN', true);
 define('IN_EXBB', true);
 
 include( './include/common.php' );
+
+$request = new Request();
+
+// TODO: Заменить на использование роутера
+if (!empty($request->query['r'])) {
+	$route = $request->query['r'];
+
+	$routes = explode('/', $route);
+
+	if (empty($routes[1])) {
+		$routes[1] = 'index';
+	}
+
+	list($controller, $action) = $routes;
+
+	$controllerPath = EXBB_ROOT.'/admin/Controllers/'.ucfirst($controller).'Controller.php';
+
+	if (file_exists($controllerPath)) {
+		require EXBB_ROOT.'/admin/Controllers/BaseController.php';
+
+		include $controllerPath;
+
+		$className = '\\Admin\\Controllers\\'.ucfirst($controller).'Controller';
+
+		if (class_exists($className)) {
+			$controller = new $className();
+
+			$actionName = ucfirst($action).'Action';
+
+			if (method_exists($controller, $actionName)) {
+				$controller->$actionName();
+				die;
+			}
+		}
+	}
+}
 
 $fm->_GetVars(true);
 $fm->_BOARDSTATS();
