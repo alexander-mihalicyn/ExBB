@@ -302,7 +302,7 @@ function addnewthread() {
 			$fm->_Write($fp_t_track, $_t_track);
 		}
 		$email = sprintf($fm->LANG['NewPostThanks'], $fm->user['name'], $fm->exbb['boardurl'] . '/topic.php?forum=' . $forum_id . '&topic=' . $topic_id, $fm->exbb['boardname'], $fm->exbb['boardurl']);
-		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], $fm->user['mail'], $fm->LANG['NewTopicInForum'] . '"' . strip_tags($forumname) . '"', $email);
+		$fm->_Mail($fm->exbb['boardname'], $fm->exbb['adminemail'], (!empty($fm->user['mail'])) ? $fm->user['mail'] : '', $fm->LANG['NewTopicInForum'] . '"' . strip_tags($forumname) . '"', $email);
 
 		/* Отправка всем подписавшимся за слежением новых тем */
 		$emailers = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/_f_track.php');
