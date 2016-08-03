@@ -1,16 +1,16 @@
 <?php
 if (!defined('IN_EXBB')) die('Hack attempt!');
-$this->exbb['boardurl'] = 'http://site.ru/forum';
-$this->exbb['boardname'] = '�������� ������';
-$this->exbb['boarddesc'] = '�������� ������';
+$this->exbb['boardurl'] = '';
+$this->exbb['boardname'] = '';
+$this->exbb['boarddesc'] = '';
 $this->exbb['description'] = '';
 $this->exbb['keywords'] = '';
 $this->exbb['default_lang'] = 'russian';
 $this->exbb['default_style'] = 'InvisionExBB';
 $this->exbb['closed_mes'] = '';
-$this->exbb['adminemail'] = 'admin@site.ru';
+$this->exbb['adminemail'] = '';
 $this->exbb['file_type'] = '.*';
-$this->exbb['version'] = '1.0';
+$this->exbb['version'] = '2.0';
 $this->exbb['ad_sestime'] = 5000;
 $this->exbb['topics_per_page'] = 15;
 $this->exbb['posts_per_page'] = 10;
