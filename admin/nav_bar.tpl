@@ -67,6 +67,19 @@ echo <<<DATA
 							<tr>
 								<td class="row1"><span class="genmed"><a href="setmembers.php?action=log" class="genmed">{$fm->LANG['VisitsLog']}</a></span></td>
 							</tr>
+
+							<tr>
+								<td height="28" class="catSides"><span class="cattitle">{$fm->LANG['NavOther']}</span></td>
+							</tr>
+							<tr>
+								<td class="row1"><span class="genmed"><a href="admincenter.php?r=banners"  class="genmed">{$fm->LANG['NavBanners']}</a></span></td>
+							</tr>
+							<tr>
+								<td class="row1"><span class="genmed"><a href="admincenter.php?r=counters" class="genmed">{$fm->LANG['NavCounters']}</a></span></td>
+							</tr>
+							<tr>
+								<td class="row1"><span class="genmed"><a href="admincenter.php?r=backups" class="genmed">{$fm->LANG['NavBackups']}</a></span></td>
+							</tr>
 						</table>
 					</td>
 				</tr>

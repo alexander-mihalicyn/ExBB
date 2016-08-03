@@ -62,6 +62,14 @@ class FileSystemHelper {
 		mkdir($directory, $chmod, $recursive);
 	}
 
+	/**
+	 * Копирует директорию со всем её содержимым в другое место
+	 *
+	 * @param string $source Исходная директория
+	 * @param string $destination Конечная директория
+	 * @param int $chmodDirs Права на дериктории
+	 * @param int $chmodFiles Права на файлы
+	 */
 	public static function copyDirectory($source, $destination, $chmodDirs=0777, $chmodFiles=0777) {
 		mkdir($destination, $chmodDirs);
 

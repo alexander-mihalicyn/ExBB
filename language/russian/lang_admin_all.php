@@ -54,6 +54,10 @@ $this->LANG['UsersRecount']		= 'Пересчитать';
 $this->LANG['Ranks']			= 'Звания';
 $this->LANG['MassEmail']		= 'Массовая рассылка почты';
 $this->LANG['VisitsLog']		= 'История посещений';
+$this->LANG['NavOther']		= 'Другое';
+$this->LANG['NavBanners']		= 'Баннеры';
+$this->LANG['NavCounters']		= 'Счётчики';
+$this->LANG['NavBackups']		= 'Резервные копии';
 
 /*
 

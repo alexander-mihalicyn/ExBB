@@ -69,6 +69,22 @@ hr	{ height: 0px; border: solid #D1D7DC 0px; border-top-width: 1px;}
 .dats { FONT-SIZE: 8pt; color:#333333; font-family: Verdana, Arial, Helvetica, sans-serif}
 
 
+.b-btn {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 3px 10px;
+	border: 1px solid #999;
+	background-color: #EDEDED;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.b-btn:hover {
+	background-color: #bfd4ed;
+	color: #000000;
+	text-decoration: none;
+}
+
 /* This is the border line & background colour round the entire page */
 .bodyline	{ background-color: #FFFFFF; border: 1px #98AAB1 solid; }
 

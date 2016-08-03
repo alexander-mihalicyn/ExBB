@@ -8,6 +8,12 @@ namespace ExBB\Helpers;
  * @package ExBB\Helpers
  */
 class UrlHelper {
+	public static function getRootUrl() {
+		global $fm;
+
+		return $fm->exbb['boardurl'];
+	}
+
 	/**
 	 * Генерирует URL страницы
 	 *
@@ -22,7 +28,7 @@ class UrlHelper {
 
 		$entryPoint = (!empty($route[2])) ? $route[2] : 'index';
 
-		$url = $fm->exbb['boardurl'] . '/' . $entryPoint . '.php';
+		$url = static::getRootUrl() . '/' . $entryPoint . '.php';
 
 		if (!empty($route[0]) || $parameters !== null) {
 			$url .= '?';
