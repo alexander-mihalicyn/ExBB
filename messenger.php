@@ -208,7 +208,16 @@ elseif (( $fm->input['action'] == 'send' && $fm->_String('dosend') == '' ) || ( 
 			$MessageText = '[quote]' . $MessageText . '[/quote]';
 		}
 		unset( $senderoutbox );
-		$MessageTitle = 'RE:' . $inboxdata[$message_id]['title'];
+
+		if (preg_match('/^RE\[(\d+)\]:(.*)$/iu',$inboxdata[$message_id]['title'], $match)) {
+			$re_number = IntVal($match[1])+1;
+			$MessageTitle = 'RE['.$re_number.']:'.$match[2];
+		}
+		else if (preg_match('/^RE:(.*)$/iu',$inboxdata[$message_id]['title'], $match)) {
+			$MessageTitle = 'RE[2]:'.$match[1];
+		} else {
+			$MessageTitle = 'RE:' . $inboxdata[ $message_id ]['title'];
+		}
 	}
 	elseif (( $ToUserID = $fm->_Intval('touser') ) != 0) {
 		$ToUserInfo = $fm->_Getmember($ToUserID);
