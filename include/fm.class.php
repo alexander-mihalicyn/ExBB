@@ -1068,9 +1068,9 @@ class FM extends VARS {
 		}
 		$matches[3] = trim($matches[3]);
 		if ($matches[1] === $matches[3] && strlen($matches[3]) > 32) {
-			$matches[3] = preg_replace("#(.{32})(.+)(.{16})#is", "$1...$3", $matches[3]);
+			$matches[3] = preg_replace("#(.{32})(.+)(.{16})#isu", "$1...$3", $matches[3]);
 		}
-		elseif (!preg_match("#src=\"http://[A-Za-z0-9-_\./\?\&\+\;\,~=]+?\"#is", $matches[3])) {
+		elseif (!preg_match("#src=\"http://[A-Za-z0-9-_\./\?\&\+\;\,~=]+?\"#isu", $matches[3])) {
 			$matches[3] = $this->chunk_split($matches[3]);
 		}
 		$Link = ( empty( $matches[2] ) ) ? "http://" . $matches[1] : $matches[1];
@@ -1165,13 +1165,13 @@ class FM extends VARS {
 		$array = array();
 		$num = 0;
 
-		$string = preg_replace_callback("#\[code\](.+?)\[/code\]#is", create_function('$matches', 'global $array,$num;
+		$string = preg_replace_callback("#\[code\](.+?)\[/code\]#isu", create_function('$matches', 'global $array,$num;
 													$key = "%__".$num."__%";
 													$num++;
 													$array[$key] = "<div class=\"block\"><b>CODE:</b><div class=\"htmlcode\">".$matches[1]."</div></div>";
 													return $key;'), $string);
 
-		$string = preg_replace_callback("#\[php\](.+?)\[/php\]#is", create_function('$matches', 'global $array,$num;
+		$string = preg_replace_callback("#\[php\](.+?)\[/php\]#isu", create_function('$matches', 'global $array,$num;
 													$key = "%__".$num."__%";
 													$num++;
 													$array[$key] = "<div class=\"block\"><b>PHP:</b><div class=\"phpcode\">".$matches[1]."</div></div>";
@@ -1190,13 +1190,13 @@ class FM extends VARS {
 		$replace = array( "<hr width=\"40%\" align=\"left\">", "<s>$1</s>", "<b>$1</b>", "<i>$1</i>", "<u>$1</u>", "<center>$1</center>", "<div align=\"left\">$1</div>", "<center>$1</center>", "<div align=\"right\">$1</div>", "<div align=\"justify\">$1</div>", "<sub>$1</sub>", "<sup>$1</sup>", "<h1>$1</h1>", "<h2>$1</h2>", "<big>$1</big>", "<small>$1</small>", "<ul>$1</ul>", "<ol type=\"$1\">$2</ol>", "<li>", "<marquee>$1</marquee>", "<br><img src=\"./im/emoticons/off.gif\" border=\"0\"><div class=\"offtop\">$1</div>", "<span style=\"color: $1;\">$2</span>", "<span style=\"font-size: $1px;\">$2</span>", "<a href=\"mailto:$1\">$1</a>" );
 
 		$string = preg_replace($search, $replace, $string);
-		$string = preg_replace_callback("#\[spoiler(\=(.+?)|)\](.+?)\[\/spoiler\]#is", array( $this, 'spoiler' ), $string);
-		$string = preg_replace_callback("#\[hide(\=([0-9]+)|)\](.+?)\[\/hide\]#is", array( $this, 'hide_text' ), $string);
-		$string = preg_replace_callback('#\[youtube(=(.+?)|)\].+?youtube.com/watch\?v=(.+?)(&.+?|)\[/youtube\]#is', array( $this, 'youtube' ), $string);
-		$string = preg_replace_callback('#\[youtube(=(.+?)|)\].+?youtu.be/(.+?)(&.+?|)\[/youtube\]#is', array( $this, 'youtube' ), $string);
-		$string = preg_replace_callback('#\[rutube(=(.+?)|)\]((http://|)www\.|http://)rutube.ru/video/(.*|\n*)/\[/rutube\]#is', array( $this, 'rutube' ), $string);
-		$string = preg_replace_callback("#\[vkvideo(=(.+?)|)\].+?(vkontakte.ru|vk.com)/video_ext.php\?oid=([-0-9]+)&amp;id=([0-9]+)&amp;hash=([0-9a-f]{1,16})&amp;(.+?)&quot;.+?\[/vkvideo\]#is", array( $this, 'vkvideo' ), $string);
-		$string = preg_replace_callback("#\[(rus)\]([^\[]*(\[\/{0,1}(?!\\1\])[^\[]*)*?)\[/\\1\]#is", create_function('$matches', '$trans = array("YO"=>"Ё",	"yo"=>"ё",	"ZH"=>"Ж",	"zh"=>"ж",	"IY"=>"Й",	"iy"=>"й",
+		$string = preg_replace_callback("#\[spoiler(\=(.+?)|)\](.+?)\[\/spoiler\]#isu", array( $this, 'spoiler' ), $string);
+		$string = preg_replace_callback("#\[hide(\=([0-9]+)|)\](.+?)\[\/hide\]#isu", array( $this, 'hide_text' ), $string);
+		$string = preg_replace_callback('#\[youtube(=(.+?)|)\].+?youtube.com/watch\?v=(.+?)(&.+?|)\[/youtube\]#isu', array( $this, 'youtube' ), $string);
+		$string = preg_replace_callback('#\[youtube(=(.+?)|)\].+?youtu.be/(.+?)(&.+?|)\[/youtube\]#isu', array( $this, 'youtube' ), $string);
+		$string = preg_replace_callback('#\[rutube(=(.+?)|)\]((http://|)www\.|http://)rutube.ru/video/(.*|\n*)/\[/rutube\]#isu', array( $this, 'rutube' ), $string);
+		$string = preg_replace_callback("#\[vkvideo(=(.+?)|)\].+?(vkontakte.ru|vk.com)/video_ext.php\?oid=([-0-9]+)&amp;id=([0-9]+)&amp;hash=([0-9a-f]{1,16})&amp;(.+?)&quot;.+?\[/vkvideo\]#isu", array( $this, 'vkvideo' ), $string);
+		$string = preg_replace_callback("#\[(rus)\]([^\[]*(\[\/{0,1}(?!\\1\])[^\[]*)*?)\[/\\1\]#isu", create_function('$matches', '$trans = array("YO"=>"Ё",	"yo"=>"ё",	"ZH"=>"Ж",	"zh"=>"ж",	"IY"=>"Й",	"iy"=>"й",
 																	"SH"=>"Ш",	"sh"=>"ш",	"SCH"=>"Щ",	"sch"=>"щ",	"IU"=>"Ы",	"iu"=>"ы",
 																	"CH"=>"Ч",	"ch"=>"ч",	"Ch"=>"Ч",	"ch"=>"ч",	"YE"=>"Э",	"ye"=>"э",
 																	"YU"=>"Ю",	"yu"=>"ю",	"YA"=>"Я",	"ya"=>"я",	"A"=>"А",	"a"=>"а",
@@ -1211,7 +1211,7 @@ class FM extends VARS {
 													);
 													return "<br><b><i>Перевод с транслита</i></b>:<br>".strtr($matches[2], $trans)."<br>";'), $string);
 
-		$string = preg_replace_callback("#\[img\]\s*((http://|www\.)[A-Za-z0-9-_\./\?\%\&\+\;\,~=]+?)\s*\[/img\]#is", create_function('$matches', 'global $fm;
+		$string = preg_replace_callback("#\[img\]\s*((http://|www\.)[A-Za-zА-я0-9-_\./\?\%\&\+\;\,~=]+?)\s*\[/img\]#isu", create_function('$matches', 'global $fm;
 													$matches[1] = ($matches[2] === "www.") ? "http://".$matches[1]:$matches[1];
 													return ($fm->exbb[\'imgpreview\'] === TRUE) ? replace_img_link($matches[1]):"<img src=\"".$matches[1]."\"> ";'), $string);
 
@@ -1229,13 +1229,13 @@ class FM extends VARS {
 								(?<= & | &amp; | [-/&+=*] )
 							)';
 
-		$string = preg_replace_callback("#\[url\](" . $patern . ")\[\/url\]#isx", create_function('$matches', 'if (!' . $this->user['id'] . ') return \'<i>' . $this->LANG['ViewLinkReged'] . '</i> \'; global $fm; $LinkText = preg_replace("#^(.{32})(.+)(.{16})#is","$1...$3",trim($matches[1]));
+		$string = preg_replace_callback("#\[url\](" . $patern . ")\[\/url\]#isxu", create_function('$matches', 'if (!' . $this->user['id'] . ') return \'<i>' . $this->LANG['ViewLinkReged'] . '</i> \'; global $fm; $LinkText = preg_replace("#^(.{32})(.+)(.{16})#is","$1...$3",trim($matches[1]));
 													$Link = (empty($matches[2])) ? "http://".$matches[1]:$matches[1];
 													if ($fm->exbb[\'redirect\'] && !stristr($Link, \'http://www.\'.$fm->exbb_domain) && !stristr($Link, \'http://\'.$fm->exbb_domain))
 													$Link = $fm->out_redir.$Link;
 													return "<a href=\"{$Link}\" target=\"_blank\">".trim($LinkText)."</a> ";'), $string);
 
-		$string = preg_replace_callback("#\[url=\s*(" . $patern . ")\s*\](.*?)\[\/url\]#isx", array( $this, 'url_text' ), $string);
+		$string = preg_replace_callback("#\[url=\s*(" . $patern . ")\s*\](.*?)\[\/url\]#isxu", array( $this, 'url_text' ), $string);
 
 		$string = preg_replace_callback("#(^|\s|\b)(" . $patern . ")(\[|\s|$)#xis", create_function('$matches', 'if (!' . $this->user['id'] . ') return \'<i>' . $this->LANG['ViewLinkReged'] . '</i> \'; global $fm; $LinkText = preg_replace("#^(.{32})(.+)(.{16})#is","$1...$3",trim($matches[2]));
 													$Link = (empty($matches[3])) ? "http://".$matches[2]:$matches[2];
@@ -1243,14 +1243,14 @@ class FM extends VARS {
 													$Link = $fm->out_redir.$Link;
 													return $matches[1]."<a href=\"$Link\" target=\"_blank\">$LinkText</a>".$matches[4];'), $string);
 
-		while (preg_match("#\[(q|quote)(|=([^\[\]]+?))\](?!.*\[\\1(|=([^\[\]]+?))\])(.+?)\[/\\1\]#is", $string, $matches)) {
+		while (preg_match("#\[(q|quote)(|=([^\[\]]+?))\](?!.*\[\\1(|=([^\[\]]+?))\])(.+?)\[/\\1\]#isu", $string, $matches)) {
 			$title = ( $matches[3] !== '' ) ? $matches[3] . ' пишет:' : 'Цитата:';
 			$string = str_replace($matches[0], "<div class=\"quotetop\">&nbsp;<b>{$title}</b></div><div class=\"quotemain\">{$matches[6]}</div>", $string);
 		}
 
 		$string = $this->chunk_split($string);
 
-		$string = preg_replace_callback("#\[search\](.+?)\[\/search\]#is", "search_link", $string);
+		$string = preg_replace_callback("#\[search\](.+?)\[\/search\]#isu", "search_link", $string);
 
 		if ($findstring !== '') {
 			$string = preg_replace("#(" . $findstring . ")(?![^<]*?>)#mi", "<span style=\"background-color:red;\">$1</span>", $string);
