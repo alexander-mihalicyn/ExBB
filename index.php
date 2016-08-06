@@ -251,7 +251,7 @@ foreach ($allforums_keys as $key => $id) {
 		if (isset( $forum['last_sub'] )) {
 			$id = $forum['last_sub'];
 		}
-		$LastTopicName = ( mb_strlen($forum['last_post']) > 36 ) ? substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
+		$LastTopicName = ( mb_strlen($forum['last_post']) > 36 ) ? mb_substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
 		$LastTopicName = ( $fm->user['id'] && ( $fm->exbb['watches'] && $_watchesIndex[$id][1] || !$fm->exbb['watches'] && ( $fm->user['last_visit'] < $forum['last_key'] && $fm->user['id'] != $forum['last_poster_id'] && ( ( !isset( $t_visits[$id . ':' . $forum['last_post_id']] ) || $t_visits[$id . ':' . $forum['last_post_id']] < $forum['last_key'] ) ) ) ) ? '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=u#unread" title="' . $fm->LANG['GoToFirstUnread'] . '"><img src="./templates/' . DEF_SKIN . '/im/unread.gif" border="0" /></a> ' : '<img src="./templates/' . DEF_SKIN . '/im/lastpost.gif"> ' ) . ( $fm->exbb['show_hints'] ? '<span class="hint">' : '' ) . '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=l#' . $forum['last_key'] . '" title="' . $forum['last_post'] . '">' . $LastTopicName . '</a>' . ( $fm->exbb['show_hints'] ? '</span>' : '' );
 		$LastPosterName = ( $forum['last_poster_id'] !== 0 ) ? $fm->LANG['Author'] . ': <a href="profile.php?action=show&member=' . $forum['last_poster_id'] . '">' . $forum['last_poster'] . '</a>' : $fm->LANG['Author'] . ': ' . $fm->LANG['Guest'];
 	}
