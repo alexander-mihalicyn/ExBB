@@ -26,7 +26,7 @@ class FileDBTable {
 	/**
 	 * Специальный флаг для внутреннего использования. Указывает на отсутствие файла
 	 */
-	const MODE_NOT_EXISTS = 4;
+	//const MODE_NOT_EXISTS = 4;
 
 	/**
 	 * @var resource указатель на открытый ранее файл
@@ -40,6 +40,8 @@ class FileDBTable {
 	 * @var int режим работы с файлом
 	 */
 	private $mode;
+
+	private $notExists = false;
 
 	/**
 	 * @param string $filename путь к файлу
@@ -68,9 +70,8 @@ class FileDBTable {
 			if (file_exists($this->filename)) {
 				$this->filePointer = fopen($this->filename, 'r');
 				flock($this->filePointer, LOCK_SH);
-			}
-			else {
-				$this->mode = static::MODE_NOT_EXISTS;
+			} else {
+				$this->notExists = true;
 			}
 
 			break;
@@ -82,6 +83,8 @@ class FileDBTable {
 			break;
 
 		case static::MODE_READWRITE:
+			if ( !file_exists($this->filename) ) $this->notExists = true;
+
 			$this->filePointer = fopen($this->filename, 'a+');
 			flock($this->filePointer, LOCK_EX);
 			break;
@@ -95,12 +98,12 @@ class FileDBTable {
 	 * @throws \Exception
 	 */
 	public function read() {
-		if ($this->mode == static::MODE_NOT_EXISTS) {
-			return [];
-		}
-
 		if ($this->mode == static::MODE_WRITE) {
 			throw new \Exception('Could not read from file "'.$this->filePointer.'"');
+		}
+
+		if ( !file_exists($this->filename) || $this->notExists ) {
+			return [];
 		}
 
 		$filesize = filesize($this->filename);
@@ -124,20 +127,28 @@ class FileDBTable {
 	/**
 	 * Записывает данные в файл
 	 *
-	 * @param mixed $data
+	 * @param mixed $data данные
+	 *
+	 * @throws \Exception
 	 */
 	public function write($data) {
+		if ($this->mode == static::MODE_READ) {
+			throw new \Exception('Could not write to file "'.$this->filePointer.'" because its opened for reading only!');
+		}
+
 		fseek($this->filePointer, 0);
 		ftruncate($this->filePointer, 0);
 		fwrite($this->filePointer, '<?die;?>' . serialize($data));
 		fflush($this->filePointer);
+
+		$this->notExists = false;
 	}
 
 	/**
 	 * Закрывает файл
 	 */
 	public function close() {
-		if ($this->mode != static::MODE_NOT_EXISTS && $this->filePointer) {
+		if ( !$this->notExists && $this->filePointer ) {
 			flock($this->filePointer, LOCK_UN);
 			fclose($this->filePointer);
 
