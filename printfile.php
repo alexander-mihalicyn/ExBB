@@ -146,7 +146,8 @@ function attachment() {
 				$type = 'application/x-tar';
 			break;
 			default        :
-				$extension = strtolower(substr(strrchr($attaches[$attach_id]['file'], '.'), 1));
+				$extension = mb_strtolower(mb_substr(mb_strrchr($attaches[$attach_id]['file'], '.'), 1));
+
 				switch ($extension) {
 					case 'gif'    :
 						$type = 'image/gif';
@@ -180,7 +181,7 @@ function attachment() {
 		}
 
 		// Преобразование заголовка файла в зависимости от браузера
-		if (stristr(@$_SERVER['HTTP_USER_AGENT'], 'Opera')) {
+		if (mb_stristr(@$_SERVER['HTTP_USER_AGENT'], 'Opera')) {
 			$attaches[$attach_id]['file'] = iconv('cp1251', 'utf-8', $attaches[$attach_id]['file']);
 		}
 
@@ -220,7 +221,8 @@ function create_tmb($bigimgsrc) {
 
 			return false;
 		}
-		$format = strtolower(substr($size['mime'], strpos($size['mime'], '/') + 1));
+
+		$format = mb_strtolower(mb_substr($size['mime'], mb_strpos($size['mime'], '/') + 1));
 		$icfunc = "imagecreatefrom" . $format;
 		if (!function_exists($icfunc)) {
 			ImgError();

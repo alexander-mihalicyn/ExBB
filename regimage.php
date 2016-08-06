@@ -34,14 +34,14 @@ class KCAPTCHA {
 		$background_color = array( mt_rand(230, 255), mt_rand(230, 255), mt_rand(230, 255) );
 		$jpeg_quality = 90;
 		$font_file = "im/images/TimesNewRoman.png";
-		$alphabet_length = strlen($alphabet);
+		$alphabet_length = mb_strlen($alphabet);
 
 		while (true) {
 			// generating random keystring
 			while (true) {
 				$this->keystring = '';
 				for ($i = 0; $i < $length; $i++) {
-					$this->keystring .= $allowed_symbols{mt_rand(0, strlen($allowed_symbols) - 1)};
+					$this->keystring .= $allowed_symbols{mt_rand(0, mb_strlen($allowed_symbols) - 1)};
 				}
 				if (!preg_match('/cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp/', $this->keystring)) {
 					break;

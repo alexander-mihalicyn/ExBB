@@ -157,7 +157,7 @@ function get_query() {
 		$query['data'] = $fm->input['user'];
 		$query['mode'] = 'poster';
 		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST);
-		$user = $fm->_LowerCase($query['data']);
+		$user = mb_strtolower($query['data']);
 		$allusers = array_filter($allusers, "search_user_id");
 		$user_id = ( sizeof($allusers) != 0 ) ? key($allusers) : 0;
 		unset( $allusers );
@@ -201,7 +201,7 @@ function search_user_id($var) {
 }
 
 function strlen_word($var) {
-	return ( strlen($var) > 3 ) ? 1 : 0;
+	return ( mb_strlen($var) > 3 ) ? 1 : 0;
 }
 
 /*

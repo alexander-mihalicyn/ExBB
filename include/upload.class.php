@@ -153,12 +153,12 @@ class UPLOAD {
 		fclose($fp);
 
 
-		$files[0] = array( 'name' => $this->_NAME, 'mode' => fileperms($this->_TEMPNAME), 'uid' => $stat[4], 'gid' => $stat[5], 'size' => strlen($data), 'mtime' => filemtime($this->_TEMPNAME), 'typeflag' => 0, 'linkname' => "", 'uname' => 'unknown', 'gname' => 'unknown', 'data' => $data );
+		$files[0] = array( 'name' => $this->_NAME, 'mode' => fileperms($this->_TEMPNAME), 'uid' => $stat[4], 'gid' => $stat[5], 'size' => mb_strlen($data), 'mtime' => filemtime($this->_TEMPNAME), 'typeflag' => 0, 'linkname' => "", 'uname' => 'unknown', 'gname' => 'unknown', 'data' => $data );
 
 		$uploadtime = date("F j, Y, H:i:s");
 		$readme = "Upload time: $uploadtime\r\nFile saved from http://" . $_SERVER['SERVER_NAME'];
 
-		$files[1] = array( 'name' => "readme.txt", 'mode' => 33152, 'uid' => $stat[4], 'gid' => $stat[5], 'size' => strlen($readme), 'mtime' => time(), 'typeflag' => 0, 'linkname' => "", 'uname' => 'unknown', 'gname' => 'unknown', 'data' => $readme );
+		$files[1] = array( 'name' => "readme.txt", 'mode' => 33152, 'uid' => $stat[4], 'gid' => $stat[5], 'size' => mb_strlen($readme), 'mtime' => time(), 'typeflag' => 0, 'linkname' => "", 'uname' => 'unknown', 'gname' => 'unknown', 'data' => $readme );
 		unset( $stat );
 		clearstatcache();
 
@@ -167,18 +167,17 @@ class UPLOAD {
 			$prefix = "";
 			$tmp = "";
 			$last = "";
-			if (strlen($file['name']) > 99) {
-				$pos = strrpos($file['name'], "/");
+			if (mb_strlen($file['name']) > 99) {
+				$pos = mb_strrpos($file['name'], "/");
 				if (is_string($pos) && !$pos) {
 					//define("UP_ERROR",'if (is_string(\$pos) && !\$pos)');
 					return false;
 				}
 
-				$prefix = substr($file['name'], 0, $pos);
-				$file['name'] = substr($file['name'], ( $pos + 1 ));
+				$prefix = mb_substr($file['name'], 0, $pos);
+				$file['name'] = mb_substr($file['name'], ( $pos + 1 ));
 
-				if (strlen($prefix) > 154) {
-					//define("UP_ERROR",'if (strlen(\$prefix) > 154)');
+				if (mb_strlen($prefix) > 154) {
 					return false;
 				}
 			}
@@ -200,11 +199,11 @@ class UPLOAD {
 			$last .= pack("a155", $prefix);
 
 			$test_len = $tmp . $last . "12345678";
-			$last .= $this->internal_build_string("\0", ( 512 - strlen($test_len) ));
+			$last .= $this->internal_build_string("\0", ( 512 - mb_strlen($test_len) ));
 			$checksum = 0;
 
 			for ($i = 0; $i < 148; $i++) {
-				$checksum += ord(substr($tmp, $i, 1));
+				$checksum += ord(mb_substr($tmp, $i, 1));
 			}
 
 			for ($i = 148; $i < 156; $i++) {
@@ -212,7 +211,7 @@ class UPLOAD {
 			}
 
 			for ($i = 156, $j = 0; $i < 512; $i++, $j++) {
-				$checksum += ord(substr($last, $j, 1));
+				$checksum += ord(mb_substr($last, $j, 1));
 			}
 
 			$checksum = sprintf("%6s ", decoct($checksum));
@@ -232,13 +231,13 @@ class UPLOAD {
 		if (extension_loaded("zlib")) {
 			$tardata = gzencode($tardata, 9);
 			$fp = fopen($tarfile, 'wb');
-			fwrite($fp, $tardata, strlen($tardata));
+			fwrite($fp, $tardata, mb_strlen($tardata));
 			fclose($fp);
 			$gzip = 'gz';
 		}
 		else {
 			$fp = fopen($tarfile, 'wb');
-			fputs($fp, $tardata, strlen($tardata));
+			fputs($fp, $tardata, mb_strlen($tardata));
 			fclose($fp);
 			$gzip = 'tar';
 		}

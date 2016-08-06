@@ -1,7 +1,7 @@
 <?php
 defined('IN_EXBB') or die;
 
-define('EXBB_VERSION', '1.2.0');
+define('EXBB_VERSION', '2.0.0');
 define('EXBB_VERSION_NAME', 'ExBB Forum Engine ' . EXBB_VERSION);
 
 // Debug flag
@@ -12,7 +12,7 @@ mb_internal_encoding("UTF-8");
 header('Content-Type: text/html; charset=UTF-8');
 
 // Минимальная версия PHP, необходимая для запуска форума
-define('REQUIRED_PHP_VERSION', '5.4.0');
+define('REQUIRED_PHP_VERSION', '5.5.0');
 
 if (version_compare(PHP_VERSION, REQUIRED_PHP_VERSION, '<')) {
 	include __DIR__.'/errors/phpversion.php';

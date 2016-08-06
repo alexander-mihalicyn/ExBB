@@ -87,7 +87,7 @@ function update() {
 				
 				$class_msg = '';
 				
-				if (strstr($fm->_LowerCase($msg['text']), $fm->_LowerCase($fm->user['name']).':') !== FALSE && $fm->user['id'] != $msg['id'])
+				if (mb_strstr(mb_strtolower($msg['text']), mb_strtolower($fm->user['name']).':') !== FALSE && $fm->user['id'] != $msg['id'])
 					$class_msg = ' class="chat_foryou"';
 				
 				$show_messages .= '<div id="msg_'.$msg_id.'"'.$class_msg.'>['.date('H:i:s', $msg['time'] + $fm->user['timedif'] * 3600).'] <a href="#" onClick="return pasteN(\''.$msg['name'].'\');"'.$class_name.'>'.$msg['name'].'</a>: <span id="msg">'.$msg['text'].'</span></div>';
@@ -130,8 +130,8 @@ function send() {
 	
 	if (!$fm->user['id'] || $fm->_String('msg') === '') die;
 $maxlength = 150;
- if (strlen($fm->input['msg']) > $maxlength)
- $fm->input['msg'] = substr($fm->input['msg'], 0, $maxlength).'...';
+ if (mb_strlen($fm->input['msg']) > $maxlength)
+ $fm->input['msg'] = mb_substr($fm->input['msg'], 0, $maxlength).'...';
 	
 	$time = $fm->_Nowtime;
 	

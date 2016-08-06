@@ -833,7 +833,7 @@ class FM extends VARS {
 		$spiders = array( 'Aport', 'archive_org', 'TurtleScanner', 'Nutscrape', 'WebSpeedReader', 'StackRambler', 'NetCaptor', 'Bond', 'Wget', 'Space Bison', 'msnbot', 'Yahoo', 'Mediapartners-Google', 'Googlebot', 'Yahoo-MMCrawler', 'Google', 'Slurp', 'ZyBorg', 'Gigabot', 'Exabot', 'Yandex', 'WebAlta', 'WebCrawler' );
 
 		foreach ($spiders as $spidername) {
-			if (stristr($_SERVER['HTTP_USER_AGENT'], $spidername) !== false) {
+			if (mb_stristr($_SERVER['HTTP_USER_AGENT'], $spidername) !== false) {
 				$this->_IsSpider = $spidername;
 				break;
 			}
@@ -1067,14 +1067,14 @@ class FM extends VARS {
 			return '<i>' . $this->LANG['ViewLinkReged'] . '</i> ';
 		}
 		$matches[3] = trim($matches[3]);
-		if ($matches[1] === $matches[3] && strlen($matches[3]) > 32) {
+		if ($matches[1] === $matches[3] && mb_strlen($matches[3]) > 32) {
 			$matches[3] = preg_replace("#(.{32})(.+)(.{16})#isu", "$1...$3", $matches[3]);
 		}
 		elseif (!preg_match("#src=\"http://[A-Za-z0-9-_\./\?\&\+\;\,~=]+?\"#isu", $matches[3])) {
 			$matches[3] = $this->chunk_split($matches[3]);
 		}
 		$Link = ( empty( $matches[2] ) ) ? "http://" . $matches[1] : $matches[1];
-		if ($this->exbb['redirect'] && !stristr($Link, 'http://www.' . $this->exbb_domain) && !stristr($Link, 'http://' . $this->exbb_domain)) {
+		if ($this->exbb['redirect'] && !mb_stristr($Link, 'http://www.' . $this->exbb_domain) && !mb_stristr($Link, 'http://' . $this->exbb_domain)) {
 			$Link = $this->out_redir . $Link;
 		}
 
@@ -1231,7 +1231,7 @@ class FM extends VARS {
 
 		$string = preg_replace_callback("#\[url\](" . $patern . ")\[\/url\]#isxu", create_function('$matches', 'if (!' . $this->user['id'] . ') return \'<i>' . $this->LANG['ViewLinkReged'] . '</i> \'; global $fm; $LinkText = preg_replace("#^(.{32})(.+)(.{16})#is","$1...$3",trim($matches[1]));
 													$Link = (empty($matches[2])) ? "http://".$matches[1]:$matches[1];
-													if ($fm->exbb[\'redirect\'] && !stristr($Link, \'http://www.\'.$fm->exbb_domain) && !stristr($Link, \'http://\'.$fm->exbb_domain))
+													if ($fm->exbb[\'redirect\'] && !mb_stristr($Link, \'http://www.\'.$fm->exbb_domain) && !mb_stristr($Link, \'http://\'.$fm->exbb_domain))
 													$Link = $fm->out_redir.$Link;
 													return "<a href=\"{$Link}\" target=\"_blank\">".trim($LinkText)."</a> ";'), $string);
 
@@ -1239,7 +1239,7 @@ class FM extends VARS {
 
 		$string = preg_replace_callback("#(^|\s|\b)(" . $patern . ")(\[|\s|$)#xis", create_function('$matches', 'if (!' . $this->user['id'] . ') return \'<i>' . $this->LANG['ViewLinkReged'] . '</i> \'; global $fm; $LinkText = preg_replace("#^(.{32})(.+)(.{16})#is","$1...$3",trim($matches[2]));
 													$Link = (empty($matches[3])) ? "http://".$matches[2]:$matches[2];
-													if ($fm->exbb[\'redirect\'] && !stristr($Link, \'http://www.\'.$fm->exbb_domain) && !stristr($Link, \'http://\'.$fm->exbb_domain))
+													if ($fm->exbb[\'redirect\'] && !mb_stristr($Link, \'http://www.\'.$fm->exbb_domain) && !mb_stristr($Link, \'http://\'.$fm->exbb_domain))
 													$Link = $fm->out_redir.$Link;
 													return $matches[1]."<a href=\"$Link\" target=\"_blank\">$LinkText</a>".$matches[4];'), $string);
 

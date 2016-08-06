@@ -27,7 +27,7 @@ function verify_register_inmembername() {
 	$fm->_LoadLang('register');
 	
 	$fm->_String('value');
-	$fm->input['value'] = preg_replace('/\s{1,}/', ' ', $fm->_LowerCase($fm->input['value']));
+	$fm->input['value'] = preg_replace('/\s{1,}/', ' ', mb_strtolower($fm->input['value']));
 	
 	if ($fm->input['value'] === '')
 		verify_result(0, $fm->LANG['VerifyNameEmpty']);
@@ -63,7 +63,7 @@ function verify_register_password() {
 	if ($fm->input['value'] === '')
 		verify_result(0, $fm->LANG['VerifyPasswordEmpty']);
 	
-	if (strlen($fm->input['value']) < 6)
+	if (mb_strlen($fm->input['value']) < 6)
 		verify_result(0, $fm->LANG['VerifyPasswordShort']);
 	
 	verify_result(1);

@@ -177,11 +177,11 @@ class VARS {
 	*/
 	function _Chek_Mail($key) {
 
-		if (strlen($this->input[$key]) > 100 || preg_match("#[^A-Za-z0-9_\-\.@]#is", $this->input[$key])) {
+		if (mb_strlen($this->input[$key]) > 100 || preg_match("#[^A-Za-z0-9_\-\.@]#isu", $this->input[$key])) {
 			return false;
 		}
 		elseif (preg_match("#^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$#", $this->input[$key])) {
-			return strtolower($this->input[$key]);
+			return mb_strtolower($this->input[$key]);
 		}
 		else {
 			return false;
@@ -194,7 +194,7 @@ class VARS {
 	function _Chek_WWW($key) {
 		$this->input[$key] = str_replace("http://", "", $this->input[$key]);
 
-		if (strlen($this->input[$key]) <= 255 && preg_match("#^(www\.|)([A-Za-z0-9-_]{1,40}\.){1,3}[A-Za-z]{2,4}(/[\.~A-Za-z0-9_-]{1,20}|)$#is", $this->input[$key])) {
+		if (mb_strlen($this->input[$key]) <= 255 && preg_match("#^(www\.|)([A-Za-z0-9-_]{1,40}\.){1,3}[A-Za-z]{2,4}(/[\.~A-Za-z0-9_-]{1,20}|)$#isu", $this->input[$key])) {
 			$this->input[$key] = 'http://' . $this->input[$key];
 
 			return $this->input[$key];
@@ -204,40 +204,6 @@ class VARS {
 
 			return $this->input[$key];
 		}
-	}
-
-	/*
-		_LowerCase преобразование строки в нижний регистр
-	*/
-	function _LowerCase($var) {
-		return ( $this->_RuLocale === false ) ? $this->_strtolower($var) : strtolower($var);
-	}
-
-	/*
-		_UpperCase преобразование строки в верхний регистр
-	*/
-	function _UpperCase($var) {
-		return ( $this->_RuLocale === false ) ? $this->_strtoupper($var) : strtoupper($var);
-	}
-
-	/*
-		_strtoupper собственная функция преобразование строки в верхний регистр
-	*/
-	function _strtoupper($var) {
-		$replacement = array( "'а'" => 'А', "'б'" => 'Б', "'в'" => 'В', "'г'" => 'Г', "'д'" => 'Д', "'е'" => 'Е', "'ё'" => 'Ё', "'ж'" => 'Ж', "'з'" => 'З', "'и'" => 'И', "'й'" => 'Й', "'к'" => 'К', "'л'" => 'Л', "'м'" => 'М', "'н'" => 'Н', "'о'" => 'О', "'п'" => 'П', "'р'" => 'Р', "'с'" => 'С', "'т'" => 'Т', "'у'" => 'У', "'ф'" => 'Ф', "'х'" => 'Х', "'ц'" => 'Ц', "'ч'" => 'Ч', "'ш'" => 'Ш', "'щ'" => 'Щ', "'ъ'" => 'Ъ', "'ы'" => 'Ы', "'ь'" => 'Ь', "'э'" => 'Э', "'ю'" => 'Ю', "'я'" => 'Я', "'q'" => 'Q', "'w'" => 'W', "'e'" => 'E', "'r'" => 'R', "'t'" => 'T', "'y'" => 'Y', "'u'" => 'U', "'i'" => 'I', "'o'" => 'O', "'p'" => 'P', "'a'" => 'A', "'s'" => 'S', "'d'" => 'D', "'f'" => 'F', "'g'" => 'G', "'h'" => 'H', "'j'" => 'J', "'k'" => 'K', "'l'" => 'L', "'z'" => 'Z', "'x'" => 'X', "'c'" => 'C', "'v'" => 'V', "'b'" => 'B', "'n'" => 'N', "'m'" => 'M' );
-		$search = array_keys($replacement);
-
-		return preg_replace($search, $replacement, $var);
-	}
-
-	/*
-		_strtolower собственная функция преобразование строки в нижний регистр
-	*/
-	function _strtolower($var) {
-		$replacement = array( "'А'" => 'а', "'Б'" => 'б', "'В'" => 'в', "'Г'" => 'г', "'Д'" => 'д', "'Е'" => 'е', "'Ё'" => 'ё', "'Ж'" => 'ж', "'З'" => 'з', "'И'" => 'и', "'Й'" => 'й', "'К'" => 'к', "'Л'" => 'л', "'М'" => 'м', "'Н'" => 'н', "'О'" => 'о', "'П'" => 'п', "'Р'" => 'р', "'С'" => 'с', "'Т'" => 'т', "'У'" => 'у', "'Ф'" => 'ф', "'Х'" => 'х', "'Ц'" => 'ц', "'Ч'" => 'ч', "'Ш'" => 'ш', "'Щ'" => 'щ', "'Ъ'" => 'ъ', "'Ы'" => 'ы', "'Ь'" => 'ь', "'Э'" => 'э', "'Ю'" => 'ю', "'Я'" => 'я', "'Q'" => 'q', "'W'" => 'w', "'E'" => 'e', "'R'" => 'r', "'T'" => 't', "'Y'" => 'y', "'U'" => 'u', "'I'" => 'i', "'O'" => 'o', "'P'" => 'p', "'A'" => 'a', "'S'" => 's', "'D'" => 'd', "'F'" => 'f', "'G'" => 'g', "'H'" => 'h', "'J'" => 'j', "'K'" => 'k', "'L'" => 'l', "'Z'" => 'z', "'X'" => 'x', "'C'" => 'c', "'V'" => 'v', "'B'" => 'b', "'N'" => 'n', "'M'" => 'm' );
-		$search = array_keys($replacement);
-
-		return preg_replace($search, $replacement, $var);
 	}
 
 	/*

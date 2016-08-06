@@ -78,7 +78,7 @@ elseif ($fm->input['action'] == "doaddcat" || $fm->input['action'] == "doaddforu
 
 	if ($fm->input['action'] == "doaddforum") {
 		$catid = $fm->_String('catid');
-		$subforum = ( stristr($catid, 'f') ) ? substr($catid, 1, strlen($catid) - 1) : 0;
+		$subforum = ( mb_stristr($catid, 'f') ) ? mb_substr($catid, 1, mb_strlen($catid) - 1) : 0;
 
 		if (( !$subforum ) && ( !isset( $categories[$catid] ) ) || ( ( $subforum ) && ( !isset( $allforums[$subforum] ) ) )) {
 			$fm->_Fclose($fp_allforums);
@@ -150,7 +150,7 @@ elseif ($fm->input['action'] == "doaddcat" || $fm->input['action'] == "doaddforu
 	$fm->_Write($fp_allforums, $allforums);
 
 	$fm->_WriteLog($MessageTitle, 1);
-	$fm->_Message($MessageTitle, $MessageText, 'setforums.php' . ( ( stristr($catid, 'f') ) ? '?subforum=' . substr($catid, 1, strlen($catid) - 1) : '' ), 1);
+	$fm->_Message($MessageTitle, $MessageText, 'setforums.php' . ( ( mb_stristr($catid, 'f') ) ? '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1) : '' ), 1);
 }
 elseif ($fm->input['action'] == "edit") {
 	$forum_id = $fm->_Intval('forum');
@@ -160,7 +160,7 @@ elseif ($fm->input['action'] == "edit") {
 	}
 
 	$categoryplace = $catid = $allforums[$forum_id]['catid'];
-	$pcatid = ( stristr($catid, 'f') ) ? substr($catid, 1, strlen($catid) - 1) : 0;
+	$pcatid = ( mb_stristr($catid, 'f') ) ? mb_substr($catid, 1, mb_strlen($catid) - 1) : 0;
 	$cathtml = ( $pcatid ) ? $allforums[$pcatid]['catname'] . ' :: ' . $allforums[$pcatid]['name'] : $allforums[$forum_id]['catname'];
 
 	$forummoderator = $allforums[$forum_id]['moderator'];
@@ -241,8 +241,8 @@ elseif ($fm->input['action'] == "doedit") {
 
 	$catid = $allforums[$forum_id]['catid'];
 	$redir = 'setforums.php';
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 
 	$fm->_Message($fm->LANG['AdminEditForum'], $fm->LANG['ForumEditOk'], $redir, 1);
@@ -250,9 +250,9 @@ elseif ($fm->input['action'] == "doedit") {
 elseif ($fm->input['action'] == "editcatname") {
 	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, false);
 	array_filter($allforums, 'GET_CATID');
-	if (( $catid = $fm->_String('catid') ) == '' || !isset( $categories[$catid] ) || stristr($catid, 'f')) {
+	if (( $catid = $fm->_String('catid') ) == '' || !isset( $categories[$catid] ) || mb_stristr($catid, 'f')) {
 		$fm->_Fclose($fp_allforums);
-		header('Location: setforums.php' . ( ( stristr($catid, 'f') ) ? '?subforum=' . substr($catid, 1, strlen($catid) - 1) : '' ));
+		header('Location: setforums.php' . ( ( mb_stristr($catid, 'f') ) ? '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1) : '' ));
 		//$fm->_Message($fm->LANG['AdminCatNameEdit'],$fm->LANG['CatNotExists'],'',1);
 	}
 
@@ -288,8 +288,8 @@ elseif ($fm->input['action'] == "delcat" || $fm->input['action'] == "delete" || 
 		case 'delcat':
 			$forum_id = $fm->_String('catid');
 			$TableTitle = $fm->LANG['AdminCatDelete'];
-			if ($forum_id == '' || !isset( $categories[$forum_id] ) || stristr($forum_id, 'f')) {
-				header('Location: setforums.php' . ( ( stristr($forum_id, 'f') ) ? '?subforum=' . substr($forum_id, 1, strlen($forum_id) - 1) : '' ));
+			if ($forum_id == '' || !isset( $categories[$forum_id] ) || mb_stristr($forum_id, 'f')) {
+				header('Location: setforums.php' . ( ( mb_stristr($forum_id, 'f') ) ? '?subforum=' . mb_substr($forum_id, 1, mb_strlen($forum_id) - 1) : '' ));
 				//$fm->_Message($TableTitle,$fm->LANG['CatNotExists'],'',1);
 			}
 			$action = 'dodelcat';
@@ -336,7 +336,7 @@ elseif ($fm->input['action'] == "dodelcat") {
 	$delposts = $deltopics = 0;
 
 	foreach ($foreach as $id => $forum) {
-		if ($forum['catid'] == $catid || stristr($forum['catid'], 'f') && ( $pforum = substr($forum['catid'], 1, strlen($forum['catid']) - 1) ) && $allforums[$pforum]['catid'] == $catid) {
+		if ($forum['catid'] == $catid || mb_stristr($forum['catid'], 'f') && ( $pforum = mb_substr($forum['catid'], 1, mb_strlen($forum['catid']) - 1) ) && $allforums[$pforum]['catid'] == $catid) {
 			if (DelForum($id) === false) {
 				$todelete[] = "<b>forum$id</b>";
 			}
@@ -364,8 +364,8 @@ elseif ($fm->input['action'] == "dodelforum") {
 
 	$redir = 'setforums.php';
 	$catid = $allforums[$forum_id]['catid'];
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 
 	if (!isset( $allforums[$forum_id] )) {
@@ -413,8 +413,8 @@ elseif ($fm->input['action'] == "domoveforum") {
 	}
 
 	$redir = 'setforums.php';
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 
 	$returncat = $catid;
@@ -436,7 +436,7 @@ elseif ($fm->input['action'] == "stat") {
 	$totalposts = 0;
 	$totalthreads = 0;
 	foreach ($allforums as $id => $forum) {
-		if (stristr($forum['catid'], 'f')) {
+		if (mb_stristr($forum['catid'], 'f')) {
 			continue;
 		}
 		$totalposts += $forum['posts'];
@@ -460,8 +460,8 @@ elseif ($fm->input['action'] == "recount") {
 
 	$redir = 'setforums.php';
 	$catid = $allforums[$forum_id]['catid'];
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 
 	$topics = array();
@@ -472,7 +472,7 @@ elseif ($fm->input['action'] == "recount") {
 	$list = $fm->_Read(EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php', false);
 	$topiccount = count($list);
 
-	if (!stristr($allforums[$forum_id]['catid'], 'f')) {
+	if (!mb_stristr($allforums[$forum_id]['catid'], 'f')) {
 		foreach ($allforums as $id => $forum) {
 			if ($forum['catid'] == 'f' . $forum_id) {
 				$topiccount += $forum['topics'];
@@ -542,8 +542,8 @@ elseif ($fm->input['action'] == "restore") {
 	$redir = 'setforums.php';
 	$allforums = $fm->_Read(EXBB_DATA_FORUMS_LIST, 0);
 	$catid = $allforums[$forum_id]['catid'];
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 
 	$views_data = $fm->_Read2Write($fp_views, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/views.php');
@@ -605,7 +605,7 @@ elseif ($fm->input['action'] == "restore") {
 elseif ($fm->input['action'] == "catorder") {
 	$tomove = $fm->_Intval('move');
 	$catid = $fm->_String('catid');
-	$redir = ( !stristr($catid, 'f') ) ? 'setforums.php' : 'setforums.php?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	$redir = ( !mb_stristr($catid, 'f') ) ? 'setforums.php' : 'setforums.php?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	$catid = intval($catid);
 	if ($catid == 1 && $tomove == -1) {
 		Header('Location: ' . $redir);
@@ -643,7 +643,7 @@ elseif ($fm->input['action'] == "forumorder") {
 	$forum_id = $fm->_Intval('forum');
 	$returncat = $catid;
 
-	$redir = ( !stristr($catid, 'f') ) ? 'setforums.php' : 'setforums.php?subforum=' . substr($catid, 1, strlen($catid - 1));
+	$redir = ( !mb_stristr($catid, 'f') ) ? 'setforums.php' : 'setforums.php?subforum=' . mb_substr($catid, 1, mb_strlen($catid - 1));
 
 	$allforums = $fm->_Read2Write($fp_allforums, EXBB_DATA_FORUMS_LIST, false);
 	array_filter($allforums, 'GET_CATID');
@@ -734,12 +734,12 @@ elseif ($fm->input['action'] == "searchindex") {
 
 	foreach ($words as $word => $value) {
 		$cwn++;
-		$words_word_dum = pack("NN", $pos_sitewords + strlen($to_print_sitewords), $pos_word_ind + strlen($to_print_word_ind));
+		$words_word_dum = pack("NN", $pos_sitewords + mb_strlen($to_print_sitewords), $pos_word_ind + mb_strlen($to_print_word_ind));
 		$to_print_sitewords .= $word . "\x0A";
-		$to_print_word_ind .= pack("N", strlen($value) / 4) . $value;
+		$to_print_word_ind .= pack("N", mb_strlen($value) / 4) . $value;
 		$words[$word] = $words_word_dum;
 
-		if (strlen($to_print_word_ind) > 32000) {
+		if (mb_strlen($to_print_word_ind) > 32000) {
 			fwrite($fp_SITEWORDS, $to_print_sitewords);
 			fwrite($fp_WORD_IND, $to_print_word_ind);
 
@@ -769,8 +769,8 @@ elseif ($fm->input['action'] == "searchindex") {
 
 	$redir = 'setforums.php';
 	$catid = $allforums[$forum_id]['catid'];
-	if (stristr($catid, 'f')) {
-		$redir .= '?subforum=' . substr($catid, 1, strlen($catid) - 1);
+	if (mb_stristr($catid, 'f')) {
+		$redir .= '?subforum=' . mb_substr($catid, 1, mb_strlen($catid) - 1);
 	}
 	$fm->_Message($fm->LANG['ForumIndexing'], sprintf($fm->LANG['ForumIndexingOk'], $indexed_total), $redir, 1);
 }
@@ -787,8 +787,8 @@ else {
 	//prints($allforums);
 	$lastcategoryplace = -1;
 	foreach ($allforums as $forumid => $forum) {
-		if (( stristr($forum['catid'], 'f') ) && ( !$subforum )) {
-			$pid = substr($forum['catid'], 1, strlen($forum['catid']) - 1);
+		if (( mb_stristr($forum['catid'], 'f') ) && ( !$subforum )) {
+			$pid = mb_substr($forum['catid'], 1, mb_strlen($forum['catid']) - 1);
 			if (!isset( $subforums[$pid] )) {
 				$subforums[$pid] = 1;
 			}
@@ -831,8 +831,8 @@ function categories($allcats, $catid, $move = false, $forum_id = 0) {
 	$cathtml = '<select name="catid">';
 	$lastcat = -1;
 	foreach ($allforums as $id => $forum) {
-		if ($ch = stristr($forum['catid'], 'f')) {
-			$sub[] = substr($forum['catid'], 1, strlen($forum['catid']) - 1);
+		if ($ch = mb_stristr($forum['catid'], 'f')) {
+			$sub[] = mb_substr($forum['catid'], 1, mb_strlen($forum['catid']) - 1);
 		}
 		if (/*($move === TRUE && $forum['catid'] == $catid) ||*/
 		( $ch )
@@ -843,8 +843,8 @@ function categories($allcats, $catid, $move = false, $forum_id = 0) {
 		if ($lastcat != $forum['catid']) {
 			$cathtml .= '<option value="' . $forum['catid'] . '"' . $selected . '>' . $forum['catname'] . "</option>\n";
 		}
-		$selected = ( $id == substr($catid, 1, strlen($catid) - 1) ) ? ' selected' : '';
-		if (( ( $move === true ) && ( stristr($catid, 'f') ) && ( $id != substr($catid, 1, strlen($catid) - 1) ) ) || ( $move === true && !stristr($catid, 'f') && !in_array($forum_id, $sub) && $forum_id != $id ) || ( $move === false )) {
+		$selected = ( $id == mb_substr($catid, 1, mb_strlen($catid) - 1) ) ? ' selected' : '';
+		if (( ( $move === true ) && ( mb_stristr($catid, 'f') ) && ( $id != mb_substr($catid, 1, mb_strlen($catid) - 1) ) ) || ( $move === true && !mb_stristr($catid, 'f') && !in_array($forum_id, $sub) && $forum_id != $id ) || ( $move === false )) {
 			$cathtml .= '<option value="f' . $id . '"' . $selected . '>-- ' . $forum['name'] . '</a>';
 		}
 		$lastcat = $forum['catid'];
@@ -880,7 +880,7 @@ function make_moderators() {
 
 	$moderators = str_replace(', ', ',', $fm->input['forummoderator']);
 	$moderators = str_replace(' ,', ',', $moderators);
-	$moderators = array_flip(explode(',', $fm->_LowerCase($moderators)));
+	$moderators = array_flip(explode(',', mb_strtolower($moderators)));
 	$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 
 	$fm->input['forummoderator'] = array();

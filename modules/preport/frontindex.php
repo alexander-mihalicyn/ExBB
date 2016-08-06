@@ -51,7 +51,7 @@ if ($fm->_Boolean($fm->input,'dosave') === TRUE){
 	if (count($fm->_Moderators) === 0) $fm->_Moderators[] = 1;
 
 	$fm->input['preporttext'] = ($fm->exbb['wordcensor'] === TRUE && $fm->input['preporttext'] !== '') ? $fm->bads_filter($fm->input['preporttext']):$fm->input['preporttext'];
-	$fm->input['preporttext'] = ($fm->input['preporttext'] === '') ? '' : '[quote='.$fm->user['name'].']'.substr($fm->input['preporttext'],0,1000).'[/quote]';
+	$fm->input['preporttext'] = ($fm->input['preporttext'] === '') ? '' : '[quote='.$fm->user['name'].']'.mb_substr($fm->input['preporttext'],0,1000).'[/quote]';
 
 	$username = ($fm->_Checkuser($poster_id) === TRUE) ? "[url=".$fm->exbb['boardurl']."/profile.php?action=show&member=".$poster_id."]".$fm->_Getmember($poster_id)."[/url]":$fm->_Getmember($poster_id);
 

@@ -227,7 +227,7 @@ function mailtouser() {
 			$fm->_Message($fm->LANG['MailByBoard'], $fm->LANG['NoEmptyFields']);
 		}
 
-		$fm->input['subject'] = $fm->bads_filter(substr($fm->input['subject'], 0, 255));
+		$fm->input['subject'] = $fm->bads_filter(mb_substr($fm->input['subject'], 0, 255));
 		$fm->input['message'] = $fm->bads_filter($fm->input['message']);
 
 		$email = sprintf($fm->LANG['EmailByBordText'], $user['name'], $fm->user['name'], $fm->exbb['boardname'], $fm->exbb['boardurl']) . htmlspecialchars_decode($fm->input['message'], ENT_QUOTES);
@@ -391,7 +391,7 @@ function memberslist() {
 		$user['location'] = ( $user['location'] != '' ) ? $user['location'] : '&nbsp;';
 		$user['mail'] = ( $user['showemail'] === true ) ? '<a href="mailto:' . $user['mail'] . '">' . $fm->LANG['Write'] . '</a>' : '<a href="tools.php?action=mail&member=' . $user_id . '">' . $fm->LANG['Write'] . '</a>';
 		$user['mail'] = ( $fm->exbb['emailfunctions'] !== true || $fm->user['id'] === 0 ) ? '&nbsp;' : $user['mail'];
-		if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !stristr($user['www'], 'http://' . $fm->exbb_domain)) {
+		if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !mb_stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !mb_stristr($user['www'], 'http://' . $fm->exbb_domain)) {
 			$user['www'] = $fm->out_redir . $user['www'];
 		}
 		$user['www'] = ( $user['www'] !== '' && $user['www'] !== 'http://' ) ? '<a href="' . $user['www'] . '" target="_blank">' . $fm->LANG['Looked'] . '</a>' : '&nbsp;';

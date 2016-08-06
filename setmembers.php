@@ -54,7 +54,7 @@ elseif ($fm->input['action'] == 'edit_user') {
 		$trans_table = get_html_translation_table(HTML_SPECIALCHARS);
 		$newname = ( $user['name'] == $fm->input['newname'] || $fm->input['newname'] == '' ) ? false : true;
 		$newpassword = ( $fm->input['password'] == '' || $user['pass'] === md5($fm->input['password']) ) ? false : true;
-		$newemail = ( $fm->input['emailaddress'] == '' || strtolower($fm->input['emailaddress']) == $user['mail'] ) ? false : true;
+		$newemail = ( $fm->input['emailaddress'] == '' || mb_strtolower($fm->input['emailaddress']) == $user['mail'] ) ? false : true;
 
 		if ($newemail === true && $fm->_Chek_Mail('emailaddress') === false) {
 			$fm->_FcloseAll();
@@ -89,7 +89,7 @@ elseif ($fm->input['action'] == 'edit_user') {
 
 		if ($newname === true || $newemail === true) {
 			$allusers = $fm->_Read2Write($fp_allusers, EXBB_DATA_USERS_LIST, false);
-			$allusers[$user_id]['n'] = $fm->_LowerCase($user['name']);
+			$allusers[$user_id]['n'] = mb_strtolower($user['name']);
 			$allusers[$user_id]['m'] = $user['mail'];
 			$fm->_Write($fp_allusers, $allusers);
 			unset( $allusers );
@@ -110,7 +110,7 @@ elseif ($fm->input['action'] == 'edit_user') {
 		$private = '';
 		foreach ($forums as $id => $infa) {
 			if ($infa['private']) {
-				if (stristr($infa['catid'], 'f')) {
+				if (mb_stristr($infa['catid'], 'f')) {
 					continue;
 				}
 				$checked = ( isset( $user['private'][$id] ) && $user['private'][$id] === true ) ? ' checked' : '';
@@ -282,7 +282,7 @@ else {
 		}
 		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 
-		$username = preg_quote($fm->_LowerCase($fm->input['username']));
+		$username = preg_quote(mb_strtolower($fm->input['username']));
 		$usermail = preg_quote($fm->input['usermail']);
 		$select_data = '';
 		ksort($allusers);
@@ -329,7 +329,7 @@ function UpdateAllusersInfo() {
 				$uid = $match[1];
 				$userinfo = $fm->_Getmember($uid);
 				if ($userinfo && !empty( $userinfo['name'] )) {
-					$users[$userinfo['id']]['n'] = $fm->_LowerCase($userinfo['name']);
+					$users[$userinfo['id']]['n'] = mb_strtolower($userinfo['name']);
 					$users[$userinfo['id']]['m'] = $userinfo['mail'];
 					$users[$userinfo['id']]['p'] = $userinfo['posts'];
 				}

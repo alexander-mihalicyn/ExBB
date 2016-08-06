@@ -129,8 +129,8 @@ function precheck_user() {
 	if ($fm->_String('imembername') == '' || $fm->_String('ipassword') == '') {
 		return 0;
 	}
-	$fm->input['imembername'] = $fm->_LowerCase(substr($fm->input['imembername'], 0, 32));
-	$fm->input['ipassword'] = substr($fm->input['ipassword'], 0, 32);
+	$fm->input['imembername'] = mb_strtolower(mb_substr($fm->input['imembername'], 0, 32));
+	$fm->input['ipassword'] = mb_substr($fm->input['ipassword'], 0, 32);
 
 	$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
 	$user_id = 0;

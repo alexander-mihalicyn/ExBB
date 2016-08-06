@@ -203,7 +203,7 @@ if ($fm->input['action'] == 'thanks' && $fm->user['id'] != 0) {
 		if (!isset( $threads[$key]['thanks'] )) {
 			$threads[$key]['thanks'] = $fm->user['id'];
 		}
-		if (strpos($threads[$key]['thanks'], strval($fm->user['id'])) === false) {
+		if (mb_strpos($threads[$key]['thanks'], strval($fm->user['id'])) === false) {
 			$threads[$key]['thanks'] .= ',' . $fm->user['id'];
 		}
 		echo $threads[$key]['thanks'];
@@ -221,7 +221,7 @@ if ($fm->exbb['reputation'] === true) {
 }
 
 /*Subforums*/
-$subf = ( stristr($catid, 'f') ) ? substr($catid, 1, strlen($catid) - 1) : 0;
+$subf = ( mb_stristr($catid, 'f') ) ? mb_substr($catid, 1, mb_strlen($catid) - 1) : 0;
 if ($subf) {
 	$pcatid = $allforums[$subf]['catid'];
 	$pcatname = $allforums[$subf]['catname'];
@@ -529,7 +529,7 @@ function setup_member($user_id) {
 	global $fm, $users, $topic, $allranks, $defranks, $_icon, $forum_id, $topic_id, $key;
 
 	$user = $fm->_Getmember($user_id);
-	if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !stristr($user['www'], 'http://' . $fm->exbb_domain)) {
+	if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !mb_stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !mb_stristr($user['www'], 'http://' . $fm->exbb_domain)) {
 		$user['www'] = $fm->out_redir . $user['www'];
 	}
 	$user['title'] = ( $user['status'] == "banned" ) ? '<font color="#cc0000"><b>Забанен</b></font>' : $user['title'];

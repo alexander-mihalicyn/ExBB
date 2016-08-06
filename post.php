@@ -183,9 +183,9 @@ function addnewthread() {
 
 	$forumname = $allforums[$forum_id]['name'];
 
-	$fm->input['topictitle'] = $fm->bads_filter(substr($fm->input['topictitle'], 0, 255));
-	$fm->input['description'] = $fm->bads_filter(substr($fm->input['description'], 0, 160));
-	$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(substr($fm->_String('keywords'), 0, 128)));
+	$fm->input['topictitle'] = $fm->bads_filter(mb_substr($fm->input['topictitle'], 0, 255));
+	$fm->input['description'] = $fm->bads_filter(mb_substr($fm->input['description'], 0, 160));
+	$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(mb_substr($fm->_String('keywords'), 0, 128)));
 	$list = $fm->_Read2Write($fp_list, EXBB_DATA_DIR_FORUMS . '/' . $forum_id . '/list.php');
 	$topic_id = ( count($list) !== 0 ) ? max(array_keys($list)) + 1 : 1;
 
@@ -210,7 +210,7 @@ function addnewthread() {
 
 	/* Если новая тема создана в подфоруме, то обновим инфу о ластпосте в родительском форуме (на главной) ;) */
 	$pcatid = $allforums[$forum_id]['catid'];
-	$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
+	$pforum = ( mb_stristr($pcatid, 'f') ) ? mb_substr($pcatid, 1, mb_strlen($pcatid) - 1) : 0;
 	if ($pforum) {
 		$allforums[$pforum]['posts']++;
 		$allforums[$pforum]['topics']++;
@@ -620,7 +620,7 @@ function addreply() {
 
 	/* Если ответ был в подфорум, то выведем инфу о ластпосте также в родительском форуме на главной */
 	$pcatid = $allforums[$forum_id]['catid'];
-	$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
+	$pforum = ( mb_stristr($pcatid, 'f') ) ? mb_substr($pcatid, 1, mb_strlen($pcatid) - 1) : 0;
 	if ($pforum) {
 		if ($PostAdded) {
 			$allforums[$pforum]['posts']++;

@@ -255,19 +255,19 @@ elseif ($fm->input['action'] == 'send') {
 	if ($fm->input['tousername'] == '') {
 		$fm->_Message($fm->LANG['NewPMCreating'], $fm->LANG['OwnerNeeded']);
 	}
-	if ($fm->input['msgtitle'] == '' || strlen($fm->input['msgtitle']) > 80) {
+	if ($fm->input['msgtitle'] == '' || mb_strlen($fm->input['msgtitle']) > 80) {
 		$fm->_Message($fm->LANG['NewPMCreating'], $fm->LANG['TitleNeeded']);
 	}
 	if ($fm->input['message'] == '') {
 		$fm->_Message($fm->LANG['NewPMCreating'], $fm->LANG['MessageNeeded']);
 	}
-	if (strlen($fm->input['message']) > $fm->exbb['max_posts']) {
+	if (mb_strlen($fm->input['message']) > $fm->exbb['max_posts']) {
 		$fm->_Message($fm->LANG['NewPMCreating'], sprintf($fm->LANG['BigPost'], $fm->exbb['max_posts'] / 1024));
 	}
 
 
 	$allusers = $fm->_Read(EXBB_DATA_USERS_LIST, false);
-	$tousername = $fm->_LowerCase($fm->input['tousername']);
+	$tousername = mb_strtolower($fm->input['tousername']);
 
 	ksort($allusers);
 	$touser_id = 0;

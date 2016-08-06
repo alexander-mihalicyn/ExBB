@@ -56,7 +56,7 @@ if ($fm->input['action'] == 'addmember') {
 
 	}
 	/* Name validation */
-	if ($fm->input['inmembername'] === '' || strlen($fm->input['inmembername']) > 20) {
+	if ($fm->input['inmembername'] === '' || mb_strlen($fm->input['inmembername']) > 20) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['NameEmpty']);
 	}
 
@@ -69,7 +69,7 @@ if ($fm->input['action'] == 'addmember') {
 	if (preg_match("#[а-яёґєіїўі|А-ЯЁҐЄІЇЎІ]{1,}#is", $fm->input['inmembername']) && preg_match("#[a-z|A-Z]{1,}#isu", $fm->input['inmembername'])) {
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['IntNameRuOrEn']);
 	}
-	if (preg_match("#(guest|admin|moder|админ|" . $fm->LANG['Guest'] . "|модер|[^0-9A-Za-zА-Яа-я-_\.\s])#isu", $fm->_LowerCase($fm->input['inmembername']))) {
+	if (preg_match("#(guest|admin|moder|админ|" . $fm->LANG['Guest'] . "|модер|[^0-9A-Za-zА-Яа-я-_\.\s])#isu", mb_strtolower($fm->input['inmembername']))) {
 		$fm->_Message($fm->LANG['Registration'], $wrongchars);
 	}
 	if ($fm->exbb['wordcensor'] === true && $fm->bads_filter($fm->input['inmembername'], 0) === true) {
@@ -90,7 +90,7 @@ if ($fm->input['action'] == 'addmember') {
 		$fm->_Fclose($fp_allusers);
 		$fm->_Message($fm->LANG['Registration'], $fm->LANG['RegistrDenied']);
 	}
-	$username = $fm->_LowerCase($fm->input['inmembername']);
+	$username = mb_strtolower($fm->input['inmembername']);
 	foreach ($allusers as $u_id => $info) {
 		if ($info['n'] == $username) {
 			$fm->_Fclose($fp_allusers);
@@ -284,7 +284,7 @@ elseif ($fm->input['action'] == 'activate') {
 		$id = key($allusers) + 1;
 		$fm->_BOARDSTATS();
 		$id = ( $fm->_Stats['last_id'] === $id ) ? $id + 1 : $id;
-		$allusers[$id]['n'] = $fm->_LowerCase($user['name']);;
+		$allusers[$id]['n'] = mb_strtolower($user['name']);
 		$allusers[$id]['m'] = $user['mail'];
 		$allusers[$id]['p'] = 0;
 		$fm->_Write($fp_allusers, $allusers);
@@ -377,7 +377,7 @@ elseif ($fm->input['action'] == 'agreed') {
 		$d = dir($styledir);
 		while (false !== ( $file = $d->read() )) {
 			if (is_dir($styledir . '/' . $file) && $file != '.' && $file != '..') {
-				$selected = ( $file == strtolower(DEF_SKIN) ) ? ' selected="selected"' : '';
+				$selected = ( $file == mb_strtolower(DEF_SKIN) ) ? ' selected="selected"' : '';
 				$style_select .= '<option value="' . trim($file) . '"' . $selected . '>' . $file . '</option>';
 			}
 		}
@@ -438,10 +438,10 @@ function validate_items() {
 	if ($fm->exbb['reg_simple'] === false) {
 		$fm->_Chek_WWW('homepage');
 		$fm->input['icqnumber'] = ( preg_match("/^[0-9]{5,9}$/", $fm->input['icqnumber']) ) ? $fm->input['icqnumber'] : '';
-		$fm->input['aolname'] = ( ( $l = strlen($fm->input['aolname']) ) >= 3 && $l <= 32 ) ? $fm->input['aolname'] : '';
-		$fm->input['location'] = ( ( $l = strlen($fm->input['location']) ) >= 3 && $l <= 100 ) ? $fm->input['location'] : '';
-		$fm->input['interests'] = ( ( $l = strlen($fm->input['interests']) ) >= 3 && $l <= 100 ) ? $fm->input['interests'] : '';
-		$fm->input['signature'] = ( strlen($fm->input['signature']) >= 3 ) ? $fm->input['signature'] : '';
+		$fm->input['aolname'] = ( ( $l = mb_strlen($fm->input['aolname']) ) >= 3 && $l <= 32 ) ? $fm->input['aolname'] : '';
+		$fm->input['location'] = ( ( $l = mb_strlen($fm->input['location']) ) >= 3 && $l <= 100 ) ? $fm->input['location'] : '';
+		$fm->input['interests'] = ( ( $l = mb_strlen($fm->input['interests']) ) >= 3 && $l <= 100 ) ? $fm->input['interests'] : '';
+		$fm->input['signature'] = ( mb_strlen($fm->input['signature']) >= 3 ) ? $fm->input['signature'] : '';
 
 		include( 'language/' . DEF_LANG . '/lang_tz.php' );
 		$fm->input['timedifference'] = ( isset( $tz[$fm->input['timedifference']] ) ) ? $fm->input['timedifference'] : 0;
@@ -451,7 +451,7 @@ function validate_items() {
 		}
 
 		$siglines = explode("\n", $fm->input['signature']);
-		if (count($siglines) > $fm->exbb['max_sig_lin'] || strlen($fm->input['signature']) > $fm->exbb['max_sig_chars']) {
+		if (count($siglines) > $fm->exbb['max_sig_lin'] || mb_strlen($fm->input['signature']) > $fm->exbb['max_sig_chars']) {
 			$fm->_Message($fm->LANG['Registration'], sprintf($fm->LANG['SigOptions'], $fm->exbb['max_sig_lin'], $fm->exbb['max_sig_chars']));
 		}
 

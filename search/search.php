@@ -44,7 +44,7 @@ function get_query(&$wholeword,&$querymode,&$query_arr) {
 
 		$query = $_SEARCH['search_keywords'];
 		$stype = $_SEARCH['stype'];
-		$query = $fm->_LowerCase($query);
+		$query = mb_strtolower($query);
 		$query = preg_replace('/\b([a-zA-Zа-яА-ЯёЁ\-\+\!]{1,3})\b/', "", $query);
 		$_SEARCH['search_keywords'] = $query;
 		$query_arr = preg_split("/\s+/",$query);
@@ -92,12 +92,12 @@ function get_results($inforum,$wholeword,$querymode,$query_arr,&$allres) {
 			$allres[$j] = array();
 
 			if ($_SEARCH['INDEXING_SCHEME'] == 1) {
-				$substring_length = strlen($query);
+				$substring_length = mb_strlen($query);
 			} else {
 					$substring_length = 4;
 			}
 
-			$hash_value = abs(exbb_hash(substr($query,0,$substring_length)) % $_SEARCH['HASHSIZE']);
+			$hash_value = abs(exbb_hash(mb_substr($query,0,$substring_length)) % $_SEARCH['HASHSIZE']);
 
 			fseek($fp_HASH,$hash_value*4,0);
 			$dum = fread($fp_HASH,4);
@@ -118,7 +118,7 @@ function get_results($inforum,$wholeword,$querymode,$query_arr,&$allres) {
 					$word = '';
 				}
 
-				$pos = strpos($word, $query);
+				$pos = mb_strpos($word, $query);
 
 				if ($pos !== false) {
 					fseek($fp_WORD_IND,$arr_dum['filepos'],0);
@@ -127,7 +127,7 @@ function get_results($inforum,$wholeword,$querymode,$query_arr,&$allres) {
 					$dum = fread($fp_WORD_IND,$dum2['dum']*4);
 
 					for($k=0; $k < $dum2['dum']; $k++){
-						$zzz = unpack("Ndum",substr($dum,$k*4,4));
+						$zzz = unpack("Ndum",mb_substr($dum,$k*4,4));
 						$allres[$j][$zzz['dum']] = 1;
 					}
 				}
@@ -154,7 +154,7 @@ function boolean($inforum,&$query_arr,&$querymode,&$allres) {
 					}
 			}
 
-			$_SEARCH['rescount'][$inforum] = intval(strlen($_SEARCH['res'][$inforum])/4);
+			$_SEARCH['rescount'][$inforum] = intval(mb_strlen($_SEARCH['res'][$inforum])/4);
 			unset($allres);
 			return;
 		} else {
@@ -200,7 +200,7 @@ function boolean($inforum,&$query_arr,&$querymode,&$allres) {
 							}
 					}
 
-					$_SEARCH['rescount'][$inforum] = intval(strlen($_SEARCH['res'][$inforum])/4);
+					$_SEARCH['rescount'][$inforum] = intval(mb_strlen($_SEARCH['res'][$inforum])/4);
 					return;
 				}
 
@@ -243,7 +243,7 @@ function boolean($inforum,&$query_arr,&$querymode,&$allres) {
 							}
 					}
 
-					$_SEARCH['rescount'][$inforum] = intval(strlen($_SEARCH['res'][$inforum])/4);
+					$_SEARCH['rescount'][$inforum] = intval(mb_strlen($_SEARCH['res'][$inforum])/4);
 					return;
 				}
 		}
@@ -262,9 +262,9 @@ function _check($inforum, $k) {
 		fclose($fp);
 	}
 	$_finfo = $finfo[$inforum];
-	$size = strlen($_finfo);
+	$size = mb_strlen($_finfo);
 	
-	$row = substr($_finfo, $k, strpos(substr($_finfo, $k, $size - $k), "\n"));
+	$row = mb_substr($_finfo, $k, mb_strpos(mb_substr($_finfo, $k, $size - $k), "\n"));
 	
 	list($f, $t) = explode('::', $row);
 	if (file_exists(EXBB_DATA_DIR_FORUMS.'/'.$f.'/'.$t.'-thd.php')) return TRUE;
@@ -334,7 +334,7 @@ function index_file($topicfile,$forum_id,$topic_id,$topicname = '') {
     	}
     	unset($topic);
 
-		$html_text	= $fm->_LowerCase($html_text.' '.$topicname);
+		$html_text	= mb_strtolower($html_text.' '.$topicname);
 		//$html_text 	= str_replace($str_search, $_TransTable,$html_text);
 
 		$serach		= array('/[^a-zA-Zа-яА-ЯёЁ]/is',
@@ -367,13 +367,13 @@ function build_hash() {
 		}*/
 
     	foreach($words as $word=>$value) {
-                $subbound = ($_SEARCH['INDEXING_SCHEME'] == 3) ?strlen($word)-3:1;
-				if (strlen($word)==3) {$subbound = 1;}
+                $subbound = ($_SEARCH['INDEXING_SCHEME'] == 3) ?mb_strlen($word)-3:1;
+				if (mb_strlen($word)==3) {$subbound = 1;}
         		$substring_length = 4;
-        		if ($_SEARCH['INDEXING_SCHEME'] == 1) $substring_length = strlen($word);
+        		if ($_SEARCH['INDEXING_SCHEME'] == 1) $substring_length = mb_strlen($word);
 
         		for ($i=0; $i<$subbound; $i++){
-            		$hash_value = abs(exbb_hash(substr($word,$i,$substring_length)) % $_SEARCH['HASHSIZE']);
+            		$hash_value = abs(exbb_hash(mb_substr($word,$i,$substring_length)) % $_SEARCH['HASHSIZE']);
             		$hash_array[$hash_value] = (isset($hash_array[$hash_value])) ? $hash_array[$hash_value].$value:$value;
         		}
 		}
@@ -391,10 +391,10 @@ function build_hash() {
         	if (!isset($hash_array[$i])) {
         		$to_print_hash .= $zzz;
         	} else {
-            		$to_print_hash .= pack("N",$pos_hashwords + strlen($to_print_hashwords));
-            		$to_print_hashwords .= pack("N", strlen($hash_array[$i])/8).$hash_array[$i];
+            		$to_print_hash .= pack("N",$pos_hashwords + mb_strlen($to_print_hashwords));
+            		$to_print_hashwords .= pack("N", mb_strlen($hash_array[$i])/8).$hash_array[$i];
         	}
-        	if (strlen($to_print_hashwords) > 64000) {
+        	if (mb_strlen($to_print_hashwords) > 64000) {
             	fwrite($fp_HASH,$to_print_hash);
             	fwrite($fp_HASHWORDS,$to_print_hashwords);
             	$to_print_hash = "";

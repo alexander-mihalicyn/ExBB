@@ -188,7 +188,7 @@ if ($fm->input['action'] === 'show') {
 		$emailaddress .= ( $user['showemail'] === true ) ? '-- <a href="mailto:' . $user['mail'] . '">' . $user['mail'] . '</a>' : '';
 	}
 	$_www = $user['www'];
-	if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !stristr($user['www'], 'http://' . $fm->exbb_domain)) {
+	if ($fm->exbb['redirect'] && $user['www'] !== '' && $user['www'] != 'http://' && !mb_stristr($user['www'], 'http://www.' . $fm->exbb_domain) && !mb_stristr($user['www'], 'http://' . $fm->exbb_domain)) {
 		$user['www'] = $fm->out_redir . $user['www'];
 	}
 	$homepage = ( $user['www'] == 'http://' || $user['www'] == '' ) ? '&nbsp;' : '<a href="' . $user['www'] . '" target="_blank">' . $_www . '</a>';
@@ -205,8 +205,8 @@ if ($fm->input['action'] === 'show') {
 		foreach ($user['posted'] as $inforum => $posts) {
 			$subforum = '';
 			$pcatid = @$allforums[$inforum]['catid'];
-			if (stristr($pcatid, 'f')) {
-				$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+			if (mb_stristr($pcatid, 'f')) {
+				$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 				$subforum = '<a href="forums.php?forum=' . $pforum . '">' . $allforums[$pforum]['name'] . '</a> :: ';
 			}
 			$forumname = ( !isset( $allforums[$inforum] ) ) ? $fm->LANG['NoData'] : $subforum . '<a href="forums.php?forum=' . $inforum . '">' . $allforums[$inforum]['name'] . '</a>';
@@ -241,7 +241,7 @@ elseif ($fm->input['action'] === 'lostpassword') {
 			$fm->_Message($fm->LANG['SendPassTitle'], $fm->LANG['NameEmpty']);
 		}
 
-		$membername = $fm->_LowerCase($fm->input['membername']);
+		$membername = mb_strtolower($fm->input['membername']);
 		$allusers = $fm->_Read(EXBB_DATA_USERS_LIST);
 
 		$m_id = 0;
@@ -362,10 +362,10 @@ elseif ($fm->input['action'] === 'savemodify') {
 	$fm->_Strings(array( 'password' => '', 'emailaddress' => '', 'icqnumber' => '', 'aolname' => '', 'homepage' => '', 'location' => '', 'interests' => '', 'signature' => '', 'noavatar' => '', 'useravatar' => '', 'timedifference' => '' ));
 
 	if ($fm->input['password'] !== '') {
-		if (strlen($fm->input['password']) < 6) {
+		if (mb_strlen($fm->input['password']) < 6) {
 			$fm->_Message($fm->LANG['ProfileEditing'], $fm->LANG['PassLitle']);
 		}
-		if (strlen($fm->input['password']) > 16) {
+		if (mb_strlen($fm->input['password']) > 16) {
 			$fm->_Message($fm->LANG['ProfileEditing'], $fm->LANG['PassBig']);
 		}
 		define("FM_NEWPASS", true);
@@ -555,10 +555,10 @@ function validate_items() {
 
 	$fm->_Chek_WWW('homepage');
 	$fm->input['icqnumber'] = ( preg_match("/^[0-9]{5,9}$/", $fm->input['icqnumber']) ) ? $fm->input['icqnumber'] : '';
-	$fm->input['aolname'] = ( ( $l = strlen($fm->input['aolname']) ) >= 3 && $l <= 32 ) ? $fm->input['aolname'] : '';
-	$fm->input['location'] = ( ( $l = strlen($fm->input['location']) ) >= 3 && $l <= 100 ) ? $fm->input['location'] : '';
-	$fm->input['interests'] = ( ( $l = strlen($fm->input['interests']) ) >= 3 && $l <= 100 ) ? $fm->input['interests'] : '';
-	$fm->input['signature'] = ( strlen($fm->input['signature']) >= 3 ) ? $fm->input['signature'] : '';
+	$fm->input['aolname'] = ( ( $l = mb_strlen($fm->input['aolname']) ) >= 3 && $l <= 32 ) ? $fm->input['aolname'] : '';
+	$fm->input['location'] = ( ( $l = mb_strlen($fm->input['location']) ) >= 3 && $l <= 100 ) ? $fm->input['location'] : '';
+	$fm->input['interests'] = ( ( $l = mb_strlen($fm->input['interests']) ) >= 3 && $l <= 100 ) ? $fm->input['interests'] : '';
+	$fm->input['signature'] = ( mb_strlen($fm->input['signature']) >= 3 ) ? $fm->input['signature'] : '';
 
 	include( 'language/' . DEF_LANG . '/lang_tz.php' );
 	$fm->input['timedifference'] = ( isset( $tz[$fm->input['timedifference']] ) ) ? $fm->input['timedifference'] : 0;
@@ -569,7 +569,7 @@ function validate_items() {
 
 	$siglines = explode("\n", $fm->input['signature']);
 
-	if (!defined('IS_ADMIN') && ( count($siglines) > $fm->exbb['max_sig_lin'] || strlen($fm->input['signature']) > $fm->exbb['max_sig_chars'] )) {
+	if (!defined('IS_ADMIN') && ( count($siglines) > $fm->exbb['max_sig_lin'] || mb_strlen($fm->input['signature']) > $fm->exbb['max_sig_chars'] )) {
 		$fm->_Message($fm->LANG['ProfileEditing'], sprintf($fm->LANG['SigOptions'], $fm->exbb['max_sig_lin'], $fm->exbb['max_sig_chars']));
 	}
 	if (defined('IS_ADMIN')) {

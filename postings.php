@@ -410,8 +410,8 @@ function deletepost() {
 
 	// Обновим ластпост в родительском форуме, если удаляемое сообщение было в нём последним
 	$pcatid = $allforums[$forum_id]['catid'];
-	if (stristr($pcatid, 'f')) {
-		$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+	if (mb_stristr($pcatid, 'f')) {
+		$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 		$allforums[$pforum]['posts']--; // Уменьшаем число ответов в родительском форуме на единицу
 		if (@$allforums[$pforum]['last_sub'] == $forum_id && @$allforums[$pforum]['last_post_id'] == $topic_id && @$allforums[$pforum]['last_key'] == $post_id) {
 			relast_post($pforum);
@@ -479,13 +479,13 @@ function edit_topic_title() {
 
 		$old_name = $list[$topic_id]['name'];
 
-		$fm->input['topictitle'] = $fm->bads_filter(substr($fm->input['topictitle'], 0, 255));
-		$fm->input['description'] = $fm->bads_filter(substr($fm->input['description'], 0, 160));
-		$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(substr($fm->_String('keywords'), 0, 255)));
+		$fm->input['topictitle'] = $fm->bads_filter(mb_substr($fm->input['topictitle'], 0, 255));
+		$fm->input['description'] = $fm->bads_filter(mb_substr($fm->input['description'], 0, 160));
+		$fm->input['keywords'] = $fm->bads_filter(keywordsProcessor(mb_substr($fm->_String('keywords'), 0, 255)));
 		// Обновление названия темы в родительском форуме, если тема находится в подфоруме
 		$pcatid = $allforums[$forum_id]['catid'];
-		if (stristr($pcatid, 'f')) {
-			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+		if (mb_stristr($pcatid, 'f')) {
+			$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 			if ($allforums[$pforum]['last_post_id'] == $topic_id && @$allforums[$pforum]['last_sub'] == $forum_id) {
 				$allforums[$pforum]['last_post'] = $fm->input['topictitle'];
 			}
@@ -601,7 +601,7 @@ function deletethread() {
 
 		/* Обновление ластпоста в родительском форуме при удалении темы в подфоруме */
 		$pcatid = $allforums[$forum_id]['catid'];
-		$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
+		$pforum = ( mb_stristr($pcatid, 'f') ) ? mb_substr($pcatid, 1, mb_strlen($pcatid) - 1) : 0;
 		if ($pforum) {
 			$allforums[$pforum]['topics']--;
 			$allforums[$pforum]['posts'] -= $del_posts;
@@ -755,9 +755,9 @@ function movetopic() {
 		$allforums[$toforum_id]['topics']++;
 
 		$pcatid = $allforums[$forum_id]['catid'];
-		$pforum = ( stristr($pcatid, 'f') ) ? substr($pcatid, 1, strlen($pcatid) - 1) : 0;
+		$pforum = ( mb_stristr($pcatid, 'f') ) ? mb_substr($pcatid, 1, mb_strlen($pcatid) - 1) : 0;
 		$ptcatid = $allforums[$toforum_id]['catid'];
-		$ptforum = ( stristr($ptcatid, 'f') ) ? substr($ptcatid, 1, strlen($ptcatid) - 1) : 0;
+		$ptforum = ( mb_stristr($ptcatid, 'f') ) ? mb_substr($ptcatid, 1, mb_strlen($ptcatid) - 1) : 0;
 
 		// Если тема при переносе уходит за пределы текущего родительского форума, то из него вычитаются она сама и её ответы :)
 		if ($pforum && $forum_id != $ptforum) {
@@ -1472,8 +1472,8 @@ function delselected() {
 
 	// Если тема с удаляемыми сообщениями находится в подфоруме и в неё постили последней, то обновим ластпост родительского форума
 	$pcatid = $allforums[$forum_id]['catid'];
-	if (stristr($pcatid, 'f')) {
-		$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+	if (mb_stristr($pcatid, 'f')) {
+		$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 		if ($allforums[$pforum]['last_post_id'] == $topic_id && @$allforums[$pforum]['last_sub'] == $forum_id) {
 			$allforums[$pforum]['posts'] -= $countremoved; // Вычтим удалённые сообщения из родительского форума
 			relast_post($pforum);
@@ -1664,8 +1664,8 @@ function innew() {
 		// Если посты переносятся в тему, находящуюся в подфоруме, то обновляем ластпост родительского форума
 		// Также в этом форуме увеличим число тем на 1 и число ответов на кол-во перемещаемых сообщений минус 1
 		$pcatid = $allforums[$toforum_id]['catid'];
-		if (stristr($pcatid, 'f')) {
-			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+		if (mb_stristr($pcatid, 'f')) {
+			$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 			$allforums[$pforum]['topics']++;
 			$allforums[$pforum]['posts'] += $countmoving - 1;
 			relast_post($pforum);
@@ -1674,8 +1674,8 @@ function innew() {
 		// Если посты перенесены из темы, находящейся в подфоруме, то обновим ластпост родительского форума
 		// Также вычтем из числа ответов этого форума кол-во перемещённых сообщений
 		$pcatid = $allforums[$forum_id]['catid'];
-		if (stristr($pcatid, 'f')) {
-			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+		if (mb_stristr($pcatid, 'f')) {
+			$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 			$allforums[$pforum]['posts'] -= $countmoving;
 			relast_post($pforum);
 		}
@@ -1880,8 +1880,8 @@ function inexists() {
 		// Если сообщения перемещаются в тему, находящуюся в подфоруме, то обновим ластпост в родительском форуме
 		// Также прибавим к числу ответов этого форума кол-во перемещаемых сообщений
 		$pcatid = $allforums[$toforum_id]['catid'];
-		if (stristr($pcatid, 'f')) {
-			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+		if (mb_stristr($pcatid, 'f')) {
+			$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 			$allforums[$pforum]['posts'] += $countmoving;
 			relast_post($pforum);
 		}
@@ -1889,8 +1889,8 @@ function inexists() {
 		// Если сообщения перемещаются из темы, находящейся в подфоруме, то обновим ластпост в родительском форуме
 		// Также вычтем из числа ответов этого форума кол-во перемещаемых сообщений
 		$pcatid = $allforums[$forum_id]['catid'];
-		if (stristr($pcatid, 'f')) {
-			$pforum = substr($pcatid, 1, strlen($pcatid) - 1);
+		if (mb_stristr($pcatid, 'f')) {
+			$pforum = mb_substr($pcatid, 1, mb_strlen($pcatid) - 1);
 			$allforums[$pforum]['posts'] -= $countmoving;
 			relast_post($pforum);
 		}
@@ -2132,7 +2132,7 @@ function JumpHTML($allforums, $toforum = 0, $unset = 0) {
 			if (!defined('IS_ADMIN') && $forum['private'] === true && !isset( $fm->user['private'][$forumid] )) {
 				continue;
 			}
-			if (stristr($forum['catid'], 'f')) {
+			if (mb_stristr($forum['catid'], 'f')) {
 				continue;
 			}
 
@@ -2145,7 +2145,7 @@ function JumpHTML($allforums, $toforum = 0, $unset = 0) {
 				$jumphtml .= '<option value="' . $forumid . '"' . $selected . '>-- &nbsp; ' . $forum['name'] . "</option>\n";
 			}
 			foreach ($allforums as $id => $sforum) {
-				if (stristr($sforum['catid'], 'f') && $forumid == substr($sforum['catid'], 1, strlen($sforum['catid']) - 1)) {
+				if (mb_stristr($sforum['catid'], 'f') && $forumid == mb_substr($sforum['catid'], 1, mb_strlen($sforum['catid']) - 1)) {
 					if (!( !defined('IS_ADMIN') && $sforum['private'] === true && !isset( $fm->user['private'][$id] ) )) {
 						if ($id != $unset) {
 							$selected = ( $selected_id === $id ) ? ' selected' : '';
@@ -2208,10 +2208,10 @@ function relast_post($forum_id) {
 	unset( $allforums[$forum_id]['last_sub'] );
 
 	foreach ($allforums as $id => $forum) {
-		if (!stristr($forum['catid'], 'f')) {
+		if (!mb_stristr($forum['catid'], 'f')) {
 			continue;
 		}
-		if (substr($forum['catid'], 1, strlen($forum['catid']) - 1) == $forum_id && @$forum['last_time'] > $maxtime) {
+		if (mb_substr($forum['catid'], 1, mb_strlen($forum['catid']) - 1) == $forum_id && @$forum['last_time'] > $maxtime) {
 			@$allforums[$forum_id]['last_poster'] = $forum['last_poster'];
 			@$allforums[$forum_id]['last_poster_id'] = $forum['last_poster_id'];
 			@$allforums[$forum_id]['last_time'] = $maxtime = $forum['last_time'];

@@ -32,7 +32,7 @@ class ModelAdminAccountSettings extends BaseModel {
 			];
 		}
 
-		if (mb_strlen($password, 'UTF-8') < 5) {
+		if (mb_strlen($password) < 5) {
 			$messages[] = [
 				'type' => 'error',
 				'text' => lang('adminAccountPasswordShort'),

@@ -119,7 +119,7 @@ if ($fm->exbb['statvisit']) {
 }
 
 /*	Subforums	*/
-$subf = ( stristr($catid, 'f') ) ? substr($catid, 1, strlen($catid) - 1) : 0;
+$subf = ( mb_stristr($catid, 'f') ) ? mb_substr($catid, 1, mb_strlen($catid) - 1) : 0;
 if ($subf) {
 	$pcatid = $allforums[$subf]['catid'];
 	$pcatname = $allforums[$subf]['catname'];
@@ -182,7 +182,7 @@ foreach ($allforums_keys as $id) {
 
 	$lastpost = $LastPosterName = $LastTopicName = '';
 	if (isset( $forum['last_post'] )) {
-		$LastTopicName = ( strlen($forum['last_post']) > 36 ) ? substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
+		$LastTopicName = ( mb_strlen($forum['last_post']) > 36 ) ? mb_substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
 		$LastTopicName = ( $fm->user['id'] && ( $fm->exbb['watches'] && $_watchesForums[0][$id][1] || !$fm->exbb['watches'] && ( $fm->user['last_visit'] < $forum['last_key'] && $fm->user['id'] != $forum['last_poster_id'] && ( ( !isset( $t_visits[$id . ':' . $forum['last_post_id']] ) || $t_visits[$id . ':' . $forum['last_post_id']] < $forum['last_key'] ) ) ) ) ? '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=u#unread" title="' . $fm->LANG['GoToFirstUnread'] . '"><img src="./templates/' . DEF_SKIN . '/im/unread.gif" border="0" /></a> ' : '<img src="./templates/' . DEF_SKIN . '/im/lastpost.gif"> ' ) . ( $fm->exbb['show_hints'] ? '<span class="hint">' : '' ) . '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=l#' . $forum['last_key'] . '" title="' . $forum['last_post'] . '">' . $LastTopicName . '</a>' . ( $fm->exbb['show_hints'] ? '</span>' : '' );
 		$LastPosterName = ( $forum['last_poster_id'] !== 0 ) ? $fm->LANG['Author'] . ': <a href="profile.php?action=show&member=' . $forum['last_poster_id'] . '">' . $forum['last_poster'] . '</a>' : $fm->LANG['Author'] . ': ' . $fm->LANG['Guest'];
 	}
@@ -325,7 +325,7 @@ include( 'page_tail.php' );
 function filterSub($forum) {
 	global $fm, $forum_id, $catid;
 
-	if (( !stristr($catid, 'f') ) && ( stristr($forum['catid'], 'f') ) && ( $forum_id == substr($forum['catid'], 1, strlen($forum['catid']) - 1) )) {
+	if (( !mb_stristr($catid, 'f') ) && ( mb_stristr($forum['catid'], 'f') ) && ( $forum_id == mb_substr($forum['catid'], 1, mb_strlen($forum['catid']) - 1) )) {
 		if (@$forum['private'] && empty( $fm->user['private'][$forum['id']] ) && !defined('IS_ADMIN')) {
 			return false;
 		}
@@ -340,12 +340,7 @@ function _sort($a, $b) {
 	global $fm, $_sort;
 
 	if ($_sort['type'] == 's') {
-		if ($fm->_RuLocale) {
-			return strcasecmp($a[$_sort['column']], $b[$_sort['column']]);
-		}
-		else {
-			return strcmp($fm->_StrToLower($a[$_sort['column']]), $fm->_StrToLower($b[$_sort['column']]));
-		}
+		return strcmp(mb_strtolower($a[$_sort['column']]), mb_strtolower($b[$_sort['column']]));
 	}
 	else {
 		if ($_sort['type'] == 'd') {
@@ -392,10 +387,10 @@ function filtered($word, $topics) {
 		break;
 	}
 
-	$word = $fm->_LowerCase($word);
+	$word = mb_strtolower($word);
 
 	foreach ($topics as $id => $info) {
-		if (isset( $info[$field] ) && preg_match("/$word/i", $fm->_LowerCase($info[$field]))) {
+		if (isset( $info[$field] ) && preg_match("/$word/i", mb_strtolower($info[$field]))) {
 			$res[$id] = $info;
 		}
 	}

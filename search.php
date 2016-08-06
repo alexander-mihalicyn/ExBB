@@ -130,7 +130,7 @@ function search() {
 		$forums = '<option value="-1"> ' . $fm->LANG['INALL'] . "\n";
 		$last_cat = -1;
 		foreach ($allforums as $forumid => $val) {
-			if (stristr($val['catid'], 'f')) {
+			if (mb_stristr($val['catid'], 'f')) {
 				continue;
 			}
 			if (!empty( $allforums[$forumid]['private'] ) && empty( $fm->user['private'][$forumid] ) && !defined('IS_ADMIN') || $allforums[$forumid]['stview'] == 'reged' && !$fm->user['id'] || $allforums[$forumid]['stview'] == 'admo' && !defined('IS_ADMIN') && $fm->user['status'] != 'sm' && !isset( $allforums[$forumid]['moderators'][$fm->user['id']] )) {
@@ -161,7 +161,7 @@ function search() {
 			$fm->_Message($fm->LANG['Search'], $fm->LANG['SEARCHNOPARAM']);
 		}
 		$key_words = array_unique($key_words[0]);
-		if (strstr($fm->input['src_in'], 'cat')) {
+		if (mb_strstr($fm->input['src_in'], 'cat')) {
 			list( $in_where, $in_range ) = explode(':', $fm->input['src_in']);
 		}
 		else {
@@ -218,7 +218,7 @@ function search() {
 			}
 
 			if ($total_found) {
-				$search_id = $newpassword = substr(uniqid(str_shuffle(session_id()), false), mt_rand(0, 32), 16);
+				$search_id = $newpassword = mb_substr(uniqid(str_shuffle(session_id()), false), mt_rand(0, 32), 16);
 				if ($fp = @fopen(EXBB_DATA_DIR_SEARCH . '/temp/' . $search_id, 'wb')) {
 					$fm->_FilePointers[$fp] = $fp;
 					$fm->_Write($fp, $_SEARCH);
@@ -263,7 +263,7 @@ function search() {
 
 			$temparray = array();
 			for ($i = 0; $i < $_SEARCH['rescount'][$forum_id]; $i++) {
-				if ($i >= strlen($_SEARCH['res'][$forum_id]) / 4) {
+				if ($i >= mb_strlen($_SEARCH['res'][$forum_id]) / 4) {
 					break 1;
 				}
 				$_found++;
@@ -274,7 +274,7 @@ function search() {
 					break;
 				}
 
-				$strpos = unpack("Npos", substr($_SEARCH['res'][$forum_id], $i * 4, 4));
+				$strpos = unpack("Npos", mb_substr($_SEARCH['res'][$forum_id], $i * 4, 4));
 
 				fseek($FP_FINFO, $strpos['pos'], 0);
 				$dum = fgets($FP_FINFO, 100);

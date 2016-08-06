@@ -121,8 +121,8 @@ foreach ($allforums_keys as $key => $id) {
 	$posts = $forum['posts'];
 	$threads = $forum['topics'];
 
-	if (stristr($in_cat, 'f')) {
-		$subforums[substr($in_cat, 1, strlen($in_cat) - 1)][$id] = $forum['name'];
+	if (mb_stristr($in_cat, 'f')) {
+		$subforums[mb_substr($in_cat, 1, mb_strlen($in_cat) - 1)][$id] = $forum['name'];
 		continue;
 	}
 	elseif ($fm->input['c'] != 0 && $fm->input['c'] != $in_cat) {
@@ -180,7 +180,7 @@ foreach ($allforums_keys as $key => $id) {
 					$sub_lastpost = $fm->LANG['No'];
 				}
 				else {
-					$sub_lastpost = ( strlen($allforums[$subid]['last_post']) > 16 ) ? substr($allforums[$subid]['last_post'], 0, 15) . '...' : $allforums[$subid]['last_post'];
+					$sub_lastpost = ( mb_strlen($allforums[$subid]['last_post']) > 16 ) ? mb_substr($allforums[$subid]['last_post'], 0, 15) . '...' : $allforums[$subid]['last_post'];
 					$sub_lastpost = ( $fm->user['id'] && ( $fm->exbb['watches'] && $_watchesIndex[$subid][1] || !$fm->exbb['watches'] && ( $fm->user['last_visit'] < $allforums[$subid]['last_key'] && $fm->user['id'] != $allforums[$subid]['last_poster_id'] && ( ( !isset( $t_visits[$subid . ':' . $allforums[$subid]['last_post_id']] ) || $t_visits[$subid . ':' . $allforums[$subid]['last_post_id']] < $allforums[$subid]['last_key'] ) ) ) ) ? '<a href="topic.php?forum=' . $subid . '&topic=' . $allforums[$subid]['last_post_id'] . '&v=u#unread" title="' . $fm->LANG['GoToFirstUnread'] . '"><img src="./templates/' . DEF_SKIN . '/im/unread.gif" border="0" /></a> ' : '' ) . '<a href="topic.php?forum=' . $subid . '&topic=' . $allforums[$subid]['last_post_id'] . '&v=l#' . $allforums[$subid]['last_key'] . '" title="' . $allforums[$subid]['last_post'] . '">' . $sub_lastpost . '</a>';
 					if ($fm->exbb['show_hints']) {
 						$sub_lastpost = '<span class="hint">' . $sub_lastpost . '</span>';
@@ -251,7 +251,7 @@ foreach ($allforums_keys as $key => $id) {
 		if (isset( $forum['last_sub'] )) {
 			$id = $forum['last_sub'];
 		}
-		$LastTopicName = ( strlen($forum['last_post']) > 36 ) ? substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
+		$LastTopicName = ( mb_strlen($forum['last_post']) > 36 ) ? substr($forum['last_post'], 0, 35) . '...' : $forum['last_post'];
 		$LastTopicName = ( $fm->user['id'] && ( $fm->exbb['watches'] && $_watchesIndex[$id][1] || !$fm->exbb['watches'] && ( $fm->user['last_visit'] < $forum['last_key'] && $fm->user['id'] != $forum['last_poster_id'] && ( ( !isset( $t_visits[$id . ':' . $forum['last_post_id']] ) || $t_visits[$id . ':' . $forum['last_post_id']] < $forum['last_key'] ) ) ) ) ? '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=u#unread" title="' . $fm->LANG['GoToFirstUnread'] . '"><img src="./templates/' . DEF_SKIN . '/im/unread.gif" border="0" /></a> ' : '<img src="./templates/' . DEF_SKIN . '/im/lastpost.gif"> ' ) . ( $fm->exbb['show_hints'] ? '<span class="hint">' : '' ) . '<a href="topic.php?forum=' . $id . '&topic=' . $forum['last_post_id'] . '&v=l#' . $forum['last_key'] . '" title="' . $forum['last_post'] . '">' . $LastTopicName . '</a>' . ( $fm->exbb['show_hints'] ? '</span>' : '' );
 		$LastPosterName = ( $forum['last_poster_id'] !== 0 ) ? $fm->LANG['Author'] . ': <a href="profile.php?action=show&member=' . $forum['last_poster_id'] . '">' . $forum['last_poster'] . '</a>' : $fm->LANG['Author'] . ': ' . $fm->LANG['Guest'];
 	}
@@ -374,10 +374,10 @@ function viewing(&$viewing) {
 	$viewing = array();
 
 	foreach ($onlinedata as $sess => $online) {
-		preg_match("#\"(forums|topic)\.php\?forum=([[:alnum:]]+)#is", $online['in'], $where);
+		preg_match("#\"(forums|topic)\.php\?forum=([[:alnum:]]+)#isu", $online['in'], $where);
 		if (isset( $where[2] ) && isset( $allforums[$where[2]] )) {
-			if (stristr($allforums[$where[2]]['catid'], 'f')) {
-				$where[2] = substr($allforums[$where[2]]['catid'], 1, strlen($allforums[$where[2]]['catid']) - 1);
+			if (mb_stristr($allforums[$where[2]]['catid'], 'f')) {
+				$where[2] = mb_substr($allforums[$where[2]]['catid'], 1, mb_strlen($allforums[$where[2]]['catid']) - 1);
 			}
 			if ($fm->input['c'] != 0 && $fm->input['c'] != $allforums[$where[2]]['catid']) {
 				continue;

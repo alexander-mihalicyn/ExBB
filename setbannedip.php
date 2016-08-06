@@ -150,8 +150,8 @@ function ConvertRegExp($ipbaned) {
 		}
 		foreach ($iparray as $id => $value) {
 			if (preg_match("#\*#", $value)) {
-				$value = substr(trim($value), 0, -1);
-				$num = strlen($value);
+				$value = mb_substr(trim($value), 0, -1);
+				$num = mb_strlen($value);
 				switch ($num) {
 					case 0:
 						$Nnum = 3;

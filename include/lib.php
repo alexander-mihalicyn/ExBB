@@ -132,7 +132,7 @@ function forumjump($allforums) {
 		if (!defined('IS_ADMIN') && $forum['private'] === true) {
 			$_access = ( isset( $fm->user['private'][$forum['id']] ) && $fm->user['private'][$forum['id']] === true ) ? true : false;
 		}
-		if (stristr($forum['catid'], 'f')) {
+		if (mb_stristr($forum['catid'], 'f')) {
 			$sub[] = $forumid;
 			continue;
 		}
@@ -146,7 +146,7 @@ function forumjump($allforums) {
 				$options .= '<option value="' . $fm->exbb['boardurl'] . '/forums.php?forum=' . $forumid . '" target="_self">-- &nbsp; ' . $forum['name'] . "\n";
 			}
 			foreach ($allforums as $id => $sforum) {
-				if (stristr($sforum['catid'], 'f') && $forumid == substr($sforum['catid'], 1, strlen($sforum['catid']) - 1) && in_array($id, $sub)) {
+				if (mb_stristr($sforum['catid'], 'f') && $forumid == mb_substr($sforum['catid'], 1, mb_strlen($sforum['catid']) - 1) && in_array($id, $sub)) {
 					$options .= '<option value="' . $fm->exbb['boardurl'] . '/forums.php?forum=' . $id . '" target="_self">---- &nbsp; ' . $sforum['name'] . "\n";
 				}
 			}
@@ -292,7 +292,7 @@ function Check_DefLangSkin($dirtoread, $key, $var) {
 function Generate_pass() {
 	$shufflestring = str_shuffle('QqWwEeRrTtYyUuIiOoPpAaSsDdFfGgHhJjKkLlZzXxCcVvBbNnMm0123456789');
 	$uniqstring = uniqid($shufflestring, false);
-	$newpassword = substr($uniqstring, mt_rand(0, 40), 8);
+	$newpassword = mb_substr($uniqstring, mt_rand(0, 40), 8);
 
 	return $newpassword;
 }
@@ -328,7 +328,7 @@ function CheckPostSize($key) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['MainMsg'], $fm->LANG['CorrectPost']);
 	}
-	if (strlen($fm->_String($key)) > $fm->exbb['max_posts'] && !defined('IS_ADMIN')) {
+	if (mb_strlen($fm->_String($key)) > $fm->exbb['max_posts'] && !defined('IS_ADMIN')) {
 		$fm->_FcloseAll();
 		$fm->_Message($fm->LANG['PostsSending'], sprintf($fm->LANG['BigPost'], $fm->exbb['max_posts'] / 1024));
 	}
@@ -443,7 +443,7 @@ function replace_img_link($imlink) {
 			$imgtag = "<img src=\"$imlink\"> ";
 		}
 		else {
-			if ($fm->exbb['redirect'] && !stristr($imlink, 'http://www.' . $fm->exbb_domain) && !stristr($imlink, 'http://' . $fm->exbb_domain)) {
+			if ($fm->exbb['redirect'] && !mb_stristr($imlink, 'http://www.' . $fm->exbb_domain) && !mb_stristr($imlink, 'http://' . $fm->exbb_domain)) {
 				$_imlink = 'rd2.php?' . $imlink;
 			}
 			else {

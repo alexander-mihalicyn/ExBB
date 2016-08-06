@@ -142,7 +142,7 @@ elseif ($fm->input['action'] == 'main') {
 	$d = dir($languagedir);
 	while (false !== ( $file = $d->read() )) {
 		if (is_dir($languagedir . '/' . $file) && $file != '.' && $file != '..') {
-			$selected = ( strtolower($file) == strtolower($fm->exbb['default_lang']) ) ? ' selected="selected"' : '';
+			$selected = ( mb_strtolower($file) == mb_strtolower($fm->exbb['default_lang']) ) ? ' selected="selected"' : '';
 			$langs_select .= '<option value="' . trim($file) . '"' . $selected . '>' . $file . '</option>';
 		}
 	}
@@ -152,7 +152,7 @@ elseif ($fm->input['action'] == 'main') {
 	$d = dir($styledir);
 	while (false !== ( $file = $d->read() )) {
 		if (is_dir($styledir . '/' . $file) && $file != '.' && $file != '..') {
-			$selected = ( strtolower($file) == strtolower($fm->exbb['default_style']) ) ? ' selected="selected"' : '';
+			$selected = ( mb_strtolower($file) == mb_strtolower($fm->exbb['default_style']) ) ? ' selected="selected"' : '';
 			$style_select .= '<option value="' . trim($file) . '"' . $selected . '>' . $file . '</option>';
 		}
 	}

@@ -34,8 +34,8 @@ function change_rep() {
 	
 	// Проверка на запрет админа ;)
 	if ($config['denied']) {
-		$blacklist = array_map(array($fm, '_LowerCase'), $config['blacklist']);
-		if (in_array($fm->_LowerCase($fm->user['name']), $blacklist))
+		$blacklist = array_map('mb_strtolower', $config['blacklist']);
+		if (in_array(mb_strtolower($fm->user['name']), $blacklist))
 			$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepDenied']);
 	}
 	
@@ -86,7 +86,7 @@ function change_rep() {
 			$fm->_Message($fm->LANG['Reputation'], $fm->LANG['RepAgain']);
 	}
 	
-	if (($size = strlen($fm->_String('reason'))) < $config['size_min'] || $size > $config['size_max'] || $fm->_POST !== TRUE) {
+	if (($size = mb_strlen($fm->_String('reason'))) < $config['size_min'] || $size > $config['size_max'] || $fm->_POST !== TRUE) {
 		// Отображаем форму изменения репутации
 		$rep_change	= sprintf($fm->LANG['RepChange'], $member['name']);
 		$fm->_Title	= ' :: '.$rep_change;

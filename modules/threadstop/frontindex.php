@@ -57,7 +57,7 @@ function return_print($array,$mode) {
 		$array = (is_array($array))?$array:array();
 		foreach ($array as $key =>$value){
 			if (!isset($value['name']) || !isset($value['id']) || !isset($value['fid']) || !isset($value['postkey'])) continue;
-				$toptopicname = (strlen($value['name'])>33)? substr($value['name'],0,32).'...':$value['name'];
+				$toptopicname = (mb_strlen($value['name'])>33)? mb_substr($value['name'],0,32).'...':$value['name'];
 				$toptopicname = (isset($value['tnun'])) ? $toptopicname.' - '.$value['tnun']:$toptopicname;
 				$printvalue = (FM_PRINTVAL === TRUE && isset($value[$mode])) ? ' ('.$value[$mode].')':'';
 				$menu .= '<span class="hint"><a href="topic.php?forum='.$value['fid'].'&topic='.$value['id'].'&postid='.$value['postkey'].'#'.$value['postkey'].'">'.$toptopicname.$printvalue.'</a></span><br>';

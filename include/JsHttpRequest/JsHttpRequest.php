@@ -63,7 +63,7 @@ class JsHttpRequest
         // Parse QUERY_STRING.
         if (preg_match('/^(.*)(?:&|^)JsHttpRequest=(?:(\d+)-)?([^&]+)((?:&|$).*)$/s', @$_SERVER['QUERY_STRING'], $m)) {
             $this->ID = $m[2];
-            $this->LOADER = strtolower($m[3]);
+            $this->LOADER = mb_strtolower($m[3]);
             $_SERVER['QUERY_STRING'] = preg_replace('/^&+|&+$/s', '', preg_replace('/(^|&)'.session_name().'=[^&]*&?/s', '&', $m[1] . $m[4]));
             unset(
                 $_GET['JsHttpRequest'],
@@ -145,7 +145,7 @@ class JsHttpRequest
     {
         // Parse an encoding.
         preg_match('/^(\S*)(?:\s+(\S*))$/', $enc, $p);
-        $this->SCRIPT_ENCODING    = strtolower(!empty($p[1])? $p[1] : $enc);
+        $this->SCRIPT_ENCODING    = mb_strtolower(!empty($p[1])? $p[1] : $enc);
         $this->SCRIPT_DECODE_MODE = !empty($p[2])? $p[2] : '';
         // Manually parse QUERY_STRING because of damned Unicode's %uXXXX.
         $this->_correctSuperglobals();
@@ -353,7 +353,7 @@ class JsHttpRequest
             }
             return $d;
         } else {
-            if (strpos($data, '%u') !== false) { // improve speed
+            if (mb_strpos($data, '%u') !== false) { // improve speed
                 $data = preg_replace_callback('/%u([0-9A-F]{1,4})/si', array(&$this, '_ucs2EntitiesDecodeCallback'), $data);
             }
             return $data;
@@ -377,7 +377,7 @@ class JsHttpRequest
             } else {
                 $c = $this->_decUcs2Decode($dec, $this->SCRIPT_ENCODING);
             }
-            if (!strlen($c)) {
+            if (!mb_strlen($c)) {
                 if ($this->SCRIPT_DECODE_MODE == 'entities') {
                     $c = '&#' . $dec . ';';
                 } else {
